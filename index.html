@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adeptskil - Professional Soft Skills Training</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="images/Logo with full name.png" alt="Adeptskil Logo">
+            </div>
+            <div class="header-search">
+                <form class="header-search-box" action="courses.html" method="get" role="search" aria-label="Site course search">
+                    <i class="fas fa-search" aria-hidden="true"></i>
+                    <input type="text" name="search" id="headerSearchInput" placeholder="Search courses..." aria-label="Search courses" autocomplete="off">
+                    <button type="submit" class="header-search-btn">
+                        <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                        <span class="sr-only">Search</span>
+                    </button>
+                </form>
+            </div>
+            <div class="nav-menu" id="navMenu">
+                <a href="index.html" class="nav-link active">Home</a>
+                <a href="about.html" class="nav-link">About</a>
+                <div class="dropdown">
+                    <a href="courses.html" class="nav-link dropdown-toggle">
+                        Courses <i class="fas fa-chevron-down"></i>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="courses.html#leadership" class="dropdown-item">Leadership & Managerial Excellence</a>
+                        <a href="courses.html#soft-skills" class="dropdown-item">Soft Skills</a>
+                        <a href="courses.html#career" class="dropdown-item">Career Development Skills</a>
+                        <a href="courses.html#project" class="dropdown-item">Project Management</a>
+                        <a href="courses.html#agile" class="dropdown-item">Agile Practices & Leadership</a>
+                        <a href="courses.html#business" class="dropdown-item">Business Growth & Strategic Marketing</a>
+                        <a href="courses.html#security" class="dropdown-item">IT Security</a>
+                        <a href="courses.html#data" class="dropdown-item">Data Management & Power BI</a>
+                        <a href="courses.html#software" class="dropdown-item">Software Innovation & Emerging Technology</a>
+                        <a href="courses.html#cloud" class="dropdown-item">Cloud Computing & DevOps</a>
+                        <a href="courses.html#construction" class="dropdown-item">Construction & Quality Management</a>
+                        <a href="courses.html#azure" class="dropdown-item">Microsoft Azure</a>
+                    </div>
+                </div>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </div>
+            <div class="nav-toggle" id="navToggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">Skills That Set You Apart—Start Your Transformation with Expert-Led Training from Adeptskil</h1>
+                <p class="hero-subtitle">Master the art of professional excellence through dynamic learning experiences that bridge the gap between talent and triumph. Where ambition meets expertise, careers are redefined.</p>
+                <div class="hero-buttons">
+                    <a href="courses.html" class="btn btn-primary">Explore Courses</a>
+                    <a href="about.html" class="btn btn-secondary">Learn More</a>
+                </div>
+            </div>
+            <!-- Hero image removed as requested -->
+        </div>
+    </section>
+
+    <!-- Trusted by Industry Leaders Section -->
+    <section class="trusted-companies">
+        <div class="container">
+            <h2 class="trusted-title">Trusted by Industry Leaders</h2>
+            <p class="trusted-subtitle">Join thousands of professionals from top companies who trust Adeptskil for their training needs</p>
+            <div class="companies-grid">
+                <div class="company-logo">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/9/96/Microsoft_logo_%282012%29.svg" alt="Microsoft" title="Microsoft">
+                </div>
+                <div class="company-logo">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" alt="Google" title="Google">
+                </div>
+                <div class="company-logo">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" alt="Amazon" title="Amazon">
+                </div>
+                <div class="company-logo">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" alt="Apple" title="Apple">
+                </div>
+                <div class="company-logo">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/7/7b/Meta_Platforms_Inc._logo.svg" alt="Meta" title="Meta">
+                </div>
+                <div class="company-logo">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" alt="Netflix" title="Netflix">
+                </div>
+                <div class="company-logo">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg" alt="IBM" title="IBM">
+                </div>
+                <div class="company-logo">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/50/Oracle_logo.svg" alt="Oracle" title="Oracle">
+                </div>
+            </div>
+            <p class="disclaimer">*Representative of the types of organizations we serve</p>
+        </div>
+    </section>
+
+    <!-- Programs Classification Section -->
+    <section class="features programs-section">
+        <div class="container">
+            <h2 class="section-title">Programs at a Glance</h2>
+            <p class="section-subtitle">Clear pathways to upskill—see program focus and typical courses at a glance.</p>
+            <div class="programs-grid">
+                <div class="program-card" data-program="career">
+                    <div class="program-icon"><i class="fas fa-user-graduate"></i></div>
+                    <h3>Professional &amp; Career Development</h3>
+                    <p class="program-focus"><strong>Core Focus:</strong> Personal and communication skills</p>
+                    <p class="program-examples"><strong>Examples:</strong> Communication, Emotional Intelligence, Presentation</p>
+                    <p class="program-desc">Sharpen everyday impact—speak clearly, present confidently, and collaborate smoothly.</p>
+                    <div class="program-actions">
+                        <a href="courses.html?filter=soft-skills&search=communication%20presentation%20emotional" class="btn btn-primary">Explore</a>
+                    </div>
+                </div>
+                <div class="program-card" data-program="leadership">
+                    <div class="program-icon"><i class="fas fa-users-cog"></i></div>
+                    <h3>Leadership &amp; Management</h3>
+                    <p class="program-focus"><strong>Core Focus:</strong> People and organizational leadership</p>
+                    <p class="program-examples"><strong>Examples:</strong> Leading Teams, Change Management, Motivating People</p>
+                    <p class="program-desc">Lead with clarity—align teams, manage change, and lift performance sustainably.</p>
+                    <div class="program-actions">
+                        <a href="courses.html?filter=leadership&search=lead%20change%20motivat" class="btn btn-primary">Explore</a>
+                    </div>
+                </div>
+                <div class="program-card" data-program="technical">
+                    <div class="program-icon"><i class="fas fa-microchip"></i></div>
+                    <h3>Technical &amp; IT</h3>
+                    <p class="program-focus"><strong>Core Focus:</strong> Technology skills and cybersecurity</p>
+                    <p class="program-examples"><strong>Examples:</strong> DevOps, Azure, Cyber Security</p>
+                    <p class="program-desc">Build core tech capabilities—cloud, DevOps, and security essentials that scale.</p>
+                    <div class="program-actions">
+                        <a href="courses.html?filter=software&search=devops%20azure%20security" class="btn btn-primary">Explore</a>
+                    </div>
+                </div>
+                <div class="program-card" data-program="business">
+                    <div class="program-icon"><i class="fas fa-chart-line"></i></div>
+                    <h3>Business, Marketing &amp; Strategic Growth</h3>
+                    <p class="program-focus"><strong>Core Focus:</strong> Business performance and marketing</p>
+                    <p class="program-examples"><strong>Examples:</strong> Core Marketing Strategies, Process Improvement</p>
+                    <p class="program-desc">Drive growth—focus strategy, modernize marketing, and streamline how work gets done.</p>
+                    <div class="program-actions">
+                        <a href="courses.html?filter=business&search=marketing%20process%20improvement" class="btn btn-primary">Explore</a>
+                    </div>
+                </div>
+                <div class="program-card" data-program="data">
+                    <div class="program-icon"><i class="fas fa-database"></i></div>
+                    <h3>Data, Project &amp; Quality Management</h3>
+                    <p class="program-focus"><strong>Core Focus:</strong> Data analytics, project control, quality</p>
+                    <p class="program-examples"><strong>Examples:</strong> PMP®, Power BI, Big Data, Quality</p>
+                    <p class="program-desc">Improve outcomes—use data well, control projects, and embed quality standards.</p>
+                    <div class="program-actions">
+                        <a href="courses.html?filter=data&search=PMP%20Power%20BI%20Quality" class="btn btn-primary">Explore</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">25+</div>
+                    <div class="stat-label">Training Programs</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">95%</div>
+                    <div class="stat-label">Success Rate</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="section-title">What Our Students Say</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"AdeptSkil delivered an excellent technical training program for our team. The trainer was highly knowledgeable and explained complex topics with real industry examples. We saw a noticeable improvement in skill levels within just a few weeks. We look forward to engaging with them again for future training needs."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-info">
+                            <h4>Jasmine Fernandes</h4>
+                            <span>L&D Manager</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"We partnered with AdeptSkil to deliver a leadership development workshop for our mid-level managers. The session was engaging, practical, and perfectly aligned with our business objectives. Our teams walked away with real skills they could immediately apply."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-info">
+                            <h4>David Smith</h4>
+                            <span>HR Business Partner, Manufacturing Company</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"I enrolled in AdeptSkil's one-on-one training and it was one of the best learning experiences I've had. The trainer was supportive, patient, and ensured I understood each concept clearly. The post-training support helped me apply everything at work with confidence."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-info">
+                            <h4>Jason Nunna</h4>
+                            <span>Project Coordinator</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Skills That Set You Apart—Start Your Transformation with Expert-Led Training from Adeptskil</h2>
+                <p>Join an elite community of forward-thinking professionals who refuse to settle for ordinary. Transform potential into performance, aspirations into achievements.</p>
+                <div class="cta-buttons">
+                    <a href="courses.html" class="btn btn-primary">Begin Your Ascent</a>
+                    <a href="contact.html" class="btn btn-secondary">Connect With Excellence</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            
+        </div>
+    </footer>
+
+    <!-- Chatbot Widget -->
+    <div id="chatbot-container" style="position: fixed; bottom: 20px; right: 20px; width: 280px; height: 380px; background: white; border-radius: 12px; box-shadow: 0 5px 40px rgba(0,0,0,0.16); display: flex; flex-direction: column; font-family: var(--font-sans); z-index: 9999; max-height: 90vh;">
+        <!-- Chat Header -->
+        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px; border-radius: 12px 12px 0 0; display: flex; justify-content: space-between; align-items: center; flex-shrink: 0;">
+            <div>
+                <h3 style="margin: 0; font-size: 18px; font-weight: 600;">Adeptskil Assistant</h3>
+                <p style="margin: 5px 0 0 0; font-size: 12px; opacity: 0.9;">Always here to help</p>
+            </div>
+            <button id="chatbot-close" onclick="toggleChatbot()" style="background: none; border: none; color: white; font-size: 24px; cursor: pointer; padding: 0; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center;">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <!-- Chat Messages Area -->
+        <div id="chatbot-messages" style="flex: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 12px; background: #f8f9fa;">
+            <!-- Welcome Message -->
+            <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 12px 16px; border-radius: 12px; align-self: flex-start; max-width: 85%; word-wrap: break-word;">
+                <p style="margin: 0; font-size: 14px;">👋 Hi! I'm your Adeptskil Assistant. How can I help you today? You can ask me about courses, training programs, or anything else!</p>
+            </div>
+        </div>
+
+        <!-- Chat Input Area -->
+        <div style="padding: 15px; border-top: 1px solid #e2e8f0; background: white; border-radius: 0 0 12px 12px; flex-shrink: 0;">
+            <div style="display: flex; gap: 10px;">
+                <input type="text" id="chatbot-input" placeholder="Type your message..." style="flex: 1; padding: 10px 15px; border: 1px solid #e2e8f0; border-radius: 8px; font-family: 'Poppins', sans-serif; font-size: 14px; outline: none; transition: border-color 0.3s;">
+                <button id="chatbot-send" onclick="sendChatbotMessage()" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; padding: 10px 15px; border-radius: 8px; cursor: pointer; font-weight: 600; transition: all 0.3s;">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chatbot Toggle Button (when minimized) -->
+    <button id="chatbot-toggle" onclick="toggleChatbot()" style="position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; cursor: pointer; font-size: 28px; box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4); transition: all 0.3s; display: none; z-index: 9998; align-items: center; justify-content: center;">
+        <i class="fas fa-comments"></i>
+    </button>
+
+    <script src="script.js"></script>
+    <script>
+        let chatbotOpen = true;
+
+        function toggleChatbot() {
+            const container = document.getElementById('chatbot-container');
+            const toggle = document.getElementById('chatbot-toggle');
+            chatbotOpen = !chatbotOpen;
+            
+            if (chatbotOpen) {
+                container.style.display = 'flex';
+                toggle.style.display = 'none';
+                document.getElementById('chatbot-input').focus();
+            } else {
+                container.style.display = 'none';
+                toggle.style.display = 'flex';
+            }
+        }
+
+        function sendChatbotMessage() {
+            const input = document.getElementById('chatbot-input');
+            const messagesArea = document.getElementById('chatbot-messages');
+            const message = input.value.trim();
+
+            if (!message) return;
+
+            // Add user message
+            const userMessageDiv = document.createElement('div');
+            userMessageDiv.style.cssText = 'background: #2563eb; color: white; padding: 12px 16px; border-radius: 12px; align-self: flex-end; max-width: 85%; word-wrap: break-word; margin-left: auto;';
+            userMessageDiv.textContent = message;
+            messagesArea.appendChild(userMessageDiv);
+
+            input.value = '';
+
+            // Simulate bot response after a short delay
+            setTimeout(() => {
+                const botMessageDiv = document.createElement('div');
+                botMessageDiv.style.cssText = 'background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 12px 16px; border-radius: 12px; align-self: flex-start; max-width: 85%; word-wrap: break-word;';
+                
+                // Simple chatbot responses
+                let response = getAutomatedResponse(message.toLowerCase());
+                botMessageDiv.innerHTML = response;
+                messagesArea.appendChild(botMessageDiv);
+
+                // Scroll to bottom
+                messagesArea.scrollTop = messagesArea.scrollHeight;
+            }, 500);
+
+            // Scroll to bottom
+            messagesArea.scrollTop = messagesArea.scrollHeight;
+        }
+
+        function getAutomatedResponse(userMessage) {
+            const responses = {
+                'hello': '👋 Hello! How can I assist you with Adeptskil training?',
+                'hi': '👋 Hi there! What can I help you with today?',
+                'courses': '📚 We offer courses in Leadership, Soft Skills, Agile, Cloud Computing, Data Analytics, and much more! <a href="courses.html" style="color: #fbbf24; text-decoration: underline;">View all courses</a>',
+                'price': '💰 Pricing varies by course. Please <a href="contact.html" style="color: #fbbf24; text-decoration: underline;">contact us</a> for detailed pricing information.',
+                'enroll': '✅ You can enroll in any course on our <a href="courses.html" style="color: #fbbf24; text-decoration: underline;">Courses page</a>. Choose your course and click "Enroll Now"!',
+                'contact': '📞 You can reach us through our <a href="contact.html" style="color: #fbbf24; text-decoration: underline;">Contact page</a> or email us at info@adeptskil.com',
+                'training': '🎓 We provide professional training in various domains including soft skills, technical skills, and leadership development.',
+                'help': '🤝 I can help you with:\n• Information about courses\n• Enrollment details\n• Contact information\n• General questions\n\nWhat would you like to know?',
+                'default': '💡 Great question! For more details, please visit our <a href="courses.html" style="color: #fbbf24; text-decoration: underline;">Courses</a> or <a href="contact.html" style="color: #fbbf24; text-decoration: underline;">Contact</a> page. Or feel free to ask me anything!'
+            };
+
+            for (let key in responses) {
+                if (userMessage.includes(key)) {
+                    return responses[key];
+                }
+            }
+            return responses['default'];
+        }
+
+        // Allow Enter key to send message
+        document.addEventListener('DOMContentLoaded', function() {
+            const chatInput = document.getElementById('chatbot-input');
+            if (chatInput) {
+                chatInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        sendChatbotMessage();
+                    }
+                });
+            }
+        });
+
+      function enrollFromHome(courseName) {
+        window.location.href = 'courses.html?course=' + encodeURIComponent(courseName);
+      }
+      function performHeaderSearch() {
+        const headerSearchInput = document.getElementById('headerSearchInput');
+        const searchTerm = headerSearchInput ? headerSearchInput.value.trim() : '';
+        if (!searchTerm) {
+          alert('Please enter a course name or keyword to search');
+          return;
+        }
+        window.location.href = 'courses.html?search=' + encodeURIComponent(searchTerm);
+      }
+      document.addEventListener('DOMContentLoaded', function() {
+        const headerSearchInput = document.getElementById('headerSearchInput');
+        if (headerSearchInput) {
+          headerSearchInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+              e.preventDefault();
+              performHeaderSearch();
+            }
+          });
+        }
+      });
+    </script>
+</body>
+</html>

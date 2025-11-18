@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Adeptskil</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Keep only generic form/button and other sections; hero and contact layout come from styles.css */
+        .contact-section {
+            padding: 60px 0;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.4rem;
+            font-weight: 500;
+            color: #374151;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.2s ease;
+            outline: none;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: #2563eb;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .submit-btn {
+            background: #2563eb;
+            color: #fff;
+            padding: 0.9rem 1.25rem;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s ease, transform 0.2s ease;
+            width: 100%;
+        }
+
+        .submit-btn:hover { background: #1d4ed8; transform: translateY(-1px); }
+        .submit-btn:disabled { background: #9ca3af; cursor: not-allowed; }
+
+        .office-locations {
+            background: #f8fafc;
+            padding: 80px 0;
+        }
+
+        .locations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .location-card {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+
+        .location-card h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #1e293b;
+        }
+
+        .location-card p {
+            color: #64748b;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .location-hours {
+            background: #f8fafc;
+            padding: 1rem;
+            border-radius: 6px;
+            margin-top: 1rem;
+        }
+
+        .location-hours h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #1e293b;
+        }
+
+        .hours-list {
+            list-style: none;
+            font-size: 0.9rem;
+            color: #64748b;
+        }
+
+        .hours-list li {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.25rem 0;
+        }
+
+        .map-section {
+            padding: 80px 0;
+        }
+
+        .map-container {
+            background: #f1f5f9;
+            border-radius: 12px;
+            overflow: hidden;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: #64748b;
+        }
+
+        .faq-section {
+            background: #f8fafc;
+            padding: 80px 0;
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: #fff;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .faq-question {
+            padding: 1.5rem;
+            background: #fff;
+            border: none;
+            width: 100%;
+            text-align: left;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1e293b;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .faq-question:hover {
+            background: #f8fafc;
+        }
+
+        .faq-question i {
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 0 1.5rem 1.5rem;
+            max-height: 200px;
+        }
+
+        .faq-answer p {
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        /* Notification Styles */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #10b981;
+            color: #fff;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+            max-width: 400px;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .notification-error {
+            background: #ef4444;
+        }
+
+        .notification-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .notification-close {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 1.5rem;
+            cursor: pointer;
+            margin-left: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .locations-grid { grid-template-columns: 1fr; }
+            .notification {
+                right: 10px;
+                left: 10px;
+                max-width: none;
+                transform: translateY(-100px);
+            }
+            .notification.show { transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="images/Logo with full name.png" alt="Adeptskil Logo">
+            </div>
+            <div class="nav-menu" id="navMenu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="about.html" class="nav-link">About</a>
+                <div class="dropdown">
+                    <a href="courses.html" class="nav-link dropdown-toggle">
+                        Courses <i class="fas fa-chevron-down"></i>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="courses.html#leadership" class="dropdown-item">Leadership & Managerial Excellence</a>
+                        <a href="courses.html#soft-skills" class="dropdown-item">Soft Skills</a>
+                        <a href="courses.html#career" class="dropdown-item">Career Development Skills</a>
+                        <a href="courses.html#project" class="dropdown-item">Project Management</a>
+                        <a href="courses.html#agile" class="dropdown-item">Agile Practices & Leadership</a>
+                        <a href="courses.html#business" class="dropdown-item">Business Growth & Strategic Marketing</a>
+                        <a href="courses.html#security" class="dropdown-item">IT Security</a>
+                        <a href="courses.html#data" class="dropdown-item">Data Management & Power BI</a>
+                        <a href="courses.html#software" class="dropdown-item">Software Innovation & Emerging Technology</a>
+                        <a href="courses.html#cloud" class="dropdown-item">Cloud Computing & DevOps</a>
+                        <a href="courses.html#construction" class="dropdown-item">Construction & Quality Management</a>
+                        <a href="courses.html#azure" class="dropdown-item">Microsoft Azure</a>
+                    </div>
+                </div>
+                <a href="contact.html" class="nav-link active">Contact</a>
+            </div>
+            <div class="nav-toggle" id="navToggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Simple Hero -->
+    <section class="contact-hero" style="padding:70px 0 40px; background:linear-gradient(135deg,#667eea,#764ba2);">
+        <div class="container" style="text-align:center;">
+            <h1 style="font-size:1.9rem; color:#fff; margin-bottom:0.5rem; line-height:1.25;">Contact Us</h1>
+            <p style="color:#ffffffd9; max-width:480px; margin:0 auto 1rem; font-size:0.95rem; line-height:1.45;">Questions? Reach out or send a quick message — we respond within one business day.</p>
+            <div style="display:flex; gap:0.6rem; justify-content:center; flex-wrap:wrap; margin-top:0.25rem;">
+                <a href="tel:+15551234567" style="background:#fbbf24; color:#0f172a; padding:8px 14px; border-radius:6px; font-weight:600; font-size:0.8rem; text-decoration:none; display:inline-flex; align-items:center; gap:0.4rem;"><i class="fas fa-phone"></i>Call</a>
+                <a href="mailto:info@adeptskil.com" style="background:#f59e0b; color:#0f172a; padding:8px 14px; border-radius:6px; font-weight:600; font-size:0.8rem; text-decoration:none; display:inline-flex; align-items:center; gap:0.4rem;"><i class="fas fa-envelope"></i>Email</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section" style="padding:35px 0;">
+        <div class="container" style="max-width:640px; margin: 0 auto;">
+            <div style="background:#fff; border:1px solid #e2e8f0; border-radius:10px; padding:1.1rem 1.25rem; box-shadow:0 2px 8px rgba(0,0,0,0.05);">
+                <form id="contactForm" action="mailto:info@adeptskil.com" method="post" enctype="text/plain">
+                    <div class="form-group" style="margin-bottom:0.75rem;">
+                        <label for="name" style="font-size:0.8rem;">Name *</label>
+                        <input type="text" id="name" name="name" placeholder="Your name" required style="padding:0.55rem 0.7rem; font-size:0.85rem; border-radius:6px;">
+                    </div>
+                    <div class="form-group" style="margin-bottom:0.75rem;">
+                        <label for="email" style="font-size:0.8rem;">Email *</label>
+                        <input type="email" id="email" name="email" placeholder="client@example.com" required style="padding:0.55rem 0.7rem; font-size:0.85rem; border-radius:6px;">
+                    </div>
+                    <div class="form-group" style="margin-bottom:0.75rem;">
+                        <label for="phone" style="font-size:0.8rem;">Phone (optional)</label>
+                        <input type="tel" id="phone" name="phone" placeholder="+1 555 123 4567" style="padding:0.55rem 0.7rem; font-size:0.85rem; border-radius:6px;">
+                    </div>
+                    <div class="form-group" style="margin-bottom:0.9rem;">                        <label for="message" style="font-size:0.8rem;">Message *</label>
+                        <textarea id="message" name="message" placeholder="Write your message" required style="padding:0.6rem 0.7rem; font-size:0.85rem; border-radius:6px; min-height:95px;"></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn" style="padding:0.6rem 1rem; font-size:0.85rem; border-radius:6px;">Send Message</button>
+                    <p style="font-size:0.65rem; color:#64748b; margin-top:0.55rem;">We respect your privacy. Your message will be sent directly to info@adeptskil.com</p>
+                </form>
+            </div>
+            <div style="margin-top:1.25rem; text-align:center; font-size:0.75rem; color:#64748b;">
+                <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+                    <span><i class="fas fa-phone" style="color:#2563eb;"></i> +1 (555) 123-4567</span>
+                    <span><i class="fas fa-envelope" style="color:#2563eb;"></i> info@adeptskil.com</span>
+                    <span><i class="fas fa-clock" style="color:#2563eb;"></i> Mon–Fri 9–6</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Removed locations, map, FAQ for simplicity -->
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Contact form submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData.entries());
+            
+            // Simulate form submission
+            const submitBtn = this.querySelector('.submit-btn');
+            const originalText = submitBtn.textContent;
+            
+            // Show loading state
+            if (window.AdeptskilJS && window.AdeptskilJS.showLoading) {
+                window.AdeptskilJS.showLoading(submitBtn);
+            } else {
+                submitBtn.textContent = 'Sending...';
+                submitBtn.disabled = true;
+            }
+            
+            // Simulate API call
+            setTimeout(() => {
+                // Reset button
+                if (window.AdeptskilJS && window.AdeptskilJS.hideLoading) {
+                    window.AdeptskilJS.hideLoading(submitBtn, originalText);
+                } else {
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                }
+                
+                // Show success message
+                if (window.AdeptskilJS && window.AdeptskilJS.showNotification) {
+                    window.AdeptskilJS.showNotification('Thank you for your message! We\'ll get back to you within 24 hours.', 'success');
+                } else {
+                    alert('Thank you for your message! We\'ll get back to you within 24 hours.');
+                }
+                
+                // Reset form
+                this.reset();
+            }, 2000);
+        });
+
+        // FAQ accordion functionality
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', function() {
+                const faqItem = this.parentElement;
+                const isActive = faqItem.classList.contains('active');
+                
+                // Close all FAQ items
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+                
+                // Open clicked item if it wasn't already active
+                if (!isActive) {
+                    faqItem.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,2702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courses - Adeptskil</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="images/Logo with full name.png" alt="Adeptskil Logo">
+            </div>
+            <div class="nav-menu" id="navMenu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="about.html" class="nav-link">About</a>
+                <div class="dropdown">
+                    <a href="courses.html" class="nav-link dropdown-toggle active">
+                        Courses <i class="fas fa-chevron-down"></i>
+                    </a>
+                    <div class="dropdown-menu">
+                        <a href="#leadership" class="dropdown-item">Leadership & Managerial Excellence</a>
+                        <a href="#soft-skills" class="dropdown-item">Soft Skills</a>
+                        <a href="#career" class="dropdown-item">Career Development Skills</a>
+                        <a href="#project" class="dropdown-item">Project Management</a>
+                        <a href="#agile" class="dropdown-item">Agile Practices & Leadership</a>
+                        <a href="#business" class="dropdown-item">Business Growth & Strategic Marketing</a>
+                        <a href="#security" class="dropdown-item">IT Security</a>
+                        <a href="#data" class="dropdown-item">Data Management & Power BI</a>
+                        <a href="#software" class="dropdown-item">Software Innovation & Emerging Technology</a>
+                        <a href="#cloud" class="dropdown-item">Cloud Computing & DevOps</a>
+                        <a href="#construction" class="dropdown-item">Construction & Quality Management</a>
+                        <a href="#azure" class="dropdown-item">Microsoft Azure</a>
+                    </div>
+                </div>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </div>
+            <div class="nav-toggle" id="navToggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section Removed -->
+
+    <!-- Page Search (Below Navbar) -->
+    <section class="page-search" style="background:#ffffff;">
+      <div class="container" style="max-width:900px;margin:0 auto;">
+        <form id="exactCourseSearch" class="header-search-box" role="search" autocomplete="off">
+          <i class="fas fa-search"></i>
+          <input type="text" id="exactSearchInput" placeholder="Type full course name and press Enter…" aria-label="Search courses">
+          <button type="submit" class="header-search-btn" aria-label="Search"><i class="fas fa-arrow-right"></i></button>
+        </form>
+        <div id="exactSearchMsg" style="margin-top:8px;font-size:0.8rem;color:#64748b;"></div>
+      </div>
+    </section>
+
+    <!-- Course Filters -->
+    <section class="course-filters">
+        <div class="container">
+                <div class="filter-container">
+                    <!-- Filters and secondary search removed per request -->
+                </div>
+        </div>
+    </section>
+
+    
+
+    <!-- Courses Section -->
+    <section class="courses-section">
+        <div class="container">
+            <div class="courses-grid">
+                                <div class="course-card" data-category="agile" id="agile">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Agile Practices & Leadership</div>
+                                        <h3 class="course-title">Introduction To Agile</h3>
+                                        <p class="course-description">Professional training in Introduction To Agile to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Introduction To Agile')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="agile">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Agile Practices & Leadership</div>
+                                        <h3 class="course-title">Agile Transformation</h3>
+                                        <p class="course-description">Professional training in Agile Transformation to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Agile Transformation')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="agile">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Agile Practices & Leadership</div>
+                                        <h3 class="course-title">Agile & Scrum Training</h3>
+                                        <p class="course-description">Professional training in Agile & Scrum Training to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Agile & Scrum Training')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="agile">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Agile Practices & Leadership</div>
+                                        <h3 class="course-title">Scrum & Agile Foundation</h3>
+                                        <p class="course-description">Professional training in Scrum & Agile Foundation to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Scrum & Agile Foundation')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="agile">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Agile Practices & Leadership</div>
+                                        <h3 class="course-title">Agile Scrum Master</h3>
+                                        <p class="course-description">Professional training in Agile Scrum Master to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Agile Scrum Master')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="agile">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Agile Practices & Leadership</div>
+                                        <h3 class="course-title">Agile Strategies for Executives</h3>
+                                        <p class="course-description">Professional training in Agile Strategies for Executives to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Agile Strategies for Executives')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="agile">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Agile Practices & Leadership</div>
+                                        <h3 class="course-title">Agile Strategies for Product Owner</h3>
+                                        <p class="course-description">Professional training in Agile Strategies for Product Owner to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Agile Strategies for Product Owner')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="business" id="business">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Business Growth & Strategic Marketing</div>
+                                        <h3 class="course-title">Business Case Writing</h3>
+                                        <p class="course-description">Professional training in Business Case Writing to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Business Case Writing')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="business">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Business Growth & Strategic Marketing</div>
+                                        <h3 class="course-title">Business Ethics & Responsibility</h3>
+                                        <p class="course-description">Professional training in Business Ethics & Responsibility to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Business Ethics & Responsibility')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="business">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Business Growth & Strategic Marketing</div>
+                                        <h3 class="course-title">Business Finance Basics</h3>
+                                        <p class="course-description">Professional training in Business Finance Basics to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Business Finance Basics')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="business">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Business Growth & Strategic Marketing</div>
+                                        <h3 class="course-title">Building Professional Business Connections</h3>
+                                        <p class="course-description">Professional training in Building Professional Business Connections to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Building Professional Business Connections')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="business">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Business Growth & Strategic Marketing</div>
+                                        <h3 class="course-title">Effective Business Presentation Skills</h3>
+                                        <p class="course-description">Professional training in Effective Business Presentation Skills to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Effective Business Presentation Skills')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="business">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Business Growth & Strategic Marketing</div>
+                                        <h3 class="course-title">Strategic Business Succession Planning Training</h3>
+                                        <p class="course-description">Professional training in Strategic Business Succession Planning Training to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Strategic Business Succession Planning Training')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="business">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Business Growth & Strategic Marketing</div>
+                                        <h3 class="course-title">Professional Business Writing Skills Training</h3>
+                                        <p class="course-description">Professional training in Professional Business Writing Skills Training to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Professional Business Writing Skills Training')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="business">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Business Growth & Strategic Marketing</div>
+                                        <h3 class="course-title">Finance & Accounting Essentials for Project Leaders</h3>
+                                        <p class="course-description">Professional training in Finance & Accounting Essentials for Project Leaders to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Finance & Accounting Essentials for Project Leaders')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="business">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Business Growth & Strategic Marketing</div>
+                                        <h3 class="course-title">Internet Marketing Fundamentals Training</h3>
+                                        <p class="course-description">Professional training in Internet Marketing Fundamentals Training to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Internet Marketing Fundamentals Training')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="business">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Business Growth & Strategic Marketing</div>
+                                        <h3 class="course-title">Core Marketing Strategies</h3>
+                                        <p class="course-description">Professional training in Core Marketing Strategies to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Core Marketing Strategies')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="business">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Business Growth & Strategic Marketing</div>
+                                        <h3 class="course-title">Practical Sales Skills</h3>
+                                        <p class="course-description">Professional training in Practical Sales Skills to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Practical Sales Skills')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="business">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Business Growth & Strategic Marketing</div>
+                                        <h3 class="course-title">Business Process Improvement & Design Strategies</h3>
+                                        <p class="course-description">Professional training in Business Process Improvement & Design Strategies to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Business Process Improvement & Design Strategies')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="business">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Business Growth & Strategic Marketing</div>
+                                        <h3 class="course-title">Sales Presentation Mastery Training</h3>
+                                        <p class="course-description">Professional training in Sales Presentation Mastery Training to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Sales Presentation Mastery Training')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="business">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Business Growth & Strategic Marketing</div>
+                                        <h3 class="course-title">Professional Technical Writing Training</h3>
+                                        <p class="course-description">Professional training in Professional Technical Writing Training to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Professional Technical Writing Training')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="business">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Business Growth & Strategic Marketing</div>
+                                        <h3 class="course-title">Sales Leadership & Management</h3>
+                                        <p class="course-description">Professional training in Sales Leadership & Management to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Sales Leadership & Management')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="software" id="software">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Software Innovation & Emerging Technology</div>
+                                        <h3 class="course-title">Software Testing Fundamentals</h3>
+                                        <p class="course-description">Professional training in Software Testing Fundamentals to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Software Testing Fundamentals')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="software">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Software Innovation & Emerging Technology</div>
+                                        <h3 class="course-title">Software Testing Essentials</h3>
+                                        <p class="course-description">Professional training in Software Testing Essentials to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Software Testing Essentials')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="software">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Software Innovation & Emerging Technology</div>
+                                        <h3 class="course-title">Software Testing Skills for Developers</h3>
+                                        <p class="course-description">Professional training in Software Testing Skills for Developers to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Software Testing Skills for Developers')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="cloud" id="cloud">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Cloud Computing & DevOps</div>
+                                        <h3 class="course-title">Cloud Computing Basics for Business</h3>
+                                        <p class="course-description">Professional training in Cloud Computing Basics for Business to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Cloud Computing Basics for Business')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="cloud">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Cloud Computing & DevOps</div>
+                                        <h3 class="course-title">Open Cloud Overview for Business</h3>
+                                        <p class="course-description">Professional training in Open Cloud Overview for Business to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Open Cloud Overview for Business')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="cloud">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Cloud Computing & DevOps</div>
+                                        <h3 class="course-title">Open Cloud Technology Foundations</h3>
+                                        <p class="course-description">Professional training in Open Cloud Technology Foundations to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Open Cloud Technology Foundations')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="cloud">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Cloud Computing & DevOps</div>
+                                        <h3 class="course-title">Cloud Essentials Training</h3>
+                                        <p class="course-description">Professional training in Cloud Essentials Training to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Cloud Essentials Training')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="cloud">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Cloud Computing & DevOps</div>
+                                        <h3 class="course-title">DevOps Fundamentals</h3>
+                                        <p class="course-description">Professional training in DevOps Fundamentals to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('DevOps Fundamentals')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="cloud">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Cloud Computing & DevOps</div>
+                                        <h3 class="course-title">DevOps Awareness Training</h3>
+                                        <p class="course-description">Professional training in DevOps Awareness Training to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('DevOps Awareness Training')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="cloud">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Cloud Computing & DevOps</div>
+                                        <h3 class="course-title">DevOps Practitioner Skills Training</h3>
+                                        <p class="course-description">Professional training in DevOps Practitioner Skills Training to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('DevOps Practitioner Skills Training')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="cloud">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Cloud Computing & DevOps</div>
+                                        <h3 class="course-title">IT Security</h3>
+                                        <p class="course-description">Professional training in IT Security to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('IT Security')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="cloud">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Cloud Computing & DevOps</div>
+                                        <h3 class="course-title">Cyber Security Training</h3>
+                                        <p class="course-description">Professional training in Cyber Security Training to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Cyber Security Training')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="cloud">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Cloud Computing & DevOps</div>
+                                        <h3 class="course-title">Android Security Masterclass</h3>
+                                        <p class="course-description">Professional training in Android Security Masterclass to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Android Security Masterclass')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="cloud">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Cloud Computing & DevOps</div>
+                                        <h3 class="course-title">SECO – IT Security Fundamentals</h3>
+                                        <p class="course-description">Professional training in SECO – IT Security Fundamentals to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('SECO – IT Security Fundamentals')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="cloud">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Cloud Computing & DevOps</div>
+                                        <h3 class="course-title">Information Security Governance Fundamentals</h3>
+                                        <p class="course-description">Professional training in Information Security Governance Fundamentals to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Information Security Governance Fundamentals')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="cloud">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Cloud Computing & DevOps</div>
+                                        <h3 class="course-title">Cyber Security Overview</h3>
+                                        <p class="course-description">Professional training in Cyber Security Overview to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Cyber Security Overview')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="cloud">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Cloud Computing & DevOps</div>
+                                        <h3 class="course-title">SECO – Data Protection Foundation</h3>
+                                        <p class="course-description">Professional training in SECO – Data Protection Foundation to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('SECO – Data Protection Foundation')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="cloud">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Cloud Computing & DevOps</div>
+                                        <h3 class="course-title">Java and Web Security Mastery</h3>
+                                        <p class="course-description">Professional training in Java and Web Security Mastery to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Java and Web Security Mastery')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="project" id="project">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Project Management</div>
+                                        <h3 class="course-title">PMP® Certification Training</h3>
+                                        <p class="course-description">Professional training in PMP® Certification Training to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('PMP® Certification Training')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="project">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Project Management</div>
+                                        <h3 class="course-title">Microsoft Project 2013</h3>
+                                        <p class="course-description">Professional training in Microsoft Project 2013 to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Microsoft Project 2013')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="project">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Project Management</div>
+                                        <h3 class="course-title">Effective Change Management</h3>
+                                        <p class="course-description">Professional training in Effective Change Management to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Effective Change Management')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="project">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Project Management</div>
+                                        <h3 class="course-title">Elements of Risk Management</h3>
+                                        <p class="course-description">Professional training in Elements of Risk Management to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Elements of Risk Management')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="project">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Project Management</div>
+                                        <h3 class="course-title">Change Management Foundation</h3>
+                                        <p class="course-description">Professional training in Change Management Foundation to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Change Management Foundation')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="project">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Project Management</div>
+                                        <h3 class="course-title">Change Management Practitioner</h3>
+                                        <p class="course-description">Professional training in Change Management Practitioner to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Change Management Practitioner')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="project">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Project Management</div>
+                                        <h3 class="course-title">Project Integration Management</h3>
+                                        <p class="course-description">Professional training in Project Integration Management to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Project Integration Management')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="project">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Project Management</div>
+                                        <h3 class="course-title">Project Management Basics</h3>
+                                        <p class="course-description">Professional training in Project Management Basics to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Project Management Basics')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="project">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Project Management</div>
+                                        <h3 class="course-title">Advanced Practical Project Management</h3>
+                                        <p class="course-description">Professional training in Advanced Practical Project Management to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Advanced Practical Project Management')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="project">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Project Management</div>
+                                        <h3 class="course-title">Prince2 Foundation and Practitioner Certification Program</h3>
+                                        <p class="course-description">Professional training in Prince2 Foundation and Practitioner Certification Program to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Prince2 Foundation and Practitioner Certification Program')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="data" id="data">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Data Management & Power BI</div>
+                                        <h3 class="course-title">Power BI for Report Developers</h3>
+                                        <p class="course-description">Professional training in Power BI for Report Developers to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Power BI for Report Developers')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="data">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Data Management & Power BI</div>
+                                        <h3 class="course-title">Power BI for Business Users</h3>
+                                        <p class="course-description">Professional training in Power BI for Business Users to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Power BI for Business Users')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="data">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Data Management & Power BI</div>
+                                        <h3 class="course-title">Power BI Comprehensive Training</h3>
+                                        <p class="course-description">Professional training in Power BI Comprehensive Training to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Power BI Comprehensive Training')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="data">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Data Management & Power BI</div>
+                                        <h3 class="course-title">Power BI Dashboard and Data Analysis</h3>
+                                        <p class="course-description">Professional training in Power BI Dashboard and Data Analysis to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Power BI Dashboard and Data Analysis')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="data">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Data Management & Power BI</div>
+                                        <h3 class="course-title">Big Data Bootcamp</h3>
+                                        <p class="course-description">Professional training in Big Data Bootcamp to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Big Data Bootcamp')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="data">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Data Management & Power BI</div>
+                                        <h3 class="course-title">Big Data Overview</h3>
+                                        <p class="course-description">Professional training in Big Data Overview to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Big Data Overview')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="data">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Data Management & Power BI</div>
+                                        <h3 class="course-title">Big Data Strategy</h3>
+                                        <p class="course-description">Professional training in Big Data Strategy to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Big Data Strategy')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="data">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Data Management & Power BI</div>
+                                        <h3 class="course-title">Data Analysis Bootcamp</h3>
+                                        <p class="course-description">Professional training in Data Analysis Bootcamp to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Data Analysis Bootcamp')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="data">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Data Management & Power BI</div>
+                                        <h3 class="course-title">CCC-Big Data Foundation</h3>
+                                        <p class="course-description">Professional training in CCC-Big Data Foundation to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('CCC-Big Data Foundation')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="leadership" id="leadership">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Leadership & Managerial Excellence</div>
+                                        <h3 class="course-title">Account Management</h3>
+                                        <p class="course-description">Professional training in Account Management to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Account Management')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="leadership">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Leadership & Managerial Excellence</div>
+                                        <h3 class="course-title">Absence Management</h3>
+                                        <p class="course-description">Professional training in Absence Management to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Absence Management')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="leadership">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Leadership & Managerial Excellence</div>
+                                        <h3 class="course-title">Conflict Management Training</h3>
+                                        <p class="course-description">Professional training in Conflict Management Training to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Conflict Management Training')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="leadership">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Leadership & Managerial Excellence</div>
+                                        <h3 class="course-title">Crisis Management Training</h3>
+                                        <p class="course-description">Professional training in Crisis Management Training to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Crisis Management Training')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="leadership">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Leadership & Managerial Excellence</div>
+                                        <h3 class="course-title">Effective Vendor Management</h3>
+                                        <p class="course-description">Professional training in Effective Vendor Management to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Effective Vendor Management')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="leadership">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Leadership & Managerial Excellence</div>
+                                        <h3 class="course-title">Employee Engagement</h3>
+                                        <p class="course-description">Professional training in Employee Engagement to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Employee Engagement')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="leadership">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Leadership & Managerial Excellence</div>
+                                        <h3 class="course-title">Essential Management Skills</h3>
+                                        <p class="course-description">Professional training in Essential Management Skills to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Essential Management Skills')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="leadership">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Leadership & Managerial Excellence</div>
+                                        <h3 class="course-title">Human Resource Management Training</h3>
+                                        <p class="course-description">Professional training in Human Resource Management Training to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Human Resource Management Training')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="leadership">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Leadership & Managerial Excellence</div>
+                                        <h3 class="course-title">Leading Effective Teams</h3>
+                                        <p class="course-description">Professional training in Leading Effective Teams to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Leading Effective Teams')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="leadership">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Leadership & Managerial Excellence</div>
+                                        <h3 class="course-title">Manager Management Training</h3>
+                                        <p class="course-description">Professional training in Manager Management Training to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Manager Management Training')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="leadership">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Leadership & Managerial Excellence</div>
+                                        <h3 class="course-title">Supply Chain Management</h3>
+                                        <p class="course-description">Professional training in Supply Chain Management to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Supply Chain Management')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="leadership">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Leadership & Managerial Excellence</div>
+                                        <h3 class="course-title">Managing a Virtual Team</h3>
+                                        <p class="course-description">Professional training in Managing a Virtual Team to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Managing a Virtual Team')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="leadership">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Leadership & Managerial Excellence</div>
+                                        <h3 class="course-title">Managing Performance</h3>
+                                        <p class="course-description">Professional training in Managing Performance to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Managing Performance')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="leadership">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Leadership & Managerial Excellence</div>
+                                        <h3 class="course-title">Performance Management</h3>
+                                        <p class="course-description">Professional training in Performance Management to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Performance Management')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="leadership">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Leadership & Managerial Excellence</div>
+                                        <h3 class="course-title">Problem Management Professional</h3>
+                                        <p class="course-description">Professional training in Problem Management Professional to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Problem Management Professional')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="leadership">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Leadership & Managerial Excellence</div>
+                                        <h3 class="course-title">Risk Assessment and Management</h3>
+                                        <p class="course-description">Professional training in Risk Assessment and Management to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Risk Assessment and Management')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="leadership">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Leadership & Managerial Excellence</div>
+                                        <h3 class="course-title">Risk Assessment Training</h3>
+                                        <p class="course-description">Professional training in Risk Assessment Training to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Risk Assessment Training')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="leadership">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Leadership & Managerial Excellence</div>
+                                        <h3 class="course-title">Change Management - Change Matters</h3>
+                                        <p class="course-description">Professional training in Change Management - Change Matters to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Change Management - Change Matters')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="leadership">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Leadership & Managerial Excellence</div>
+                                        <h3 class="course-title">Motivating People</h3>
+                                        <p class="course-description">Professional training in Motivating People to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Motivating People')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="leadership">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Leadership & Managerial Excellence</div>
+                                        <h3 class="course-title">Building High Performing Teams</h3>
+                                        <p class="course-description">Professional training in Building High Performing Teams to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Building High Performing Teams')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="leadership">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Leadership & Managerial Excellence</div>
+                                        <h3 class="course-title">Leadership Skills - Lead, Motivate & Inspire</h3>
+                                        <p class="course-description">Professional training in Leadership Skills - Lead, Motivate & Inspire to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Leadership Skills - Lead, Motivate & Inspire')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="career" id="career">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Career Development Skills</div>
+                                        <h3 class="course-title">10 Soft Skills You Need</h3>
+                                        <p class="course-description">Professional training in 10 Soft Skills You Need to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('10 Soft Skills You Need')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="career">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Career Development Skills</div>
+                                        <h3 class="course-title">Coaching at Work</h3>
+                                        <p class="course-description">Professional training in Coaching at Work to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Coaching at Work')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="career">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Career Development Skills</div>
+                                        <h3 class="course-title">Emotional Intelligence Training</h3>
+                                        <p class="course-description">Professional training in Emotional Intelligence Training to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Emotional Intelligence Training')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="career">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Career Development Skills</div>
+                                        <h3 class="course-title">Event Planning Training</h3>
+                                        <p class="course-description">Professional training in Event Planning Training to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Event Planning Training')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="career">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Career Development Skills</div>
+                                        <h3 class="course-title">Essential Coaching Skills for Managers</h3>
+                                        <p class="course-description">Professional training in Essential Coaching Skills for Managers to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Essential Coaching Skills for Managers')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="career">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Career Development Skills</div>
+                                        <h3 class="course-title">Professional Development Essentials</h3>
+                                        <p class="course-description">Professional training in Professional Development Essentials to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Professional Development Essentials')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="career">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Career Development Skills</div>
+                                        <h3 class="course-title">Professional Skills Bootcamp</h3>
+                                        <p class="course-description">Professional training in Professional Skills Bootcamp to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Professional Skills Bootcamp')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="career">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Career Development Skills</div>
+                                        <h3 class="course-title">Proposal Writing</h3>
+                                        <p class="course-description">Professional training in Proposal Writing to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Proposal Writing')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="career">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Career Development Skills</div>
+                                        <h3 class="course-title">Recruitment Skills</h3>
+                                        <p class="course-description">Professional training in Recruitment Skills to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Recruitment Skills')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="career">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Career Development Skills</div>
+                                        <h3 class="course-title">Report Writing</h3>
+                                        <p class="course-description">Professional training in Report Writing to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Report Writing')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="career">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Career Development Skills</div>
+                                        <h3 class="course-title">Stakeholder Management</h3>
+                                        <p class="course-description">Professional training in Stakeholder Management to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Stakeholder Management')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="career">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Career Development Skills</div>
+                                        <h3 class="course-title">Train-The-Trainer</h3>
+                                        <p class="course-description">Professional training in Train-The-Trainer to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Train-The-Trainer')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="career">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Career Development Skills</div>
+                                        <h3 class="course-title">Workplace Reflective Practice</h3>
+                                        <p class="course-description">Professional training in Workplace Reflective Practice to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Workplace Reflective Practice')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="career">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Career Development Skills</div>
+                                        <h3 class="course-title">Writing a CV</h3>
+                                        <p class="course-description">Professional training in Writing a CV to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Writing a CV')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="career">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Career Development Skills</div>
+                                        <h3 class="course-title">Train-The-Trainer  (3 Days)</h3>
+                                        <p class="course-description">Professional training in Train-The-Trainer  (3 Days) to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Train-The-Trainer  (3 Days)')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="career">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Career Development Skills</div>
+                                        <h3 class="course-title">Telephone Customer Service - Find a way to say YES!</h3>
+                                        <p class="course-description">Professional training in Telephone Customer Service - Find a way to say YES! to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Telephone Customer Service - Find a way to say YES!')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="career">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Career Development Skills</div>
+                                        <h3 class="course-title">Passionate Retail Experts</h3>
+                                        <p class="course-description">Professional training in Passionate Retail Experts to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Passionate Retail Experts')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="career">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Career Development Skills</div>
+                                        <h3 class="course-title">Pathways to Service Excellence</h3>
+                                        <p class="course-description">Professional training in Pathways to Service Excellence to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Pathways to Service Excellence')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="career">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Career Development Skills</div>
+                                        <h3 class="course-title">Telephone Debt Collection</h3>
+                                        <p class="course-description">Professional training in Telephone Debt Collection to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Telephone Debt Collection')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="career">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Career Development Skills</div>
+                                        <h3 class="course-title">Call Control</h3>
+                                        <p class="course-description">Professional training in Call Control to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Call Control')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="soft-skills" id="soft-skills">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Soft Skills</div>
+                                        <h3 class="course-title">Communication Skills Training</h3>
+                                        <p class="course-description">Professional training in Communication Skills Training to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Communication Skills Training')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="soft-skills">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Soft Skills</div>
+                                        <h3 class="course-title">Career Planning</h3>
+                                        <p class="course-description">Professional training in Career Planning to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Career Planning')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="soft-skills">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Soft Skills</div>
+                                        <h3 class="course-title">Communication Strategies Training</h3>
+                                        <p class="course-description">Professional training in Communication Strategies Training to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Communication Strategies Training')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="soft-skills">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Soft Skills</div>
+                                        <h3 class="course-title">Knowledge Management Training</h3>
+                                        <p class="course-description">Professional training in Knowledge Management Training to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Knowledge Management Training')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="soft-skills">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Soft Skills</div>
+                                        <h3 class="course-title">Negotiation Skills – Expert</h3>
+                                        <p class="course-description">Professional training in Negotiation Skills – Expert to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Negotiation Skills – Expert')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="soft-skills">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Soft Skills</div>
+                                        <h3 class="course-title">Negotiation Skills – Professional</h3>
+                                        <p class="course-description">Professional training in Negotiation Skills – Professional to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Negotiation Skills – Professional')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="soft-skills">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Soft Skills</div>
+                                        <h3 class="course-title">Personal Branding</h3>
+                                        <p class="course-description">Professional training in Personal Branding to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Personal Branding')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="soft-skills">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Soft Skills</div>
+                                        <h3 class="course-title">Preparing for Job Interviews</h3>
+                                        <p class="course-description">Professional training in Preparing for Job Interviews to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Preparing for Job Interviews')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="soft-skills">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Soft Skills</div>
+                                        <h3 class="course-title">Presentation Skills</h3>
+                                        <p class="course-description">Professional training in Presentation Skills to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Presentation Skills')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="soft-skills">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Soft Skills</div>
+                                        <h3 class="course-title">Presentation Skills – Expert</h3>
+                                        <p class="course-description">Professional training in Presentation Skills – Expert to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Presentation Skills – Expert')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="soft-skills">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Soft Skills</div>
+                                        <h3 class="course-title">Presentation Skills – Professional</h3>
+                                        <p class="course-description">Professional training in Presentation Skills – Professional to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Presentation Skills – Professional')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="soft-skills">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Soft Skills</div>
+                                        <h3 class="course-title">Public Speaking</h3>
+                                        <p class="course-description">Professional training in Public Speaking to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Public Speaking')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="soft-skills">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Soft Skills</div>
+                                        <h3 class="course-title">Time Management</h3>
+                                        <p class="course-description">Professional training in Time Management to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Time Management')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="soft-skills">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Soft Skills</div>
+                                        <h3 class="course-title">Teamwork Skills: Communicating Effectively in Groups</h3>
+                                        <p class="course-description">Professional training in Teamwork Skills: Communicating Effectively in Groups to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Teamwork Skills: Communicating Effectively in Groups')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="soft-skills">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Soft Skills</div>
+                                        <h3 class="course-title">Stress Management</h3>
+                                        <p class="course-description">Professional training in Stress Management to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Stress Management')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="soft-skills">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Soft Skills</div>
+                                        <h3 class="course-title">Wellness</h3>
+                                        <p class="course-description">Professional training in Wellness to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Wellness')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="soft-skills">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Soft Skills</div>
+                                        <h3 class="course-title">Anger Management</h3>
+                                        <p class="course-description">Professional training in Anger Management to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Anger Management')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="soft-skills">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Soft Skills</div>
+                                        <h3 class="course-title">Handling Angry and Difficult Callers</h3>
+                                        <p class="course-description">Professional training in Handling Angry and Difficult Callers to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Handling Angry and Difficult Callers')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="soft-skills">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Soft Skills</div>
+                                        <h3 class="course-title">Setting Others Up For Success! (Internal Customer Service)</h3>
+                                        <p class="course-description">Professional training in Setting Others Up For Success! (Internal Customer Service) to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Setting Others Up For Success! (Internal Customer Service)')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="soft-skills">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Soft Skills</div>
+                                        <h3 class="course-title">Managing People</h3>
+                                        <p class="course-description">Professional training in Managing People to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Managing People')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="soft-skills">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Soft Skills</div>
+                                        <h3 class="course-title">Negotiating for Results</h3>
+                                        <p class="course-description">Professional training in Negotiating for Results to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Negotiating for Results')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="soft-skills">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Soft Skills</div>
+                                        <h3 class="course-title">Vision, Energy & Passion To Serve</h3>
+                                        <p class="course-description">Professional training in Vision, Energy & Passion To Serve to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Vision, Energy & Passion To Serve')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="soft-skills">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Soft Skills</div>
+                                        <h3 class="course-title">Workplace Diversity & Inclusion</h3>
+                                        <p class="course-description">Professional training in Workplace Diversity & Inclusion to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Workplace Diversity & Inclusion')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="soft-skills">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Soft Skills</div>
+                                        <h3 class="course-title">Creative Problem Solving and Decision Making</h3>
+                                        <p class="course-description">Professional training in Creative Problem Solving and Decision Making to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Creative Problem Solving and Decision Making')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="azure" id="azure">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Microsoft Azure</div>
+                                        <h3 class="course-title">Microsoft Azure Fundamentals</h3>
+                                        <p class="course-description">Professional training in Microsoft Azure Fundamentals to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Microsoft Azure Fundamentals')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="azure">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Microsoft Azure</div>
+                                        <h3 class="course-title">Azure Essentials for Business Leaders</h3>
+                                        <p class="course-description">Professional training in Azure Essentials for Business Leaders to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Azure Essentials for Business Leaders')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="azure">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Microsoft Azure</div>
+                                        <h3 class="course-title">Microsoft Azure for Developers</h3>
+                                        <p class="course-description">Professional training in Microsoft Azure for Developers to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Microsoft Azure for Developers')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="azure">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Microsoft Azure</div>
+                                        <h3 class="course-title">Microsoft Azure Cloud Overview</h3>
+                                        <p class="course-description">Professional training in Microsoft Azure Cloud Overview to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Microsoft Azure Cloud Overview')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="azure">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Microsoft Azure</div>
+                                        <h3 class="course-title">Azure Resource Management & Governance</h3>
+                                        <p class="course-description">Professional training in Azure Resource Management & Governance to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Azure Resource Management & Governance')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="azure">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Microsoft Azure</div>
+                                        <h3 class="course-title">Azure Cost Optimization & Billing Management</h3>
+                                        <p class="course-description">Professional training in Azure Cost Optimization & Billing Management to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Azure Cost Optimization & Billing Management')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="azure">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Microsoft Azure</div>
+                                        <h3 class="course-title">Microsoft Azure Developer</h3>
+                                        <p class="course-description">Professional training in Microsoft Azure Developer to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Microsoft Azure Developer')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="azure">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Microsoft Azure</div>
+                                        <h3 class="course-title">Microsoft Azure Security Engineer</h3>
+                                        <p class="course-description">Professional training in Microsoft Azure Security Engineer to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Microsoft Azure Security Engineer')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="azure">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Microsoft Azure</div>
+                                        <h3 class="course-title">Data Engineering on Microsoft Azure</h3>
+                                        <p class="course-description">Professional training in Data Engineering on Microsoft Azure to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Data Engineering on Microsoft Azure')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="azure">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Microsoft Azure</div>
+                                        <h3 class="course-title">Azure AI & Machine Learning Essentials</h3>
+                                        <p class="course-description">Professional training in Azure AI & Machine Learning Essentials to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Azure AI & Machine Learning Essentials')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="azure">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Microsoft Azure</div>
+                                        <h3 class="course-title">Power BI with Azure Data Sources</h3>
+                                        <p class="course-description">Professional training in Power BI with Azure Data Sources to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Power BI with Azure Data Sources')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="azure">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Microsoft Azure</div>
+                                        <h3 class="course-title">Cloud Migration to Azure</h3>
+                                        <p class="course-description">Professional training in Cloud Migration to Azure to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Cloud Migration to Azure')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="azure">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Microsoft Azure</div>
+                                        <h3 class="course-title">Azure Infrastructure Design & Best Practices</h3>
+                                        <p class="course-description">Professional training in Azure Infrastructure Design & Best Practices to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Azure Infrastructure Design & Best Practices')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="construction" id="construction">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Construction & Quality Management</div>
+                                        <h3 class="course-title">Quality Management</h3>
+                                        <p class="course-description">Professional training in Quality Management to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Quality Management')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="course-card" data-category="construction">
+                                    <div class="course-image">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <div class="course-content">
+                                        <div class="course-category">Construction & Quality Management</div>
+                                        <h3 class="course-title">Construction Project Manager</h3>
+                                        <p class="course-description">Professional training in Construction Project Manager to enhance your skills and career prospects.</p>
+                                        <div class="course-footer">
+                                            <button class="enroll-btn" onclick="enrollCourse('Construction Project Manager')">Enroll Now</button>
+                                        </div>
+                                    </div>
+                                </div>
+                
+
+    <script src="script.js"></script>
+    <script>
+        // Enhanced search functionality - scroll and show course enrollment directly
+        function searchCourses() {
+            const searchInput = document.getElementById('courseSearch');
+            const searchTerm = searchInput.value.toLowerCase().trim();
+            const courseCards = document.querySelectorAll('.course-card');
+            let hasResults = false;
+            let foundCourses = [];
+
+            // If search is empty, show all courses
+            if (searchTerm === '') {
+                courseCards.forEach(card => {
+                    card.style.display = 'block';
+                    resetCourseCardStyles(card);
+                });
+                hideNoResults();
+                return;
+            }
+
+            // Split search term into words for better matching
+            const searchWords = searchTerm.split(' ').filter(word => word.length > 0);
+
+            // Search through each course card
+            courseCards.forEach(card => {
+                const title = card.querySelector('.course-title').textContent.toLowerCase();
+                const description = card.querySelector('.course-description').textContent.toLowerCase();
+                const category = card.querySelector('.course-category').textContent.toLowerCase();
+                const features = card.querySelector('.features-list') ? 
+                    card.querySelector('.features-list').textContent.toLowerCase() : '';
+
+                // Enhanced matching logic
+                const matches = title.includes(searchTerm) ||
+                              description.includes(searchTerm) ||
+                              category.includes(searchTerm) ||
+                              features.includes(searchTerm) ||
+                              searchWords.some(word => 
+                                  title.includes(word) || 
+                                  description.includes(word) || 
+                                  category.includes(word) ||
+                                  features.includes(word)
+                              );
+
+                if (matches) {
+                    card.style.display = 'block';
+                    highlightCourseCard(card);
+                    hasResults = true;
+                    foundCourses.push({
+                        title: card.querySelector('.course-title').textContent,
+                        element: card
+                    });
+                } else {
+                    card.style.display = 'none';
+                    resetCourseCardStyles(card);
+                }
+            });
+
+            // Handle search results
+            if (!hasResults) {
+                showNoResults(searchTerm);
+            } else {
+                hideNoResults();
+                
+                // SCROLL DOWN TO FIRST COURSE
+                if (foundCourses.length > 0) {
+                    // Scroll to the first found course
+                    setTimeout(() => {
+                        foundCourses[0].element.scrollIntoView({ 
+                            behavior: 'smooth', 
+                            block: 'center' 
+                        });
+                    }, 300);
+                }
+            }
+        }
+
+        // Enhanced enrollment function - redirects to enrollment page
+        function enrollCourse(courseName) {
+            // Redirect to enrollment page with course name as parameter
+            window.location.href = `enrollment.html?course=${encodeURIComponent(courseName)}`;
+        }
+
+        // Highlight course card for search results
+        function highlightCourseCard(card) {
+            // Apply highlight only to matched search results
+            card.classList.add('search-highlight');
+            card.style.border = '3px solid #667eea';
+            card.style.backgroundColor = '#f0f4ff';
+            card.style.transform = 'translateY(-5px)';
+            card.style.boxShadow = '0 8px 25px rgba(102, 126, 234, 0.3)';
+            
+            const enrollBtn = card.querySelector('.enroll-btn');
+            if (enrollBtn) {
+                enrollBtn.style.background = 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)';
+                enrollBtn.style.animation = 'pulse 2s infinite';
+                enrollBtn.style.fontWeight = '700';
+                enrollBtn.style.boxShadow = '0 4px 15px rgba(245, 158, 11, 0.4)';
+            }
+        }
+
+        // Reset course card styles
+        function resetCourseCardStyles(card) {
+            // Remove highlight class
+            card.classList.remove('search-highlight');
+            card.style.border = '';
+            card.style.backgroundColor = '';
+            card.style.transform = '';
+            card.style.boxShadow = '';
+            card.style.animation = '';
+            
+            const enrollBtn = card.querySelector('.enroll-btn');
+            if (enrollBtn) {
+                enrollBtn.style.background = '';
+                enrollBtn.style.animation = '';
+                enrollBtn.style.fontWeight = '';
+                enrollBtn.style.boxShadow = '';
+            }
+        }
+
+        // Show no results message with enrollment guidance
+        function showNoResults(searchTerm) {
+            hideNoResults(); // Remove existing message first
+            
+            const noResultsDiv = document.createElement('div');
+            noResultsDiv.id = 'noSearchResults';
+            noResultsDiv.style.cssText = `
+                background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+                border: 2px solid #f59e0b;
+                color: #92400e;
+                padding: 25px;
+                border-radius: 12px;
+                margin: 20px 0;
+                text-align: center;
+                box-shadow: 0 4px 12px rgba(245, 158, 11, 0.2);
+            `;
+            
+            // Suggest similar courses based on search term
+            const suggestions = getSimilarCourses(searchTerm);
+            let suggestionButtons = '';
+            
+            if (suggestions.length > 0) {
+                suggestionButtons = `
+                    <div style="margin: 20px 0;">
+                        <p style="margin-bottom: 15px; font-weight: 600; color: #92400e;">🎯 Try these related courses instead:</p>
+                        ${suggestions.map(course => 
+                            `<button onclick="enrollCourse('${course.title}')" 
+                                style="margin: 5px; background: #f59e0b; color: white; border: none; 
+                                       padding: 10px 18px; border-radius: 8px; cursor: pointer; font-weight: 500;
+                                       transition: all 0.3s ease; box-shadow: 0 2px 8px rgba(0,0,0,0.1);"
+                                onmouseover="this.style.background='#d97706'; this.style.transform='translateY(-2px)'"
+                                onmouseout="this.style.background='#f59e0b'; this.style.transform='translateY(0)'">
+                                📚 Enroll in ${course.title}
+                            </button>`
+                        ).join('')}
+                    </div>
+                `;
+            }
+            
+            noResultsDiv.innerHTML = `
+                <h4 style="margin: 0 0 15px 0; font-size: 1.4em;">🔍 No courses found for "${searchTerm}"</h4>
+                <p style="margin-bottom: 20px; font-size: 1.1em;">Don't worry! We have amazing courses that might interest you.</p>
+                ${suggestionButtons}
+                <div style="margin-top: 20px;">
+                    <button onclick="clearSearch()" 
+                        style="margin: 0 8px; background: #3b82f6; color: white; border: none; 
+                               padding: 12px 20px; border-radius: 8px; cursor: pointer; font-weight: 600;
+                               transition: all 0.3s ease; box-shadow: 0 2px 8px rgba(0,0,0,0.1);"
+                        onmouseover="this.style.background='#2563eb'; this.style.transform='translateY(-2px)'"
+                        onmouseout="this.style.background='#3b82f6'; this.style.transform='translateY(0)'">
+                        📋 Browse All Courses
+                    </button>
+                    <button onclick="window.location.href='contact.html'" 
+                        style="margin: 0 8px; background: #059669; color: white; border: none; 
+                               padding: 12px 20px; border-radius: 8px; cursor: pointer; font-weight: 600;
+                               transition: all 0.3s ease; box-shadow: 0 2px 8px rgba(0,0,0,0.1);"
+                        onmouseover="this.style.background='#047857'; this.style.transform='translateY(-2px)'"
+                        onmouseout="this.style.background='#059669'; this.style.transform='translateY(0)'">
+                        💬 Get Personal Guidance
+                    </button>
+                </div>
+            `;
+            
+            document.querySelector('.courses-section .container').insertBefore(
+                noResultsDiv, 
+                document.querySelector('.courses-grid')
+            );
+        }
+
+        // Get similar courses based on search term
+        function getSimilarCourses(searchTerm) {
+            const popularCourses = [
+                { title: 'Essential Leadership Skills', keywords: ['leadership', 'management', 'team'] },
+                { title: 'Agile Fundamentals', keywords: ['agile', 'scrum', 'project'] },
+                { title: 'Effective Communication Skills', keywords: ['communication', 'speaking', 'presentation'] },
+                { title: 'Python Programming', keywords: ['python', 'programming', 'coding', 'software'] },
+                { title: 'Cloud Computing Fundamentals', keywords: ['cloud', 'aws', 'azure', 'computing'] },
+                { title: 'Project Management Professional', keywords: ['project', 'management', 'pmp'] }
+            ];
+
+            const searchLower = searchTerm.toLowerCase();
+            return popularCourses.filter(course => 
+                course.keywords.some(keyword => 
+                    keyword.includes(searchLower) || searchLower.includes(keyword)
+                )
+            ).slice(0, 3);
+        }
+
+        // Enhanced search results display with immediate enrollment options
+        function showSearchResults(searchTerm, foundCourses) {
+            hideNoResults(); // Remove any existing message
+            
+            const resultsDiv = document.createElement('div');
+            resultsDiv.id = 'searchResults';
+            resultsDiv.style.cssText = `
+                background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+                border: 1px solid #bbf7d0;
+                color: white;
+                padding: 20px;
+                border-radius: 12px;
+                margin: 20px 0;
+                text-align: center;
+                box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+                animation: slideInDown 0.5s ease-out;
+            `;
+            
+            let enrollmentButtons = '';
+            if (foundCourses.length <= 3) {
+                // Show individual enrollment buttons for small result sets
+                enrollmentButtons = foundCourses.map(course => 
+                    `<button onclick="enrollCourse('${course.title}')" 
+                        style="margin: 8px; background: rgba(255,255,255,0.95); color: #059669; border: none; 
+                               padding: 14px 24px; border-radius: 8px; cursor: pointer; font-weight: 700;
+                               transition: all 0.3s ease; box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+                               font-size: 1rem;"
+                        onmouseover="this.style.background='white'; this.style.transform='translateY(-3px)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.3)'"
+                        onmouseout="this.style.background='rgba(255,255,255,0.95)'; this.style.transform='translateY(0)'; this.style.boxShadow='0 3px 10px rgba(0,0,0,0.2)'">
+                        🎯 ENROLL IN ${course.title.toUpperCase()}
+                    </button>`
+                ).join('');
+            } else {
+                // For larger result sets, do not show a count message, just scroll to the first course
+                enrollmentButtons = '';
+            }
+            // Remove the resultsDiv and just scroll to the first course
+        }
+
+        // Enhanced clear search function
+        function clearSearch() {
+            const searchInput = document.getElementById('courseSearch');
+            searchInput.value = '';
+            
+            // Reset all course cards
+            const courseCards = document.querySelectorAll('.course-card');
+            courseCards.forEach(card => {
+                card.style.display = 'block';
+                resetCourseCardStyles(card);
+            });
+            
+            hideNoResults();
+        }
+
+        // Scroll to first enrollment option with enhanced UX
+        function scrollToEnrollment() {
+            const highlightedCourses = document.querySelectorAll('.course-card[style*="border: 3px solid #667eea"]');
+            if (highlightedCourses.length > 0) {
+                const firstCourse = highlightedCourses[0];
+                firstCourse.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                
+                // Flash effect on the first course
+                firstCourse.style.animation = 'bounceIn 0.8s ease-out';
+                
+                // Flash the enroll button
+                const enrollBtn = firstCourse.querySelector('.enroll-btn');
+                if (enrollBtn) {
+                    setTimeout(() => {
+                        enrollBtn.style.animation = 'flash 1s ease-in-out 3';
+                        setTimeout(() => {
+                            enrollBtn.style.animation = 'pulse 2s infinite';
+                        }, 3000);
+                    }, 500);
+                }
+            }
+        }
+
+        // Hide search result messages
+        function hideNoResults() {
+            const existingNoResults = document.getElementById('noSearchResults');
+            const existingResults = document.getElementById('searchResults');
+            if (existingNoResults) existingNoResults.remove();
+            if (existingResults) existingResults.remove();
+        } // Filter functionality with improved category mapping
+        function filterCourses(category) {
+            const courseCards = document.querySelectorAll('.course-card');
+            const categorySections = document.querySelectorAll('.category-section');
+            const filterButtons = document.querySelectorAll('.filter-btn');
+
+            // Update active filter button
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            // Clear search
+            document.getElementById('courseSearch').value = '';
+            hideNoResults();
+
+            if (category === 'all') {
+                // Show all courses
+                courseCards.forEach(card => {
+                    card.style.display = 'block';
+                    card.style.border = '';
+                    card.style.backgroundColor = '';
+                });
+                categorySections.forEach(section => {
+                    section.style.display = 'block';
+                });
+            } else {
+                // Hide all categories first
+                categorySections.forEach(section => {
+                    section.style.display = 'none';
+                });
+
+                // Map filter categories to course categories and specific course IDs
+                const categoryMap = {
+                    'agile': ['agile'],
+                    'business': ['business'],
+                    'software': ['technology'], // Software courses are in technology category
+                    'cloud': ['technology'], // Cloud courses are in technology category  
+                    'security': ['technology'], // Security courses are in technology category
+                    'project': ['management'], // Project management courses
+                    'data': ['technology'], // Data analytics courses are in technology
+                    'leadership': ['management'], // Leadership courses are in management
+                    'career': ['soft-skills'], // Career development in soft skills
+                    'soft-skills': ['soft-skills'],
+                    'azure': ['technology'], // Azure courses are in technology
+                    'construction': ['management'] // Construction is in management
+                };
+
+                const allowedCategories = categoryMap[category] || [category];
+                
+                // Show courses matching the category
+                courseCards.forEach(card => {
+                    const cardCategory = card.getAttribute('data-category');
+                    const cardId = card.getAttribute('id');
+                    
+                    // Check if card matches category or specific filter
+                    const matchesCategory = allowedCategories.includes(cardCategory);
+                    const matchesSpecificFilter = (
+                        (category === 'software' && (cardId === 'software' || card.querySelector('.course-title').textContent.toLowerCase().includes('python'))) ||
+                        (category === 'cloud' && (cardId === 'cloud' || card.querySelector('.course-title').textContent.toLowerCase().includes('cloud'))) ||
+                        (category === 'security' && (cardId === 'security' || card.querySelector('.course-title').textContent.toLowerCase().includes('security'))) ||
+                        (category === 'data' && (cardId === 'data' || card.querySelector('.course-title').textContent.toLowerCase().includes('data'))) ||
+                        (category === 'azure' && (cardId === 'azure' || card.querySelector('.course-title').textContent.toLowerCase().includes('azure'))) ||
+                        (category === 'project' && (cardId === 'project' || card.querySelector('.course-title').textContent.toLowerCase().includes('project'))) ||
+                        (category === 'leadership' && (cardId === 'leadership' || card.querySelector('.course-title').textContent.toLowerCase().includes('leadership'))) ||
+                        (category === 'career' && (cardId === 'career' || card.querySelector('.course-title').textContent.toLowerCase().includes('career'))) ||
+                        (category === 'construction' && (cardId === 'construction' || card.querySelector('.course-title').textContent.toLowerCase().includes('construction')))
+                    );
+                    
+                    if (matchesCategory || matchesSpecificFilter) {
+                        card.style.display = 'block';
+                        card.style.border = '';
+                        card.style.backgroundColor = '';
+                        card.closest('.category-section').style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            }
+        }
+
+        // Enhanced course enrollment and search handling from homepage
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const courseParam = urlParams.get('course');
+            const searchParam = urlParams.get('search');
+            
+            // Add event listeners for search functionality
+            const searchInput = document.getElementById('courseSearch');
+            if (searchInput) {
+                // Add real-time search on input
+                searchInput.addEventListener('input', searchCourses);
+                
+                // Add search on Enter key
+                searchInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        searchCourses();
+                    }
+                });
+            }
+
+            // Add click listeners to filter buttons
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const category = this.getAttribute('data-filter');
+                    filterCourses.call(this, category);
+                });
+            });
+            
+            if (courseParam) {
+                // Auto-scroll to the specific course and highlight it
+                setTimeout(() => {
+                    const courseCards = document.querySelectorAll('.course-card h3');
+                    let found = false;
+                    
+                    courseCards.forEach(card => {
+                        if (card.textContent.toLowerCase().includes(courseParam.toLowerCase())) {
+                            const courseCard = card.closest('.course-card');
+                            courseCard.style.border = '3px solid #3b82f6';
+                            courseCard.style.backgroundColor = '#fef3c7';
+                            courseCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                            found = true;
+                            
+                            // Show enrollment prompt
+                            setTimeout(() => {
+                                if (confirm(`Would you like to enroll in "${courseParam}" now?`)) {
+                                    enrollCourse(courseParam);
+                                }
+                            }, 1000);
+                        }
+                    });
+                    
+                    if (!found) {
+                        alert(`Course "${courseParam}" not found on this page. Please browse our available courses below.`);
+                    }
+                }, 500);
+            } else if (searchParam) {
+                // Handle search parameter with keyword matching
+                setTimeout(() => {
+                    // Set the search input value and trigger search
+                    if (searchInput) {
+                        searchInput.value = searchParam;
+                        searchCourses();
+                    }
+                }, 500);
+            }
+        });
+
+        // Show search results message with direct enrollment options
+        function showSearchResultsMessage(searchTerm, foundCourses) {
+            // Intentionally left blank: removed search results message
+        }
+
+        // Scroll to course and offer enrollment
+        function scrollToAndEnroll(courseTitle) {
+            const courseCards = document.querySelectorAll('.course-card h3');
+            
+            courseCards.forEach(card => {
+                if (card.textContent.toLowerCase().includes(courseTitle.toLowerCase())) {
+                    const courseCard = card.closest('.course-card');
+                    
+                    // Scroll to the course
+                    courseCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    
+                    // Highlight the course
+                    courseCard.style.border = '3px solid #3b82f6';
+                    courseCard.style.backgroundColor = '#fef3c7';
+                    courseCard.style.transform = 'scale(1.02)';
+                    courseCard.style.transition = 'all 0.3s ease';
+                    
+                    // Show enrollment confirmation
+                    setTimeout(() => {
+                        if (confirm(`🎯 Ready to enroll in "${courseTitle}"?\n\nClick OK to proceed with enrollment!`)) {
+                            enrollCourse(courseTitle);
+                        }
+                        
+                        // Reset highlight after interaction
+                        setTimeout(() => {
+                            courseCard.style.border = '';
+                            courseCard.style.backgroundColor = '';
+                            courseCard.style.transform = '';
+                        }, 3000);
+                    }, 800);
+                }
+            });
+        }
+
+        // Scroll to first found course
+        function scrollToFirstCourse(foundCourses) {
+            if (foundCourses.length > 0) {
+                foundCourses[0].element.scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'center' 
+                });
+            }
+        }
+    </script>
+
+    <style>
+        @keyframes slideDown {
+            from {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+        }
+
+        @keyframes flash {
+            0%, 50%, 100% {
+                background-color: #3b82f6;
+                transform: scale(1);
+            }
+            25%, 75% {
+                background-color: #ef4444;
+                transform: scale(1.05);
+                box-shadow: 0 0 20px rgba(239, 68, 68, 0.5);
+            }
+        }
+
+        /* Footer Styling */
+        .footer {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            color: #e2e8f0;
+            padding: 3rem 0 1rem;
+            margin-top: 4rem;
+            border-top: 1px solid #334155;
+            width: 100%;
+            clear: both;
+        }
+
+        .footer .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section {
+            padding: 1rem 0;
+        }
+
+        .footer-section h3,
+        .footer-section h4 {
+            color: #f1f5f9;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .footer-section p {
+            color: #cbd5e1;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-section ul li a {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .footer-section ul li a:hover {
+            color: #667eea;
+            padding-left: 0.5rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+            border-radius: 50%;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: #667eea;
+            color: #fff;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .contact-info p {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .contact-info i {
+            color: #667eea;
+            font-size: 1.1rem;
+            width: 20px;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #334155;
+            padding-top: 2rem;
+            text-align: center;
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+    </style>
+    <!-- Back to Top button -->
+    <button id="backToTop" class="back-to-top" aria-label="Back to top" title="Back to top">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <script>
+        // Back to Top button behavior
+        document.addEventListener('DOMContentLoaded', function() {
+            var btn = document.getElementById('backToTop');
+            if (!btn) return;
+            var scrollThreshold = 400;
+
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > scrollThreshold) {
+                    btn.classList.add('show');
+                } else {
+                    btn.classList.remove('show');
+                }
+            });
+
+            btn.addEventListener('click', function() {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
