@@ -2687,6 +2687,120 @@
     </button>
 
     <script>
+        // Perfect Course Search System - Direct Navigation
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchForm = document.getElementById('exactCourseSearch');
+            const searchInput = document.getElementById('exactSearchInput');
+            const msgBox = document.getElementById('exactSearchMsg');
+            const courseCards = Array.from(document.querySelectorAll('.course-card'));
+
+            // Helper function to generate slug from course title
+            function generateSlug(text) {
+                return text.toLowerCase()
+                    .trim()
+                    .replace(/[^a-z0-9\s-]/g, '')
+                    .replace(/\s+/g, '-')
+                    .replace(/^-+|-+$/g, '');
+            }
+
+            // Assign IDs to all course cards if missing
+            courseCards.forEach((card, index) => {
+                const titleEl = card.querySelector('h3.course-title');
+                if (titleEl) {
+                    const slug = generateSlug(titleEl.textContent);
+                    if (!card.id || card.id === '') {
+                        card.id = slug || `course-${index}`;
+                    }
+                }
+            });
+
+            // Function to highlight and scroll to course
+            function navigateToCourse(courseName) {
+                const searchTerm = courseName.toLowerCase().trim();
+                if (!searchTerm) {
+                    msgBox.innerHTML = '<span style="color: #ef4444;">📝 Please enter a course name</span>';
+                    return;
+                }
+
+                msgBox.innerHTML = '';
+                
+                // Find exact match by title
+                let targetCourse = courseCards.find(card => {
+                    const title = card.querySelector('h3.course-title')?.textContent.toLowerCase().trim();
+                    return title === searchTerm;
+                });
+
+                // If no exact match, find partial match
+                if (!targetCourse) {
+                    const partialMatches = courseCards.filter(card => {
+                        const title = card.querySelector('h3.course-title')?.textContent.toLowerCase();
+                        const description = card.querySelector('p.course-description')?.textContent.toLowerCase();
+                        return title.includes(searchTerm) || description.includes(searchTerm);
+                    });
+
+                    if (partialMatches.length === 1) {
+                        targetCourse = partialMatches[0];
+                    } else if (partialMatches.length > 1) {
+                        msgBox.innerHTML = `<span style="color: #f59e0b;">🔍 Found ${partialMatches.length} matching courses. Showing first match...</span>`;
+                        targetCourse = partialMatches[0];
+                    }
+                }
+
+                if (targetCourse) {
+                    // Scroll to course with highlight effect
+                    targetCourse.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    
+                    // Add highlight animation
+                    targetCourse.style.transform = 'scale(1.02)';
+                    targetCourse.style.boxShadow = '0 0 40px rgba(102, 126, 234, 0.6)';
+                    targetCourse.style.transition = 'all 0.3s ease';
+                    
+                    msgBox.innerHTML = '<span style="color: #10b981;">✅ Course found! Scrolling now...</span>';
+                    
+                    // Remove highlight after 3 seconds
+                    setTimeout(() => {
+                        targetCourse.style.transform = 'scale(1)';
+                        targetCourse.style.boxShadow = 'none';
+                        msgBox.innerHTML = '';
+                    }, 3000);
+                    
+                    // Update URL with course hash
+                    window.location.hash = `#${targetCourse.id}`;
+                } else {
+                    msgBox.innerHTML = `<span style="color: #ef4444;">❌ No course found for "${searchTerm}". Try another search or browse all courses below.</span>`;
+                }
+            }
+
+            // Handle search form submit
+            if (searchForm) {
+                searchForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    navigateToCourse(searchInput.value);
+                    searchInput.value = '';
+                });
+            }
+
+            // Handle Enter key in search input
+            if (searchInput) {
+                searchInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        navigateToCourse(this.value);
+                        this.value = '';
+                    }
+                });
+            }
+
+            // Auto-search if coming from navbar search with ?search= parameter
+            const params = new URLSearchParams(window.location.search);
+            const searchParam = params.get('search');
+            if (searchParam) {
+                setTimeout(() => {
+                    navigateToCourse(searchParam);
+                }, 500);
+            }
+        });
+
         // Back to Top button behavior
         document.addEventListener('DOMContentLoaded', function() {
             var btn = document.getElementById('backToTop');
