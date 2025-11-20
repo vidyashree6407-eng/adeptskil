@@ -57,6 +57,31 @@
         </div>
     </nav>
 
+    <!-- Marquee Banner -->
+    <div class="marquee-banner" style="background: linear-gradient(90deg, #667eea 0%, #764ba2 100%); padding: 12px 0; overflow: hidden; position: relative; border-top: 2px solid rgba(255,255,255,0.1);">
+        <style>
+            @keyframes scroll-left {
+                0% { transform: translateX(100%); }
+                100% { transform: translateX(-100%); }
+            }
+            .marquee-content {
+                display: inline-block;
+                white-space: nowrap;
+                animation: scroll-left 25s linear infinite;
+                font-size: 0.95rem;
+                font-weight: 600;
+                color: white;
+                text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            }
+            .marquee-content:hover {
+                animation-play-state: paused;
+            }
+        </style>
+        <div class="marquee-content">
+            📧 Email: info@adeptskil.com • 🎓 Unlock Your Potential Today! • Transform Skills, Transform Lives • 📧 Email: info@adeptskil.com • 🎓 Unlock Your Potential Today! • Transform Skills, Transform Lives
+        </div>
+    </div>
+
     <!-- Hero Section -->
     <section class="hero" style="background: linear-gradient(135deg, rgba(102, 126, 234, 0.85) 0%, rgba(118, 75, 162, 0.85) 100%), url('images/pic1.avif') center/cover no-repeat; min-height: 500px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; padding: 40px 20px;">
         <div class="hero-container" style="display: flex; flex-direction: column; align-items: center; justify-content: center; max-width: 900px; width: 100%; gap: 2rem;">
