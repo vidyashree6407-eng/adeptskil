@@ -71,10 +71,10 @@ p, li, a, button, input, textarea {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0.5rem 1.5rem;
+    padding: 0.2rem 1.5rem;
     max-width: 1200px;
     margin: 0 auto;
-    min-height: 50px;
+    min-height: 40px;
 }
 
 .nav-logo {
@@ -85,23 +85,25 @@ p, li, a, button, input, textarea {
 }
 
 .nav-logo img {
-    height: 120px;
+    height: 140px;
     width: auto;
-    max-width: 600px;
+    max-width: 700px;
     transition: all 0.3s ease;
     object-fit: contain;
     background: transparent;
     border: none;
     box-shadow: none;
     padding: 0;
-    filter: drop-shadow(0 3px 12px rgba(0,0,0,0.15));
+    margin: -20px 0;
+    filter: drop-shadow(0 4px 15px rgba(0,0,0,0.2));
     font-weight: 900;
 }
 
 .nav-logo img:hover {
-    height: 125px;
-    filter: drop-shadow(0 5px 20px rgba(102, 126, 234, 0.4));
-    transform: scale(1.02);
+    height: 145px;
+    margin: -22.5px 0;
+    filter: drop-shadow(0 6px 25px rgba(102, 126, 234, 0.5));
+    transform: scale(1.03);
 }
 
 .nav-menu {
@@ -302,12 +304,12 @@ p, li, a, button, input, textarea {
 
 @media (max-width: 992px) {
     .nav-container {
-        padding: 0.4rem 1.25rem;
-        min-height: 48px;
+        padding: 0.2rem 1.25rem;
+        min-height: 38px;
     }
     
     .nav-logo img {
-        height: 100px;
+        height: 110px;
         max-width: 420px;
     }
     
@@ -319,8 +321,8 @@ p, li, a, button, input, textarea {
 @media (max-width: 768px) {
     .nav-container {
         flex-wrap: wrap;
-        padding: 0.4rem 0.75rem;
-        min-height: 46px;
+        padding: 0.15rem 0.75rem;
+        min-height: 36px;
     }
     
     .nav-logo {
@@ -328,7 +330,7 @@ p, li, a, button, input, textarea {
     }
     
     .nav-logo img {
-        height: 90px;
+        height: 100px;
         max-width: 300px;
     }
     
