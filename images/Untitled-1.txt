@@ -1,0 +1,3 @@
+git add .
+git commit -m "Add SEO optimizations: meta tags, schema.org, open graph"
+git push
