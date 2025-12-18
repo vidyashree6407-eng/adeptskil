@@ -516,11 +516,13 @@ p, li, a, button, input, textarea {
     .nav-container {
         padding: 0.1rem 0.75rem;
         min-height: 32px;
+        gap: 0.5rem;
     }
     
     .nav-logo {
-        margin-right: 1rem;
+        margin-right: 0.5rem;
         flex-shrink: 0;
+        min-width: 120px;
     }
     
     .nav-logo img {
@@ -530,7 +532,7 @@ p, li, a, button, input, textarea {
     }
     
     .header-search {
-        display: none;
+        display: none !important;
     }
     
     .nav-menu {
@@ -539,6 +541,8 @@ p, li, a, button, input, textarea {
     
     .nav-toggle {
         display: flex;
+        margin-left: auto;
+        flex-shrink: 0;
     }
 }
 
@@ -906,13 +910,14 @@ p, li, a, button, input, textarea {
     background: #fff;
     border: 1px solid #e2e8f0;
     border-radius: 12px;
-    padding: 1.25rem; /* reduced padding */
+    padding: 1.25rem;
     box-shadow: 0 2px 8px rgba(0,0,0,0.04);
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
     position: relative;
     transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+    width: 100%;
 }
 
 .program-card h3 {
@@ -1014,26 +1019,31 @@ p, li, a, button, input, textarea {
 
 /* Enhanced Programs Section with Modern Card Design */
 .programs-section .programs-grid {
-        grid-template-columns: repeat(2, minmax(250px, 1fr));
+    display: grid;
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 100%;
+}
+
+@media (min-width: 640px) {
+    .programs-section .programs-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
         gap: 1.5rem;
-        justify-items: center;
+    }
 }
 
 @media (min-width: 992px) {
     .programs-section .programs-grid {
-        grid-template-columns: repeat(3, minmax(250px, 1fr));
+        grid-template-columns: repeat(3, 1fr) !important;
         gap: 1.75rem;
-        justify-items: center;
     }
 }
 
-@media (min-width: 1280px) {
+@media (min-width: 1200px) {
     .programs-section .programs-grid {
-        grid-template-columns: repeat(5, minmax(230px, 1fr)); /* 5 in a single line on desktop */
+        grid-template-columns: repeat(5, 1fr) !important;
         gap: 1.5rem;
-        justify-items: center;
-        max-width: 1200px;
-        margin: 0 auto;
     }
 }
 
@@ -1048,7 +1058,6 @@ p, li, a, button, input, textarea {
     overflow: hidden;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     width: 100%;
-    max-width: 280px;
 }
 
 .programs-section .program-card::before {
@@ -1886,58 +1895,71 @@ p, li, a, button, input, textarea {
 
 @media (max-width: 480px) {
     .hero {
-        padding: 120px 0 80px;
+        padding: 80px 10px 50px !important;
+        margin-top: -10px !important;
+        min-height: 400px !important;
     }
 
     .hero-title {
-        font-size: 1.7rem; /* proportionally reduced */
+        font-size: 1.7rem;
         line-height: 1.35;
     }
 
     .hero-subtitle {
-        font-size: 1rem;
+        font-size: 0.95rem;
+    }
+
+    .hero-buttons {
+        gap: 0.75rem;
     }
 
     .hero-buttons .btn {
         padding: 12px 20px;
-        font-size: 0.95rem;
+        font-size: 0.9rem;
     }
 
     .companies-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: 1fr;
         gap: 1rem;
     }
     
-    @media (max-width: 480px) {
-        .companies-grid {
-            grid-template-columns: 1fr;
-            gap: 1rem;
-        }
-        
-        .company-logo {
-            height: 50px;
-            padding: 0.3rem;
-        }
-        
-        .company-logo img {
-            max-height: 30px;
-            max-width: 80px;
-        }
+    .company-logo {
+        height: 50px;
+        padding: 0.3rem;
+    }
+    
+    .company-logo img {
+        max-height: 30px;
+        max-width: 80px;
     }
 
-    .trusted-title {
-        font-size: 1.5rem;
-        margin-bottom: 0.8rem;
-    }
-
-    .trusted-subtitle {
-        font-size: 0.95rem;
-        margin-bottom: 2rem;
-    }
-
+@media (max-width: 640px) {
     .section-title {
-        font-size: 2.2rem;
-        margin-bottom: 2.5rem;
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+        padding: 0 10px;
+    }
+
+    .section-subtitle {
+        font-size: 0.95rem;
+        margin-bottom: 1.5rem;
+        padding: 0 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .section-title {
+        font-size: 1.6rem;
+        margin-bottom: 1rem;
+        padding: 0 8px;
+    }
+
+    .section-subtitle {
+        font-size: 0.9rem;
+        margin-bottom: 1.25rem;
+        padding: 0 8px;
+    }
+}
     }
 
     .search-header h2 {
@@ -2519,3 +2541,4 @@ img:not([src]) {
   .form-flex { grid-template-columns: 1fr; }
   .contact-hero { padding: 100px 0 60px; }
 }
+

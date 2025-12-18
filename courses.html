@@ -10,6 +10,11 @@
     <meta name="referrer" content="strict-origin-when-cross-origin">
     <title>Courses - Adeptskil</title>
     <link rel="icon" type="image/png" href="images/Logo with full name.png">
+    <meta property="og:title" content="Courses - Adeptskil">
+    <meta property="og:description" content="Browse Adeptskil's professional training courses: leadership, soft skills, project management, agile, marketing, IT security, Azure, and more.">
+    <meta property="og:image" content="https://adeptskil.com/images/Logo%20with%20full%20name.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://adeptskil.com/images/Logo%20with%20full%20name.png">
     <link rel="canonical" href="https://adeptskil.com/courses.html">
     <link rel="stylesheet" href="styles.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
@@ -82,7 +87,7 @@
     <section class="courses-section">
         <div class="container">
             <div class="courses-grid">
-                                <div class="course-card" data-category="agile" id="agile">
+                                <div class="course-card" data-category="leadership" id="leadership">
                                     <div class="course-image">
                                         <i class="fas fa-graduation-cap"></i>
                                     </div>
@@ -530,12 +535,12 @@
                                     </div>
                                 </div>
                 
-                                <div class="course-card" data-category="cloud">
+                                <div class="course-card" data-category="security" id="security">
                                     <div class="course-image">
                                         <i class="fas fa-graduation-cap"></i>
                                     </div>
                                     <div class="course-content">
-                                        <div class="course-category">Cloud Computing & DevOps</div>
+                                        <div class="course-category">IT Security</div>
                                         <h3 class="course-title">IT Security</h3>
                                         <p class="course-description">Professional training in IT Security to enhance your skills and career prospects.</p>
                                         <div class="course-footer">
@@ -544,12 +549,12 @@
                                     </div>
                                 </div>
                 
-                                <div class="course-card" data-category="cloud">
+                                <div class="course-card" data-category="security">
                                     <div class="course-image">
                                         <i class="fas fa-graduation-cap"></i>
                                     </div>
                                     <div class="course-content">
-                                        <div class="course-category">Cloud Computing & DevOps</div>
+                                        <div class="course-category">IT Security</div>
                                         <h3 class="course-title">Cyber Security Training</h3>
                                         <p class="course-description">Professional training in Cyber Security Training to enhance your skills and career prospects.</p>
                                         <div class="course-footer">
@@ -558,12 +563,12 @@
                                     </div>
                                 </div>
                 
-                                <div class="course-card" data-category="cloud">
+                                <div class="course-card" data-category="security">
                                     <div class="course-image">
                                         <i class="fas fa-graduation-cap"></i>
                                     </div>
                                     <div class="course-content">
-                                        <div class="course-category">Cloud Computing & DevOps</div>
+                                        <div class="course-category">IT Security</div>
                                         <h3 class="course-title">Android Security Masterclass</h3>
                                         <p class="course-description">Professional training in Android Security Masterclass to enhance your skills and career prospects.</p>
                                         <div class="course-footer">
@@ -572,12 +577,12 @@
                                     </div>
                                 </div>
                 
-                                <div class="course-card" data-category="cloud">
+                                <div class="course-card" data-category="security">
                                     <div class="course-image">
                                         <i class="fas fa-graduation-cap"></i>
                                     </div>
                                     <div class="course-content">
-                                        <div class="course-category">Cloud Computing & DevOps</div>
+                                        <div class="course-category">IT Security</div>
                                         <h3 class="course-title">SECO – IT Security Fundamentals</h3>
                                         <p class="course-description">Professional training in SECO – IT Security Fundamentals to enhance your skills and career prospects.</p>
                                         <div class="course-footer">
@@ -586,12 +591,12 @@
                                     </div>
                                 </div>
                 
-                                <div class="course-card" data-category="cloud">
+                                <div class="course-card" data-category="security">
                                     <div class="course-image">
                                         <i class="fas fa-graduation-cap"></i>
                                     </div>
                                     <div class="course-content">
-                                        <div class="course-category">Cloud Computing & DevOps</div>
+                                        <div class="course-category">IT Security</div>
                                         <h3 class="course-title">Information Security Governance Fundamentals</h3>
                                         <p class="course-description">Professional training in Information Security Governance Fundamentals to enhance your skills and career prospects.</p>
                                         <div class="course-footer">
@@ -600,12 +605,12 @@
                                     </div>
                                 </div>
                 
-                                <div class="course-card" data-category="cloud">
+                                <div class="course-card" data-category="security">
                                     <div class="course-image">
                                         <i class="fas fa-graduation-cap"></i>
                                     </div>
                                     <div class="course-content">
-                                        <div class="course-category">Cloud Computing & DevOps</div>
+                                        <div class="course-category">IT Security</div>
                                         <h3 class="course-title">Cyber Security Overview</h3>
                                         <p class="course-description">Professional training in Cyber Security Overview to enhance your skills and career prospects.</p>
                                         <div class="course-footer">
@@ -2949,6 +2954,48 @@
                     navigateToCourse(searchParam);
                 }, 500);
             }
+        });
+
+        // Reorganize courses to match navbar dropdown order
+        document.addEventListener('DOMContentLoaded', function() {
+            const courseGrid = document.querySelector('.courses-grid');
+            if (!courseGrid) return;
+
+            // Define the target order as per navbar dropdown
+            const categoryOrder = [
+                'leadership',
+                'soft-skills',
+                'career',
+                'project',
+                'agile',
+                'business',
+                'security',
+                'data',
+                'software',
+                'cloud',
+                'construction',
+                'azure'
+            ];
+
+            // Get all course cards
+            const courseCards = Array.from(courseGrid.querySelectorAll('.course-card'));
+
+            // Sort cards according to the target category order
+            courseCards.sort((a, b) => {
+                const categoryA = a.getAttribute('data-category');
+                const categoryB = b.getAttribute('data-category');
+                
+                const indexA = categoryOrder.indexOf(categoryA);
+                const indexB = categoryOrder.indexOf(categoryB);
+                
+                // If category not in list, push to end
+                return (indexA === -1 ? 999 : indexA) - (indexB === -1 ? 999 : indexB);
+            });
+
+            // Re-append sorted cards to grid
+            courseCards.forEach(card => {
+                courseGrid.appendChild(card);
+            });
         });
 
         // Back to Top button behavior

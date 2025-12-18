@@ -10,6 +10,11 @@
     <meta name="referrer" content="strict-origin-when-cross-origin">
     <title>Contact Us - Adeptskil</title>
     <link rel="icon" type="image/png" href="images/Logo with full name.png">
+    <meta property="og:title" content="Contact Us - Adeptskil">
+    <meta property="og:description" content="Contact Adeptskil for inquiries about professional training courses, corporate workshops, and business development programs.">
+    <meta property="og:image" content="https://adeptskil.com/images/Logo%20with%20full%20name.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://adeptskil.com/images/Logo%20with%20full%20name.png">
     <link rel="canonical" href="https://adeptskil.com/contact.html">
     <link rel="stylesheet" href="styles.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
@@ -300,7 +305,6 @@
             <h1 style="font-size:1.9rem; color:#fff; margin-bottom:0.5rem; line-height:1.25;">Contact Us</h1>
             <p style="color:#ffffffd9; max-width:480px; margin:0 auto 1rem; font-size:0.95rem; line-height:1.45;">Get in touch with our team. We're here to help and answer any questions you may have.</p>
             <div style="display:flex; gap:0.6rem; justify-content:center; flex-wrap:wrap; margin-top:0.25rem;">
-                <a href="tel:+15551234567" style="background:#fbbf24; color:#0f172a; padding:8px 14px; border-radius:6px; font-weight:600; font-size:0.8rem; text-decoration:none; display:inline-flex; align-items:center; gap:0.4rem;"><i class="fas fa-phone"></i>Call</a>
                 <a href="mailto:info@adeptskil.com" style="background:#f59e0b; color:#0f172a; padding:8px 14px; border-radius:6px; font-weight:600; font-size:0.8rem; text-decoration:none; display:inline-flex; align-items:center; gap:0.4rem;"><i class="fas fa-envelope"></i>Email</a>
             </div>
         </div>
@@ -313,18 +317,18 @@
                 <form id="contactForm" action="mailto:info@adeptskil.com" method="post" enctype="text/plain">
                     <div class="form-group" style="margin-bottom:0.75rem;">
                         <label for="name" style="font-size:0.8rem;">Name *</label>
-                        <input type="text" id="name" name="name" placeholder="Your name" required style="padding:0.55rem 0.7rem; font-size:0.85rem; border-radius:6px;">
+                        <input type="text" id="name" name="name" placeholder="Your name" required minlength="2" maxlength="100" style="padding:0.55rem 0.7rem; font-size:0.85rem; border-radius:6px;">
                     </div>
                     <div class="form-group" style="margin-bottom:0.75rem;">
                         <label for="email" style="font-size:0.8rem;">Email *</label>
-                        <input type="email" id="email" name="email" placeholder="client@example.com" required style="padding:0.55rem 0.7rem; font-size:0.85rem; border-radius:6px;">
+                        <input type="email" id="email" name="email" placeholder="client@example.com" required autocomplete="email" pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}" style="padding:0.55rem 0.7rem; font-size:0.85rem; border-radius:6px;">
                     </div>
                     <div class="form-group" style="margin-bottom:0.75rem;">
                         <label for="phone" style="font-size:0.8rem;">Phone (optional)</label>
-                        <input type="tel" id="phone" name="phone" placeholder="+1 555 123 4567" style="padding:0.55rem 0.7rem; font-size:0.85rem; border-radius:6px;">
+                        <input type="tel" id="phone" name="phone" placeholder="1234567890" autocomplete="tel" inputmode="numeric" maxlength="10" style="padding:0.55rem 0.7rem; font-size:0.85rem; border-radius:6px;">
                     </div>
                     <div class="form-group" style="margin-bottom:0.9rem;">                        <label for="message" style="font-size:0.8rem;">Message *</label>
-                        <textarea id="message" name="message" placeholder="Write your message" required style="padding:0.6rem 0.7rem; font-size:0.85rem; border-radius:6px; min-height:95px;"></textarea>
+                        <textarea id="message" name="message" placeholder="Write your message" required minlength="10" maxlength="1000" style="padding:0.6rem 0.7rem; font-size:0.85rem; border-radius:6px; min-height:95px;"></textarea>
                     </div>
                     <button type="submit" class="submit-btn" style="padding:0.6rem 1rem; font-size:0.85rem; border-radius:6px;">Send Message</button>
                     <p style="font-size:0.65rem; color:#64748b; margin-top:0.55rem;">We respect your privacy. Your message will be sent directly to info@adeptskil.com</p>
@@ -332,9 +336,8 @@
             </div>
             <div style="margin-top:1.25rem; text-align:center; font-size:0.75rem; color:#64748b;">
                 <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
-                    <span><i class="fas fa-phone" style="color:#2563eb;"></i> +1 (555) 123-4567</span>
                     <span><i class="fas fa-envelope" style="color:#2563eb;"></i> info@adeptskil.com</span>
-                    <span><i class="fas fa-clock" style="color:#2563eb;"></i> Mon–Fri 9–6</span>
+                    <span><i class="fas fa-clock" style="color:#2563eb;"></i> Available 24/7 Mon-Sun</span>
                 </div>
             </div>
         </div>
@@ -358,6 +361,17 @@
             // Get form data
             const formData = new FormData(this);
             const data = Object.fromEntries(formData.entries());
+            
+            // Validate email format
+            const emailPattern = /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/;
+            if (!emailPattern.test(data.email)) {
+                if (window.AdeptskilJS && window.AdeptskilJS.showNotification) {
+                    window.AdeptskilJS.showNotification('Please enter a valid email address', 'error');
+                } else {
+                    alert('Please enter a valid email address');
+                }
+                return;
+            }
             
             // Simulate form submission
             const submitBtn = this.querySelector('.submit-btn');
@@ -383,9 +397,9 @@
                 
                 // Show success message
                 if (window.AdeptskilJS && window.AdeptskilJS.showNotification) {
-                    window.AdeptskilJS.showNotification('Thank you for your message! We\'ll get back to you within 24 hours.', 'success');
+                    window.AdeptskilJS.showNotification('🎉 Thank You! We\'re excited to connect with you and will reach out very soon! 🚀', 'success');
                 } else {
-                    alert('Thank you for your message! We\'ll get back to you within 24 hours.');
+                    alert('🎉 Thank You! We\'re excited to connect with you and will reach out very soon! 🚀');
                 }
                 
                 // Reset form
@@ -409,6 +423,30 @@
                     faqItem.classList.add('active');
                 }
             });
+        });
+
+        // Phone input - only allow numbers
+        const phoneInput = document.getElementById('phone');
+        phoneInput.addEventListener('input', function() {
+            this.value = this.value.replace(/[^\d]/g, '');
+        });
+        
+        phoneInput.addEventListener('keypress', function(e) {
+            if (!/[0-9]/.test(String.fromCharCode(e.which))) {
+                e.preventDefault();
+            }
+        });
+
+        // Name input - only allow letters and spaces
+        const nameInput = document.getElementById('name');
+        nameInput.addEventListener('input', function() {
+            this.value = this.value.replace(/[^a-zA-Z\s]/g, '');
+        });
+        
+        nameInput.addEventListener('keypress', function(e) {
+            if (!/[a-zA-Z\s]/.test(String.fromCharCode(e.which))) {
+                e.preventDefault();
+            }
         });
     </script>
 </body>
