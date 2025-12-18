@@ -1268,8 +1268,6 @@
                                         <i class="fas fa-graduation-cap"></i>
                                     </div>
                                     <div class="course-content">
-                                    </div>
-                                    <div class="course-content">
                                         <div class="course-category">Career Development Skills</div>
                                         <h3 class="course-title">Essential Coaching Skills for Managers</h3>
                                         <p class="course-description">Professional training in Essential Coaching Skills for Managers to enhance your skills and career prospects.</p>
@@ -2055,18 +2053,7 @@
                                     <i class="fas fa-info-circle"></i> About Us
                                 </a>
 
-                                <a href="contact.html" style="background: rgba(255,255,255,0.2); color: white; padding: 1rem 2rem; border-radius: 8px; text-decoration: none; transition: all 0.3s; font-weight: 600; display: flex; align-items: center; gap: 0.5rem; border: 1px solid rgba(255,255,255,0.3);"
-                                   onmouseover="this.style.background='rgba(255,255,255,0.3)'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.2)'"
-                                   onmouseout="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='translateY(0)'; this.style.boxShadow='none'">
-                                    <i class="fas fa-envelope"></i> Contact Us
-                                </a>
-
-                                <a href="contact.html" style="background: #fff; color: #667eea; padding: 1rem 2rem; border-radius: 8px; text-decoration: none; font-weight: 700; display: flex; align-items: center; gap: 0.5rem; transition: all 0.3s; box-shadow: 0 4px 15px rgba(0,0,0,0.2);"
-                                   onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 8px 25px rgba(0,0,0,0.3)'"
-                                   onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.2)'">
-                                    <i class="fas fa-comment-dots"></i> Get Help
-                                </a>
-
+                                <a href="contact.html" class="nav-link">Contact</a>
                             </div>
                         </div>
                     </section>
@@ -2330,221 +2317,6 @@
             });
             
             hideNoResults();
-        }
-
-        // Scroll to first enrollment option with enhanced UX
-        function scrollToEnrollment() {
-            const highlightedCourses = document.querySelectorAll('.course-card[style*="border: 3px solid #667eea"]');
-            if (highlightedCourses.length > 0) {
-                const firstCourse = highlightedCourses[0];
-                firstCourse.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                
-                // Flash effect on the first course
-                firstCourse.style.animation = 'bounceIn 0.8s ease-out';
-                
-                // Flash the enroll button
-                const enrollBtn = firstCourse.querySelector('.enroll-btn');
-                if (enrollBtn) {
-                    setTimeout(() => {
-                        enrollBtn.style.animation = 'flash 1s ease-in-out 3';
-                        setTimeout(() => {
-                            enrollBtn.style.animation = 'pulse 2s infinite';
-                        }, 3000);
-                    }, 500);
-                }
-            }
-        }
-
-        // Hide search result messages
-        function hideNoResults() {
-            const existingNoResults = document.getElementById('noSearchResults');
-            const existingResults = document.getElementById('searchResults');
-            if (existingNoResults) existingNoResults.remove();
-            if (existingResults) existingResults.remove();
-        } // Filter functionality with improved category mapping
-        function filterCourses(category) {
-            const courseCards = document.querySelectorAll('.course-card');
-            const categorySections = document.querySelectorAll('.category-section');
-            const filterButtons = document.querySelectorAll('.filter-btn');
-
-            // Update active filter button
-            filterButtons.forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-
-            // Clear search
-            document.getElementById('courseSearch').value = '';
-            hideNoResults();
-
-            if (category === 'all') {
-                // Show all courses
-                courseCards.forEach(card => {
-                    card.style.display = 'block';
-                    card.style.border = '';
-                    card.style.backgroundColor = '';
-                });
-                categorySections.forEach(section => {
-                    section.style.display = 'block';
-                });
-            } else {
-                // Hide all categories first
-                categorySections.forEach(section => {
-                    section.style.display = 'none';
-                });
-
-                // Map filter categories to course categories and specific course IDs
-                const categoryMap = {
-                    'agile': ['agile'],
-                    'business': ['business'],
-                    'software': ['technology'], // Software courses are in technology category
-                    'cloud': ['technology'], // Cloud courses are in technology category  
-                    'security': ['technology'], // Security courses are in technology category
-                    'project': ['management'], // Project management courses
-                    'data': ['technology'], // Data analytics courses are in technology
-                    'leadership': ['management'], // Leadership courses are in management
-                    'career': ['soft-skills'], // Career development in soft skills
-                    'soft-skills': ['soft-skills'],
-                    'azure': ['technology'], // Azure courses are in technology
-                    'construction': ['management'] // Construction is in management
-                };
-
-                const allowedCategories = categoryMap[category] || [category];
-                
-                // Show courses matching the category
-                courseCards.forEach(card => {
-                    const cardCategory = card.getAttribute('data-category');
-                    const cardId = card.getAttribute('id');
-                    
-                    // Check if card matches category or specific filter
-                    const matchesCategory = allowedCategories.includes(cardCategory);
-                    const matchesSpecificFilter = (
-                        (category === 'software' && (cardId === 'software' || card.querySelector('.course-title').textContent.toLowerCase().includes('python'))) ||
-                        (category === 'cloud' && (cardId === 'cloud' || card.querySelector('.course-title').textContent.toLowerCase().includes('cloud'))) ||
-                        (category === 'security' && (cardId === 'security' || card.querySelector('.course-title').textContent.toLowerCase().includes('security'))) ||
-                        (category === 'data' && (cardId === 'data' || card.querySelector('.course-title').textContent.toLowerCase().includes('data'))) ||
-                        (category === 'azure' && (cardId === 'azure' || card.querySelector('.course-title').textContent.toLowerCase().includes('azure'))) ||
-                        (category === 'project' && (cardId === 'project' || card.querySelector('.course-title').textContent.toLowerCase().includes('project'))) ||
-                        (category === 'leadership' && (cardId === 'leadership' || card.querySelector('.course-title').textContent.toLowerCase().includes('leadership'))) ||
-                        (category === 'career' && (cardId === 'career' || card.querySelector('.course-title').textContent.toLowerCase().includes('career'))) ||
-                        (category === 'construction' && (cardId === 'construction' || card.querySelector('.course-title').textContent.toLowerCase().includes('construction')))
-                    );
-                    
-                    if (matchesCategory || matchesSpecificFilter) {
-                        card.style.display = 'block';
-                        card.style.border = '';
-                        card.style.backgroundColor = '';
-                        card.closest('.category-section').style.display = 'block';
-                    } else {
-                        card.style.display = 'none';
-                    }
-                });
-            }
-        }
-
-        // Enhanced course enrollment and search handling from homepage
-        document.addEventListener('DOMContentLoaded', function() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const courseParam = urlParams.get('course');
-            const searchParam = urlParams.get('search');
-            
-            // Add event listeners for search functionality
-            const searchInput = document.getElementById('courseSearch');
-            if (searchInput) {
-                // Add real-time search on input
-                searchInput.addEventListener('input', searchCourses);
-                
-                // Add search on Enter key
-                searchInput.addEventListener('keypress', function(e) {
-                    if (e.key === 'Enter') {
-                        searchCourses();
-                    }
-                });
-            }
-
-            // Add click listeners to filter buttons
-            const filterButtons = document.querySelectorAll('.filter-btn');
-            filterButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const category = this.getAttribute('data-filter');
-                    filterCourses.call(this, category);
-                });
-            });
-            
-            if (courseParam) {
-                // Auto-scroll to the specific course and highlight it
-                setTimeout(() => {
-                    const courseCards = document.querySelectorAll('.course-card h3');
-                    let found = false;
-                    
-                    courseCards.forEach(card => {
-                        if (card.textContent.toLowerCase().includes(courseParam.toLowerCase())) {
-                            const courseCard = card.closest('.course-card');
-                            courseCard.style.border = '3px solid #3b82f6';
-                            courseCard.style.backgroundColor = '#fef3c7';
-                            courseCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                            found = true;
-                            
-                            // Show enrollment prompt
-                            setTimeout(() => {
-                                if (confirm(`Would you like to enroll in "${courseParam}" now?`)) {
-                                    enrollCourse(courseParam);
-                                }
-                            }, 1000);
-                        }
-                    });
-                    
-                    if (!found) {
-                        alert(`Course "${courseParam}" not found on this page. Please browse our available courses below.`);
-                    }
-                }, 500);
-            } else if (searchParam) {
-                // Handle search parameter with keyword matching
-                setTimeout(() => {
-                    // Set the search input value and trigger search
-                    if (searchInput) {
-                        searchInput.value = searchParam;
-                        searchCourses();
-                    }
-                }, 500);
-            }
-        });
-
-        // Show search results message with direct enrollment options
-        function showSearchResultsMessage(searchTerm, foundCourses) {
-            // Intentionally left blank: removed search results message
-        }
-
-        // Scroll to course and offer enrollment
-        function scrollToAndEnroll(courseTitle) {
-            const courseCards = document.querySelectorAll('.course-card h3');
-            
-            courseCards.forEach(card => {
-                if (card.textContent.toLowerCase().includes(courseTitle.toLowerCase())) {
-                    const courseCard = card.closest('.course-card');
-                    
-                    // Scroll to the course
-                    courseCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    
-                    // Highlight the course
-                    courseCard.style.border = '3px solid #3b82f6';
-                    courseCard.style.backgroundColor = '#fef3c7';
-                    courseCard.style.transform = 'scale(1.02)';
-                    courseCard.style.transition = 'all 0.3s ease';
-                    
-                    // Show enrollment confirmation
-                    setTimeout(() => {
-                        if (confirm(`🎯 Ready to enroll in "${courseTitle}"?\n\nClick OK to proceed with enrollment!`)) {
-                            enrollCourse(courseTitle);
-                        }
-                        
-                        // Reset highlight after interaction
-                        setTimeout(() => {
-                            courseCard.style.border = '';
-                            courseCard.style.backgroundColor = '';
-                            courseCard.style.transform = '';
-                        }, 3000);
-                    }, 800);
-                }
-            });
         }
 
         // Scroll to first found course
@@ -3017,6 +2789,20 @@
             });
         });
     </script>
+
+    <!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/6943fd2e274413197e932509/1jcopa0b2';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
 </body>
 </html>
 
