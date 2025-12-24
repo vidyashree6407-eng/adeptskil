@@ -9,7 +9,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="referrer" content="strict-origin-when-cross-origin">
     <title>Contact Us - Adeptskil</title>
-    <link rel="icon" type="image/png" href="images/Logo with full name.png">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon-128x128.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="apple-touch-icon-128x128.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="apple-touch-icon-32x32.png">
+    <meta name="theme-color" content="#667eea">
     <meta property="og:title" content="Contact Us - Adeptskil">
     <meta property="og:description" content="Contact Adeptskil for inquiries about professional training courses, corporate workshops, and business development programs.">
     <meta property="og:image" content="https://adeptskil.com/images/Logo%20with%20full%20name.png">
@@ -265,7 +270,9 @@
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-logo">
-                <img src="images/Logo with full name.png" alt="Adeptskil Logo">
+                <a href="index.html" style="text-decoration: none; display: flex; align-items: center;">
+                    <img src="images/Logo with full name.png" alt="Adeptskil Logo">
+                </a>
             </div>
             <div class="nav-menu" id="navMenu">
                 <a href="index.html" class="nav-link">Home</a>
@@ -314,7 +321,7 @@
     <section class="contact-section" style="padding:35px 0;">
         <div class="container" style="max-width:640px; margin: 0 auto;">
             <div style="background:#fff; border:1px solid #e2e8f0; border-radius:10px; padding:1.1rem 1.25rem; box-shadow:0 2px 8px rgba(0,0,0,0.05);">
-                <form id="contactForm" action="mailto:info@adeptskil.com" method="post" enctype="text/plain">
+                <form id="contactForm" method="post" action="process_contact.php">
                     <div class="form-group" style="margin-bottom:0.75rem;">
                         <label for="name" style="font-size:0.8rem;">Name *</label>
                         <input type="text" id="name" name="name" placeholder="Your name" required minlength="2" maxlength="100" style="padding:0.55rem 0.7rem; font-size:0.85rem; border-radius:6px;">
@@ -346,11 +353,39 @@
     <!-- Removed locations, map, FAQ for simplicity -->
 
     <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            
-        </div>
-    </footer>
+        <footer class="footer" style="background: linear-gradient(90deg, #667eea 0%, #764ba2 100%); color: #fff; padding: 40px 0 0 0; margin-top: 60px;">
+            <div class="container" style="max-width:1200px; margin:0 auto; display:flex; flex-wrap:wrap; justify-content:space-between; align-items:flex-start; gap:2rem;">
+                <div style="flex:1; min-width:220px;">
+                    <img src="images/Logo with full name.png" alt="Adeptskil Logo" style="height:48px; margin-bottom:1rem;">
+                    <p style="font-size:1rem; line-height:1.6; margin-bottom:1.2rem;">Adeptskil empowers professionals and organizations with world-class training, workshops, and business development programs. Unlock your potential with us.</p>
+                    <div style="font-size:1.2rem;">
+                        <a href="mailto:info@adeptskil.com" style="color:#fff; text-decoration:none; margin-right:1.2rem;"><i class="fas fa-envelope"></i> info@adeptskil.com</a>
+                        <a href="tel:+1234567890" style="color:#fff; text-decoration:none;"><i class="fas fa-phone"></i> +1234567890</a>
+                    </div>
+                </div>
+                <div style="flex:1; min-width:180px;">
+                    <h4 style="font-size:1.1rem; margin-bottom:1rem;">Quick Links</h4>
+                    <ul style="list-style:none; padding:0; margin:0;">
+                        <li><a href="index.html" style="color:#fff; text-decoration:none;">Home</a></li>
+                        <li><a href="about.html" style="color:#fff; text-decoration:none;">About</a></li>
+                        <li><a href="courses.html" style="color:#fff; text-decoration:none;">Courses</a></li>
+                        <li><a href="contact.html" style="color:#fff; text-decoration:none;">Contact</a></li>
+                    </ul>
+                </div>
+                <div style="flex:1; min-width:220px;">
+                    <h4 style="font-size:1.1rem; margin-bottom:1rem;">Follow Us</h4>
+                    <div style="font-size:1.5rem; display:flex; gap:1.2rem;">
+                        <a href="#" style="color:#fff;"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" style="color:#fff;"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" style="color:#fff;"><i class="fab fa-twitter"></i></a>
+                        <a href="#" style="color:#fff;"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div style="border-top:1px solid rgba(255,255,255,0.15); margin-top:2rem; padding:1.2rem 0 0 0; text-align:center; font-size:0.95rem; color:#e0e7ff;">
+                &copy; 2025 Adeptskil. All rights reserved. | Designed by Adeptskil Team
+            </div>
+        </footer>
 
     <script src="script.js"></script>
     <script>
@@ -373,38 +408,55 @@
                 return;
             }
             
-            // Simulate form submission
             const submitBtn = this.querySelector('.submit-btn');
             const originalText = submitBtn.textContent;
+            const form = this;
             
             // Show loading state
-            if (window.AdeptskilJS && window.AdeptskilJS.showLoading) {
-                window.AdeptskilJS.showLoading(submitBtn);
-            } else {
-                submitBtn.textContent = 'Sending...';
-                submitBtn.disabled = true;
-            }
+            submitBtn.textContent = 'Sending...';
+            submitBtn.disabled = true;
             
-            // Simulate API call
-            setTimeout(() => {
+            // Send form data to backend
+            fetch('process_contact.php', {
+                method: 'POST',
+                body: new FormData(form)
+            })
+            .then(response => response.json())
+            .then(data => {
                 // Reset button
-                if (window.AdeptskilJS && window.AdeptskilJS.hideLoading) {
-                    window.AdeptskilJS.hideLoading(submitBtn, originalText);
-                } else {
-                    submitBtn.textContent = originalText;
-                    submitBtn.disabled = false;
-                }
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
                 
-                // Show success message
+                if (data.success) {
+                    // Show success message
+                    if (window.AdeptskilJS && window.AdeptskilJS.showNotification) {
+                        window.AdeptskilJS.showNotification('🎉 Thank You! We\'re excited to connect with you and will reach out very soon! 🚀', 'success');
+                    } else {
+                        alert('🎉 Thank You! We\'re excited to connect with you and will reach out very soon! 🚀');
+                    }
+                    // Reset form
+                    form.reset();
+                } else {
+                    // Show error message
+                    if (window.AdeptskilJS && window.AdeptskilJS.showNotification) {
+                        window.AdeptskilJS.showNotification('Error: ' + (data.message || 'Failed to send message'), 'error');
+                    } else {
+                        alert('Error: ' + (data.message || 'Failed to send message'));
+                    }
+                }
+            })
+            .catch(error => {
+                // Reset button
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+                
+                console.error('Error:', error);
                 if (window.AdeptskilJS && window.AdeptskilJS.showNotification) {
-                    window.AdeptskilJS.showNotification('🎉 Thank You! We\'re excited to connect with you and will reach out very soon! 🚀', 'success');
+                    window.AdeptskilJS.showNotification('Network error. Please try again later.', 'error');
                 } else {
-                    alert('🎉 Thank You! We\'re excited to connect with you and will reach out very soon! 🚀');
+                    alert('Network error. Please try again later.');
                 }
-                
-                // Reset form
-                this.reset();
-            }, 2000);
+            });
         });
 
         // FAQ accordion functionality
