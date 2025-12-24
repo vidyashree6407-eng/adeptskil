@@ -330,10 +330,6 @@
                         <label for="email" style="font-size:0.8rem;">Email *</label>
                         <input type="email" id="email" name="email" placeholder="client@example.com" required autocomplete="email" pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}" style="padding:0.55rem 0.7rem; font-size:0.85rem; border-radius:6px;">
                     </div>
-                    <div class="form-group" style="margin-bottom:0.75rem;">
-                        <label for="phone" style="font-size:0.8rem;">Phone (optional)</label>
-                        <input type="tel" id="phone" name="phone" placeholder="1234567890" autocomplete="tel" inputmode="numeric" maxlength="10" style="padding:0.55rem 0.7rem; font-size:0.85rem; border-radius:6px;">
-                    </div>
                     <div class="form-group" style="margin-bottom:0.9rem;">                        <label for="message" style="font-size:0.8rem;">Message *</label>
                         <textarea id="message" name="message" placeholder="Write your message" required minlength="10" maxlength="1000" style="padding:0.6rem 0.7rem; font-size:0.85rem; border-radius:6px; min-height:95px;"></textarea>
                     </div>
@@ -360,7 +356,6 @@
                     <p style="font-size:1rem; line-height:1.6; margin-bottom:1.2rem;">Adeptskil empowers professionals and organizations with world-class training, workshops, and business development programs. Unlock your potential with us.</p>
                     <div style="font-size:1.2rem;">
                         <a href="mailto:info@adeptskil.com" style="color:#fff; text-decoration:none; margin-right:1.2rem;"><i class="fas fa-envelope"></i> info@adeptskil.com</a>
-                        <a href="tel:+1234567890" style="color:#fff; text-decoration:none;"><i class="fas fa-phone"></i> +1234567890</a>
                     </div>
                 </div>
                 <div style="flex:1; min-width:180px;">
@@ -475,18 +470,6 @@
                     faqItem.classList.add('active');
                 }
             });
-        });
-
-        // Phone input - only allow numbers
-        const phoneInput = document.getElementById('phone');
-        phoneInput.addEventListener('input', function() {
-            this.value = this.value.replace(/[^\d]/g, '');
-        });
-        
-        phoneInput.addEventListener('keypress', function(e) {
-            if (!/[0-9]/.test(String.fromCharCode(e.which))) {
-                e.preventDefault();
-            }
         });
 
         // Name input - only allow letters and spaces
