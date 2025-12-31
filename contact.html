@@ -51,6 +51,22 @@
             outline: none;
         }
 
+        .form-group select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.2s ease;
+            outline: none;
+            background-color: #fff;
+            cursor: pointer;
+        }
+
+        .form-group select:focus {
+            border-color: #2563eb;
+        }
+
         .form-group input:focus,
         .form-group textarea:focus {
             border-color: #2563eb;
@@ -330,6 +346,24 @@
                         <label for="email" style="font-size:0.8rem;">Email *</label>
                         <input type="email" id="email" name="email" placeholder="client@example.com" required autocomplete="email" pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}" style="padding:0.55rem 0.7rem; font-size:0.85rem; border-radius:6px;">
                     </div>
+                    <div class="form-group" style="margin-bottom:0.75rem;">
+                        <label for="phone" style="font-size:0.8rem;">Phone (optional)</label>
+                        <input type="tel" id="phone" name="phone" placeholder="1234567890" autocomplete="tel" inputmode="numeric" maxlength="10" style="padding:0.55rem 0.7rem; font-size:0.85rem; border-radius:6px;">
+                    </div>
+                    <div class="form-group" style="margin-bottom:0.75rem;">
+                        <label for="inquiry-type" style="font-size:0.8rem;">Type of Inquiry *</label>
+                        <select id="inquiry-type" name="inquiry_type" required style="padding:0.55rem 0.7rem; font-size:0.85rem; border-radius:6px; width:100%; border:1px solid #e2e8f0; background-color:#fff; cursor:pointer; appearance:none; background-image:url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 20 20\" fill=\"%23667eea\"><path fill-rule=\"evenodd\" d=\"M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z\" clip-rule=\"evenodd\" /></svg>'); background-repeat:no-repeat; background-position:right 0.5rem center; background-size:1.25rem; padding-right:2.5rem;">
+                            <option value="">-- Select Inquiry Type --</option>
+                            <option value="Course Enrollment">Course Enrollment</option>
+                            <option value="Corporate Training">Corporate Training Programs</option>
+                            <option value="Workshop Inquiry">Workshop Inquiry</option>
+                            <option value="Business Partnership">Business Partnership</option>
+                            <option value="Course Customization">Course Customization</option>
+                            <option value="Technical Support">Technical Support</option>
+                            <option value="Bulk Enrollment">Bulk Enrollment Discount</option>
+                            <option value="Other">Other Inquiry</option>
+                        </select>
+                    </div>
                     <div class="form-group" style="margin-bottom:0.9rem;">                        <label for="message" style="font-size:0.8rem;">Message *</label>
                         <textarea id="message" name="message" placeholder="Write your message" required minlength="10" maxlength="1000" style="padding:0.6rem 0.7rem; font-size:0.85rem; border-radius:6px; min-height:95px;"></textarea>
                     </div>
@@ -356,6 +390,7 @@
                     <p style="font-size:1rem; line-height:1.6; margin-bottom:1.2rem;">Adeptskil empowers professionals and organizations with world-class training, workshops, and business development programs. Unlock your potential with us.</p>
                     <div style="font-size:1.2rem;">
                         <a href="mailto:info@adeptskil.com" style="color:#fff; text-decoration:none; margin-right:1.2rem;"><i class="fas fa-envelope"></i> info@adeptskil.com</a>
+                        <a href="tel:+1234567890" style="color:#fff; text-decoration:none;"><i class="fas fa-phone"></i> +1234567890</a>
                     </div>
                 </div>
                 <div style="flex:1; min-width:180px;">
@@ -470,6 +505,18 @@
                     faqItem.classList.add('active');
                 }
             });
+        });
+
+        // Phone input - only allow numbers
+        const phoneInput = document.getElementById('phone');
+        phoneInput.addEventListener('input', function() {
+            this.value = this.value.replace(/[^\d]/g, '');
+        });
+        
+        phoneInput.addEventListener('keypress', function(e) {
+            if (!/[0-9]/.test(String.fromCharCode(e.which))) {
+                e.preventDefault();
+            }
         });
 
         // Name input - only allow letters and spaces

@@ -23,16 +23,123 @@
     <link rel="canonical" href="https://adeptskil.com/courses.html">
     <link rel="stylesheet" href="styles.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Courses page navbar with centered search bar */
+        .courses-navbar .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+        }
+        .courses-navbar .nav-logo {
+            flex-shrink: 0;
+            margin-right: 0;
+        }
+        .navbar-search-container {
+            flex: 1;
+            max-width: 500px;
+            display: flex;
+            justify-content: center;
+        }
+        .navbar-search-box {
+            display: flex;
+            align-items: center;
+            background: #f1f5f9;
+            padding: 0.5rem 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 999px;
+            width: 100%;
+            max-width: 500px;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+        .navbar-search-box:focus-within {
+            border-color: #667eea;
+            background: white;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.15);
+        }
+        .navbar-search-box input {
+            flex: 1;
+            border: none;
+            background: transparent;
+            outline: none;
+            font-size: 0.9rem;
+            color: #334155;
+        }
+        .navbar-search-box input::placeholder {
+            color: #94a3b8;
+        }
+        .navbar-search-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        .navbar-search-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+        .courses-navbar .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            flex-shrink: 0;
+        }
+        .courses-section {
+            padding-top: 180px;
+            margin-top: 0;
+        }
+        @media (max-width: 1200px) {
+            .courses-navbar .nav-container {
+                gap: 1.5rem;
+            }
+            .navbar-search-container {
+                max-width: 350px;
+            }
+            .courses-section {
+                padding-top: 160px;
+            }
+        }
+        @media (max-width: 992px) {
+            .courses-navbar .nav-container {
+                gap: 1rem;
+            }
+            .courses-section {
+                padding-top: 130px;
+            }
+        }
+        @media (max-width: 768px) {
+            .courses-section {
+                padding-top: 100px;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Navigation -->
-    <nav class="navbar">
+    <nav class="navbar courses-navbar">
         <div class="nav-container">
             <div class="nav-logo">
                 <a href="index.html" style="text-decoration: none; display: flex; align-items: center;">
                     <img src="images/Logo with full name.png" alt="Adeptskil Logo">
                 </a>
             </div>
+            
+            <div class="navbar-search-container">
+                <form id="exactCourseSearch" class="navbar-search-box" role="search" autocomplete="off">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="exactSearchInput" placeholder="Search courses..." aria-label="Search courses">
+                    <button type="submit" class="navbar-search-btn" aria-label="Search"><i class="fas fa-arrow-right"></i></button>
+                </form>
+            </div>
+            
             <div class="nav-menu" id="navMenu">
                 <a href="index.html" class="nav-link">Home</a>
                 <a href="about.html" class="nav-link">About</a>
@@ -66,18 +173,6 @@
     </nav>
 
     <!-- Hero Section Removed -->
-
-    <!-- Page Search (Below Navbar) -->
-    <section class="page-search" style="background:#ffffff;">
-      <div class="container" style="max-width:900px;margin:0 auto;">
-        <form id="exactCourseSearch" class="header-search-box" role="search" autocomplete="off">
-          <i class="fas fa-search"></i>
-          <input type="text" id="exactSearchInput" placeholder="Type full course name and press Enter…" aria-label="Search courses">
-          <button type="submit" class="header-search-btn" aria-label="Search"><i class="fas fa-arrow-right"></i></button>
-        </form>
-        <div id="exactSearchMsg" style="margin-top:8px;font-size:0.8rem;color:#64748b;"></div>
-      </div>
-    </section>
 
     <!-- Course Filters -->
     <section class="course-filters">
@@ -2060,7 +2155,11 @@
                                     <i class="fas fa-info-circle"></i> About Us
                                 </a>
 
-                                <a href="contact.html" class="nav-link">Contact</a>
+                                <a href="contact.html" style="background: rgba(255,255,255,0.2); color: white; padding: 1rem 2rem; border-radius: 8px; text-decoration: none; transition: all 0.3s; font-weight: 600; display: flex; align-items: center; gap: 0.5rem; border: 1px solid rgba(255,255,255,0.3);"
+                                   onmouseover="this.style.background='rgba(255,255,255,0.3)'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.2)'"
+                                   onmouseout="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                                    <i class="fas fa-envelope"></i> Contact Us
+                                </a>
                             </div>
                         </div>
                     </section>

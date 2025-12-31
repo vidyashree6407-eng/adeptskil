@@ -25,6 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 $name = isset($_POST['name']) ? trim(strip_tags($_POST['name'])) : '';
 $email = isset($_POST['email']) ? trim(strtolower($_POST['email'])) : '';
 $phone = isset($_POST['phone']) ? trim(preg_replace('/[^\d]/', '', $_POST['phone'])) : '';
+$inquiry_type = isset($_POST['inquiry_type']) ? trim(strip_tags($_POST['inquiry_type'])) : '';
 $message = isset($_POST['message']) ? trim(strip_tags($_POST['message'])) : '';
 
 // Validate required fields
@@ -36,6 +37,10 @@ if (empty($name) || strlen($name) < 2) {
 
 if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
     $errors[] = 'Valid email is required';
+}
+
+if (empty($inquiry_type)) {
+    $errors[] = 'Type of inquiry is required';
 }
 
 if (empty($message) || strlen($message) < 10) {
@@ -55,7 +60,7 @@ $site_name = 'Adeptskil';
 $timestamp = date('Y-m-d H:i:s');
 
 // Build email content
-$email_subject = "New Contact Form Submission from $name";
+$email_subject = "New Contact Form Submission - $inquiry_type from $name";
 $email_body = "
 Dear Adeptskil Team,
 
@@ -64,6 +69,7 @@ You have received a new contact form submission:
 Name: $name
 Email: $email
 Phone: " . (!empty($phone) ? $phone : 'Not provided') . "
+Inquiry Type: $inquiry_type
 Timestamp: $timestamp
 
 Message:
@@ -95,7 +101,7 @@ foreach ($headers as $key => $value) {
 $mail_sent = mail($recipient_email, $email_subject, $email_body, $headers_str);
 
 // Log the submission
-logContactSubmission($name, $email, $phone, $message, $mail_sent);
+logContactSubmission($name, $email, $phone, $inquiry_type, $message, $mail_sent);
 
 // Return appropriate response
 if ($mail_sent) {
@@ -117,16 +123,17 @@ exit;
 /**
  * Log contact form submissions
  */
-function logContactSubmission($name, $email, $phone, $message, $mail_sent) {
+function logContactSubmission($name, $email, $phone, $inquiry_type, $message, $mail_sent) {
     $log_file = __DIR__ . '/contact_submissions.log';
     $status = $mail_sent ? 'SUCCESS' : 'FAILED';
     $log_entry = sprintf(
-        "[%s] %s - Name: %s | Email: %s | Phone: %s | Message Length: %d\n",
+        "[%s] %s - Name: %s | Email: %s | Phone: %s | Inquiry Type: %s | Message Length: %d\n",
         date('Y-m-d H:i:s'),
         $status,
         $name,
         $email,
         $phone ?: 'N/A',
+        $inquiry_type,
         strlen($message)
     );
     
