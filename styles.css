@@ -84,7 +84,7 @@ p, li, a, button, input, textarea {
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
-    min-height: 35px;
+    min-height: 60px;
     box-sizing: border-box;
 }
 
@@ -515,7 +515,7 @@ p, li, a, button, input, textarea {
 @media (max-width: 768px) {
     .nav-container {
         padding: 0.1rem 0.75rem;
-        min-height: 34px;
+        min-height: 50px;
         gap: 0.5rem;
     }
     
@@ -526,8 +526,8 @@ p, li, a, button, input, textarea {
     }
     
     .nav-logo img {
-        height: 180px;
-        margin: -40px 0;
+        height: 200px;
+        margin: -45px 0;
         max-width: 750px;
     }
     
@@ -549,7 +549,7 @@ p, li, a, button, input, textarea {
 @media (max-width: 640px) {
     .nav-container {
         padding: 0.05rem 0.4rem;
-        min-height: 30px;
+        min-height: 45px;
         gap: 0.3rem;
     }
     
@@ -561,8 +561,8 @@ p, li, a, button, input, textarea {
     }
     
     .nav-logo img {
-        height: 130px;
-        margin: -28px 0;
+        height: 160px;
+        margin: -32px 0;
         max-width: 100%;
     }
     
@@ -576,7 +576,7 @@ p, li, a, button, input, textarea {
 @media (max-width: 480px) {
     .nav-container {
         padding: 0.05rem 0.3rem;
-        min-height: 26px;
+        min-height: 40px;
         gap: 0.2rem;
     }
     
@@ -585,8 +585,8 @@ p, li, a, button, input, textarea {
     }
     
     .nav-logo img {
-        height: 95px;
-        margin: -20px 0;
+        height: 120px;
+        margin: -25px 0;
         max-width: 100%;
     }
     
@@ -2341,11 +2341,11 @@ img:not([src]) {
 
     /* Reduce footer logo on mobile for better content visibility */
     .footer-section:first-child img {
-        height: 100px !important;
+        height: 70px !important;
     }
 
     .footer-section:first-child > div {
-        gap: 1rem !important;
+        gap: 0.8rem !important;
     }
 }
 
@@ -2384,11 +2384,11 @@ img:not([src]) {
 
     /* Further reduce footer logo on extra small screens */
     .footer-section:first-child img {
-        height: 80px !important;
+        height: 60px !important;
     }
 
     .footer-section:first-child > div {
-        gap: 0.75rem !important;
+        gap: 0.6rem !important;
     }
 
     .footer-section:first-child h3 {
