@@ -96,23 +96,23 @@ p, li, a, button, input, textarea {
 }
 
 .nav-logo img {
-    height: 180px;
+    height: 210px;
     width: auto;
-    max-width: 850px;
+    max-width: 1600px;
     transition: all 0.3s ease;
     object-fit: contain;
     background: transparent;
     border: none;
     box-shadow: none;
     padding: 0;
-    margin: -40px 0;
+    margin: -50px 0;
     filter: drop-shadow(0 6px 25px rgba(0,0,0,0.3));
     font-weight: 900;
 }
 
 .nav-logo img:hover {
-    height: 190px;
-    margin: -45px 0;
+    height: 220px;
+    margin: -55px 0;
     filter: drop-shadow(0 10px 40px rgba(102, 126, 234, 0.7));
     transform: scale(1.06);
 }
@@ -502,9 +502,9 @@ p, li, a, button, input, textarea {
     }
     
     .nav-logo img {
-        height: 150px;
-        margin: -32px 0;
-        max-width: 420px;
+        height: 180px;
+        margin: -40px 0;
+        max-width: 950px;
     }
     
     .nav-menu {
@@ -526,9 +526,9 @@ p, li, a, button, input, textarea {
     }
     
     .nav-logo img {
-        height: 140px;
-        margin: -28px 0;
-        max-width: 300px;
+        height: 160px;
+        margin: -35px 0;
+        max-width: 750px;
     }
     
     .header-search {
@@ -557,12 +557,12 @@ p, li, a, button, input, textarea {
         margin-right: 0;
         flex-shrink: 1;
         min-width: 0;
-        max-width: 70%;
+        max-width: 95%;
     }
     
     .nav-logo img {
-        height: 80px;
-        margin: -15px 0;
+        height: 100px;
+        margin: -20px 0;
         max-width: 100%;
     }
     
@@ -581,12 +581,13 @@ p, li, a, button, input, textarea {
     }
     
     .nav-logo {
-        max-width: 60%;
+        max-width: 85%;
     }
     
     .nav-logo img {
-        height: 60px;
-        margin: -10px 0;
+        height: 75px;
+        margin: -15px 0;
+        max-width: 100%;
     }
     
     .nav-toggle {
@@ -1737,10 +1738,22 @@ p, li, a, button, input, textarea {
 }
 
 /* Footer */
-.footer-content {
-    display: block;
-    margin-bottom: 2rem;
+.footer {
+    padding: 4rem 2rem 2rem !important;
 }
+
+.footer .container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: 3rem;
+    margin-bottom: 2.5rem;
+}
+
 .footer .btn-primary {
     background: #fff;
     color: #667eea;
@@ -2295,6 +2308,69 @@ img:not([src]) {
 
     .course-category {
         padding: 1rem;
+    }
+
+    /* Footer Responsive */
+    .footer-content {
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    .footer .container {
+        padding: 0 1rem;
+    }
+}
+
+@media (max-width: 640px) {
+    /* Footer Mobile Stack */
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .footer {
+        padding: 2rem 1rem !important;
+    }
+
+    .footer-section h4 {
+        font-size: 0.9rem !important;
+        margin-bottom: 1rem !important;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Footer Extra Small */
+    .footer {
+        padding: 1.5rem 0.75rem !important;
+    }
+
+    .footer-content {
+        gap: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .footer-section {
+        padding: 0 0.5rem;
+    }
+
+    .footer-section h4 {
+        font-size: 0.85rem !important;
+        margin-bottom: 0.75rem !important;
+    }
+
+    .footer-section p {
+        font-size: 0.85rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .footer-section ul {
+        gap: 0.5rem !important;
+    }
+
+    .footer-section ul li a {
+        font-size: 0.85rem;
     }
 }
 
