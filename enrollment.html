@@ -283,7 +283,9 @@
                     body: JSON.stringify(enrollmentData)
                 });
                 
-                if (response.ok) {
+                const responseData = await response.json();
+                
+                if (response.ok && responseData.success) {
                     successMsg.style.display = 'block';
                     successMsg.innerHTML = '<i class="fas fa-check-circle"></i> Enrollment successful! Check your email for confirmation.';
                     enrollBtn.innerHTML = '<i class="fas fa-check"></i> Enrollment Complete!';
@@ -297,11 +299,12 @@
                         window.location.href = 'thank-you.html?course=' + encodeURIComponent(courseName);
                     }, 2000);
                 } else {
-                    throw new Error('Enrollment failed');
+                    throw new Error(responseData.message || 'Enrollment failed');
                 }
             } catch (error) {
+                console.error('Enrollment error:', error);
                 errorMsg.style.display = 'block';
-                errorMsg.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Something went wrong. Please try again.';
+                errorMsg.innerHTML = '<i class="fas fa-exclamation-triangle"></i> ' + (error.message || 'Something went wrong. Please try again or contact support.');
                 enrollBtn.disabled = false;
                 enrollBtn.innerHTML = '<i class="fas fa-graduation-cap"></i> Enroll Now';
             }

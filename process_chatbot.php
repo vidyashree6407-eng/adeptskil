@@ -10,6 +10,9 @@ ini_set('display_errors', 0);
 ini_set('log_errors', 1);
 ini_set('error_log', __DIR__ . '/chatbot_errors.log');
 
+// Set header
+header('Content-Type: application/json');
+
 // Get the incoming enrollment data
 $input = json_decode(file_get_contents('php://input'), true);
 
@@ -33,6 +36,13 @@ $phone = sanitize($input['phone'] ?? '');
 $company = sanitize($input['company'] ?? '');
 $message = sanitize($input['message'] ?? '');
 $timestamp = date('Y-m-d H:i:s');
+
+// Validate required fields
+if (empty($fullName) || empty($email) || empty($phone)) {
+    http_response_code(400);
+    echo json_encode(['error' => 'Missing required fields']);
+    exit;
+}
 
 // Log the enrollment
 logEnrollment($fullName, $email, $course, $timestamp);
@@ -85,16 +95,24 @@ $userBody = "
 </html>";
 
 // Send emails
-$adminSent = sendEmail($ADMIN_EMAIL, $adminSubject, $adminBody);
-$userSent = sendEmail($email, $userSubject, $userBody);
-
-// Return success response
-if ($adminSent) {
+try {
+    $adminSent = sendEmail($ADMIN_EMAIL, $adminSubject, $adminBody);
+    $userSent = sendEmail($email, $userSubject, $userBody);
+    
+    // Return success response
     http_response_code(200);
-    echo json_encode(['success' => true, 'message' => 'Enrollment processed successfully']);
-} else {
+    echo json_encode([
+        'success' => true, 
+        'message' => 'Enrollment processed successfully',
+        'adminSent' => $adminSent,
+        'userSent' => $userSent
+    ]);
+} catch (Exception $e) {
     http_response_code(500);
-    echo json_encode(['success' => false, 'message' => 'Error processing enrollment']);
+    echo json_encode([
+        'success' => false, 
+        'message' => 'Error processing enrollment: ' . $e->getMessage()
+    ]);
 }
 exit;
 
@@ -107,13 +125,20 @@ function sendEmail($to, $subject, $body) {
     $headers = "MIME-Version: 1.0" . "\r\n";
     $headers .= "Content-type: text/html; charset=UTF-8" . "\r\n";
     $headers .= "From: noreply@adeptskil.com" . "\r\n";
+    $headers .= "Reply-To: noreply@adeptskil.com" . "\r\n";
     
-    return mail($to, $subject, $body, $headers);
+    $result = mail($to, $subject, $body, $headers);
+    
+    if (!$result) {
+        error_log("Failed to send email to: $to, Subject: $subject");
+    }
+    
+    return $result;
 }
 
 function logEnrollment($name, $email, $course, $timestamp) {
     $logFile = __DIR__ . '/enrollments.log';
-    $logEntry = "[$timestamp] Name: $name | Email: $email | Course: $course\n";
+    $logEntry = "[$timestamp] Name: $name | Email: $email | Course: $course | IP: " . $_SERVER['REMOTE_ADDR'] . "\n";
     file_put_contents($logFile, $logEntry, FILE_APPEND);
 }
 
