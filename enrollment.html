@@ -295,14 +295,20 @@
                 });
                 
                 console.log('Response status:', response.status);
+                console.log('Response headers:', response.headers);
+                console.log('Response URL:', response.url);
+                
+                const responseText = await response.text();
+                console.log('Raw response text:', responseText);
                 
                 let responseData;
                 try {
-                    responseData = await response.json();
-                    console.log('Response data:', responseData);
+                    responseData = JSON.parse(responseText);
+                    console.log('Parsed response data:', responseData);
                 } catch (jsonError) {
                     console.error('Failed to parse JSON response:', jsonError);
-                    throw new Error('Server returned invalid response. Please try again.');
+                    console.error('Response text was:', responseText);
+                    throw new Error('Server returned invalid JSON: ' + responseText.substring(0, 200));
                 }
                 
                 if (response.ok && responseData.success) {

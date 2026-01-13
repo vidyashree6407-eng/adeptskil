@@ -1,17 +1,21 @@
 <?php
-error_reporting(0);
-ini_set('display_errors', 0);
-ini_set('log_errors', 1);
-ini_set('error_log', __DIR__ . '/chatbot_errors.log');
-
 ob_start();
+
 header('Content-Type: application/json; charset=utf-8');
 header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: POST, OPTIONS');
+header('Access-Control-Allow-Headers: Content-Type');
+
+error_reporting(E_ALL);
+ini_set('display_errors', '0');
+ini_set('log_errors', '1');
+ini_set('error_log', __DIR__ . '/chatbot_errors.log');
 
 function respond($success, $message, $code = 200) {
     ob_end_clean();
     http_response_code($code);
     echo json_encode(['success' => $success, 'message' => $message]);
+    error_log("Response: " . json_encode(['success' => $success, 'message' => $message]));
     exit;
 }
 
