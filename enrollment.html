@@ -256,6 +256,15 @@
             
             if (!fullName || !email || !phone) {
                 errorMsg.style.display = 'block';
+                errorMsg.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Please fill in all required fields (Name, Email, Phone).';
+                return;
+            }
+            
+            // Validate email format
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                errorMsg.style.display = 'block';
+                errorMsg.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Please enter a valid email address.';
                 return;
             }
             
@@ -266,13 +275,15 @@
             try {
                 // Prepare data for backend
                 const enrollmentData = {
-                    course: courseName,
+                    course: courseName || 'Not specified',
                     fullName: fullName,
                     email: email,
                     phone: phone,
                     company: formData.get('company')?.trim() || '',
                     message: formData.get('message')?.trim() || ''
                 };
+                
+                console.log('Sending enrollment data:', enrollmentData);
                 
                 // Send to backend
                 const response = await fetch('process_chatbot.php', {
@@ -283,7 +294,16 @@
                     body: JSON.stringify(enrollmentData)
                 });
                 
-                const responseData = await response.json();
+                console.log('Response status:', response.status);
+                
+                let responseData;
+                try {
+                    responseData = await response.json();
+                    console.log('Response data:', responseData);
+                } catch (jsonError) {
+                    console.error('Failed to parse JSON response:', jsonError);
+                    throw new Error('Server returned invalid response. Please try again.');
+                }
                 
                 if (response.ok && responseData.success) {
                     successMsg.style.display = 'block';
@@ -299,7 +319,7 @@
                         window.location.href = 'thank-you.html?course=' + encodeURIComponent(courseName);
                     }, 2000);
                 } else {
-                    throw new Error(responseData.message || 'Enrollment failed');
+                    throw new Error(responseData.message || responseData.error || 'Enrollment failed');
                 }
             } catch (error) {
                 console.error('Enrollment error:', error);
