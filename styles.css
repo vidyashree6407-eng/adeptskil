@@ -13,6 +13,8 @@
 html {
     width: 100%;
     overflow-x: hidden;
+    scroll-padding-top: 180px;
+    scroll-behavior: smooth;
 }
 
 body {
@@ -621,9 +623,9 @@ p, li, a, button, input, textarea {
 
 /* Container class for proper spacing */
 .container {
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
-    padding: 0 2rem;
+    padding: 0 1rem;
     width: 100%;
     box-sizing: border-box;
 }
@@ -1051,7 +1053,7 @@ p, li, a, button, input, textarea {
 
 /* Modern card styling with brand colors */
 .programs-section .program-card {
-    padding: 1.75rem 1.5rem;
+    padding: 2.2rem 2rem;
     border-radius: 16px;
     border: none;
     background: #ffffff;

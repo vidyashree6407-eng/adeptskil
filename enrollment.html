@@ -5,17 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Course Enrollment - Adeptskil</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon-128x128.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="apple-touch-icon-128x128.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="apple-touch-icon-32x32.png">
-    <meta name="theme-color" content="#667eea">
-    <link rel="icon" type="image/png" href="images/Logo with full name.png">
-    <meta property="og:title" content="Course Enrollment - Adeptskil">
-    <meta property="og:description" content="Enroll in Adeptskil's professional training courses and start your learning journey today.">
-    <meta property="og:image" content="https://adeptskil.com/images/Logo%20with%20full%20name.png">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content="https://adeptskil.com/images/Logo%20with%20full%20name.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         * {
@@ -30,132 +19,59 @@
             color: #333;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
         }
 
         .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 20px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            max-width: 500px;
+            width: 100%;
+            padding: 40px;
         }
 
         .enrollment-header {
             text-align: center;
-            color: white;
             margin-bottom: 30px;
         }
 
         .enrollment-header h1 {
-            font-size: 2.5rem;
+            font-size: 2rem;
+            color: #2d3748;
             margin-bottom: 10px;
         }
 
         .enrollment-header p {
-            font-size: 1.2rem;
-            opacity: 0.9;
-        }
-
-        .enrollment-container {
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            overflow: hidden;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 0;
-        }
-
-        .course-summary {
-            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-            padding: 40px;
-            border-right: 1px solid #e2e8f0;
-        }
-
-        .enrollment-form {
-            padding: 40px;
-        }
-
-        .course-title {
-            font-size: 1.8rem;
-            color: #2d3748;
-            margin-bottom: 15px;
-            font-weight: 600;
-        }
-
-        .course-description {
             color: #64748b;
-            margin-bottom: 25px;
-            line-height: 1.6;
+            font-size: 0.95rem;
         }
 
-        .course-features {
-            list-style: none;
+        .course-info {
+            background: #f8fafc;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            border-radius: 8px;
             margin-bottom: 30px;
         }
 
-        .course-features li {
-            padding: 8px 0;
-            color: #475569;
-            display: flex;
-            align-items: center;
-        }
-
-        .course-features li i {
-            color: #10b981;
-            margin-right: 12px;
-            width: 20px;
-        }
-
-        .pricing-section {
-            background: white;
-            padding: 25px;
-            border-radius: 12px;
-            border: 2px solid #e2e8f0;
-            margin-top: 20px;
-        }
-
-        .price-display {
-            text-align: center;
-            margin-bottom: 15px;
-        }
-
-        .original-price {
-            text-decoration: line-through;
-            color: #94a3b8;
-            font-size: 1rem;
-        }
-
-        .current-price {
-            font-size: 2rem;
-            font-weight: bold;
+        .course-info h3 {
             color: #667eea;
-            margin: 5px 0;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
-        .discount-badge {
-            background: #ef4444;
-            color: white;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
+        .course-info p {
+            color: #2d3748;
+            font-size: 1.1rem;
             font-weight: 500;
         }
 
-        .form-section {
-            margin-bottom: 30px;
-        }
-
-        .form-section h3 {
-            color: #2d3748;
-            margin-bottom: 20px;
-            font-size: 1.3rem;
-            display: flex;
-            align-items: center;
-        }
-
-        .form-section h3 i {
-            margin-right: 10px;
-            color: #667eea;
-        }
 
         .form-group {
             margin-bottom: 20px;
@@ -165,13 +81,14 @@
             display: block;
             margin-bottom: 8px;
             font-weight: 500;
-            color: #374151;
+            color: #2d3748;
+            font-size: 0.95rem;
         }
 
         .form-control {
             width: 100%;
             padding: 12px;
-            border: 2px solid #e5e7eb;
+            border: 2px solid #e2e8f0;
             border-radius: 8px;
             font-size: 1rem;
             transition: all 0.3s ease;
@@ -183,118 +100,9 @@
             box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
         }
 
-        .date-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 10px;
-            margin-top: 15px;
-        }
-
-        .date-option {
-            background: #f8fafc;
-            border: 2px solid #e2e8f0;
-            border-radius: 8px;
-            padding: 15px 10px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .date-option:hover {
-            border-color: #667eea;
-            background: #f0f4ff;
-        }
-
-        .date-option.selected {
-            background: #667eea;
-            color: white;
-            border-color: #667eea;
-        }
-
-        .date-option .day {
-            font-weight: bold;
-            font-size: 0.9rem;
-        }
-
-        .date-option .date {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin: 5px 0;
-        }
-
-        .date-option .month {
-            font-size: 0.8rem;
-            opacity: 0.8;
-        }
-
-        .payment-methods {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin-top: 15px;
-        }
-
-        .payment-option {
-            background: #f8fafc;
-            border: 2px solid #e2e8f0;
-            border-radius: 12px;
-            padding: 20px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .payment-option:hover {
-            border-color: #667eea;
-            background: #f0f4ff;
-        }
-
-        .payment-option.selected {
-            background: #667eea;
-            color: white;
-            border-color: #667eea;
-        }
-
-        .payment-option i {
-            font-size: 2rem;
-            margin-bottom: 10px;
-            color: #667eea;
-        }
-
-        .payment-option.selected i {
-            color: white;
-        }
-
-        .payment-option h4 {
-            margin-bottom: 5px;
-            font-size: 1rem;
-        }
-
-        .payment-option p {
-            font-size: 0.85rem;
-            opacity: 0.8;
-        }
-
-        .enrollment-summary {
-            background: #f8fafc;
-            padding: 20px;
-            border-radius: 8px;
-            margin: 20px 0;
-            border-left: 4px solid #667eea;
-        }
-
-        .summary-row {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
-        }
-
-        .summary-row:last-child {
-            font-weight: bold;
-            font-size: 1.1rem;
-            border-top: 1px solid #e2e8f0;
-            padding-top: 10px;
-            margin-bottom: 0;
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
         }
 
         .enroll-btn {
@@ -302,18 +110,18 @@
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             border: none;
-            padding: 15px 30px;
+            padding: 14px 30px;
             border-radius: 8px;
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            margin-top: 20px;
+            margin-top: 10px;
         }
 
         .enroll-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
         }
 
         .enroll-btn:disabled {
@@ -323,12 +131,13 @@
         }
 
         .back-link {
-            color: white;
+            color: #667eea;
             text-decoration: none;
-            margin-bottom: 20px;
+            font-size: 0.9rem;
             display: inline-flex;
             align-items: center;
             transition: all 0.3s ease;
+            margin-bottom: 20px;
         }
 
         .back-link:hover {
@@ -336,73 +145,31 @@
         }
 
         .back-link i {
-            margin-right: 8px;
-        }
-
-        .secure-badge {
-            text-align: center;
-            color: #10b981;
-            font-size: 0.9rem;
-            margin-top: 15px;
-        }
-
-        .secure-badge i {
-            margin-right: 5px;
-        }
-
-        @media (max-width: 768px) {
-            .enrollment-container {
-                grid-template-columns: 1fr;
-            }
-
-            .course-summary {
-                border-right: none;
-                border-bottom: 1px solid #e2e8f0;
-            }
-
-            .enrollment-header h1 {
-                font-size: 2rem;
-            }
-
-            .date-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .payment-methods {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .loading {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255,255,255,.3);
-            border-radius: 50%;
-            border-top-color: #fff;
-            animation: spin 1s ease-in-out infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
+            margin-right: 6px;
         }
 
         .success-message {
             background: #d1fae5;
             color: #065f46;
-            padding: 15px;
+            padding: 12px;
             border-radius: 8px;
             margin: 20px 0;
             display: none;
+            font-size: 0.9rem;
         }
 
         .error-message {
             background: #fee2e2;
             color: #991b1b;
-            padding: 15px;
+            padding: 12px;
             border-radius: 8px;
             margin: 20px 0;
             display: none;
+            font-size: 0.9rem;
+        }
+
+        .required {
+            color: #ef4444;
         }
     </style>
 </head>
@@ -415,194 +182,59 @@
 
         <div class="enrollment-header">
             <h1>Course Enrollment</h1>
-            <p>Complete your registration and start your learning journey</p>
+            <p>Complete your registration below</p>
         </div>
 
-        <div class="enrollment-container">
-            <!-- Course Summary Section -->
-            <div class="course-summary">
-                <h2 class="course-title" id="courseTitle">Loading Course...</h2>
-                <p class="course-description" id="courseDescription">Please wait while we load course details...</p>
-                
-                <ul class="course-features" id="courseFeatures">
-                    <li><i class="fas fa-video"></i> Interactive video lessons</li>
-                    <li><i class="fas fa-certificate"></i> Certificate upon completion</li>
-                    <li><i class="fas fa-users"></i> Expert instructor support</li>
-                    <li><i class="fas fa-clock"></i> Flexible learning schedule</li>
-                    <li><i class="fas fa-mobile-alt"></i> Mobile-friendly content</li>
-                    <li><i class="fas fa-infinity"></i> Lifetime access</li>
-                </ul>
-            </div>
-
-            <!-- Enrollment Form Section -->
-            <div class="enrollment-form">
-                <form id="enrollmentForm" action="mailto:info@adeptskil.com" method="post" enctype="text/plain">
-                    <!-- Personal Information -->
-                    <div class="form-section">
-                        <h3><i class="fas fa-user"></i> Personal Information</h3>
-                        <div class="form-group">
-                            <label for="fullName">Full Name *</label>
-                            <input type="text" id="fullName" name="fullName" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email Address *</label>
-                            <input type="email" id="email" name="email" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="company">Company/Organization (Optional)</label>
-                            <input type="text" id="company" name="company" class="form-control">
-                        </div>
-                    </div>
-
-                    <!-- Course Schedule -->
-                    <div class="form-section">
-                        <h3><i class="fas fa-calendar"></i> Select Your Start Date</h3>
-                        <p style="color: #64748b; margin-bottom: 15px;">Choose when you'd like to begin your course</p>
-                        <div class="date-grid" id="dateOptions">
-                            <!-- Dates will be populated by JavaScript -->
-                        </div>
-                        <input type="hidden" id="selectedDate" name="selectedDate" required>
-                    </div>
-
-                    <!-- Payment Method -->
-                    <div class="form-section">
-                        <h3><i class="fas fa-credit-card"></i> Payment Method</h3>
-                        <div class="payment-methods">
-                            <div class="payment-option" data-method="razorpay">
-                                <i class="fas fa-credit-card"></i>
-                                <h4>Credit/Debit Card</h4>
-                                <p>Secure payment via Razorpay</p>
-                            </div>
-                            <div class="payment-option" data-method="upi">
-                                <i class="fab fa-google-pay"></i>
-                                <h4>UPI Payment</h4>
-                                <p>PhonePe, Google Pay, Paytm</p>
-                            </div>
-                            <div class="payment-option" data-method="netbanking">
-                                <i class="fas fa-university"></i>
-                                <h4>Net Banking</h4>
-                                <p>All major banks supported</p>
-                            </div>
-                            <div class="payment-option" data-method="wallet">
-                                <i class="fas fa-wallet"></i>
-                                <h4>Digital Wallet</h4>
-                                <p>Paytm, Amazon Pay, etc.</p>
-                            </div>
-                        </div>
-                        <input type="hidden" id="selectedPayment" name="selectedPayment" required>
-                    </div>
-
-                    <!-- Enrollment Summary -->
-                    <div class="enrollment-summary">
-                        <h4 style="margin-bottom: 15px; color: #2d3748;">Enrollment Summary</h4>
-                        <div class="summary-row">
-                            <span>Selected Date:</span>
-                            <span id="summaryDate">Not selected</span>
-                        </div>
-                    </div>
-
-                    <div class="success-message" id="successMessage">
-                        <i class="fas fa-check-circle"></i> Enrollment successful! You will receive a confirmation email shortly.
-                    </div>
-
-                    <div class="error-message" id="errorMessage">
-                        <i class="fas fa-exclamation-triangle"></i> Please fill in all required fields and make your selections.
-                    </div>
-
-                    <button type="submit" class="enroll-btn" id="enrollBtn">
-                        <i class="fas fa-graduation-cap"></i> Complete Enrollment
-                    </button>
-
-                    <div class="secure-badge">
-                        <i class="fas fa-shield-alt"></i>
-                        Your payment information is secured with 256-bit SSL encryption
-                    </div>
-                </form>
-            </div>
+        <div class="course-info">
+            <h3>Selected Course</h3>
+            <p id="courseTitle">Loading Course...</p>
         </div>
+
+        <div class="success-message" id="successMessage">
+            <i class="fas fa-check-circle"></i> Enrollment successful! Check your email for confirmation.
+        </div>
+
+        <div class="error-message" id="errorMessage">
+            <i class="fas fa-exclamation-triangle"></i> Please fill in all required fields.
+        </div>
+
+        <form id="enrollmentForm">
+            <div class="form-group">
+                <label for="fullName">Full Name <span class="required">*</span></label>
+                <input type="text" id="fullName" name="fullName" class="form-control" placeholder="Your full name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Address <span class="required">*</span></label>
+                <input type="email" id="email" name="email" class="form-control" placeholder="your@email.com" required>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone Number <span class="required">*</span></label>
+                <input type="tel" id="phone" name="phone" class="form-control" placeholder="Your contact number" required>
+            </div>
+
+            <div class="form-group">
+                <label for="company">Company/Organization</label>
+                <input type="text" id="company" name="company" class="form-control" placeholder="Optional">
+            </div>
+
+            <div class="form-group">
+                <label for="message">Additional Information</label>
+                <textarea id="message" name="message" class="form-control" placeholder="Any questions or special requirements?"></textarea>
+            </div>
+
+            <button type="submit" class="enroll-btn" id="enrollBtn">
+                <i class="fas fa-graduation-cap"></i> Enroll Now
+            </button>
+        </form>
     </div>
 
     <script>
         // Get course name from URL parameter
         const urlParams = new URLSearchParams(window.location.search);
         const courseName = urlParams.get('course') || 'Professional Development Course';
-
-        // Update course information
         document.getElementById('courseTitle').textContent = courseName;
-        document.getElementById('courseDescription').textContent = `Master the skills needed for ${courseName} with our comprehensive training program designed by industry experts.`;
-
-        // Generate available dates (next 8 weeks, starting from next Monday)
-        function generateAvailableDates() {
-            const dateGrid = document.getElementById('dateOptions');
-            const dates = [];
-            const today = new Date();
-            
-            // Find next Monday
-            const nextMonday = new Date(today);
-            const daysUntilMonday = (8 - today.getDay()) % 7;
-            nextMonday.setDate(today.getDate() + daysUntilMonday);
-            
-            // Generate 8 dates (every Monday for 8 weeks)
-            for (let i = 0; i < 8; i++) {
-                const date = new Date(nextMonday);
-                date.setDate(nextMonday.getDate() + (i * 7));
-                dates.push(date);
-            }
-            
-            dates.forEach((date, index) => {
-                const dateOption = document.createElement('div');
-                dateOption.className = 'date-option';
-                dateOption.dataset.date = date.toISOString().split('T')[0];
-                
-                const dayName = date.toLocaleDateString('en-US', { weekday: 'short' });
-                const dayNumber = date.getDate();
-                const monthName = date.toLocaleDateString('en-US', { month: 'short' });
-                
-                dateOption.innerHTML = `
-                    <div class="day">${dayName}</div>
-                    <div class="date">${dayNumber}</div>
-                    <div class="month">${monthName}</div>
-                `;
-                
-                dateOption.addEventListener('click', () => selectDate(dateOption));
-                dateGrid.appendChild(dateOption);
-            });
-        }
-
-        // Date selection handler
-        function selectDate(selectedElement) {
-            // Remove previous selection
-            document.querySelectorAll('.date-option').forEach(el => el.classList.remove('selected'));
-            
-            // Add selection to clicked element
-            selectedElement.classList.add('selected');
-            
-            // Update hidden input and summary
-            const dateValue = selectedElement.dataset.date;
-            document.getElementById('selectedDate').value = dateValue;
-            
-            const formattedDate = new Date(dateValue).toLocaleDateString('en-US', { 
-                weekday: 'long', 
-                year: 'numeric', 
-                month: 'long', 
-                day: 'numeric' 
-            });
-            document.getElementById('summaryDate').textContent = formattedDate;
-        }
-
-        // Payment method selection
-        document.querySelectorAll('.payment-option').forEach(option => {
-            option.addEventListener('click', () => {
-                // Remove previous selection
-                document.querySelectorAll('.payment-option').forEach(el => el.classList.remove('selected'));
-                
-                // Add selection to clicked element
-                option.classList.add('selected');
-                
-                // Update hidden input
-                document.getElementById('selectedPayment').value = option.dataset.method;
-            });
-        });
 
         // Form submission
         document.getElementById('enrollmentForm').addEventListener('submit', async (e) => {
@@ -618,58 +250,61 @@
             errorMsg.style.display = 'none';
             
             // Validate required fields
-            const requiredFields = ['fullName', 'email', 'selectedDate', 'selectedPayment'];
-            const missingFields = requiredFields.filter(field => !formData.get(field));
+            const fullName = formData.get('fullName')?.trim();
+            const email = formData.get('email')?.trim();
+            const phone = formData.get('phone')?.trim();
             
-            if (missingFields.length > 0) {
+            if (!fullName || !email || !phone) {
                 errorMsg.style.display = 'block';
-                errorMsg.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Please fill in all required fields and make your selections.';
                 return;
             }
             
             // Show loading state
             enrollBtn.disabled = true;
-            enrollBtn.innerHTML = '<span class="loading"></span> Processing Enrollment...';
+            enrollBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
             
             try {
-                // Simulate API call
-                await new Promise(resolve => setTimeout(resolve, 2000));
+                // Prepare data for backend
+                const enrollmentData = {
+                    course: courseName,
+                    fullName: fullName,
+                    email: email,
+                    phone: phone,
+                    company: formData.get('company')?.trim() || '',
+                    message: formData.get('message')?.trim() || ''
+                };
                 
-                // Show success message
-                successMsg.style.display = 'block';
-                successMsg.innerHTML = `
-                    <i class="fas fa-check-circle"></i> 
-                    Enrollment successful! Welcome to ${courseName}. You will receive a confirmation email shortly with access details.
-                `;
+                // Send to backend
+                const response = await fetch('process_chatbot.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(enrollmentData)
+                });
                 
-                // Reset button
-                enrollBtn.innerHTML = '<i class="fas fa-check"></i> Enrollment Complete!';
-                enrollBtn.style.background = '#10b981';
-                
-                // Scroll to success message
-                successMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                
-                // Optional: Redirect after success
-                setTimeout(() => {
-                    if (confirm('Enrollment successful! Would you like to view your dashboard?')) {
-                        window.location.href = 'index.html?enrolled=' + encodeURIComponent(courseName);
-                    }
-                }, 3000);
-                
+                if (response.ok) {
+                    successMsg.style.display = 'block';
+                    successMsg.innerHTML = '<i class="fas fa-check-circle"></i> Enrollment successful! Check your email for confirmation.';
+                    enrollBtn.innerHTML = '<i class="fas fa-check"></i> Enrollment Complete!';
+                    enrollBtn.style.background = '#10b981';
+                    
+                    // Reset form
+                    e.target.reset();
+                    
+                    // Redirect after success
+                    setTimeout(() => {
+                        window.location.href = 'thank-you.html?course=' + encodeURIComponent(courseName);
+                    }, 2000);
+                } else {
+                    throw new Error('Enrollment failed');
+                }
             } catch (error) {
-                // Show error message
                 errorMsg.style.display = 'block';
-                errorMsg.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Something went wrong. Please try again or contact support.';
-                
-                // Reset button
+                errorMsg.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Something went wrong. Please try again.';
                 enrollBtn.disabled = false;
-                enrollBtn.innerHTML = '<i class="fas fa-graduation-cap"></i> Complete Enrollment - ₹12,999';
+                enrollBtn.innerHTML = '<i class="fas fa-graduation-cap"></i> Enroll Now';
             }
-        });
-
-        // Initialize the page
-        document.addEventListener('DOMContentLoaded', () => {
-            generateAvailableDates();
         });
     </script>
 

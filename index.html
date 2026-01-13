@@ -35,11 +35,11 @@
       },
       "image": "https://adeptskil.com/images/Logo%20with%20full%20name.png",
       "sameAs": [
-        "https://www.facebook.com/adeptskil",
+        "https://www.facebook.com/adeptskilofficial",
         "https://twitter.com/adeptskil",
-        "https://www.linkedin.com/company/adeptskil",
+        "https://www.linkedin.com/company/adeptskil-innovations/",
         "https://www.youtube.com/adeptskil",
-        "https://www.linkedin.com/company/adeptskil"
+        "https://www.linkedin.com/company/adeptskil-innovations/"
       ],
       "contactPoint": {
         "@type": "ContactPoint",
@@ -203,55 +203,125 @@
         <div class="container">
             <h2 class="section-title">Programs at a Glance</h2>
             <p class="section-subtitle">Clear pathways to upskill—see program focus and typical courses at a glance.</p>
-            <div class="programs-grid">
-                <div class="program-card" data-program="career" style="cursor: pointer;" onclick="window.location.href='courses.html#soft-skills'; return false;">
-                    <div class="program-icon"><i class="fas fa-user-graduate"></i></div>
-                    <h3>Professional &amp; Career Development</h3>
-                    <p class="program-focus"><strong>Core Focus:</strong> Personal and communication skills</p>
-                    <p class="program-examples"><strong>Examples:</strong> Communication, Emotional Intelligence, Presentation</p>
-                    <p class="program-desc">Sharpen everyday impact—speak clearly, present confidently, and collaborate smoothly.</p>
+            <div class="programs-grid" style="display: grid !important; grid-template-columns: repeat(6, 1fr) !important; gap: 1rem !important; width: 100% !important; max-width: 100% !important; box-sizing: border-box !important;">
+                <div class="program-card" data-program="soft-skills" style="cursor: pointer;" onclick="window.location.href='courses.html#soft-skills'; return false;">
+                    <div class="program-icon"><i class="fas fa-comments"></i></div>
+                    <h3>Soft Skills</h3>
+                    <p class="program-focus"><strong>Core Focus:</strong> Communication and interpersonal development</p>
+                    <p class="program-examples"><strong>Examples:</strong> Communication, Presentation, Collaboration</p>
+                    <p class="program-desc">Master essential communication and relationship-building skills for career success.</p>
                     <div class="program-actions">
                         <a href="courses.html#soft-skills" class="btn btn-primary">Explore</a>
                     </div>
                 </div>
+                <div class="program-card" data-program="career" style="cursor: pointer;" onclick="window.location.href='courses.html#career'; return false;">
+                    <div class="program-icon"><i class="fas fa-user-graduate"></i></div>
+                    <h3>Career Development Skills</h3>
+                    <p class="program-focus"><strong>Core Focus:</strong> Professional advancement and growth</p>
+                    <p class="program-examples"><strong>Examples:</strong> Emotional Intelligence, Leadership Basics, Personal Branding</p>
+                    <p class="program-desc">Accelerate your career trajectory with targeted skill development programs.</p>
+                    <div class="program-actions">
+                        <a href="courses.html#career" class="btn btn-primary">Explore</a>
+                    </div>
+                </div>
                 <div class="program-card" data-program="leadership" style="cursor: pointer;" onclick="window.location.href='courses.html#leadership'; return false;">
                     <div class="program-icon"><i class="fas fa-users-cog"></i></div>
-                    <h3>Leadership &amp; Management</h3>
-                    <p class="program-focus"><strong>Core Focus:</strong> People and organizational leadership</p>
-                    <p class="program-examples"><strong>Examples:</strong> Leading Teams, Change Management, Motivating People</p>
-                    <p class="program-desc">Lead with clarity—align teams, manage change, and lift performance sustainably.</p>
+                    <h3>Leadership &amp; Managerial Excellence</h3>
+                    <p class="program-focus"><strong>Core Focus:</strong> Strategic leadership and team management</p>
+                    <p class="program-examples"><strong>Examples:</strong> Leading Teams, Change Management, Executive Coaching</p>
+                    <p class="program-desc">Develop exceptional leadership capabilities to drive organizational success.</p>
                     <div class="program-actions">
                         <a href="courses.html#leadership" class="btn btn-primary">Explore</a>
                     </div>
                 </div>
-                <div class="program-card" data-program="technical" style="cursor: pointer;" onclick="window.location.href='courses.html#software'; return false;">
-                    <div class="program-icon"><i class="fas fa-microchip"></i></div>
-                    <h3>Technical &amp; IT</h3>
-                    <p class="program-focus"><strong>Core Focus:</strong> Technology skills and cybersecurity</p>
-                    <p class="program-examples"><strong>Examples:</strong> DevOps, Azure, Cyber Security</p>
-                    <p class="program-desc">Build core tech capabilities—cloud, DevOps, and security essentials that scale.</p>
+                <div class="program-card" data-program="project" style="cursor: pointer;" onclick="window.location.href='courses.html#project'; return false;">
+                    <div class="program-icon"><i class="fas fa-tasks"></i></div>
+                    <h3>Project Management</h3>
+                    <p class="program-focus"><strong>Core Focus:</strong> Project delivery and execution excellence</p>
+                    <p class="program-examples"><strong>Examples:</strong> PMP®, PRINCE2, Agile Project Management</p>
+                    <p class="program-desc">Master project planning, execution, and delivery with industry-recognized certifications.</p>
                     <div class="program-actions">
-                        <a href="courses.html#software" class="btn btn-primary">Explore</a>
+                        <a href="courses.html#project" class="btn btn-primary">Explore</a>
+                    </div>
+                </div>
+                <div class="program-card" data-program="agile" style="cursor: pointer;" onclick="window.location.href='courses.html#agile'; return false;">
+                    <div class="program-icon"><i class="fas fa-rocket"></i></div>
+                    <h3>Agile Practices &amp; Leadership</h3>
+                    <p class="program-focus"><strong>Core Focus:</strong> Agile transformation and iterative delivery</p>
+                    <p class="program-examples"><strong>Examples:</strong> Scrum, Kanban, SAFe, Agile Coaching</p>
+                    <p class="program-desc">Build agile competencies for modern, responsive organizational environments.</p>
+                    <div class="program-actions">
+                        <a href="courses.html#agile" class="btn btn-primary">Explore</a>
                     </div>
                 </div>
                 <div class="program-card" data-program="business" style="cursor: pointer;" onclick="window.location.href='courses.html#business'; return false;">
                     <div class="program-icon"><i class="fas fa-chart-line"></i></div>
-                    <h3>Business, Marketing &amp; Strategic Growth</h3>
-                    <p class="program-focus"><strong>Core Focus:</strong> Business performance and marketing</p>
-                    <p class="program-examples"><strong>Examples:</strong> Core Marketing Strategies, Process Improvement</p>
-                    <p class="program-desc">Drive growth—focus strategy, modernize marketing, and streamline how work gets done.</p>
+                    <h3>Business Growth &amp; Strategic Marketing</h3>
+                    <p class="program-focus"><strong>Core Focus:</strong> Strategic growth and market expansion</p>
+                    <p class="program-examples"><strong>Examples:</strong> Marketing Strategy, Business Development, Sales Excellence</p>
+                    <p class="program-desc">Drive business growth through strategic marketing and customer-centric approaches.</p>
                     <div class="program-actions">
                         <a href="courses.html#business" class="btn btn-primary">Explore</a>
                     </div>
                 </div>
+                <div class="program-card" data-program="software" style="cursor: pointer;" onclick="window.location.href='courses.html#software'; return false;">
+                    <div class="program-icon"><i class="fas fa-microchip"></i></div>
+                    <h3>Software Innovation &amp; Emerging Technology</h3>
+                    <p class="program-focus"><strong>Core Focus:</strong> Latest technologies and software development</p>
+                    <p class="program-examples"><strong>Examples:</strong> AI/ML, Blockchain, IoT, Software Architecture</p>
+                    <p class="program-desc">Stay ahead of technology trends with cutting-edge innovation and development skills.</p>
+                    <div class="program-actions">
+                        <a href="courses.html#software" class="btn btn-primary">Explore</a>
+                    </div>
+                </div>
+                <div class="program-card" data-program="cloud" style="cursor: pointer;" onclick="window.location.href='courses.html#cloud'; return false;">
+                    <div class="program-icon"><i class="fas fa-cloud"></i></div>
+                    <h3>Cloud Computing &amp; DevOps</h3>
+                    <p class="program-focus"><strong>Core Focus:</strong> Cloud infrastructure and continuous deployment</p>
+                    <p class="program-examples"><strong>Examples:</strong> AWS, Docker, Kubernetes, CI/CD Pipelines</p>
+                    <p class="program-desc">Master cloud platforms and DevOps practices for modern infrastructure management.</p>
+                    <div class="program-actions">
+                        <a href="courses.html#cloud" class="btn btn-primary">Explore</a>
+                    </div>
+                </div>
+                <div class="program-card" data-program="security" style="cursor: pointer;" onclick="window.location.href='courses.html#security'; return false;">
+                    <div class="program-icon"><i class="fas fa-shield-alt"></i></div>
+                    <h3>IT Security</h3>
+                    <p class="program-focus"><strong>Core Focus:</strong> Cybersecurity and threat management</p>
+                    <p class="program-examples"><strong>Examples:</strong> Network Security, Ethical Hacking, CISSP, Risk Management</p>
+                    <p class="program-desc">Protect organizational assets with comprehensive IT security and compliance expertise.</p>
+                    <div class="program-actions">
+                        <a href="courses.html#security" class="btn btn-primary">Explore</a>
+                    </div>
+                </div>
                 <div class="program-card" data-program="data" style="cursor: pointer;" onclick="window.location.href='courses.html#data'; return false;">
                     <div class="program-icon"><i class="fas fa-database"></i></div>
-                    <h3>Data, Project &amp; Quality Management</h3>
-                    <p class="program-focus"><strong>Core Focus:</strong> Data analytics, project control, quality</p>
-                    <p class="program-examples"><strong>Examples:</strong> PMP®, Power BI, Big Data, Quality</p>
-                    <p class="program-desc">Improve outcomes—use data well, control projects, and embed quality standards.</p>
+                    <h3>Data Management &amp; Power BI</h3>
+                    <p class="program-focus"><strong>Core Focus:</strong> Data analytics and business intelligence</p>
+                    <p class="program-examples"><strong>Examples:</strong> Power BI, SQL, Tableau, Data Visualization</p>
+                    <p class="program-desc">Transform data into actionable insights with advanced analytics and BI tools.</p>
                     <div class="program-actions">
                         <a href="courses.html#data" class="btn btn-primary">Explore</a>
+                    </div>
+                </div>
+                <div class="program-card" data-program="azure" style="cursor: pointer;" onclick="window.location.href='courses.html#azure'; return false;">
+                    <div class="program-icon"><i class="fas fa-server"></i></div>
+                    <h3>Microsoft Azure</h3>
+                    <p class="program-focus"><strong>Core Focus:</strong> Microsoft Azure cloud platform and services</p>
+                    <p class="program-examples"><strong>Examples:</strong> Azure Fundamentals, Azure Solutions Architect, Azure DevOps</p>
+                    <p class="program-desc">Build and manage cloud solutions using Microsoft Azure technologies.</p>
+                    <div class="program-actions">
+                        <a href="courses.html#azure" class="btn btn-primary">Explore</a>
+                    </div>
+                </div>
+                <div class="program-card" data-program="construction" style="cursor: pointer;" onclick="window.location.href='courses.html#construction'; return false;">
+                    <div class="program-icon"><i class="fas fa-hard-hat"></i></div>
+                    <h3>Construction &amp; Quality Management</h3>
+                    <p class="program-focus"><strong>Core Focus:</strong> Construction management and quality standards</p>
+                    <p class="program-examples"><strong>Examples:</strong> Quality Assurance, Construction Planning, Six Sigma, ISO Standards</p>
+                    <p class="program-desc">Ensure project excellence through quality management and construction best practices.</p>
+                    <div class="program-actions">
+                        <a href="courses.html#construction" class="btn btn-primary">Explore</a>
                     </div>
                 </div>
             </div>
@@ -261,7 +331,7 @@
     <!-- Statistics Section -->
     <section class="stats-section" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 4rem 2rem; margin: 3rem 0;">
         <div class="container">
-            <div class="stats-content" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; align-items: center; max-width: 1000px; margin: 0 auto;">
+            <div class="stats-content" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 3rem; align-items: center; max-width: 1000px; margin: 0 auto;">
                 <div class="stat-box" style="text-align: center; color: white;">
                     <div class="stat-number" style="font-size: 3rem; font-weight: 900; margin-bottom: 0.5rem; text-shadow: 0 2px 8px rgba(0,0,0,0.2);">200+</div>
                     <div class="stat-label" style="font-size: 1.1rem; font-weight: 600; opacity: 0.95;">Training Programs</div>
@@ -276,6 +346,11 @@
                     <div class="stat-number" style="font-size: 3rem; font-weight: 900; margin-bottom: 0.5rem; text-shadow: 0 2px 8px rgba(0,0,0,0.2);">5000+</div>
                     <div class="stat-label" style="font-size: 1.1rem; font-weight: 600; opacity: 0.95;">Professionals Trained</div>
                     <p style="font-size: 0.9rem; margin-top: 0.5rem; opacity: 0.85;">Transforming careers across industries</p>
+                </div>
+                <div class="stat-box" style="text-align: center; color: white;">
+                    <div class="stat-number" style="font-size: 3rem; font-weight: 900; margin-bottom: 0.5rem; text-shadow: 0 2px 8px rgba(0,0,0,0.2);">300+</div>
+                    <div class="stat-label" style="font-size: 1.1rem; font-weight: 600; opacity: 0.95;">Expert Trainers</div>
+                    <p style="font-size: 0.9rem; margin-top: 0.5rem; opacity: 0.85;">Industry-experienced professionals delivering excellence</p>
                 </div>
             </div>
         </div>
@@ -355,13 +430,13 @@
                             
                             <!-- Social Links -->
                             <div class="social-links" style="display: flex; gap: 0.8rem; margin-top: 0.5rem;">
-                                <a href="https://www.facebook.com/adeptskil" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; justify-content: center; width: 38px; height: 38px; background: rgba(102, 126, 234, 0.1); color: #667eea; border-radius: 50%; text-decoration: none; transition: all 0.3s ease;" onmouseover="this.style.background='#667eea'; this.style.color='white'; this.style.transform='translateY(-3px)';" onmouseout="this.style.background='rgba(102, 126, 234, 0.1)'; this.style.color='#667eea'; this.style.transform='translateY(0)';">
+                                <a href="https://www.facebook.com/adeptskilofficial" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; justify-content: center; width: 38px; height: 38px; background: rgba(102, 126, 234, 0.1); color: #667eea; border-radius: 50%; text-decoration: none; transition: all 0.3s ease;" onmouseover="this.style.background='#667eea'; this.style.color='white'; this.style.transform='translateY(-3px)';" onmouseout="this.style.background='rgba(102, 126, 234, 0.1)'; this.style.color='#667eea'; this.style.transform='translateY(0)';">
                                     <i class="fab fa-facebook-f"></i>
                                 </a>
                                 <a href="https://twitter.com/adeptskil" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; justify-content: center; width: 38px; height: 38px; background: rgba(102, 126, 234, 0.1); color: #667eea; border-radius: 50%; text-decoration: none; transition: all 0.3s ease;" onmouseover="this.style.background='#667eea'; this.style.color='white'; this.style.transform='translateY(-3px)';" onmouseout="this.style.background='rgba(102, 126, 234, 0.1)'; this.style.color='#667eea'; this.style.transform='translateY(0)';">
                                     <i class="fab fa-twitter"></i>
                                 </a>
-                                <a href="https://www.linkedin.com/company/adeptskil" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; justify-content: center; width: 38px; height: 38px; background: rgba(102, 126, 234, 0.1); color: #667eea; border-radius: 50%; text-decoration: none; transition: all 0.3s ease;" onmouseover="this.style.background='#667eea'; this.style.color='white'; this.style.transform='translateY(-3px)';" onmouseout="this.style.background='rgba(102, 126, 234, 0.1)'; this.style.color='#667eea'; this.style.transform='translateY(0)';">
+                                <a href="https://www.linkedin.com/company/adeptskil-innovations/" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; justify-content: center; width: 38px; height: 38px; background: rgba(102, 126, 234, 0.1); color: #667eea; border-radius: 50%; text-decoration: none; transition: all 0.3s ease;" onmouseover="this.style.background='#667eea'; this.style.color='white'; this.style.transform='translateY(-3px)';" onmouseout="this.style.background='rgba(102, 126, 234, 0.1)'; this.style.color='#667eea'; this.style.transform='translateY(0)';">
                                     <i class="fab fa-linkedin-in"></i>
                                 </a>
                                 <a href="https://www.youtube.com/adeptskil" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; justify-content: center; width: 38px; height: 38px; background: rgba(102, 126, 234, 0.1); color: #667eea; border-radius: 50%; text-decoration: none; transition: all 0.3s ease;" onmouseover="this.style.background='#667eea'; this.style.color='white'; this.style.transform='translateY(-3px);'" onmouseout="this.style.background='rgba(102, 126, 234, 0.1)'; this.style.color='#667eea'; this.style.transform='translateY(0)';">
