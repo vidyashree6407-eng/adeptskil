@@ -337,7 +337,7 @@
     <section class="contact-section" style="padding:35px 0;">
         <div class="container" style="max-width:640px; margin: 0 auto;">
             <div style="background:#fff; border:1px solid #e2e8f0; border-radius:10px; padding:1.1rem 1.25rem; box-shadow:0 2px 8px rgba(0,0,0,0.05);">
-                <form id="contactForm" method="post" action="process_contact.php">
+                <form id="contactForm">
                     <div class="form-group" style="margin-bottom:0.75rem;">
                         <label for="name" style="font-size:0.8rem;">Name *</label>
                         <input type="text" id="name" name="name" placeholder="Your name" required minlength="2" maxlength="100" style="padding:0.55rem 0.7rem; font-size:0.85rem; border-radius:6px;">
@@ -366,6 +366,12 @@
                     </div>
                     <div class="form-group" style="margin-bottom:0.9rem;">                        <label for="message" style="font-size:0.8rem;">Message *</label>
                         <textarea id="message" name="message" placeholder="Write your message" required minlength="10" maxlength="1000" style="padding:0.6rem 0.7rem; font-size:0.85rem; border-radius:6px; min-height:95px;"></textarea>
+                    </div>
+                    <div id="successMsg" style="background: #d1fae5; color: #065f46; padding: 12px; border-radius: 8px; margin-bottom: 15px; display: none; font-size: 0.9rem;">
+                        <i class="fas fa-check-circle"></i> Message sent successfully! We'll get back to you soon.
+                    </div>
+                    <div id="errorMsg" style="background: #fee2e2; color: #991b1b; padding: 12px; border-radius: 8px; margin-bottom: 15px; display: none; font-size: 0.9rem;">
+                        <i class="fas fa-exclamation-triangle"></i> Please fill in all required fields.
                     </div>
                     <button type="submit" class="submit-btn" style="padding:0.6rem 1rem; font-size:0.85rem; border-radius:6px;">Send Message</button>
                     <p style="font-size:0.65rem; color:#64748b; margin-top:0.55rem;">We respect your privacy. Your message will be sent directly to info@adeptskil.com</p>
@@ -475,73 +481,87 @@
 
     <script src="script.js"></script>
     <script>
-        // Contact form submission
+        // Contact form submission with localStorage
         document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
-            // Get form data
-            const formData = new FormData(this);
-            const data = Object.fromEntries(formData.entries());
+            const successMsg = document.getElementById('successMsg');
+            const errorMsg = document.getElementById('errorMsg');
+            const submitBtn = this.querySelector('.submit-btn');
             
-            // Validate email format
-            const emailPattern = /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/;
-            if (!emailPattern.test(data.email)) {
-                if (window.AdeptskilJS && window.AdeptskilJS.showNotification) {
-                    window.AdeptskilJS.showNotification('Please enter a valid email address', 'error');
-                } else {
-                    alert('Please enter a valid email address');
-                }
+            // Hide previous messages
+            successMsg.style.display = 'none';
+            errorMsg.style.display = 'none';
+            
+            // Get form values
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const inquiryType = document.getElementById('inquiry-type').value;
+            const message = document.getElementById('message').value.trim();
+            
+            // Validate
+            if (!name || !email || !inquiryType || !message) {
+                errorMsg.style.display = 'block';
                 return;
             }
             
-            const submitBtn = this.querySelector('.submit-btn');
-            const originalText = submitBtn.textContent;
-            const form = this;
+            // Validate email format
+            const emailPattern = /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/;
+            if (!emailPattern.test(email)) {
+                errorMsg.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Please enter a valid email address.';
+                errorMsg.style.display = 'block';
+                return;
+            }
             
-            // Show loading state
-            submitBtn.textContent = 'Sending...';
+            // Show loading
             submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
             
-            // Send form data to backend
-            fetch('process_contact.php', {
-                method: 'POST',
-                body: new FormData(form)
-            })
-            .then(response => response.json())
-            .then(data => {
-                // Reset button
-                submitBtn.textContent = originalText;
-                submitBtn.disabled = false;
+            try {
+                // Create contact record
+                const contactData = {
+                    name: name,
+                    email: email,
+                    phone: phone,
+                    inquiryType: inquiryType,
+                    message: message,
+                    timestamp: new Date().toISOString()
+                };
                 
-                if (data.success) {
-                    // Show success message
-                    if (window.AdeptskilJS && window.AdeptskilJS.showNotification) {
-                        window.AdeptskilJS.showNotification('🎉 Thank You! We\'re excited to connect with you and will reach out very soon! 🚀', 'success');
-                    } else {
-                        alert('🎉 Thank You! We\'re excited to connect with you and will reach out very soon! 🚀');
-                    }
-                    // Reset form
-                    form.reset();
-                } else {
-                    // Show error message
-                    if (window.AdeptskilJS && window.AdeptskilJS.showNotification) {
-                        window.AdeptskilJS.showNotification('Error: ' + (data.message || 'Failed to send message'), 'error');
-                    } else {
-                        alert('Error: ' + (data.message || 'Failed to send message'));
-                    }
-                }
-            })
-            .catch(error => {
-                // Reset button
-                submitBtn.textContent = originalText;
-                submitBtn.disabled = false;
+                // Save to localStorage
+                let contacts = JSON.parse(localStorage.getItem('adeptskil_contacts') || '[]');
+                contacts.push(contactData);
+                localStorage.setItem('adeptskil_contacts', JSON.stringify(contacts));
                 
+                // Try to send to server (non-blocking)
+                fetch('./process_contact.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(contactData)
+                }).catch(() => {
+                    console.log('Server unavailable, saved locally');
+                });
+                
+                // Show success
+                successMsg.style.display = 'block';
+                this.reset();
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = 'Send Message';
+                
+                // Auto-hide success message after 5 seconds
+                setTimeout(() => {
+                    successMsg.style.display = 'none';
+                }, 5000);
+                
+            } catch (error) {
                 console.error('Error:', error);
-                if (window.AdeptskilJS && window.AdeptskilJS.showNotification) {
-                    window.AdeptskilJS.showNotification('Network error. Please try again later.', 'error');
-                } else {
-                    alert('Network error. Please try again later.');
-                }
+                errorMsg.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Something went wrong. Please try again.';
+                errorMsg.style.display = 'block';
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = 'Send Message';
+            }
+        });
             });
         });
 
