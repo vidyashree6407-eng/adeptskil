@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enrollment Records - Adeptskil</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        
+        .header h1 {
+            color: #2d3748;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            color: #64748b;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .stat-card .number {
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+        
+        .stat-card .label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-top: 5px;
+        }
+        
+        .enrollments-table {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th {
+            background: #f8fafc;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            color: #1e293b;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #e2e8f0;
+            color: #475569;
+        }
+        
+        tr:hover {
+            background: #f8fafc;
+        }
+        
+        .timestamp {
+            font-size: 0.85rem;
+            color: #94a3b8;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #64748b;
+        }
+        
+        .empty-state i {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            opacity: 0.3;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-right: 10px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+        
+        .btn-danger {
+            background: #ef4444;
+            color: white;
+        }
+        
+        .btn-danger:hover {
+            background: #dc2626;
+        }
+        
+        .action-bar {
+            padding: 20px;
+            background: #f8fafc;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #e2e8f0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-graduation-cap"></i> Course Enrollments</h1>
+            <p>All student enrollment records (saved locally)</p>
+            
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="number" id="totalCount">0</div>
+                    <div class="label">Total Enrollments</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="enrollments-table">
+            <div class="action-bar">
+                <div>
+                    <button class="btn btn-primary" onclick="downloadCSV()">
+                        <i class="fas fa-download"></i> Download CSV
+                    </button>
+                    <button class="btn btn-danger" onclick="clearAll()">
+                        <i class="fas fa-trash"></i> Clear All
+                    </button>
+                </div>
+            </div>
+            
+            <div id="contentArea">
+                <div class="empty-state">
+                    <i class="fas fa-inbox"></i>
+                    <h3>No Enrollments Yet</h3>
+                    <p>Enrollments will appear here when students submit the form.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function loadEnrollments() {
+            const enrollments = JSON.parse(localStorage.getItem('adeptskil_enrollments') || '[]');
+            const totalCount = document.getElementById('totalCount');
+            const contentArea = document.getElementById('contentArea');
+            
+            totalCount.textContent = enrollments.length;
+            
+            if (enrollments.length === 0) {
+                contentArea.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-inbox"></i>
+                        <h3>No Enrollments Yet</h3>
+                        <p>Enrollments will appear here when students submit the form.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            // Sort by most recent first
+            enrollments.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+            
+            let html = `
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Course</th>
+                            <th>Company</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+            
+            enrollments.forEach((e, i) => {
+                const date = new Date(e.timestamp).toLocaleDateString();
+                html += `
+                    <tr>
+                        <td class="timestamp">${date}</td>
+                        <td>${e.fullName}</td>
+                        <td>${e.email}</td>
+                        <td>${e.phone}</td>
+                        <td>${e.course}</td>
+                        <td>${e.company || '-'}</td>
+                        <td>
+                            <button class="btn btn-primary" style="padding: 6px 12px; font-size: 0.85rem;" onclick="viewDetails(${i})">View</button>
+                        </td>
+                    </tr>
+                `;
+            });
+            
+            html += `
+                    </tbody>
+                </table>
+            `;
+            
+            contentArea.innerHTML = html;
+        }
+        
+        function viewDetails(index) {
+            const enrollments = JSON.parse(localStorage.getItem('adeptskil_enrollments') || '[]');
+            const e = enrollments[index];
+            
+            const details = `
+Name: ${e.fullName}
+Email: ${e.email}
+Phone: ${e.phone}
+Company: ${e.company || 'Not provided'}
+Course: ${e.course}
+Date: ${e.timestamp}
+Message: ${e.message || 'No message'}
+            `;
+            
+            alert(details);
+        }
+        
+        function downloadCSV() {
+            const enrollments = JSON.parse(localStorage.getItem('adeptskil_enrollments') || '[]');
+            
+            if (enrollments.length === 0) {
+                alert('No enrollments to download');
+                return;
+            }
+            
+            const headers = ['Date', 'Name', 'Email', 'Phone', 'Company', 'Course', 'Message'];
+            const rows = enrollments.map(e => [
+                e.timestamp,
+                `"${e.fullName}"`,
+                e.email,
+                e.phone,
+                `"${e.company || ''}"`,
+                `"${e.course}"`,
+                `"${(e.message || '').replace(/"/g, '""')}"`
+            ]);
+            
+            const csv = [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
+            
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `enrollments-${new Date().toISOString().split('T')[0]}.csv`;
+            a.click();
+            window.URL.revokeObjectURL(url);
+        }
+        
+        function clearAll() {
+            if (confirm('Are you sure you want to delete all enrollments?')) {
+                localStorage.removeItem('adeptskil_enrollments');
+                loadEnrollments();
+            }
+        }
+        
+        // Load on page load
+        window.addEventListener('load', loadEnrollments);
+        
+        // Refresh every 5 seconds
+        setInterval(loadEnrollments, 5000);
+    </script>
+</body>
+</html>

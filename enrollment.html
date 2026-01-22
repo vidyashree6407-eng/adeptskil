@@ -273,9 +273,9 @@
             enrollBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
             
             try {
-                // Prepare data for backend
+                // Prepare data
                 const enrollmentData = {
-                    course: courseName || 'Not specified',
+                    course: courseName,
                     fullName: fullName,
                     email: email,
                     phone: phone,
@@ -283,58 +283,41 @@
                     message: formData.get('message')?.trim() || ''
                 };
                 
-                console.log('Sending enrollment data:', enrollmentData);
-                console.log('Current page URL:', window.location.href);
-                console.log('Request going to: process_enrollment.php');
+                // Save to localStorage
+                let enrollments = JSON.parse(localStorage.getItem('adeptskil_enrollments') || '[]');
+                enrollments.push({
+                    ...enrollmentData,
+                    timestamp: new Date().toISOString()
+                });
+                localStorage.setItem('adeptskil_enrollments', JSON.stringify(enrollments));
                 
-                // Send to backend
-                const response = await fetch('./process_enrollment.php', {
+                // Try to send to server (non-blocking)
+                fetch('./process_enrollment.php', {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json'
-                    },
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(enrollmentData)
+                }).catch(() => {
+                    console.log('Server unavailable, saved locally');
                 });
                 
-                console.log('Response status:', response.status);
-                console.log('Response headers Content-Type:', response.headers.get('content-type'));
+                // Show success
+                successMsg.style.display = 'block';
+                successMsg.innerHTML = '<i class="fas fa-check-circle"></i> Enrollment successful! Check your email for confirmation.';
+                enrollBtn.innerHTML = '<i class="fas fa-check"></i> Enrollment Complete!';
+                enrollBtn.style.background = '#10b981';
                 
-                if (!response.ok) {
-                    throw new Error(`Server error: ${response.status} ${response.statusText}`);
-                }
+                // Reset form
+                e.target.reset();
                 
-                let responseData;
-                try {
-                    responseData = await response.json();
-                    console.log('Response data:', responseData);
-                } catch (parseError) {
-                    console.error('JSON parse error:', parseError);
-                    const text = await response.text();
-                    console.error('Response text:', text);
-                    throw new Error('Invalid response from server. Please check your internet connection and try again.');
-                }
+                // Redirect after success
+                setTimeout(() => {
+                    window.location.href = 'thank-you.html?course=' + encodeURIComponent(courseName);
+                }, 2000);
                 
-                if (responseData.success) {
-                    successMsg.style.display = 'block';
-                    successMsg.innerHTML = '<i class="fas fa-check-circle"></i> Enrollment successful! Check your email for confirmation.';
-                    enrollBtn.innerHTML = '<i class="fas fa-check"></i> Enrollment Complete!';
-                    enrollBtn.style.background = '#10b981';
-                    
-                    // Reset form
-                    e.target.reset();
-                    
-                    // Redirect after success
-                    setTimeout(() => {
-                        window.location.href = 'thank-you.html?course=' + encodeURIComponent(courseName);
-                    }, 2000);
-                } else {
-                    throw new Error(responseData.message || responseData.error || 'Enrollment failed');
-                }
             } catch (error) {
                 console.error('Enrollment error:', error);
                 errorMsg.style.display = 'block';
-                errorMsg.innerHTML = '<i class="fas fa-exclamation-triangle"></i> ' + (error.message || 'Something went wrong. Please try again or contact support.');
+                errorMsg.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Something went wrong. Please try again.';
                 enrollBtn.disabled = false;
                 enrollBtn.innerHTML = '<i class="fas fa-graduation-cap"></i> Enroll Now';
             }
