@@ -1,68 +1,83 @@
 <?php
-// Set proper headers
+ob_start();
+ob_clean();
+
+// Set proper headers FIRST
 header('Content-Type: application/json; charset=utf-8');
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: POST, OPTIONS, GET');
 header('Access-Control-Allow-Headers: Content-Type, Accept');
 
+// Disable error output
+ini_set('display_errors', 0);
+error_reporting(E_ALL);
+
 // Handle CORS preflight
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     http_response_code(200);
-    exit(json_encode(['success' => true]));
+    echo json_encode(['success' => true]);
+    exit;
 }
 
 // Only POST allowed
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
-    exit(json_encode(['success' => false, 'message' => 'Method not allowed']));
+    echo json_encode(['success' => false, 'message' => 'Method not allowed']);
+    exit;
 }
 
 // Get JSON input
-$input = json_decode(file_get_contents('php://input'), true);
+$json_input = file_get_contents('php://input');
+$input = json_decode($json_input, true);
 
 // Validate input
-if (!$input) {
+if (empty($input)) {
     http_response_code(400);
-    exit(json_encode(['success' => false, 'message' => 'No data received']));
+    echo json_encode(['success' => false, 'message' => 'No data received']);
+    exit;
 }
 
-// Extract and validate fields
+// Extract fields
 $fullName = isset($input['fullName']) ? trim($input['fullName']) : '';
 $email = isset($input['email']) ? trim($input['email']) : '';
 $phone = isset($input['phone']) ? trim($input['phone']) : '';
 $course = isset($input['course']) ? trim($input['course']) : '';
 $company = isset($input['company']) ? trim($input['company']) : '';
-$message = isset($input['message']) ? trim($input['message']) : '';
+$message_text = isset($input['message']) ? trim($input['message']) : '';
 
 // Validate required fields
 if (empty($fullName) || empty($email) || empty($phone)) {
     http_response_code(400);
-    exit(json_encode(['success' => false, 'message' => 'Required fields missing: Name, Email, Phone']));
+    echo json_encode(['success' => false, 'message' => 'Missing required fields']);
+    exit;
 }
 
 // Validate email
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     http_response_code(400);
-    exit(json_encode(['success' => false, 'message' => 'Invalid email address']));
+    echo json_encode(['success' => false, 'message' => 'Invalid email address']);
+    exit;
 }
 
 // Create enrollment record
+$enrollment_id = 'ENR-' . date('YmdHis') . '-' . random_int(1000, 9999);
 $enrollment = array(
-    'id' => uniqid('ENR-', true),
+    'id' => $enrollment_id,
     'timestamp' => date('Y-m-d H:i:s'),
     'fullName' => $fullName,
     'email' => $email,
     'phone' => $phone,
     'course' => $course,
     'company' => $company,
-    'message' => $message
+    'message' => $message_text
 );
 
-// Save to JSON file
-$enrollmentsFile = __DIR__ . '/enrollments.json';
+// Get enrollments file path
+$enrollmentsFile = dirname(__FILE__) . '/enrollments.json';
 $enrollments = array();
 
-if (file_exists($enrollmentsFile)) {
+// Read existing enrollments
+if (file_exists($enrollmentsFile) && is_readable($enrollmentsFile)) {
     $content = file_get_contents($enrollmentsFile);
     if (!empty($content)) {
         $decoded = json_decode($content, true);
@@ -72,45 +87,37 @@ if (file_exists($enrollmentsFile)) {
     }
 }
 
+// Add new enrollment
 $enrollments[] = $enrollment;
 
-if (!file_put_contents($enrollmentsFile, json_encode($enrollments, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES))) {
+// Save to file
+$save_result = file_put_contents($enrollmentsFile, json_encode($enrollments, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
+
+if ($save_result === false) {
     http_response_code(500);
-    exit(json_encode(['success' => false, 'message' => 'Failed to save enrollment']));
+    echo json_encode(['success' => false, 'message' => 'Failed to save enrollment data']);
+    exit;
 }
 
-// Try to send confirmation email to user
-$userSubject = "Enrollment Confirmation - " . $course;
-$userMessage = "Dear " . $fullName . ",\n\n";
-$userMessage .= "Thank you for enrolling in: " . $course . "\n\n";
-$userMessage .= "We have received your enrollment request and will contact you shortly.\n\n";
-$userMessage .= "Best regards,\nAdeptskil Team\n";
-$userMessage .= "Email: info@adeptskil.com\n";
+// Send emails (non-blocking, don't fail if email fails)
+$headers = "Content-Type: text/plain; charset=UTF-8\r\nFrom: noreply@adeptskil.com\r\n";
 
-$headers = "Content-Type: text/plain; charset=UTF-8\r\n";
-$headers .= "From: noreply@adeptskil.com\r\n";
+// User confirmation email
+@mail($email, 
+    "Enrollment Confirmation - " . $course, 
+    "Dear " . $fullName . ",\n\nThank you for enrolling!\n\nWe have received your enrollment request. Our team will contact you shortly.\n\nBest regards,\nAdeptskil Team");
 
-@mail($email, $userSubject, $userMessage, $headers);
-
-// Try to send notification to admin
-$adminSubject = "New Enrollment: " . $course . " - " . $fullName;
-$adminMessage = "New enrollment received!\n\n";
-$adminMessage .= "Name: " . $fullName . "\n";
-$adminMessage .= "Email: " . $email . "\n";
-$adminMessage .= "Phone: " . $phone . "\n";
-$adminMessage .= "Company: " . ($company ?: 'Not provided') . "\n";
-$adminMessage .= "Course: " . $course . "\n";
-$adminMessage .= "Message: " . ($message ?: 'No message') . "\n";
-$adminMessage .= "Date: " . date('Y-m-d H:i:s') . "\n";
-
-@mail('info@adeptskil.com', $adminSubject, $adminMessage, $headers);
+// Admin notification
+@mail('info@adeptskil.com',
+    "New Enrollment: " . $course . " - " . $fullName,
+    "Name: " . $fullName . "\nEmail: " . $email . "\nPhone: " . $phone . "\nCompany: " . $company . "\nCourse: " . $course . "\n\nMessage:\n" . $message_text);
 
 // Return success
 http_response_code(200);
-exit(json_encode([
+echo json_encode([
     'success' => true,
     'message' => 'Enrollment successful! Check your email for confirmation.',
-    'enrollment_id' => $enrollment['id'],
+    'enrollment_id' => $enrollment_id,
     'name' => $fullName
-]));
-?>
+]);
+exit;
