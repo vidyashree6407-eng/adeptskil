@@ -74,7 +74,7 @@ $emailBody = "New Enrollment Received!\n\n" .
     "Message: " . ($message_text ?: 'No message') . "\n\n" .
     "Enrolled at: " . date('Y-m-d H:i:s');
 
-$headers = "Content-Type: text/plain\r\nFrom: noreply@adeptskil.com\r\n";
+$headers = "Content-Type: text/plain\r\nFrom: info@adeptskil.com\r\n";
 
 $emailSent = false;
 if (@mail($to, $subject, $emailBody, $headers)) {

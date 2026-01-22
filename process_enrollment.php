@@ -114,7 +114,7 @@ if ($save_result === false) {
 }
 
 // Send emails (non-blocking, don't fail if email fails)
-$headers = "Content-Type: text/plain; charset=UTF-8\r\nFrom: noreply@adeptskil.com\r\n";
+$headers = "Content-Type: text/plain; charset=UTF-8\r\nFrom: info@adeptskil.com\r\n";
 
 // User confirmation email
 @mail($email, 

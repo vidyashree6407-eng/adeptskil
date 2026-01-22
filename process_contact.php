@@ -85,11 +85,11 @@ This is an automated message from the Adeptskil contact form.
 
 // Prepare email headers
 $headers = array(
-    'From' => 'noreply@adeptskil.com',
+    'From' => 'info@adeptskil.com',
     'Reply-To' => $email,
     'X-Mailer' => 'Adeptskil Contact Form',
     'X-Priority' => '3',
-    'Return-Path' => 'noreply@adeptskil.com'
+    'Return-Path' => 'info@adeptskil.com'
 );
 
 $headers_str = '';
