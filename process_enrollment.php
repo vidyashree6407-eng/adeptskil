@@ -1,28 +1,38 @@
 <?php
+// Start output buffering to prevent any accidental output
 ob_start();
+
+// Clear any previous output
 ob_clean();
 
-// Set proper headers FIRST
-header('Content-Type: application/json; charset=utf-8');
-header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Methods: POST, OPTIONS, GET');
-header('Access-Control-Allow-Headers: Content-Type, Accept');
-
-// Disable error output
+// Disable error reporting to console/output
 ini_set('display_errors', 0);
+ini_set('log_errors', 1);
 error_reporting(E_ALL);
 
-// Handle CORS preflight
+// Set JSON response header IMMEDIATELY
+header('Content-Type: application/json; charset=utf-8');
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
+header('Access-Control-Allow-Headers: Content-Type, Accept, Origin');
+
+// Log request method for debugging
+error_log('Request method: ' . $_SERVER['REQUEST_METHOD']);
+
+// Handle CORS preflight request
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     http_response_code(200);
-    echo json_encode(['success' => true]);
+    echo json_encode(['success' => true, 'message' => 'CORS preflight OK']);
+    ob_end_flush();
     exit;
 }
 
-// Only POST allowed
+// Only allow POST
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    error_log('Invalid method: ' . $_SERVER['REQUEST_METHOD']);
     http_response_code(405);
-    echo json_encode(['success' => false, 'message' => 'Method not allowed']);
+    echo json_encode(['success' => false, 'message' => 'Method ' . $_SERVER['REQUEST_METHOD'] . ' not allowed. Use POST.']);
+    ob_end_flush();
     exit;
 }
 
@@ -34,6 +44,7 @@ $input = json_decode($json_input, true);
 if (empty($input)) {
     http_response_code(400);
     echo json_encode(['success' => false, 'message' => 'No data received']);
+    ob_end_flush();
     exit;
 }
 
@@ -49,6 +60,7 @@ $message_text = isset($input['message']) ? trim($input['message']) : '';
 if (empty($fullName) || empty($email) || empty($phone)) {
     http_response_code(400);
     echo json_encode(['success' => false, 'message' => 'Missing required fields']);
+    ob_end_flush();
     exit;
 }
 
@@ -56,6 +68,7 @@ if (empty($fullName) || empty($email) || empty($phone)) {
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     http_response_code(400);
     echo json_encode(['success' => false, 'message' => 'Invalid email address']);
+    ob_end_flush();
     exit;
 }
 
@@ -96,6 +109,7 @@ $save_result = file_put_contents($enrollmentsFile, json_encode($enrollments, JSO
 if ($save_result === false) {
     http_response_code(500);
     echo json_encode(['success' => false, 'message' => 'Failed to save enrollment data']);
+    ob_end_flush();
     exit;
 }
 
@@ -114,10 +128,12 @@ $headers = "Content-Type: text/plain; charset=UTF-8\r\nFrom: noreply@adeptskil.c
 
 // Return success
 http_response_code(200);
-echo json_encode([
+$response = [
     'success' => true,
     'message' => 'Enrollment successful! Check your email for confirmation.',
     'enrollment_id' => $enrollment_id,
     'name' => $fullName
-]);
+];
+echo json_encode($response);
+ob_end_flush();
 exit;

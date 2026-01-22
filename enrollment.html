@@ -283,14 +283,22 @@
                     message: formData.get('message')?.trim() || ''
                 };
                 
+                console.log('Sending enrollment data:', enrollmentData);
+                console.log('Current page URL:', window.location.href);
+                console.log('Request going to: process_enrollment.php');
+                
                 // Send to backend
-                const response = await fetch('process_enrollment.php', {
+                const response = await fetch('./process_enrollment.php', {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
                     },
                     body: JSON.stringify(enrollmentData)
                 });
+                
+                console.log('Response status:', response.status);
+                console.log('Response headers Content-Type:', response.headers.get('content-type'));
                 
                 if (!response.ok) {
                     throw new Error(`Server error: ${response.status} ${response.statusText}`);
@@ -299,6 +307,7 @@
                 let responseData;
                 try {
                     responseData = await response.json();
+                    console.log('Response data:', responseData);
                 } catch (parseError) {
                     console.error('JSON parse error:', parseError);
                     const text = await response.text();
