@@ -34,14 +34,65 @@ if (!$fullName || !$email || !$phone) {
     die(json_encode(['success' => false, 'message' => 'Missing fields']));
 }
 
+// Save enrollment data to file
+$company = trim($input['company'] ?? '');
+$message_text = trim($input['message'] ?? '');
+
+$enrollmentRecord = [
+    'timestamp' => date('Y-m-d H:i:s'),
+    'fullName' => $fullName,
+    'email' => $email,
+    'phone' => $phone,
+    'course' => $course,
+    'company' => $company,
+    'message' => $message_text
+];
+
+// Save to JSON file
+$enrollmentsFile = 'enrollments.json';
+$enrollments = [];
+
+if (file_exists($enrollmentsFile)) {
+    $content = file_get_contents($enrollmentsFile);
+    if (!empty($content)) {
+        $enrollments = json_decode($content, true) ?? [];
+    }
+}
+
+$enrollments[] = $enrollmentRecord;
+file_put_contents($enrollmentsFile, json_encode($enrollments, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
+
+// Also try to send email if mail server is configured
 $to = 'info@adeptskil.com';
-$subject = "Enrollment: $course";
-$message = "Name: $fullName\nEmail: $email\nPhone: $phone\nCourse: $course";
+$subject = "Enrollment: $course - $fullName";
+$emailBody = "New Enrollment Received!\n\n" .
+    "Name: $fullName\n" .
+    "Email: $email\n" .
+    "Phone: $phone\n" .
+    "Course: $course\n" .
+    "Company: " . ($company ?: 'Not provided') . "\n" .
+    "Message: " . ($message_text ?: 'No message') . "\n\n" .
+    "Enrolled at: " . date('Y-m-d H:i:s');
+
 $headers = "Content-Type: text/plain\r\nFrom: noreply@adeptskil.com\r\n";
 
-@mail($to, $subject, $message, $headers);
-@mail($email, "Enrollment Confirmation", "Thank you for enrolling in $course", $headers);
+$emailSent = false;
+if (@mail($to, $subject, $emailBody, $headers)) {
+    $emailSent = true;
+}
+
+// Send confirmation email to user
+@mail($email, "Enrollment Confirmation - $course", 
+    "Thank you for enrolling in $course!\n\n" .
+    "We have received your enrollment request. Our team will contact you soon.\n\n" .
+    "Best regards,\nAdeptskil Team",
+    $headers);
 
 http_response_code(200);
-echo json_encode(['success' => true, 'message' => 'Enrollment successful']);
+echo json_encode([
+    'success' => true, 
+    'message' => 'Enrollment successful! Check your email for confirmation.',
+    'enrollment_id' => count($enrollments),
+    'email_sent' => $emailSent
+]);
 
