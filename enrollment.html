@@ -286,7 +286,7 @@
                 console.log('Sending enrollment data:', enrollmentData);
                 
                 // Send to backend
-                const response = await fetch('process_chatbot.php', {
+                const response = await fetch('process_enrollment.php', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -294,22 +294,7 @@
                     body: JSON.stringify(enrollmentData)
                 });
                 
-                console.log('Response status:', response.status);
-                console.log('Response headers:', response.headers);
-                console.log('Response URL:', response.url);
-                
-                const responseText = await response.text();
-                console.log('Raw response text:', responseText);
-                
-                let responseData;
-                try {
-                    responseData = JSON.parse(responseText);
-                    console.log('Parsed response data:', responseData);
-                } catch (jsonError) {
-                    console.error('Failed to parse JSON response:', jsonError);
-                    console.error('Response text was:', responseText);
-                    throw new Error('Server returned invalid JSON: ' + responseText.substring(0, 200));
-                }
+                const responseData = await response.json();
                 
                 if (response.ok && responseData.success) {
                     successMsg.style.display = 'block';
