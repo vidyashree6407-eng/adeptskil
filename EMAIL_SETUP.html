@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Setup - Adeptskil Admin</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+        
+        .step {
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .step:last-child {
+            border-bottom: none;
+        }
+        
+        .step-number {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: #667eea;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+        
+        .step-title {
+            display: inline-block;
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .step-content {
+            margin-top: 15px;
+            margin-left: 55px;
+            color: #555;
+            line-height: 1.6;
+        }
+        
+        .code {
+            background: #f5f5f5;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            overflow-x: auto;
+        }
+        
+        .warning {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        
+        .success {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        
+        .info {
+            background: #d1ecf1;
+            border-left: 4px solid #17a2b8;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        
+        a {
+            color: #667eea;
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+        
+        button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+            transition: background 0.3s;
+        }
+        
+        button:hover {
+            background: #764ba2;
+        }
+        
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: #f0f0f0;
+            border-radius: 4px;
+            text-decoration: none;
+            color: #333;
+        }
+        
+        .back-link:hover {
+            background: #e0e0e0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📧 Email Configuration Setup</h1>
+        <p class="subtitle">Get your Adeptskil emails reaching info@adeptskil.com</p>
+        
+        <div class="info">
+            <strong>ℹ️ How it works:</strong> Adeptskil now uses SMTP (Simple Mail Transfer Protocol) to send emails. You'll need credentials from a free email service to make this work. We recommend Brevo (free tier: 300 emails/day).
+        </div>
+        
+        <div class="step">
+            <div>
+                <span class="step-number">1</span>
+                <span class="step-title">Sign Up for Brevo (Free)</span>
+            </div>
+            <div class="step-content">
+                <p>Go to <a href="https://brevo.com/" target="_blank">https://brevo.com/</a> and create a free account.</p>
+                <p>✅ Free tier includes 300 emails/day - perfect for getting started</p>
+                <p>📧 Use any email address (can be different from info@adeptskil.com)</p>
+            </div>
+        </div>
+        
+        <div class="step">
+            <div>
+                <span class="step-number">2</span>
+                <span class="step-title">Get Your SMTP Credentials</span>
+            </div>
+            <div class="step-content">
+                <p><strong>After signing up to Brevo:</strong></p>
+                <ol style="margin-left: 20px; margin-top: 10px;">
+                    <li>Go to <a href="https://app.brevo.com/dashboard/smtp-api" target="_blank">Settings → SMTP & API</a></li>
+                    <li>You'll find:<br>
+                        <span style="display: inline-block; margin-top: 5px;">
+                            • <strong>Host:</strong> smtp-relay.brevo.com<br>
+                            • <strong>Port:</strong> 587<br>
+                            • <strong>Username:</strong> (your Brevo login email)<br>
+                            • <strong>Password:</strong> (your SMTP key - shown on that page)
+                        </span>
+                    </li>
+                </ol>
+                <div class="warning" style="margin-top: 15px;">
+                    <strong>⚠️ Security:</strong> Never share your SMTP key publicly. Keep config.php private.
+                </div>
+            </div>
+        </div>
+        
+        <div class="step">
+            <div>
+                <span class="step-number">3</span>
+                <span class="step-title">Update config.php</span>
+            </div>
+            <div class="step-content">
+                <p>Edit <strong>config.php</strong> in the Adeptskil folder:</p>
+                <div class="code">
+define('SMTP_USERNAME', 'your-brevo-email@example.com'); // Your Brevo login email<br>
+define('SMTP_PASSWORD', 'your-brevo-smtp-key');           // Your SMTP key
+                </div>
+                <p>Replace the placeholder values with your actual Brevo credentials.</p>
+                <div class="warning">
+                    <strong>⚠️ Example:</strong> If your Brevo login is "john@company.com" and your SMTP key is "xkeysib-abc123", update it to:
+                    <div class="code">
+define('SMTP_USERNAME', 'john@company.com');<br>
+define('SMTP_PASSWORD', 'xkeysib-abc123');
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="step">
+            <div>
+                <span class="step-number">4</span>
+                <span class="step-title">Test It</span>
+            </div>
+            <div class="step-content">
+                <p>Fill out a contact form or enrollment form on your website.</p>
+                <p>✅ Within seconds, you should receive an email at <strong>info@adeptskil.com</strong></p>
+                <p>You can also check the <a href="view_mail_log.html">Email Log</a> to see all email attempts.</p>
+            </div>
+        </div>
+        
+        <div class="step">
+            <div>
+                <span class="step-number">5</span>
+                <span class="step-title">(Optional) Alternative Email Services</span>
+            </div>
+            <div class="step-content">
+                <p>If you prefer not to use Brevo, here are other free SMTP services:</p>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li><strong>Gmail SMTP:</strong> Host: smtp.gmail.com, Port: 587
+                        <br><small>⚠️ Requires "App Password" setup (not regular Gmail password)</small>
+                    </li>
+                    <li><strong>Mailgun:</strong> Free tier with custom domain
+                        <br><small>Host: smtp.mailgun.org</small>
+                    </li>
+                    <li><strong>SendGrid:</strong> Free tier available
+                        <br><small>Host: smtp.sendgrid.net</small>
+                    </li>
+                </ul>
+                <p style="margin-top: 15px;">The SMTP host and port can be configured in config.php lines 13-14.</p>
+            </div>
+        </div>
+        
+        <div class="success">
+            <strong>✅ All Set!</strong> After updating config.php with your SMTP credentials, all emails will be sent directly to info@adeptskil.com.
+        </div>
+        
+        <a href="view_mail_log.html" class="back-link">← View Email Log</a>
+    </div>
+</body>
+</html>
