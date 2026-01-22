@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Log Viewer - Adeptskil Admin</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        
+        .info-bar {
+            background: #f0f4ff;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            margin-bottom: 30px;
+            border-radius: 4px;
+        }
+        
+        .info-bar p {
+            color: #333;
+            font-size: 14px;
+        }
+        
+        .controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.3s;
+        }
+        
+        button:hover {
+            background: #764ba2;
+        }
+        
+        button.secondary {
+            background: #666;
+        }
+        
+        button.secondary:hover {
+            background: #555;
+        }
+        
+        .email-log {
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 20px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            line-height: 1.6;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            max-height: 600px;
+            overflow-y: auto;
+            color: #333;
+        }
+        
+        .email-log.empty {
+            color: #999;
+            font-style: italic;
+        }
+        
+        .stat {
+            display: inline-block;
+            margin-right: 30px;
+            margin-bottom: 10px;
+        }
+        
+        .stat-number {
+            font-size: 24px;
+            font-weight: bold;
+            color: #667eea;
+        }
+        
+        .stat-label {
+            font-size: 12px;
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        .refresh-info {
+            color: #666;
+            font-size: 12px;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📧 Email Log Viewer</h1>
+        <p style="color: #666; margin-bottom: 20px;">View all email attempts and delivery logs</p>
+        
+        <div class="info-bar">
+            <p><strong>ℹ️ Info:</strong> This page displays all emails sent through the Adeptskil system. Each entry shows the timestamp, recipient, subject, and sender.</p>
+        </div>
+        
+        <div class="controls">
+            <button onclick="refreshPage()">🔄 Refresh</button>
+            <button class="secondary" onclick="clearLog()">🗑️ Clear Log</button>
+        </div>
+        
+        <div id="stats">
+            <div class="stat">
+                <div class="stat-number" id="email-count">0</div>
+                <div class="stat-label">Total Emails</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number" id="last-updated">--</div>
+                <div class="stat-label">Last Updated</div>
+            </div>
+        </div>
+        
+        <div class="email-log" id="email-log">Loading...</div>
+        
+        <div class="refresh-info">
+            🔄 Auto-refreshing every 10 seconds...
+        </div>
+    </div>
+    
+    <script>
+        function loadEmailLog() {
+            fetch('view_mail_log.php')
+                .then(response => response.json())
+                .then(data => {
+                    const logDiv = document.getElementById('email-log');
+                    const countDiv = document.getElementById('email-count');
+                    const lastUpdatedDiv = document.getElementById('last-updated');
+                    
+                    if (data.content && data.content.trim()) {
+                        logDiv.textContent = data.content;
+                        logDiv.classList.remove('empty');
+                    } else {
+                        logDiv.textContent = '📭 No email logs yet. When emails are sent, they will appear here.';
+                        logDiv.classList.add('empty');
+                    }
+                    
+                    countDiv.textContent = data.count;
+                    lastUpdatedDiv.textContent = data.lastUpdated;
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    document.getElementById('email-log').textContent = '❌ Error loading email log';
+                });
+        }
+        
+        function refreshPage() {
+            loadEmailLog();
+        }
+        
+        function clearLog() {
+            if (confirm('⚠️ Are you sure you want to clear all email logs? This cannot be undone.')) {
+                fetch('clear_mail_log.php', { method: 'POST' })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            loadEmailLog();
+                            alert('✅ Email log cleared');
+                        }
+                    })
+                    .catch(error => console.error('Error:', error));
+            }
+        }
+        
+        // Load on page load
+        loadEmailLog();
+        
+        // Auto-refresh every 10 seconds
+        setInterval(loadEmailLog, 10000);
+    </script>
+</body>
+</html>

@@ -5,11 +5,14 @@
  * Sends email notifications without exposing user data
  */
 
+// Load configuration
+require_once(__DIR__ . '/config.php');
+
 // Enable error logging
 error_reporting(E_ALL);
 ini_set('display_errors', 0);
 ini_set('log_errors', 1);
-ini_set('error_log', __DIR__ . '/contact_errors.log');
+ini_set('error_log', LOGS_DIR . '/contact_errors.log');
 
 // Set JSON response header
 header('Content-Type: application/json');
@@ -55,8 +58,8 @@ if (!empty($errors)) {
 }
 
 // Configuration
-$recipient_email = 'info@adeptskil.com';
-$site_name = 'Adeptskil';
+$recipient_email = ADMIN_EMAIL;
+$site_name = SITE_NAME;
 $timestamp = date('Y-m-d H:i:s');
 
 // Build email content
@@ -83,24 +86,10 @@ Please reply to: $email
 This is an automated message from the Adeptskil contact form.
 ";
 
-// Prepare email headers
-$headers = array(
-    'From' => 'info@adeptskil.com',
-    'Reply-To' => $email,
-    'X-Mailer' => 'Adeptskil Contact Form',
-    'X-Priority' => '3',
-    'Return-Path' => 'info@adeptskil.com'
-);
+// Send email using centralized function
+$mail_sent = sendEmail($recipient_email, $email_subject, $email_body, ADMIN_EMAIL, $email);
 
-$headers_str = '';
-foreach ($headers as $key => $value) {
-    $headers_str .= $key . ": " . $value . "\r\n";
-}
-
-// Send email
-$mail_sent = mail($recipient_email, $email_subject, $email_body, $headers_str);
-
-// Log the submission
+// Log the submission to local file for admin review
 logContactSubmission($name, $email, $phone, $inquiry_type, $message, $mail_sent);
 
 // Return appropriate response
@@ -116,6 +105,13 @@ if ($mail_sent) {
         'success' => false,
         'message' => 'Sorry, there was an error sending your message. Please try again later.'
     ]);
+}
+
+// Function to log contact submissions
+function logContactSubmission($name, $email, $phone, $inquiry_type, $message, $mail_sent) {
+    $log_entry = date('Y-m-d H:i:s') . " | Name: $name | Email: $email | Type: $inquiry_type | Sent: " . ($mail_sent ? 'Yes' : 'No') . "\n";
+    $log_file = LOGS_DIR . '/contact_submissions.log';
+    @file_put_contents($log_file, $log_entry, FILE_APPEND);
 }
 
 exit;

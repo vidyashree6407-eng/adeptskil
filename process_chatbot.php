@@ -1,4 +1,7 @@
 <?php
+// Load configuration
+require_once(__DIR__ . '/config.php');
+
 ob_clean();
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
@@ -74,19 +77,15 @@ $emailBody = "New Enrollment Received!\n\n" .
     "Message: " . ($message_text ?: 'No message') . "\n\n" .
     "Enrolled at: " . date('Y-m-d H:i:s');
 
-$headers = "Content-Type: text/plain\r\nFrom: info@adeptskil.com\r\n";
-
-$emailSent = false;
-if (@mail($to, $subject, $emailBody, $headers)) {
-    $emailSent = true;
-}
+$emailSent = sendEmail(ADMIN_EMAIL, $subject, $emailBody, ADMIN_EMAIL);
 
 // Send confirmation email to user
-@mail($email, "Enrollment Confirmation - $course", 
+sendEmail($email, "Enrollment Confirmation - $course", 
     "Thank you for enrolling in $course!\n\n" .
     "We have received your enrollment request. Our team will contact you soon.\n\n" .
     "Best regards,\nAdeptskil Team",
-    $headers);
+    ADMIN_EMAIL,
+    $email);
 
 http_response_code(200);
 echo json_encode([

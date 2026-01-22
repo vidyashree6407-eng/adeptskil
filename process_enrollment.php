@@ -1,4 +1,7 @@
 <?php
+// Load configuration
+require_once(__DIR__ . '/config.php');
+
 // Start output buffering to prevent any accidental output
 ob_start();
 
@@ -114,15 +117,13 @@ if ($save_result === false) {
 }
 
 // Send emails (non-blocking, don't fail if email fails)
-$headers = "Content-Type: text/plain; charset=UTF-8\r\nFrom: info@adeptskil.com\r\n";
-
 // User confirmation email
-@mail($email, 
+sendEmail($email, 
     "Enrollment Confirmation - " . $course, 
-    "Dear " . $fullName . ",\n\nThank you for enrolling!\n\nWe have received your enrollment request. Our team will contact you shortly.\n\nBest regards,\nAdeptskil Team");
+    "Dear " . $fullName . ",\n\nThank you for enrolling!\n\nWe have received your enrollment request for: " . $course . "\n\nOur team will contact you shortly at " . $phone . ".\n\nBest regards,\nAdeptskil Team");
 
 // Admin notification
-@mail('info@adeptskil.com',
+sendEmail(ADMIN_EMAIL,
     "New Enrollment: " . $course . " - " . $fullName,
     "Name: " . $fullName . "\nEmail: " . $email . "\nPhone: " . $phone . "\nCompany: " . $company . "\nCourse: " . $course . "\n\nMessage:\n" . $message_text);
 
