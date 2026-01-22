@@ -1,7 +1,14 @@
 <?php
 /**
- * Configuration file for Adeptskil
- * Centralized settings for email and system configuration
+ * Configuration Template - COPY THIS FILE
+ * 
+ * DO NOT COMMIT THIS FILE TO GIT IF YOU ADD REAL CREDENTIALS!
+ * 
+ * Instructions:
+ * 1. Copy this file to config.php
+ * 2. Fill in your SMTP credentials
+ * 3. Add config.php to .gitignore
+ * 4. NEVER push config.php to GitHub
  */
 
 // Email Configuration
@@ -10,12 +17,12 @@ define('SITE_NAME', 'Adeptskil');
 define('SITE_URL', 'https://adeptskil.com');
 
 // SMTP Configuration - Using Brevo (Sendinblue)
-// Sign up free at https://brevo.com/
-// Free tier: 300 emails/day
+// Sign up free at https://brevo.com/ (300 emails/day free)
+// Get credentials from: https://app.brevo.com/dashboard/smtp-api
 define('SMTP_HOST', 'smtp-relay.brevo.com');
 define('SMTP_PORT', 587);
-define('SMTP_USERNAME', 'your-brevo-email@example.com'); // Update with your Brevo account email
-define('SMTP_PASSWORD', 'your-brevo-smtp-key'); // Update with your Brevo SMTP key
+define('SMTP_USERNAME', ''); // Your Brevo email/username here
+define('SMTP_PASSWORD', ''); // Your SMTP API key here
 define('SMTP_FROM_EMAIL', 'info@adeptskil.com');
 define('SMTP_FROM_NAME', 'Adeptskil');
 
@@ -57,6 +64,12 @@ function sendEmail($to, $subject, $body, $from = SMTP_FROM_EMAIL, $replyTo = nul
 // Function to send email via SMTP
 function sendViaSMTP($to, $subject, $body, $from, $replyTo = null) {
     try {
+        // Validate credentials are set
+        if (empty(SMTP_USERNAME) || empty(SMTP_PASSWORD)) {
+            error_log("SMTP: Credentials not configured in config.php");
+            return false;
+        }
+        
         // Create SMTP connection
         $socket = @fsockopen(SMTP_HOST, SMTP_PORT, $errno, $errstr, 10);
         

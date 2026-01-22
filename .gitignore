@@ -1,0 +1,25 @@
+# Config files with credentials
+config.php
+
+# System files
+.DS_Store
+Thumbs.db
+.env
+.env.local
+
+# Editor files
+.vscode/settings.json
+.idea/
+
+# Log files
+*.log
+error_log
+
+# Temp files
+*.tmp
+*.temp
+*~
+
+# Data files (optional)
+# data/
+# logs/
