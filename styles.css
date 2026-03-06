@@ -123,7 +123,7 @@ p, li, a, button, input, textarea {
     display: flex;
     align-items: center;
     list-style: none;
-    gap: 2.5rem;
+    gap: 2rem;
 }
 
 .nav-link {
@@ -133,7 +133,7 @@ p, li, a, button, input, textarea {
     font-size: 0.95rem;
     transition: all 0.3s ease;
     position: relative;
-    padding: 0.75rem 0;
+    padding: 0.75rem 0.5rem;
     letter-spacing: 0.025em;
 }
 
@@ -158,6 +158,35 @@ p, li, a, button, input, textarea {
 .nav-link:hover::after,
 .nav-link.active::after {
     width: 100%;
+}
+
+/* Social Media Icons */
+.social-media-icons {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-left: 1.5rem;
+    padding-left: 1.5rem;
+    border-left: 1px solid rgba(226, 232, 240, 0.5);
+}
+
+.social-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-size: 0.85rem;
+}
+
+.social-icon:hover {
+    transform: translateY(-3px) scale(1.1);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
 }
 
 /* Header Search Styles */
@@ -541,9 +570,24 @@ p, li, a, button, input, textarea {
         display: none;
     }
     
+    .social-media-icons {
+        display: flex !important;
+        gap: 0.6rem;
+        margin-left: auto;
+        margin-right: 0.5rem;
+        padding-left: 0.8rem;
+        border-left: 1px solid rgba(226, 232, 240, 0.5);
+    }
+    
+    .social-icon {
+        width: 28px;
+        height: 28px;
+        font-size: 0.75rem;
+    }
+    
     .nav-toggle {
         display: flex;
-        margin-left: auto;
+        margin-left: 0.3rem;
         flex-shrink: 0;
     }
 }
@@ -568,9 +612,24 @@ p, li, a, button, input, textarea {
         max-width: 100%;
     }
     
+    .social-media-icons {
+        display: flex !important;
+        gap: 0.5rem;
+        margin-left: auto;
+        margin-right: 0.3rem;
+        padding-left: 0.6rem;
+        border-left: 1px solid rgba(226, 232, 240, 0.5);
+    }
+    
+    .social-icon {
+        width: 26px;
+        height: 26px;
+        font-size: 0.7rem;
+    }
+    
     .nav-toggle {
         display: flex;
-        margin-left: auto;
+        margin-left: 0.2rem;
         flex-shrink: 0;
     }
 }
@@ -590,6 +649,21 @@ p, li, a, button, input, textarea {
         height: 120px;
         margin: -25px 0;
         max-width: 100%;
+    }
+    
+    .social-media-icons {
+        display: flex !important;
+        gap: 0.4rem;
+        margin-left: auto;
+        margin-right: 0.2rem;
+        padding-left: 0.5rem;
+        border-left: 1px solid rgba(226, 232, 240, 0.5);
+    }
+    
+    .social-icon {
+        width: 24px;
+        height: 24px;
+        font-size: 0.65rem;
     }
     
     .nav-toggle {
@@ -645,6 +719,16 @@ p, li, a, button, input, textarea {
 @media (max-width: 768px) {
     .container {
         padding: 0 1.25rem;
+    }
+    
+    .hero {
+        background: linear-gradient(180deg, rgba(102, 126, 234, 0.4) 0%, rgba(118, 75, 162, 0.4) 100%) !important;
+        background-image: none !important;
+        min-height: 50vh !important;
+    }
+    
+    .hero video {
+        display: none !important;
     }
 }
 
