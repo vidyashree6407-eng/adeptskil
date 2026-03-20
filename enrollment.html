@@ -242,7 +242,8 @@
                 <i class="fas fa-credit-card"></i> Payment Method
             </h3>
             <div style="background: #f0f4ff; padding: 15px; border-radius: 8px; margin-bottom: 20px; text-align: center;">
-                <p style="color: #667eea; font-weight: 600; margin-bottom: 10px;">Course Fee: <span id="courseCurrency">$</span><span id="coursePrice">99</span></p>
+                <p style="color: #667eea; font-weight: 600; margin-bottom: 10px;">Course Fee: <span id="courseCurrency">$</span><span id="coursePrice">-</span></p>
+                <p style="color: #94a3b8; font-size: 0.85rem; margin-bottom: 8px;">Duration: <span id="courseDuration">-</span> days</p>
                 <p style="color: #64748b; font-size: 0.9rem;">Pay securely with PayPal (USD)</p>
             </div>
             <form id="paypalForm" action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" style="text-align: center;">
@@ -275,19 +276,37 @@
         let enrollmentConfig = {};
         let coursePrices = {};
 
-        // Fetch enrollment configuration on page load
-        async function loadEnrollmentConfig() {
+        // Fetch course pricing from new pricing system
+        async function loadCoursePricing() {
             try {
-                const response = await fetch('./get_enrollment_config.php');
+                const urlParams = new URLSearchParams(window.location.search);
+                const courseName = urlParams.get('course') || 'Professional Development Course';
+                
+                // Try new pricing system first
+                const response = await fetch(`course_pricing_manager.php?action=get_course_price&course=${encodeURIComponent(courseName)}`);
                 const data = await response.json();
                 
-                enrollmentConfig = data;
-                coursePrices = data.courses_pricing || { 'default': 99.00 };
-                return true;
+                if (data.success && data.data) {
+                    return {
+                        price: data.data.base_price,
+                        duration: data.data.duration_days,
+                        category: data.data.category
+                    };
+                } else {
+                    // Fallback to old system if course not found
+                    const response = await fetch('./get_enrollment_config.php');
+                    const config = await response.json();
+                    enrollmentConfig = config;
+                    coursePrices = config.courses_pricing || { 'default': 149.00 };
+                    return {
+                        price: coursePrices[courseName] || coursePrices['default'] || 149.00,
+                        duration: 1,
+                        category: 'General'
+                    };
+                }
             } catch (error) {
-                console.error('Error loading enrollment config:', error);
-                coursePrices = { 'default': 99.00 };
-                return false;
+                console.error('Error loading course pricing:', error);
+                return { price: 149.00, duration: 1, category: 'General' };
             }
         }
 
@@ -297,11 +316,15 @@
         document.getElementById('courseTitle').textContent = courseName;
         document.getElementById('courseHidden').value = courseName;
 
-        // Initialize on page load
-        loadEnrollmentConfig().then(() => {
-            const coursePrice = coursePrices[courseName] || coursePrices['default'] || 99.00;
+        // Initialize on page load with new pricing
+        loadCoursePricing().then((courseData) => {
             document.getElementById('courseCurrency').textContent = '$';
-            document.getElementById('coursePrice').textContent = coursePrice.toFixed(2);
+            document.getElementById('coursePrice').textContent = courseData.price.toFixed(2);
+            document.getElementById('courseDuration').textContent = courseData.duration;
+            // Store for payment processing
+            window.coursePrice = courseData.price;
+            window.courseDuration = courseData.duration;
+            window.courseCategory = courseData.category;
         });
 
         // Store enrollment data globally
@@ -340,8 +363,8 @@
                 return;
             }
             
-            // Get the current course price
-            const currentCoursePrice = coursePrices[courseName] || coursePrices['default'] || 99.00;
+            // Get the current course price from the new pricing system
+            const currentCoursePrice = window.coursePrice || 149.00;
             
             // Store enrollment data for payment processing
             enrollmentData = {
