@@ -815,6 +815,67 @@
 
         // Select pricing option
         function selectPricingOption(key, pricing) {
+            selectedPricingOption = {
+                key: key,
+                name: pricing.name,
+                price: pricing.price
+            };
+
+            // Update visual selection
+            document.querySelectorAll('.pricing-card').forEach(c => c.classList.remove('selected'));
+            event.currentTarget.classList.add('selected');
+
+            // Update form fields
+            document.getElementById('selectedOption').value = pricing.name;
+            document.getElementById('selectedPrice').value = pricing.price.toFixed(2);
+            document.getElementById('totalPrice').textContent = pricing.price.toFixed(2);
+
+            // Update summary
+            updateSummary();
+        }
+
+        function updateSummary() {
+            if (selectedPricingOption) {
+                const summary = document.getElementById('pricingSummary');
+                summary.innerHTML = `
+                    <div class="summary-item">
+                        <span>Course:</span>
+                        <strong>${courseName}</strong>
+                    </div>
+                    <div class="summary-item">
+                        <span>Selected Option:</span>
+                        <strong>${selectedPricingOption.name}</strong>
+                    </div>
+                    <div class="summary-item">
+                        <span>Total Price:</span>
+                        <strong class="summary-price">$${selectedPricingOption.price.toFixed(2)}</strong>
+                    </div>
+                `;
+            }
+        }
+
+        function showError(message) {
+            alert(message);
+        }
+
+        function submitEnrollment() {
+            if (!selectedPricingOption) {
+                showError('Please select a pricing option.');
+                return;
+            }
+            // Submit form with selected pricing
+            document.getElementById('enrollmentForm').submit();
+        }
+
+        // Initialize on page load
+        window.addEventListener('DOMContentLoaded', loadCourseData);
+
+                container.appendChild(card);
+            });
+        }
+
+        // Select pricing option
+        function selectPricingOption(key, pricing) {
             // Remove previous selection
             document.querySelectorAll('.pricing-card').forEach(card => {
                 card.classList.remove('selected');
