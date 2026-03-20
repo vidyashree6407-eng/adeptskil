@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>API Test</title>
+</head>
+<body>
+    <h1>Course Fees API Test</h1>
+    <div id="result"></div>
+
+    <script>
+        const courseName = new URLSearchParams(window.location.search).get('course') || 'Account Management';
+        
+        async function testAPI() {
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = `<p>Testing API for course: <strong>${courseName}</strong></p>`;
+            
+            try {
+                const url = `course_fees_api.php?action=get_course&course=${encodeURIComponent(courseName)}`;
+                const response = await fetch(url);
+                const data = await response.json();
+                
+                resultDiv.innerHTML += `<p>Status: ${response.status}</p>`;
+                resultDiv.innerHTML += `<p>Response: <pre>${JSON.stringify(data, null, 2)}</pre></p>`;
+                
+                if (data.success && data.data) {
+                    resultDiv.innerHTML += `<p style="color: green;">✓ API works! Pricing options found.</p>`;
+                } else {
+                    resultDiv.innerHTML += `<p style="color: red;">✗ API error: ${data.error}</p>`;
+                }
+            } catch (error) {
+                resultDiv.innerHTML += `<p style="color: red;">✗ Error: ${error}</p>`;
+            }
+        }
+        
+        testAPI();
+    </script>
+</body>
+</html>

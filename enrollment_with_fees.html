@@ -481,6 +481,8 @@
         async function loadCourseData() {
             try {
                 const courseName = getCourseName();
+                console.log('Loading course data for:', courseName);
+                
                 if (!courseName) {
                     showStatus('No course selected. Please go back and select a course.', 'error');
                     return;
@@ -489,28 +491,55 @@
                 document.getElementById('courseName').value = courseName;
 
                 // Fetch course data from API
-                const response = await fetch(`course_fees_api.php?action=get_course&course=${encodeURIComponent(courseName)}`);
+                const apiUrl = `course_fees_api.php?action=get_course&course=${encodeURIComponent(courseName)}`;
+                console.log('API URL:', apiUrl);
+                
+                const response = await fetch(apiUrl);
+                console.log('API Response Status:', response.status);
+                
                 const data = await response.json();
+                console.log('API Response Data:', data);
 
                 if (data.success && data.data) {
                     courseData = data.data;
                     document.getElementById('courseDuration').value = courseData.duration;
                     populatePricingOptions();
+                    console.log('Successfully loaded pricing options');
                 } else {
-                    showStatus('Course not found. Please go back and select a valid course.', 'error');
+                    console.error('API error:', data.error);
+                    showStatus(data.error || 'Course not found. Please check the course name.', 'error');
                 }
             } catch (error) {
                 console.error('Error loading course:', error);
-                showStatus('Error loading course data. Please refresh the page.', 'error');
+                showStatus(`Error: ${error.message}. Please check browser console for details.`, 'error');
             }
         }
 
         // Populate pricing dropdown and grid options
         function populatePricingOptions() {
-            if (!courseData || !courseData.pricing) return;
+            console.log('populatePricingOptions called');
+            console.log('courseData:', courseData);
+            
+            if (!courseData) {
+                console.error('courseData is null or undefined');
+                showStatus('Error: Course data not loaded', 'error');
+                return;
+            }
+            
+            if (!courseData.pricing) {
+                console.error('courseData.pricing is missing', courseData);
+                showStatus('Error: Pricing data not available for this course', 'error');
+                return;
+            }
 
             const dropdown = document.getElementById('pricingOption');
             const grid = document.getElementById('pricingGrid');
+            
+            if (!dropdown || !grid) {
+                console.error('DOM elements not found - dropdown:', dropdown, 'grid:', grid);
+                return;
+            }
+            
             dropdown.innerHTML = '<option value="">-- Choose pricing option --</option>';
             grid.innerHTML = '';
 
@@ -521,8 +550,11 @@
                 { key: 'virtual_early_bird', label: 'Live Virtual Early Bird' }
             ];
 
+            let optionsAdded = 0;
             options.forEach(opt => {
                 const pricing = courseData.pricing[opt.key];
+                console.log(`Checking ${opt.key}:`, pricing);
+                
                 if (pricing) {
                     // Add to dropdown
                     const option = document.createElement('option');
@@ -539,8 +571,15 @@
                     `;
                     gridItem.onclick = () => selectPricingFromGrid(opt.key, pricing, opt.label);
                     grid.appendChild(gridItem);
+                    
+                    optionsAdded++;
                 }
             });
+            
+            console.log(`Added ${optionsAdded} pricing options`);
+            if (optionsAdded === 0) {
+                showStatus('Error: No pricing options available', 'error');
+            }
         }
 
         // Select pricing from grid
