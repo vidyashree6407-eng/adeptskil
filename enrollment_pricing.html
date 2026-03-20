@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Enrollment with Pricing - Adeptskil</title>
+    <link rel="icon" type="image/jpeg" href="images/FAVICON.jpg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .enrollment-container {
+            max-width: 900px;
+            margin: 100px auto;
+            padding: 20px;
+        }
+
+        .enrollment-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 2rem;
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+
+        .enrollment-form {
+            padding: 3rem;
+        }
+
+        .enrollment-sidebar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 3rem;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .enrollment-form h1 {
+            font-size: 2rem;
+            color: #1e293b;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .enrollment-form .form-subtitle {
+            color: #64748b;
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #2d3748;
+            font-size: 0.9rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        /* Pricing Sidebar */
+        .pricing-box {
+            background: rgba(255,255,255, 0.15);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .pricing-box h3 {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            opacity: 0.9;
+            font-weight: 600;
+        }
+
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.75rem;
+            font-size: 0.95rem;
+            opacity: 0.95;
+        }
+
+        .price-row.total {
+            border-top: 2px solid rgba(255,255,255, 0.3);
+            padding-top: 1rem;
+            margin-top: 1rem;
+            font-size: 1.3rem;
+            font-weight: 700;
+            opacity: 1;
+        }
+
+        .savings-badge {
+            background: #10b981;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        /* Offer Selection */
+        .offers-section {
+            background: rgba(255,255,255, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .offers-section h4 {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .offer-option {
+            background: rgba(255,255,255, 0.1);
+            border: 2px solid transparent;
+            padding: 1rem;
+            margin-bottom: 0.75rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .offer-option:hover {
+            background: rgba(255,255,255, 0.2);
+            border-color: rgba(255,255,255, 0.5);
+        }
+
+        .offer-option input[type="radio"] {
+            margin-right: 0.75rem;
+        }
+
+        .offer-option label {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            margin: 0;
+        }
+
+        .offer-label {
+            flex: 1;
+        }
+
+        .offer-label .offer-name {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .offer-label .offer-desc {
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+
+        /* Buttons */
+        .enrollment-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 1rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-secondary {
+            background: #e2e8f0;
+            color: #2d3748;
+        }
+
+        .btn-secondary:hover {
+            background: #cbd5e1;
+        }
+
+        /* Course Info Card */
+        .course-info-card {
+            background: linear-gradient(135deg, #f0f4ff, #faf8ff);
+            border-left: 4px solid #667eea;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+
+        .course-info-card h4 {
+            color: #667eea;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .course-info-card p {
+            color: #2d3748;
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .course-duration {
+            font-size: 0.9rem;
+            color: #64748b;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .enrollment-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .enrollment-form,
+            .enrollment-sidebar {
+                padding: 2rem;
+            }
+
+            .enrollment-form h1 {
+                font-size: 1.5rem;
+            }
+        }
+
+        .success-message {
+            background: #ecfdf5;
+            border: 2px solid #10b981;
+            color: #047857;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            display: none;
+        }
+
+        .error-message {
+            background: #fef2f2;
+            border: 2px solid #ef4444;
+            color: #991b1b;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation (include from main site) -->
+    
+    <div class="enrollment-container">
+        <div class="enrollment-grid">
+            <!-- Enrollment Form -->
+            <div class="enrollment-form">
+                <h1>💳 Enroll Now</h1>
+                <p class="form-subtitle">Complete your enrollment and select your preferred offer</p>
+
+                <div class="success-message" id="successMessage"></div>
+                <div class="error-message" id="errorMessage"></div>
+
+                <form id="enrollmentForm">
+                    <!-- Course Selection -->
+                    <div class="course-info-card">
+                        <h4>📚 Selected Course</h4>
+                        <div id="selectedCourseDisplay">
+                            <p id="courseNameDisplay">-</p>
+                            <p class="course-duration">Duration: <span id="courseDurationDisplay">-</span></p>
+                        </div>
+                    </div>
+
+                    <!-- Participant Information -->
+                    <div class="form-group">
+                        <label for="participantNames">👥 Participant Names (one per line)</label>
+                        <textarea id="participantNames" name="participant_names" placeholder="John Doe&#10;Jane Smith&#10;Mark Wilson" required></textarea>
+                        <small style="color: #64748b;">Enter each participant on a new line</small>
+                    </div>
+
+                    <!-- Company Name -->
+                    <div class="form-group">
+                        <label for="companyName">🏢 Company Name</label>
+                        <input type="text" id="companyName" name="company_name" placeholder="Enter your company name">
+                    </div>
+
+                    <!-- Email -->
+                    <div class="form-group">
+                        <label for="email">📧 Email Address</label>
+                        <input type="email" id="email" name="email" placeholder="your.email@company.com" required>
+                    </div>
+
+                    <!-- Phone -->
+                    <div class="form-group">
+                        <label for="phone">📱 Phone Number</label>
+                        <input type="tel" id="phone" name="phone" placeholder="+1 (555) 123-4567" required>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="enrollment-buttons">
+                        <button type="button" class="btn btn-secondary" onclick="history.back()">
+                            ← Back
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            Continue to Payment →
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Pricing Sidebar -->
+            <div class="enrollment-sidebar">
+                <div>
+                    <h3 style="margin-bottom: 1.5rem; font-size: 1.2rem;">💰 Pricing Details</h3>
+
+                    <!-- Course Pricing -->
+                    <div class="pricing-box">
+                        <h3>Course Price</h3>
+                        <div class="price-row">
+                            <span>Base Price:</span>
+                            <span id="basePriceDisplay">$0</span>
+                        </div>
+                        <div class="price-row">
+                            <span>Participants:</span>
+                            <span id="participantCountDisplay">0</span>
+                        </div>
+                    </div>
+
+                    <!-- Offer Selection -->
+                    <div class="offers-section">
+                        <h4>🎁 Apply Offer (Optional)</h4>
+                        
+                        <div class="offer-option">
+                            <input type="radio" id="offer_none" name="offer_code" value="" checked onchange="updatePricing()">
+                            <label for="offer_none">
+                                <div class="offer-label">
+                                    <div class="offer-name">No Discount</div>
+                                </div>
+                            </label>
+                        </div>
+
+                        <div class="offer-option">
+                            <input type="radio" id="offer_welcome" name="offer_code" value="WELCOME15" onchange="updatePricing()">
+                            <label for="offer_welcome">
+                                <div class="offer-label">
+                                    <div class="offer-name">🎉 Welcome (15% off)</div>
+                                    <div class="offer-desc">First-time customers</div>
+                                </div>
+                            </label>
+                        </div>
+
+                        <div class="offer-option">
+                            <input type="radio" id="offer_team" name="offer_code" value="TEAM20" onchange="updatePricing()">
+                            <label for="offer_team">
+                                <div class="offer-label">
+                                    <div class="offer-name">👥 Team (20% off)</div>
+                                    <div class="offer-desc">5+ participants</div>
+                                </div>
+                            </label>
+                        </div>
+
+                        <div class="offer-option">
+                            <input type="radio" id="offer_extended" name="offer_code" value="EXTENDED25" onchange="updatePricing()">
+                            <label for="offer_extended">
+                                <div class="offer-label">
+                                    <div class="offer-name">📚 Extended (25% off)</div>
+                                    <div class="offer-desc">Courses 3+ days</div>
+                                </div>
+                            </label>
+                        </div>
+
+                        <div class="offer-option">
+                            <input type="radio" id="offer_corporate" name="offer_code" value="CORPORATE30" onchange="updatePricing()">
+                            <label for="offer_corporate">
+                                <div class="offer-label">
+                                    <div class="offer-name">🏢 Corporate (30% off)</div>
+                                    <div class="offer-desc">Annual package</div>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Discount Summary -->
+                    <div class="pricing-box">
+                        <h3>Summary</h3>
+                        <div class="price-row">
+                            <span>Subtotal:</span>
+                            <span id="subtotalDisplay">$0</span>
+                        </div>
+                        <div class="price-row" id="discountRow" style="display:none;">
+                            <span>Discount:</span>
+                            <span id="discountDisplay" style="color: #10b981;">-$0</span>
+                        </div>
+                        <div class="price-row total">
+                            <span>Total:</span>
+                            <span id="totalPriceDisplay">$0</span>
+                        </div>
+                        <div class="savings-badge" id="savingsBadge" style="display:none;">
+                            💰 You save <span id="savingsAmount">$0</span>!
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Payment Info -->
+                <div style="border-top: 2px solid rgba(255,255,255,0.2); padding-top: 1.5rem;">
+                    <p style="font-size: 0.85rem; opacity: 0.85; margin-bottom: 1rem;">
+                        ✅ Secure payment processing<br>
+                        ✅ 100% refund within 7 days<br>
+                        ✅ Satisfaction guaranteed
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Get course name from URL or session
+        function getCourseName() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('course') || sessionStorage.getItem('enrollCourse') || 'Professional Training Course';
+        }
+
+        // Load course pricing data
+        let courseData = null;
+
+        async function loadCourseData() {
+            try {
+                const courseName = getCourseName();
+                const response = await fetch(`course_pricing_manager.php?action=get_course_price&course=${encodeURIComponent(courseName)}`);
+                const result = await response.json();
+                
+                if (result.success) {
+                    courseData = result.data;
+                    document.getElementById('courseNameDisplay').textContent = courseData.course_name;
+                    document.getElementById('courseDurationDisplay').textContent = courseData.duration_days + ' days';
+                    document.getElementById('basePriceDisplay').textContent = '$' + courseData.base_price;
+                    updatePricing();
+                }
+            } catch (error) {
+                console.error('Error loading course data:', error);
+            }
+        }
+
+        // Update pricing when participants or offer changes
+        function updatePricing() {
+            if (!courseData) return;
+
+            const participantNames = document.getElementById('participantNames').value;
+            const participants = participantNames.split('\n').filter(name => name.trim().length > 0);
+            const participantCount = participants.length;
+
+            const offerCode = document.querySelector('input[name="offer_code"]:checked').value;
+
+            document.getElementById('participantCountDisplay').textContent = participantCount || '0';
+
+            let basePricePerPerson = courseData.base_price;
+            let subtotal = basePricePerPerson * participantCount;
+            let discountAmount = 0;
+            let discountPercent = 0;
+
+            // Apply offer logic
+            const offers = {
+                'WELCOME15': { percent: 15, minParticipants: 1, minDays: 0 },
+                'TEAM20': { percent: 20, minParticipants: 5, minDays: 0 },
+                'EXTENDED25': { percent: 25, minParticipants: 1, minDays: 3 },
+                'CORPORATE30': { percent: 30, minParticipants: 1, minDays: 0 }
+            };
+
+            if (offerCode && offers[offerCode]) {
+                const offer = offers[offerCode];
+                
+                // Check eligibility
+                if (participantCount >= offer.minParticipants && courseData.duration_days >= offer.minDays) {
+                    discountPercent = offer.percent;
+                    discountAmount = (subtotal * discountPercent) / 100;
+                }
+            }
+
+            const totalPrice = subtotal - discountAmount;
+
+            // Update display
+            document.getElementById('subtotalDisplay').textContent = '$' + subtotal.toFixed(2);
+            document.getElementById('totalPriceDisplay').textContent = '$' + totalPrice.toFixed(2);
+
+            if (discountAmount > 0) {
+                document.getElementById('discountRow').style.display = 'flex';
+                document.getElementById('discountDisplay').textContent = '-$' + discountAmount.toFixed(2);
+                document.getElementById('savingsBadge').style.display = 'block';
+                document.getElementById('savingsAmount').textContent = '$' + discountAmount.toFixed(2);
+            } else {
+                document.getElementById('discountRow').style.display = 'none';
+                document.getElementById('savingsBadge').style.display = 'none';
+            }
+
+            // Store data for submission
+            sessionStorage.setItem('enrollmentData', JSON.stringify({
+                course: courseData.course_name,
+                participants: participantCount,
+                subtotal: subtotal,
+                discount: discountAmount,
+                total: totalPrice,
+                offerCode: offerCode
+            }));
+        }
+
+        // Form submission
+        document.getElementById('enrollmentForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const participants = document.getElementById('participantNames').value.split('\n').filter(n => n.trim());
+            
+            if (participants.length === 0) {
+                showError('Please enter at least one participant name');
+                return;
+            }
+
+            const formData = new FormData(this);
+            formData.append('action', 'enroll');
+            formData.append('course_name', getCourseName());
+
+            // Store enrollment data and redirect to payment
+            sessionStorage.setItem('enrollmentData', JSON.stringify({
+                courseName: getCourseName(),
+                participants: participants,
+                company: document.getElementById('companyName').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                offerCode: document.querySelector('input[name="offer_code"]:checked').value
+            }));
+
+            // Redirect to payment
+            window.location.href = 'paypal-return.html?step=payment';
+        });
+
+        // Helper functions
+        function showError(message) {
+            const errorDiv = document.getElementById('errorMessage');
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+            setTimeout(() => {
+                errorDiv.style.display = 'none';
+            }, 5000);
+        }
+
+        function showSuccess(message) {
+            const successDiv = document.getElementById('successMessage');
+            successDiv.textContent = message;
+            successDiv.style.display = 'block';
+        }
+
+        // Listen to participant changes
+        document.getElementById('participantNames').addEventListener('input', updatePricing);
+
+        // Initialize
+        loadCourseData();
+    </script>
+</body>
+</html>

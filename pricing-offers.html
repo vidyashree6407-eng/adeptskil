@@ -1,0 +1,455 @@
+<!-- pricing-offers.html - Pricing and Offers Section -->
+<!-- This can be integrated into courses.html, enrollment.html, and index.html -->
+
+<style>
+.pricing-section {
+    padding: 80px 0;
+    background: linear-gradient(135deg, #f8fafc 0%, #e8eef7 100%);
+}
+
+.pricing-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.pricing-header h2 {
+    font-size: 2.5rem;
+    color: #1e293b;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.pricing-header p {
+    font-size: 1.1rem;
+    color: #64748b;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Pricing Cards */
+.pricing-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+
+.pricing-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    position: relative;
+}
+
+.pricing-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 32px rgba(102, 126, 234, 0.15);
+    border-color: #667eea;
+}
+
+.pricing-card.featured {
+    border: 2px solid #667eea;
+    background: linear-gradient(135deg, #f0f4ff 0%, #faf8ff 100%);
+}
+
+.pricing-card .badge {
+    position: absolute;
+    top: -12px;
+    right: 20px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.pricing-card h3 {
+    font-size: 1.3rem;
+    color: #1e293b;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+}
+
+.pricing-card .offer-code {
+    display: inline-block;
+    background: #667eea15;
+    color: #667eea;
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.pricing-card .discount-info {
+    background: #fef3c7;
+    border-left: 4px solid #f59e0b;
+    padding: 1rem;
+    border-radius: 6px;
+    margin: 1rem 0;
+    font-size: 0.95rem;
+    color: #92400e;
+}
+
+.pricing-card .description {
+    color: #64748b;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    min-height: 50px;
+}
+
+.pricing-card .discount-percent {
+    font-size: 2rem;
+    color: #667eea;
+    font-weight: 700;
+    margin: 0.5rem 0;
+}
+
+.pricing-card .eligibility {
+    background: #ecfdf5;
+    border-left: 4px solid #10b981;
+    padding: 0.75rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    color: #047857;
+    margin-bottom: 1rem;
+}
+
+.pricing-card .btn {
+    width: 100%;
+    padding: 0.75rem;
+    margin-top: 1rem;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+}
+
+.pricing-card .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+/* Course Pricing Display */
+.course-price-display {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem;
+    background: #f0f4ff;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+.course-price-display .base-price {
+    font-size: 1.5rem;
+    color: #667eea;
+    font-weight: 700;
+}
+
+.course-price-display .duration {
+    font-size: 0.9rem;
+    color: #64748b;
+    flex: 1;
+}
+
+.course-price-display .per-day {
+    font-size: 0.85rem;
+    color: #94a3b8;
+}
+
+/* Offers Grid */
+.offers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.offer-box {
+    background: #fff;
+    border: 2px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 1.5rem;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.offer-box:hover {
+    border-color: #667eea;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.1);
+}
+
+.offer-box .offer-icon {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.offer-box h4 {
+    font-size: 1.1rem;
+    color: #1e293b;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+}
+
+.offer-box .offer-tag {
+    display: inline-block;
+    background: #667eea;
+    color: #fff;
+    padding: 0.3rem 0.8rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+/* Pricing FAQ */
+.pricing-faq {
+    background: #fff;
+    border-radius: 12px;
+    padding: 2rem;
+    margin-top: 3rem;
+}
+
+.faq-item {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.faq-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.faq-item strong {
+    color: #1e293b;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.faq-item p {
+    color: #64748b;
+    line-height: 1.6;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .pricing-header h2 {
+        font-size: 1.8rem;
+    }
+    
+    .pricing-cards-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .offers-grid {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+
+<!-- Pricing Section HTML -->
+<section class="pricing-section" id="pricing">
+    <div class="container">
+        <!-- Pricing Header -->
+        <div class="pricing-header">
+            <h2>💰 Our Competitive Pricing</h2>
+            <p>Transparent pricing with flexible options for individual learners and corporate teams</p>
+        </div>
+
+        <!-- Pricing Formula Explanation -->
+        <div style="background: #f0f4ff; border-left: 4px solid #667eea; padding: 1.5rem; border-radius: 8px; margin-bottom: 3rem;">
+            <strong style="color: #1e293b; display: block; margin-bottom: 0.5rem;">How We Price Courses</strong>
+            <p style="color: #64748b; margin: 0;">
+                <strong>Base Formula:</strong> $50 course setup fee + $99 per training day
+            </p>
+            <p style="color: #64748b; margin: 0.5rem 0 0;">
+                <strong>Examples:</strong> 1-day course = $149 | 2-day course = $248 | 3-day course = $347
+            </p>
+        </div>
+
+        <!-- 4 Offers -->
+        <div class="pricing-cards-grid">
+            <!-- Offer 1: Welcome Discount -->
+            <div class="pricing-card">
+                <div class="badge">NEW CUSTOMER</div>
+                <h3>🎉 Welcome Offer</h3>
+                <div class="offer-code">WELCOME15</div>
+                <div class="discount-percent">15% Off</div>
+                <p class="description">Perfect for first-time learners getting started with us</p>
+                <div class="discount-info">
+                    <strong>Save Money:</strong> Get instant 15% discount on any course
+                </div>
+                <div class="eligibility">
+                    ✓ Valid for all courses
+                    <br>✓ One-time use per account
+                </div>
+                <button class="btn" onclick="applyOffer('WELCOME15')">Use Code WELCOME15</button>
+            </div>
+
+            <!-- Offer 2: Team Training -->
+            <div class="pricing-card">
+                <div class="badge">ORGANIZATIONS</div>
+                <h3>👥 Team Training Offer</h3>
+                <div class="offer-code">TEAM20</div>
+                <div class="discount-percent">20% Off</div>
+                <p class="description">Enroll 5+ employees for better prices and team cohesion</p>
+                <div class="discount-info">
+                    <strong>Bulk Discount:</strong> Minimum 5 people per enrollment
+                </div>
+                <div class="eligibility">
+                    ✓ Valid for all courses
+                    <br>✓ Scales with team size
+                </div>
+                <button class="btn" onclick="applyOffer('TEAM20')">Use Code TEAM20</button>
+            </div>
+
+            <!-- Offer 3: Extended Training -->
+            <div class="pricing-card">
+                <div class="badge">ADVANCED COURSES</div>
+                <h3>📚 Extended Training Offer</h3>
+                <div class="offer-code">EXTENDED25</div>
+                <div class="discount-percent">25% Off</div>
+                <p class="description">Deep-dive courses (3+ days) at special rates</p>
+                <div class="discount-info">
+                    <strong>Intensive Learning:</strong> Minimum 3-day course required
+                </div>
+                <div class="eligibility">
+                    ✓ Courses 3+ days only
+                    <br>✓ Perfect for mastery-level training
+                </div>
+                <button class="btn" onclick="applyOffer('EXTENDED25')">Use Code EXTENDED25</button>
+            </div>
+
+            <!-- Offer 4: Corporate Package -->
+            <div class="pricing-card featured">
+                <div class="badge">BEST VALUE</div>
+                <h3>🏢 Corporate Annual Package</h3>
+                <div class="offer-code">CORPORATE30</div>
+                <div class="discount-percent">30% Off + Unlimited</div>
+                <p class="description">Maximum savings with unlimited access to all 134+ courses</p>
+                <div class="discount-info">
+                    <strong>Annual License:</strong> $9,999/year - Covers unlimited employees
+                </div>
+                <div class="eligibility">
+                    ✓ All 134+ courses included
+                    <br>✓ 1-year full access
+                    <br>✓ Team management tools
+                </div>
+                <button class="btn" onclick="applyOffer('CORPORATE30')">Use Code CORPORATE30</button>
+            </div>
+        </div>
+
+        <!-- Pricing FAQ Section -->
+        <div class="pricing-faq">
+            <h3 style="margin-bottom: 2rem; color: #1e293b;">❓ Frequently Asked Questions</h3>
+            
+            <div class="faq-item">
+                <strong>Q: Can I use multiple discount codes?</strong>
+                <p>A: No, only one discount code can be applied per enrollment. We automatically apply the highest discount available to you.</p>
+            </div>
+            
+            <div class="faq-item">
+                <strong>Q: Are there refunds?</strong>
+                <p>A: Yes, we offer 100% refunds if you request cancellation 7 days before course start date.</p>
+            </div>
+            
+            <div class="faq-item">
+                <strong>Q: Do you offer certificates?</strong>
+                <p>A: Yes, all courses include a completion certificate upon successful finishing.</p>
+            </div>
+            
+            <div class="faq-item">
+                <strong>Q: Can I extend a course?</strong>
+                <p>A: Yes, if you need more time, you can request a 7-day extension (additional fee may apply).</p>
+            </div>
+            
+            <div class="faq-item">
+                <strong>Q: Is there a payment plan?</strong>
+                <p>A: Yes, we offer 3-month and 6-month payment plans for courses above $500.</p>
+            </div>
+        </div>
+
+        <!-- Price Range Summary -->
+        <div style="background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%); border: 2px solid #667eea30; border-radius: 12px; padding: 2rem; margin-top: 3rem; text-align: center;">
+            <h3 style="color: #1e293b; margin-bottom: 1rem;">📊 Pricing Summary</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem;">
+                <div>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 0.5rem;">Starting From</p>
+                    <p style="font-size: 2rem; color: #667eea; font-weight: 700;">$149</p>
+                    <p style="color: #94a3b8; font-size: 0.85rem;">(1-day courses)</p>
+                </div>
+                <div>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 0.5rem;">Average Price</p>
+                    <p style="font-size: 2rem; color: #667eea; font-weight: 700;">$397</p>
+                    <p style="color: #94a3b8; font-size: 0.85rem;">(Across all courses)</p>
+                </div>
+                <div>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 0.5rem;">Maximum Savings</p>
+                    <p style="font-size: 2rem; color: #667eea; font-weight: 700;">30%</p>
+                    <p style="color: #94a3b8; font-size: 0.85rem;">(With best offer)</p>
+                </div>
+                <div>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 0.5rem;">Total Courses</p>
+                    <p style="font-size: 2rem; color: #667eea; font-weight: 700;">134+</p>
+                    <p style="color: #94a3b8; font-size: 0.85rem;">(Across 11 categories)</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- JavaScript for Pricing Functions -->
+<script>
+// Store selected offer in session
+function applyOffer(code) {
+    sessionStorage.setItem('selectedOffer', code);
+    alert(`✅ Offer "${code}" will be applied at checkout!`);
+    window.location.href = 'courses.html?offer=' + code;
+}
+
+// Get pricing for specific course
+async function getCoursePricing(courseName) {
+    try {
+        const response = await fetch(`course_pricing_manager.php?action=get_course_price&course=${encodeURIComponent(courseName)}`);
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error fetching pricing:', error);
+    }
+}
+
+// Get all available offers
+async function getAvailableOffers() {
+    try {
+        const response = await fetch('course_pricing_manager.php?action=get_offers');
+        const data = await response.json();
+        return data.offers;
+    } catch (error) {
+        console.error('Error fetching offers:', error);
+    }
+}
+
+// Apply offer to course
+async function applyOfferToCoarse(courseName, offerCode) {
+    try {
+        const response = await fetch(`course_pricing_manager.php?action=apply_offer&course=${encodeURIComponent(courseName)}&code=${offerCode}`);
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error applying offer:', error);
+    }
+}
+</script>

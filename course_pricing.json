@@ -1,0 +1,864 @@
+{
+  "total_courses": 134,
+  "categories": {
+    "Business Growth & Strategic Marketing": {
+      "course_count": 15,
+      "courses": [
+        {
+          "name": "Business Case Writing",
+          "duration": 1,
+          "base_price": 149,
+          "category": "Business Growth & Strategic Marketing"
+        },
+        {
+          "name": "Business Ethics & Responsibility",
+          "duration": 1,
+          "base_price": 149,
+          "category": "Business Growth & Strategic Marketing"
+        },
+        {
+          "name": "Business Finance Basics",
+          "duration": 1,
+          "base_price": 149,
+          "category": "Business Growth & Strategic Marketing"
+        },
+        {
+          "name": "Building Professional Business Connections",
+          "duration": 1,
+          "base_price": 149,
+          "category": "Business Growth & Strategic Marketing"
+        },
+        {
+          "name": "Effective Business Presentation Skills",
+          "duration": 1,
+          "base_price": 149,
+          "category": "Business Growth & Strategic Marketing"
+        },
+        {
+          "name": "Strategic Business Succession Planning Training",
+          "duration": 1,
+          "base_price": 149,
+          "category": "Business Growth & Strategic Marketing"
+        },
+        {
+          "name": "Professional Business Writing Skills Training",
+          "duration": 1,
+          "base_price": 149,
+          "category": "Business Growth & Strategic Marketing"
+        },
+        {
+          "name": "Finance & Accounting Essentials for Project Leaders",
+          "duration": 2,
+          "base_price": 248,
+          "category": "Business Growth & Strategic Marketing"
+        },
+        {
+          "name": "Internet Marketing Fundamentals Training",
+          "duration": 1,
+          "base_price": 149,
+          "category": "Business Growth & Strategic Marketing"
+        },
+        {
+          "name": "Core Marketing Strategies",
+          "duration": 1,
+          "base_price": 149,
+          "category": "Business Growth & Strategic Marketing"
+        },
+        {
+          "name": "Practical Sales Skills",
+          "duration": 1,
+          "base_price": 149,
+          "category": "Business Growth & Strategic Marketing"
+        },
+        {
+          "name": "Business Process Improvement & Design Strategies",
+          "duration": 2,
+          "base_price": 248,
+          "category": "Business Growth & Strategic Marketing"
+        },
+        {
+          "name": "Sales Presentation Mastery Training",
+          "duration": 2,
+          "base_price": 248,
+          "category": "Business Growth & Strategic Marketing"
+        },
+        {
+          "name": "Professional Technical Writing Training",
+          "duration": 4,
+          "base_price": 446,
+          "category": "Business Growth & Strategic Marketing"
+        },
+        {
+          "name": "Sales Leadership & Management",
+          "duration": 2,
+          "base_price": 248,
+          "category": "Business Growth & Strategic Marketing"
+        }
+      ]
+    },
+    "Software Innovation & Emerging Technology": {
+      "course_count": 3,
+      "courses": [
+        {
+          "name": "Software Testing Fundamentals",
+          "duration": 2,
+          "base_price": 248,
+          "category": "Software Innovation & Emerging Technology"
+        },
+        {
+          "name": "Software Testing Essentials",
+          "duration": 1,
+          "base_price": 149,
+          "category": "Software Innovation & Emerging Technology"
+        },
+        {
+          "name": "Software Testing Skills for Developers",
+          "duration": 1,
+          "base_price": 149,
+          "category": "Software Innovation & Emerging Technology"
+        }
+      ]
+    },
+    "Cloud Computing & DevOps": {
+      "course_count": 7,
+      "courses": [
+        {
+          "name": "Cloud Computing Basics for Business",
+          "duration": 5,
+          "base_price": 545,
+          "category": "Cloud Computing & DevOps"
+        },
+        {
+          "name": "Open Cloud Overview for Business",
+          "duration": 5,
+          "base_price": 545,
+          "category": "Cloud Computing & DevOps"
+        },
+        {
+          "name": "Open Cloud Technology Foundations",
+          "duration": 6,
+          "base_price": 644,
+          "category": "Cloud Computing & DevOps"
+        },
+        {
+          "name": "Cloud Essentials Training",
+          "duration": 2,
+          "base_price": 248,
+          "category": "Cloud Computing & DevOps"
+        },
+        {
+          "name": "DevOps Fundamentals",
+          "duration": 3,
+          "base_price": 347,
+          "category": "Cloud Computing & DevOps"
+        },
+        {
+          "name": "DevOps Awareness Training",
+          "duration": 1,
+          "base_price": 149,
+          "category": "Cloud Computing & DevOps"
+        },
+        {
+          "name": "DevOps Practitioner Skills Training",
+          "duration": 2,
+          "base_price": 248,
+          "category": "Cloud Computing & DevOps"
+        }
+      ]
+    },
+    "IT Security": {
+      "course_count": 7,
+      "courses": [
+        {
+          "name": "Cyber Security Training",
+          "duration": 2,
+          "base_price": 248,
+          "category": "IT Security"
+        },
+        {
+          "name": "Android Security Masterclass",
+          "duration": 3,
+          "base_price": 347,
+          "category": "IT Security"
+        },
+        {
+          "name": "SECO \u2013 IT Security Fundamentals",
+          "duration": 2,
+          "base_price": 248,
+          "category": "IT Security"
+        },
+        {
+          "name": "Information Security Governance Fundamentals",
+          "duration": 1,
+          "base_price": 149,
+          "category": "IT Security"
+        },
+        {
+          "name": "Cyber Security Overview",
+          "duration": 1,
+          "base_price": 149,
+          "category": "IT Security"
+        },
+        {
+          "name": "SECO \u2013 Data Protection Foundation",
+          "duration": 2,
+          "base_price": 248,
+          "category": "IT Security"
+        },
+        {
+          "name": "Java and Web Security Mastery",
+          "duration": 3,
+          "base_price": 347,
+          "category": "IT Security"
+        }
+      ]
+    },
+    "Project Management": {
+      "course_count": 10,
+      "courses": [
+        {
+          "name": "PMP\u00ae Certification Training",
+          "duration": 4,
+          "base_price": 446,
+          "category": "Project Management"
+        },
+        {
+          "name": "Microsoft Project 2013",
+          "duration": 2,
+          "base_price": 248,
+          "category": "Project Management"
+        },
+        {
+          "name": "Effective Change Management",
+          "duration": 1,
+          "base_price": 149,
+          "category": "Project Management"
+        },
+        {
+          "name": "Elements of Risk Management",
+          "duration": 1,
+          "base_price": 149,
+          "category": "Project Management"
+        },
+        {
+          "name": "Change Management Foundation",
+          "duration": 3,
+          "base_price": 347,
+          "category": "Project Management"
+        },
+        {
+          "name": "Change Management Practitioner",
+          "duration": 2,
+          "base_price": 248,
+          "category": "Project Management"
+        },
+        {
+          "name": "Project Integration Management",
+          "duration": 2,
+          "base_price": 248,
+          "category": "Project Management"
+        },
+        {
+          "name": "Project Management Basics",
+          "duration": 2,
+          "base_price": 248,
+          "category": "Project Management"
+        },
+        {
+          "name": "Advanced Practical Project Management",
+          "duration": 3,
+          "base_price": 347,
+          "category": "Project Management"
+        },
+        {
+          "name": "Prince2 Foundation and Practitioner Certification Program",
+          "duration": 5,
+          "base_price": 545,
+          "category": "Project Management"
+        }
+      ]
+    },
+    "Data Management & Power BI": {
+      "course_count": 9,
+      "courses": [
+        {
+          "name": "Power BI for Report Developers",
+          "duration": 1,
+          "base_price": 149,
+          "category": "Data Management & Power BI"
+        },
+        {
+          "name": "Power BI for Business Users",
+          "duration": 1,
+          "base_price": 149,
+          "category": "Data Management & Power BI"
+        },
+        {
+          "name": "Power BI Comprehensive Training",
+          "duration": 2,
+          "base_price": 248,
+          "category": "Data Management & Power BI"
+        },
+        {
+          "name": "Power BI Dashboard and Data Analysis",
+          "duration": 2,
+          "base_price": 248,
+          "category": "Data Management & Power BI"
+        },
+        {
+          "name": "Big Data Bootcamp",
+          "duration": 2,
+          "base_price": 248,
+          "category": "Data Management & Power BI"
+        },
+        {
+          "name": "Big Data Overview",
+          "duration": 1,
+          "base_price": 149,
+          "category": "Data Management & Power BI"
+        },
+        {
+          "name": "Big Data Strategy",
+          "duration": 1,
+          "base_price": 149,
+          "category": "Data Management & Power BI"
+        },
+        {
+          "name": "Data Analysis Bootcamp",
+          "duration": 3,
+          "base_price": 347,
+          "category": "Data Management & Power BI"
+        },
+        {
+          "name": "CCC-Big Data Foundation",
+          "duration": 2,
+          "base_price": 248,
+          "category": "Data Management & Power BI"
+        }
+      ]
+    },
+    "Leadership & Managerial Excellence": {
+      "course_count": 21,
+      "courses": [
+        {
+          "name": "Account Management",
+          "duration": 1,
+          "base_price": 149,
+          "category": "Leadership & Managerial Excellence"
+        },
+        {
+          "name": "Absence Management",
+          "duration": 1,
+          "base_price": 149,
+          "category": "Leadership & Managerial Excellence"
+        },
+        {
+          "name": "Conflict Management Training",
+          "duration": 1,
+          "base_price": 149,
+          "category": "Leadership & Managerial Excellence"
+        },
+        {
+          "name": "Crisis Management Training",
+          "duration": 1,
+          "base_price": 149,
+          "category": "Leadership & Managerial Excellence"
+        },
+        {
+          "name": "Effective Vendor Management",
+          "duration": 1,
+          "base_price": 149,
+          "category": "Leadership & Managerial Excellence"
+        },
+        {
+          "name": "Employee Engagement",
+          "duration": 1,
+          "base_price": 149,
+          "category": "Leadership & Managerial Excellence"
+        },
+        {
+          "name": "Essential Management Skills",
+          "duration": 1,
+          "base_price": 149,
+          "category": "Leadership & Managerial Excellence"
+        },
+        {
+          "name": "Human Resource Management Training",
+          "duration": 1,
+          "base_price": 149,
+          "category": "Leadership & Managerial Excellence"
+        },
+        {
+          "name": "Leading Effective Teams",
+          "duration": 1,
+          "base_price": 149,
+          "category": "Leadership & Managerial Excellence"
+        },
+        {
+          "name": "Manager Management Training",
+          "duration": 1,
+          "base_price": 149,
+          "category": "Leadership & Managerial Excellence"
+        },
+        {
+          "name": "Supply Chain Management",
+          "duration": 1,
+          "base_price": 149,
+          "category": "Leadership & Managerial Excellence"
+        },
+        {
+          "name": "Managing a Virtual Team",
+          "duration": 1,
+          "base_price": 149,
+          "category": "Leadership & Managerial Excellence"
+        },
+        {
+          "name": "Managing Performance",
+          "duration": 1,
+          "base_price": 149,
+          "category": "Leadership & Managerial Excellence"
+        },
+        {
+          "name": "Performance Management",
+          "duration": 1,
+          "base_price": 149,
+          "category": "Leadership & Managerial Excellence"
+        },
+        {
+          "name": "Problem Management Professional",
+          "duration": 2,
+          "base_price": 248,
+          "category": "Leadership & Managerial Excellence"
+        },
+        {
+          "name": "Risk Assessment and Management",
+          "duration": 1,
+          "base_price": 149,
+          "category": "Leadership & Managerial Excellence"
+        },
+        {
+          "name": "Risk Assessment Training",
+          "duration": 1,
+          "base_price": 149,
+          "category": "Leadership & Managerial Excellence"
+        },
+        {
+          "name": "Change Management - Change Matters",
+          "duration": 1,
+          "base_price": 149,
+          "category": "Leadership & Managerial Excellence"
+        },
+        {
+          "name": "Motivating People",
+          "duration": 1,
+          "base_price": 149,
+          "category": "Leadership & Managerial Excellence"
+        },
+        {
+          "name": "Building High Performing Teams",
+          "duration": 1,
+          "base_price": 149,
+          "category": "Leadership & Managerial Excellence"
+        },
+        {
+          "name": "Leadership Skills - Lead, Motivate & Inspire",
+          "duration": 2,
+          "base_price": 248,
+          "category": "Leadership & Managerial Excellence"
+        }
+      ]
+    },
+    "Career Development Skills": {
+      "course_count": 23,
+      "courses": [
+        {
+          "name": "10 Soft Skills You Need",
+          "duration": 1,
+          "base_price": 149,
+          "category": "Career Development Skills"
+        },
+        {
+          "name": "Coaching at Work",
+          "duration": 1,
+          "base_price": 149,
+          "category": "Career Development Skills"
+        },
+        {
+          "name": "Emotional Intelligence Training",
+          "duration": 1,
+          "base_price": 149,
+          "category": "Career Development Skills"
+        },
+        {
+          "name": "Event Planning Training",
+          "duration": 1,
+          "base_price": 149,
+          "category": "Career Development Skills"
+        },
+        {
+          "name": "Essential Coaching Skills for Managers",
+          "duration": 1,
+          "base_price": 149,
+          "category": "Career Development Skills"
+        },
+        {
+          "name": "Customer Service Essentials",
+          "duration": 1,
+          "base_price": 149,
+          "category": "Career Development Skills"
+        },
+        {
+          "name": "Interview Skills",
+          "duration": 1,
+          "base_price": 149,
+          "category": "Career Development Skills"
+        },
+        {
+          "name": "Organizational Skills Training",
+          "duration": 1,
+          "base_price": 149,
+          "category": "Career Development Skills"
+        },
+        {
+          "name": "Professional Development Essentials",
+          "duration": 1,
+          "base_price": 149,
+          "category": "Career Development Skills"
+        },
+        {
+          "name": "Professional Skills Bootcamp",
+          "duration": 3,
+          "base_price": 347,
+          "category": "Career Development Skills"
+        },
+        {
+          "name": "Proposal Writing",
+          "duration": 1,
+          "base_price": 149,
+          "category": "Career Development Skills"
+        },
+        {
+          "name": "Recruitment Skills",
+          "duration": 1,
+          "base_price": 149,
+          "category": "Career Development Skills"
+        },
+        {
+          "name": "Report Writing",
+          "duration": 1,
+          "base_price": 149,
+          "category": "Career Development Skills"
+        },
+        {
+          "name": "Stakeholder Management",
+          "duration": 1,
+          "base_price": 149,
+          "category": "Career Development Skills"
+        },
+        {
+          "name": "Train-The-Trainer",
+          "duration": 1,
+          "base_price": 149,
+          "category": "Career Development Skills"
+        },
+        {
+          "name": "Workplace Reflective Practice",
+          "duration": 1,
+          "base_price": 149,
+          "category": "Career Development Skills"
+        },
+        {
+          "name": "Writing a CV",
+          "duration": 1,
+          "base_price": 149,
+          "category": "Career Development Skills"
+        },
+        {
+          "name": "Train-The-Trainer  (3 Days)",
+          "duration": 3,
+          "base_price": 347,
+          "category": "Career Development Skills"
+        },
+        {
+          "name": "Telephone Customer Service - Find a way to say YES!",
+          "duration": 2,
+          "base_price": 248,
+          "category": "Career Development Skills"
+        },
+        {
+          "name": "Passionate Retail Experts",
+          "duration": 2,
+          "base_price": 248,
+          "category": "Career Development Skills"
+        },
+        {
+          "name": "Pathways to Service Excellence",
+          "duration": 2,
+          "base_price": 248,
+          "category": "Career Development Skills"
+        },
+        {
+          "name": "Telephone Debt Collection",
+          "duration": 1,
+          "base_price": 149,
+          "category": "Career Development Skills"
+        },
+        {
+          "name": "Call Control",
+          "duration": 1,
+          "base_price": 149,
+          "category": "Career Development Skills"
+        }
+      ]
+    },
+    "Soft Skills": {
+      "course_count": 24,
+      "courses": [
+        {
+          "name": "Communication Skills Training",
+          "duration": 1,
+          "base_price": 149,
+          "category": "Soft Skills"
+        },
+        {
+          "name": "Career Planning",
+          "duration": 1,
+          "base_price": 149,
+          "category": "Soft Skills"
+        },
+        {
+          "name": "Communication Strategies Training",
+          "duration": 1,
+          "base_price": 149,
+          "category": "Soft Skills"
+        },
+        {
+          "name": "Knowledge Management Training",
+          "duration": 1,
+          "base_price": 149,
+          "category": "Soft Skills"
+        },
+        {
+          "name": "Negotiation Skills \u2013 Expert",
+          "duration": 1,
+          "base_price": 149,
+          "category": "Soft Skills"
+        },
+        {
+          "name": "Negotiation Skills \u2013 Professional",
+          "duration": 1,
+          "base_price": 149,
+          "category": "Soft Skills"
+        },
+        {
+          "name": "Personal Branding",
+          "duration": 1,
+          "base_price": 149,
+          "category": "Soft Skills"
+        },
+        {
+          "name": "Preparing for Job Interviews",
+          "duration": 1,
+          "base_price": 149,
+          "category": "Soft Skills"
+        },
+        {
+          "name": "Presentation Skills",
+          "duration": 1,
+          "base_price": 149,
+          "category": "Soft Skills"
+        },
+        {
+          "name": "Presentation Skills \u2013 Expert",
+          "duration": 1,
+          "base_price": 149,
+          "category": "Soft Skills"
+        },
+        {
+          "name": "Presentation Skills \u2013 Professional",
+          "duration": 1,
+          "base_price": 149,
+          "category": "Soft Skills"
+        },
+        {
+          "name": "Public Speaking",
+          "duration": 1,
+          "base_price": 149,
+          "category": "Soft Skills"
+        },
+        {
+          "name": "Time Management",
+          "duration": 1,
+          "base_price": 149,
+          "category": "Soft Skills"
+        },
+        {
+          "name": "Teamwork Skills: Communicating Effectively in Groups",
+          "duration": 1,
+          "base_price": 149,
+          "category": "Soft Skills"
+        },
+        {
+          "name": "Stress Management",
+          "duration": 1,
+          "base_price": 149,
+          "category": "Soft Skills"
+        },
+        {
+          "name": "Wellness",
+          "duration": 1,
+          "base_price": 149,
+          "category": "Soft Skills"
+        },
+        {
+          "name": "Anger Management",
+          "duration": 1,
+          "base_price": 149,
+          "category": "Soft Skills"
+        },
+        {
+          "name": "Handling Angry and Difficult Callers",
+          "duration": 1,
+          "base_price": 149,
+          "category": "Soft Skills"
+        },
+        {
+          "name": "Setting Others Up For Success! (Internal Customer Service)",
+          "duration": 1,
+          "base_price": 149,
+          "category": "Soft Skills"
+        },
+        {
+          "name": "Managing People",
+          "duration": 2,
+          "base_price": 248,
+          "category": "Soft Skills"
+        },
+        {
+          "name": "Negotiating for Results",
+          "duration": 2,
+          "base_price": 248,
+          "category": "Soft Skills"
+        },
+        {
+          "name": "Vision, Energy & Passion To Serve",
+          "duration": 2,
+          "base_price": 248,
+          "category": "Soft Skills"
+        },
+        {
+          "name": "Workplace Diversity & Inclusion",
+          "duration": 2,
+          "base_price": 248,
+          "category": "Soft Skills"
+        },
+        {
+          "name": "Creative Problem Solving and Decision Making",
+          "duration": 2,
+          "base_price": 248,
+          "category": "Soft Skills"
+        }
+      ]
+    },
+    "Microsoft Azure": {
+      "course_count": 13,
+      "courses": [
+        {
+          "name": "Microsoft Azure Fundamentals",
+          "duration": 1,
+          "base_price": 149,
+          "category": "Microsoft Azure"
+        },
+        {
+          "name": "Azure Essentials for Business Leaders",
+          "duration": 1,
+          "base_price": 149,
+          "category": "Microsoft Azure"
+        },
+        {
+          "name": "Microsoft Azure for Developers",
+          "duration": 2,
+          "base_price": 248,
+          "category": "Microsoft Azure"
+        },
+        {
+          "name": "Microsoft Azure Cloud Overview",
+          "duration": 1,
+          "base_price": 149,
+          "category": "Microsoft Azure"
+        },
+        {
+          "name": "Azure Resource Management & Governance",
+          "duration": 2,
+          "base_price": 248,
+          "category": "Microsoft Azure"
+        },
+        {
+          "name": "Azure Cost Optimization & Billing Management",
+          "duration": 1,
+          "base_price": 149,
+          "category": "Microsoft Azure"
+        },
+        {
+          "name": "Microsoft Azure Developer",
+          "duration": 3,
+          "base_price": 347,
+          "category": "Microsoft Azure"
+        },
+        {
+          "name": "Microsoft Azure Security Engineer",
+          "duration": 3,
+          "base_price": 347,
+          "category": "Microsoft Azure"
+        },
+        {
+          "name": "Data Engineering on Microsoft Azure",
+          "duration": 3,
+          "base_price": 347,
+          "category": "Microsoft Azure"
+        },
+        {
+          "name": "Azure AI & Machine Learning Essentials",
+          "duration": 2,
+          "base_price": 248,
+          "category": "Microsoft Azure"
+        },
+        {
+          "name": "Power BI with Azure Data Sources",
+          "duration": 1,
+          "base_price": 149,
+          "category": "Microsoft Azure"
+        },
+        {
+          "name": "Cloud Migration to Azure",
+          "duration": 1,
+          "base_price": 149,
+          "category": "Microsoft Azure"
+        },
+        {
+          "name": "Azure Infrastructure Design & Best Practices",
+          "duration": 2,
+          "base_price": 248,
+          "category": "Microsoft Azure"
+        }
+      ]
+    },
+    "Construction & Quality Management": {
+      "course_count": 2,
+      "courses": [
+        {
+          "name": "Quality Management",
+          "duration": 1,
+          "base_price": 149,
+          "category": "Construction & Quality Management"
+        },
+        {
+          "name": "Construction Project Manager",
+          "duration": 2,
+          "base_price": 248,
+          "category": "Construction & Quality Management"
+        }
+      ]
+    }
+  }
+}
