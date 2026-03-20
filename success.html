@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Successful - Adeptskil</title>
+    <link rel="icon" type="image/jpeg" href="images/FAVICON.jpg">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            max-width: 600px;
+            width: 100%;
+            padding: 60px 40px;
+            text-align: center;
+        }
+        .checkmark {
+            font-size: 5rem;
+            color: #10b981;
+            margin-bottom: 20px;
+            animation: scaleIn 0.5s ease-out;
+        }
+        @keyframes scaleIn {
+            from {
+                transform: scale(0);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        h1 {
+            font-size: 2.5rem;
+            color: #2d3748;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        p {
+            font-size: 1.1rem;
+            color: #64748b;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        .transaction-box {
+            background: linear-gradient(135deg, #f0f4ff 0%, #f5f3ff 100%);
+            padding: 25px;
+            border-radius: 12px;
+            margin: 30px 0;
+            border-left: 4px solid #10b981;
+        }
+        .transaction-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .transaction-row:last-child {
+            border-bottom: none;
+        }
+        .transaction-label {
+            color: #64748b;
+            font-weight: 500;
+        }
+        .transaction-value {
+            color: #2d3748;
+            font-weight: 600;
+        }
+        .transaction-amount {
+            color: #10b981;
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+        .status-badge {
+            display: inline-block;
+            background: #10b981;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin: 15px 0;
+        }
+        .buttons {
+            margin-top: 30px;
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        a {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+        .btn-secondary {
+            background: #e2e8f0;
+            color: #2d3748;
+        }
+        .btn-secondary:hover {
+            background: #cbd5e1;
+        }
+        .info-text {
+            background: #fef3c7;
+            border: 1px solid #fcd34d;
+            color: #92400e;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="checkmark">
+            <i class="fas fa-check-circle"></i>
+        </div>
+        
+        <h1>Payment Successful!</h1>
+        
+        <div class="status-badge">
+            <i class="fas fa-check"></i> Transaction Completed
+        </div>
+        
+        <p>Your payment has been processed successfully!</p>
+        
+        <div class="transaction-box">
+            <div class="transaction-row">
+                <span class="transaction-label">Status:</span>
+                <span class="transaction-value"><i class="fas fa-check-circle" style="color: #10b981;"></i> Completed</span>
+            </div>
+            <div class="transaction-row">
+                <span class="transaction-label">Transaction ID:</span>
+                <span class="transaction-value" id="transactionId">Processing...</span>
+            </div>
+            <div class="transaction-row">
+                <span class="transaction-label">Amount:</span>
+                <span class="transaction-amount" id="transactionAmount">$0.00</span>
+            </div>
+            <div class="transaction-row">
+                <span class="transaction-label">Payment Method:</span>
+                <span class="transaction-value">PayPal</span>
+            </div>
+            <div class="transaction-row">
+                <span class="transaction-label">Date & Time:</span>
+                <span class="transaction-value" id="transactionTime">--:--</span>
+            </div>
+        </div>
+        
+        <div class="info-text">
+            <i class="fas fa-info-circle"></i> A confirmation email has been sent to your registered email address with enrollment details and course access information.
+        </div>
+        
+        <div style="background: #dbeafe; border: 1px solid #93c5fd; color: #1e40af; padding: 15px; border-radius: 8px; font-size: 0.95rem; margin: 15px 0;">
+            <i class="fas fa-flask"></i> <strong>Sandbox Test:</strong> This is a test payment. In production, PayPal will automatically redirect you here.
+        </div>
+        
+        <p style="font-size: 0.95rem; color: #64748b; margin-top: 20px;">
+            Our team will review your enrollment and contact you shortly with the next steps.
+        </p>
+        
+        <div class="buttons">
+            <a href="courses.html" class="btn-primary">
+                <i class="fas fa-book"></i> Explore More Courses
+            </a>
+            <a href="index.html" class="btn-secondary">
+                <i class="fas fa-home"></i> Back to Home
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Auto-redirect if coming from PayPal with parameters
+        function handlePayPalReturn() {
+            const urlParams = new URLSearchParams(window.location.search);
+            
+            // PayPal returns with tx (transaction ID) param when payment is complete
+            if (urlParams.get('tx')) {
+                console.log('Payment successful - Transaction ID:', urlParams.get('tx'));
+                // Payment was successful, continue with enrollment processing
+                processEnrollmentConfirmation();
+            } else if (window.location.hash.includes('tx=')) {
+                // Sometimes PayPal uses hash instead of query params
+                console.log('Payment successful (from hash)', window.location.hash);
+                processEnrollmentConfirmation();
+            } else {
+                // No transaction ID, process anyway (might be from localStorage)
+                processEnrollmentConfirmation();
+            }
+        }
+        
+        // Process enrollment data after PayPal return
+        async function processEnrollmentConfirmation() {
+            try {
+                // Get enrollment data from localStorage
+                const enrollmentDataStr = localStorage.getItem('adeptskil_enrollment_data');
+                if (!enrollmentDataStr) {
+                    console.log('No enrollment data found in localStorage');
+                    displayTransactionInfo();
+                    return;
+                }
+                
+                const enrollmentData = JSON.parse(enrollmentDataStr);
+                
+                // Add PayPal details
+                const enrollmentId = 'ENR-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9);
+                
+                // Prepare data for process_enrollment.php
+                const dataToSubmit = {
+                    fullName: enrollmentData.fullName,
+                    email: enrollmentData.email,
+                    phone: enrollmentData.phone,
+                    city: enrollmentData.city,
+                    course: enrollmentData.course,
+                    company: enrollmentData.company,
+                    message: enrollmentData.message,
+                    price: enrollmentData.price,
+                    paypal_order_id: enrollmentId,
+                    payment_status: 'Completed'
+                };
+                
+                // Submit to process_enrollment.php
+                const response = await fetch('./process_enrollment.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(dataToSubmit)
+                });
+                
+                const result = await response.json();
+                console.log('Enrollment processed:', result);
+                
+                // Display transaction info
+                document.getElementById('transactionId').textContent = enrollmentId;
+                document.getElementById('transactionAmount').textContent = '$' + parseFloat(enrollmentData.price).toFixed(2);
+                document.getElementById('transactionTime').textContent = new Date().toLocaleString();
+                
+                // Clear localStorage after successful submission
+                localStorage.removeItem('adeptskil_enrollment_data');
+                
+            } catch (error) {
+                console.error('Error processing enrollment:', error);
+                displayTransactionInfo();
+            }
+        }
+        
+        function displayTransactionInfo() {
+            document.getElementById('transactionId').textContent = 'TRX-' + Date.now();
+            document.getElementById('transactionTime').textContent = new Date().toLocaleString();
+        }
+        
+        // Handle PayPal return when page loads
+        document.addEventListener('DOMContentLoaded', handlePayPalReturn);
+    </script>
+</body>
+</html>

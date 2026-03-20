@@ -56,11 +56,15 @@ $fullName = isset($input['fullName']) ? trim($input['fullName']) : '';
 $email = isset($input['email']) ? trim($input['email']) : '';
 $phone = isset($input['phone']) ? trim($input['phone']) : '';
 $course = isset($input['course']) ? trim($input['course']) : '';
+$city = isset($input['city']) ? trim($input['city']) : '';
 $company = isset($input['company']) ? trim($input['company']) : '';
 $message_text = isset($input['message']) ? trim($input['message']) : '';
+$paypal_order_id = isset($input['paypal_order_id']) ? trim($input['paypal_order_id']) : '';
+$payment_status = isset($input['payment_status']) ? trim($input['payment_status']) : '';
+$price = isset($input['price']) ? floatval($input['price']) : 0;
 
 // Validate required fields
-if (empty($fullName) || empty($email) || empty($phone)) {
+if (empty($fullName) || empty($email) || empty($phone) || empty($city)) {
     http_response_code(400);
     echo json_encode(['success' => false, 'message' => 'Missing required fields']);
     ob_end_flush();
@@ -83,9 +87,13 @@ $enrollment = array(
     'fullName' => $fullName,
     'email' => $email,
     'phone' => $phone,
+    'city' => $city,
     'course' => $course,
     'company' => $company,
-    'message' => $message_text
+    'message' => $message_text,
+    'paypal_order_id' => $paypal_order_id,
+    'payment_status' => $payment_status,
+    'price' => $price
 );
 
 // Get enrollments file path
@@ -117,15 +125,66 @@ if ($save_result === false) {
 }
 
 // Send emails (non-blocking, don't fail if email fails)
-// User confirmation email
-sendEmail($email, 
-    "Enrollment Confirmation - " . $course, 
-    "Dear " . $fullName . ",\n\nThank you for enrolling!\n\nWe have received your enrollment request for: " . $course . "\n\nOur team will contact you shortly at " . $phone . ".\n\nBest regards,\nAdeptskil Team");
 
-// Admin notification
-sendEmail(ADMIN_EMAIL,
-    "New Enrollment: " . $course . " - " . $fullName,
-    "Name: " . $fullName . "\nEmail: " . $email . "\nPhone: " . $phone . "\nCompany: " . $company . "\nCourse: " . $course . "\n\nMessage:\n" . $message_text);
+// ===== USER CONFIRMATION EMAIL =====
+$userEmailSubject = "Course Enrollment Confirmation - " . $course;
+$userEmailBody = "Dear " . $fullName . ",
+
+Thank you for enrolling in our course and completing your payment!
+
+==== ENROLLMENT DETAILS ====
+Name: " . $fullName . "
+Email: " . $email . "
+Phone: " . $phone . "
+City: " . $city . "
+Course: " . $course . "
+Course Fee: \$" . number_format($price, 2) . "
+Company: " . ($company ?: 'N/A') . "
+Payment Status: Completed
+Order ID: " . $paypal_order_id . "
+Enrollment ID: " . $enrollment_id . "
+
+We have successfully received your enrollment for: " . $course . "
+
+Your payment of \$" . number_format($price, 2) . " has been processed successfully.
+
+Our team will review your application and contact you shortly at " . $phone . " with the next steps and course details.
+
+If you have any questions, feel free to reach out to us.
+
+Best regards,
+Adeptskil Training Team
+Email: " . ADMIN_EMAIL . "";
+
+sendEmail($email, $userEmailSubject, $userEmailBody);
+
+// ===== ADMIN NOTIFICATION EMAIL =====
+$adminEmailSubject = "New Course Enrollment - " . $course . " [" . $fullName . "]";
+$adminEmailBody = "New course enrollment received!
+
+==== STUDENT DETAILS ====
+Name: " . $fullName . "
+Email: " . $email . "
+Phone: " . $phone . "
+City: " . $city . "
+Company: " . ($company ?: 'N/A') . "
+
+==== ENROLLMENT DETAILS ====
+Course: " . $course . "
+Enrollment ID: " . $enrollment_id . "
+Enrollment Time: " . date('Y-m-d H:i:s') . "
+Payment Status: " . $payment_status . "
+Course Fee: \$" . number_format($price, 2) . "
+PayPal Order ID: " . $paypal_order_id . "
+
+==== ADDITIONAL MESSAGE ====
+" . ($message_text ?: 'No additional message provided') . "
+
+---
+Please follow up with the student to confirm enrollment and provide course materials.
+";
+
+sendEmail(ADMIN_EMAIL, $adminEmailSubject, $adminEmailBody);
 
 // Return success
 http_response_code(200);

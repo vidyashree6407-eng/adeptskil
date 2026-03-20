@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Processing Payment - Adeptskil</title>
+    <link rel="icon" type="image/jpeg" href="images/FAVICON.jpg">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            max-width: 600px;
+            width: 100%;
+            padding: 60px 40px;
+            text-align: center;
+        }
+        .spinner {
+            border: 4px solid #e2e8f0;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        h2 {
+            color: #2d3748;
+            margin: 20px 0;
+            font-size: 1.8rem;
+        }
+        p {
+            color: #64748b;
+            margin: 15px 0;
+            font-size: 1rem;
+        }
+        .button-group {
+            margin-top: 30px;
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        a, button {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+        }
+        .btn-success {
+            background: #10b981;
+            color: white;
+        }
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(16, 185, 129, 0.3);
+        }
+        .btn-cancel {
+            background: #ef4444;
+            color: white;
+        }
+        .btn-cancel:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(239, 68, 68, 0.3);
+        }
+        .info-box {
+            background: #f0f4ff;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            text-align: left;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="processingView">
+            <div class="spinner"></div>
+            <h2>Processing Your Payment</h2>
+            <p>Please wait while we confirm your payment with PayPal...</p>
+            <p style="font-size: 0.9rem; color: #94a3b8;">This usually takes a few seconds.</p>
+        </div>
+
+        <div id="successView" class="hidden">
+            <div style="font-size: 4rem; color: #10b981; margin-bottom: 20px;">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h2>Payment Successful!</h2>
+            <p>Your enrollment has been confirmed.</p>
+            <div class="info-box">
+                <p><strong>✓ Payment Completed</strong></p>
+                <p><strong>✓ Enrollment Confirmed</strong></p>
+                <p><strong>✓ Confirmation Email Sent</strong></p>
+            </div>
+            <div class="button-group">
+                <a href="success.html" class="btn-success">
+                    <i class="fas fa-arrow-right"></i> View Receipt
+                </a>
+                <a href="courses.html" class="btn-success">
+                    <i class="fas fa-book"></i> Explore Courses
+                </a>
+            </div>
+        </div>
+
+        <div id="cancelView" class="hidden">
+            <div style="font-size: 4rem; color: #f59e0b; margin-bottom: 20px;">
+                <i class="fas fa-exclamation-circle"></i>
+            </div>
+            <h2>Payment Cancelled</h2>
+            <p>Your payment was cancelled. No charges have been made.</p>
+            <div class="info-box">
+                <p>You can retry the enrollment process anytime.</p>
+            </div>
+            <div class="button-group">
+                <a href="cancel.html" class="btn-cancel">
+                    <i class="fas fa-times"></i> View Details
+                </a>
+                <a href="enrollment.html" class="btn-success">
+                    <i class="fas fa-redo"></i> Try Again
+                </a>
+            </div>
+        </div>
+
+        <div id="manualView" class="hidden">
+            <h2>Payment Processing</h2>
+            <p>We couldn't automatically detect your payment status.</p>
+            <p style="font-size: 0.9rem; color: #94a3b8;">Please select what happened:</p>
+            <div class="button-group" style="margin-top: 30px;">
+                <button onclick="handleSuccess()" class="btn-success">
+                    <i class="fas fa-check"></i> Payment Completed
+                </button>
+                <button onclick="handleCancel()" class="btn-cancel">
+                    <i class="fas fa-times"></i> Payment Cancelled
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Check payment status and handle accordingly
+        function processPaymentReturn() {
+            try {
+                // Check if we're returning from PayPal
+                const urlParams = new URLSearchParams(window.location.search);
+                const hasTransaction = urlParams.get('tx') || urlParams.get('st') || window.location.hash.includes('tx=');
+                
+                // Check localStorage for enrollment data
+                const enrollmentData = localStorage.getItem('adeptskil_enrollment_data');
+                
+                if (hasTransaction && enrollmentData) {
+                    // Payment was successful
+                    console.log('Payment successful detected');
+                    showSuccess();
+                } else if (urlParams.get('cancelled') === 'true') {
+                    // Payment was cancelled
+                    console.log('Payment cancelled detected');
+                    showCancel();
+                } else if (enrollmentData) {
+                    // We have enrollment data but couldn't detect payment status
+                    // Wait for auto-redirect, then show manual option
+                    setTimeout(() => {
+                        if (document.getElementById('processingView').style.display !== 'none') {
+                            console.log('Showing manual options');
+                            document.getElementById('processingView').classList.add('hidden');
+                            document.getElementById('manualView').classList.remove('hidden');
+                        }
+                    }, 3000);
+                } else {
+                    // No enrollment data, payment might have been cancelled
+                    showCancel();
+                }
+            } catch (error) {
+                console.error('Error processing payment return:', error);
+                // Show manual options on error
+                setTimeout(() => {
+                    if (document.getElementById('processingView').style.display !== 'none') {
+                        document.getElementById('processingView').classList.add('hidden');
+                        document.getElementById('manualView').classList.remove('hidden');
+                    }
+                }, 3000);
+            }
+        }
+
+        function showSuccess() {
+            document.getElementById('processingView').classList.add('hidden');
+            document.getElementById('successView').classList.remove('hidden');
+            document.getElementById('manualView').classList.add('hidden');
+            document.getElementById('cancelView').classList.add('hidden');
+            
+            // Auto-redirect to success.html after 2 seconds
+            setTimeout(() => {
+                window.location.href = './success.html';
+            }, 2000);
+        }
+
+        function showCancel() {
+            document.getElementById('processingView').classList.add('hidden');
+            document.getElementById('cancelView').classList.remove('hidden');
+            document.getElementById('successView').classList.add('hidden');
+            document.getElementById('manualView').classList.add('hidden');
+            
+            // Clear enrollment data
+            localStorage.removeItem('adeptskil_enrollment_data');
+            
+            // Auto-redirect to cancel.html after 2 seconds
+            setTimeout(() => {
+                window.location.href = './cancel.html';
+            }, 2000);
+        }
+
+        function handleSuccess() {
+            console.log('User confirmed successful payment');
+            showSuccess();
+        }
+
+        function handleCancel() {
+            console.log('User confirmed cancelled payment');
+            showCancel();
+        }
+
+        // Process payment return when page loads
+        document.addEventListener('DOMContentLoaded', processPaymentReturn);
+    </script>
+</body>
+</html>

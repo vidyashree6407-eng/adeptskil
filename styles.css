@@ -722,13 +722,29 @@ p, li, a, button, input, textarea {
     }
     
     .hero {
-        background: linear-gradient(180deg, rgba(102, 126, 234, 0.4) 0%, rgba(118, 75, 162, 0.4) 100%) !important;
-        background-image: none !important;
-        min-height: 50vh !important;
+        background: linear-gradient(180deg, rgba(102, 126, 234, 0.6) 0%, rgba(118, 75, 162, 0.6) 100%) !important;
+        min-height: 60vh !important;
+        padding: 80px 20px 80px !important;
     }
     
-    .hero video {
-        display: none !important;
+    .hero-title {
+        font-size: 1.8rem !important;
+        margin-bottom: 0.75rem !important;
+    }
+    
+    .hero-subtitle {
+        font-size: 0.9rem !important;
+        max-width: 100% !important;
+    }
+    
+    .hero-buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .hero-buttons a {
+        width: 100%;
+        text-align: center;
     }
 }
 
@@ -813,6 +829,19 @@ p, li, a, button, input, textarea {
     overflow: hidden;
     text-align: center;
     min-height: calc(100vh - 70px);
+}
+
+.hero video {
+    width: 100vw !important;
+    height: 100vh !important;
+    min-width: 100%;
+    min-height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    display: block !important;
 }
 
 .hero-container {

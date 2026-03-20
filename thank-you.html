@@ -3,51 +3,181 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Thank you for enrolling with Adeptskil">
-    <meta name="keywords" content="thank you, enrollment, confirmation">
-    <meta name="author" content="Adeptskil">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="referrer" content="strict-origin-when-cross-origin">
     <title>Thank You - Adeptskil</title>
     <link rel="icon" type="image/jpeg" href="images/FAVICON.jpg">
-    <link rel="apple-touch-icon" href="images/FAVICON.jpg">
-    <meta name="theme-color" content="#667eea">
-    <meta property="og:title" content="Thank You - Adeptskil">
-    <meta property="og:description" content="Thank you for enrolling with Adeptskil. We look forward to supporting your professional development.">
-    <meta property="og:image" content="https://adeptskil.com/images/Logo%20with%20full%20name.png">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content="https://adeptskil.com/images/Logo%20with%20full%20name.png">
-    <link rel="canonical" href="https://adeptskil.com/thank-you.html">
-    <link rel="stylesheet" href="styles.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            max-width: 600px;
+            width: 100%;
+            padding: 60px 40px;
+            text-align: center;
+        }
+        .checkmark {
+            font-size: 5rem;
+            color: #10b981;
+            margin-bottom: 20px;
+        }
+        h1 {
+            font-size: 2.5rem;
+            color: #2d3748;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        p {
+            font-size: 1.1rem;
+            color: #64748b;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        .details {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 30px 0;
+            text-align: left;
+            border-left: 4px solid #667eea;
+        }
+        .details p {
+            margin: 10px 0;
+            font-size: 0.95rem;
+        }
+        .buttons {
+            margin-top: 30px;
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        a {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+        .btn-secondary {
+            background: #e2e8f0;
+            color: #2d3748;
+        }
+        .btn-secondary:hover {
+            background: #cbd5e1;
+        }
+    </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="nav-logo">
-                <a href="index.html" style="text-decoration: none; display: flex; align-items: center;">
-                    <img src="images/Logo with full name.png" alt="Adeptskil Logo">
-                </a>
-            </div>
-            <div class="nav-menu" id="navMenu">
-                <a href="index.html" class="nav-link">Home</a>
-                <a href="about.html" class="nav-link">About</a>
-                <a href="courses.html" class="nav-link">Courses</a>
-                <a href="contact.html" class="nav-link">Contact</a>
-            </div>
+    <div class="container">
+        <div class="checkmark">
+            <i class="fas fa-check-circle"></i>
         </div>
-    </nav>
+        
+        <h1>Enrollment Successful!</h1>
+        
+        <p>Thank you for enrolling with Adeptskil!</p>
+        <p>Your payment has been processed successfully.</p>
+        
+        <div class="details">
+            <p><strong>✓ Payment Completed</strong></p>
+            <p><strong>✓ Enrollment Confirmed</strong></p>
+            <p><strong>✓ Confirmation Email Sent</strong></p>
+            <p style="margin-top: 15px; font-size: 0.9rem;">Check your email for course details and next steps.</p>
+        </div>
+        
+        <div class="buttons">
+            <a href="courses.html" class="btn-primary">
+                <i class="fas fa-book"></i> Explore More Courses
+            </a>
+            <a href="index.html" class="btn-secondary">
+                <i class="fas fa-home"></i> Back to Home
+            </a>
+        </div>
+    </div>
 
-    <!-- Thank You Section -->
-    <section style="padding: 150px 0; text-align: center; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; min-height: 100vh; display: flex; align-items: center;">
-        <div class="container" style="max-width: 600px; margin: 0 auto;">
-            <div style="background: rgba(255, 255, 255, 0.1); padding: 3rem 2rem; border-radius: 20px; backdrop-filter: blur(10px);">
-                <i class="fas fa-check-circle" style="font-size: 4rem; color: #f59e0b; margin-bottom: 1.5rem;"></i>
-                <h1 style="font-size: 2.5rem; font-weight: 700; margin-bottom: 1rem;">Thank You!</h1>
-                <p style="font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.9;">
-                    Your message has been sent successfully to <strong>info@adeptskil.com</strong>
-                </p>
+    <script>
+        // Process enrollment data after PayPal return
+        async function processEnrollmentConfirmation() {
+            try {
+                // Get enrollment data from localStorage
+                const enrollmentDataStr = localStorage.getItem('adeptskil_enrollment_data');
+                if (!enrollmentDataStr) {
+                    console.log('No enrollment data found in localStorage');
+                    return;
+                }
+                
+                const enrollmentData = JSON.parse(enrollmentDataStr);
+                
+                // Add PayPal details
+                const paypalCustom = {
+                    enrollment_id: 'ENR-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9),
+                    status: 'Completed'
+                };
+                
+                // Prepare data for process_enrollment.php
+                const dataToSubmit = {
+                    fullName: enrollmentData.fullName,
+                    email: enrollmentData.email,
+                    phone: enrollmentData.phone,
+                    city: enrollmentData.city,
+                    course: enrollmentData.course,
+                    company: enrollmentData.company,
+                    message: enrollmentData.message,
+                    price: enrollmentData.price,
+                    paypal_order_id: paypalCustom.enrollment_id,
+                    payment_status: 'Completed'
+                };
+                
+                // Submit to process_enrollment.php
+                const response = await fetch('./process_enrollment.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(dataToSubmit)
+                });
+                
+                const result = await response.json();
+                console.log('Enrollment processed:', result);
+                
+                // Clear localStorage after successful submission
+                localStorage.removeItem('adeptskil_enrollment_data');
+                
+            } catch (error) {
+                console.error('Error processing enrollment:', error);
+            }
+        }
+        
+        // Process enrollment when page loads
+        document.addEventListener('DOMContentLoaded', processEnrollmentConfirmation);
+    </script>
+</body>
+</html>
                 <p style="font-size: 1rem; margin-bottom: 2.5rem; opacity: 0.8;">
                     We'll get back to you within 24 hours. Meanwhile, feel free to explore our courses and learn more about our training programs.
                 </p>
