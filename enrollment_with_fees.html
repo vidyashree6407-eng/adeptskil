@@ -7,59 +7,28 @@
     <link rel="icon" type="image/jpeg" href="images/FAVICON.jpg">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             min-height: 100vh;
             color: #2c3e50;
-            line-height: 1.6;
         }
-
         .navbar {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             padding: 15px 40px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
             display: flex;
             justify-content: space-between;
             align-items: center;
             box-shadow: 0 2px 15px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 100;
         }
-
-        .navbar h1 {
-            font-size: 1.8rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .navbar a {
-            color: white;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: opacity 0.3s;
-        }
-
-        .navbar a:hover {
-            opacity: 0.8;
-        }
-
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
-
+        .navbar h1 { font-size: 1.8rem; display: flex; align-items: center; gap: 10px; }
+        .navbar a { color: white; text-decoration: none; display: flex; align-items: center; gap: 8px; }
+        .container { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
         .enrollment-card {
             background: white;
             border-radius: 15px;
@@ -67,314 +36,123 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.15);
             margin-bottom: 40px;
         }
-
-        .enrollment-card h2 {
-            font-size: 1.6rem;
-            color: #667eea;
-            margin-bottom: 8px;
-            text-align: center;
+        .enrollment-card h2 { font-size: 1.6rem; color: #667eea; margin-bottom: 8px; text-align: center; }
+        .enrollment-card p { text-align: center; color: #64748b; margin-bottom: 25px; font-size: 0.95rem; }
+        .error-box {
+            background: #fee2e2;
+            border: 2px solid #fca5a5;
+            color: #b91c1c;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
         }
-
-        .enrollment-card p {
-            text-align: center;
-            color: #64748b;
-            margin-bottom: 25px;
-            font-size: 0.95rem;
+        .error-box.show { display: block; }
+        .success-box {
+            background: #dcfce7;
+            border: 2px solid #86efac;
+            color: #166534;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
         }
-
-        .form-group {
-            margin-bottom: 18px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 10px;
-            font-weight: 700;
-            color: #2c3e50;
-            font-size: 1rem;
-        }
-
-        .inline-wrapper {
-            display: grid;
-            grid-template-columns: 1.5fr 1fr;
-            gap: 20px;
-            align-items: end;
-        }
-
-        input[type="text"], input[type="email"], input[type="tel"], select, textarea {
+        .success-box.show { display: block; }
+        .form-group { margin-bottom: 18px; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 700; color: #2c3e50; }
+        .form-group input, .form-group select, .form-group textarea {
             width: 100%;
-            padding: 14px 16px;
+            padding: 12px 14px;
             border: 2px solid #e2e8f0;
             border-radius: 8px;
             font-size: 1rem;
-            transition: all 0.3s ease;
-            background: #f8fafc;
-            color: #2c3e50;
             font-family: inherit;
+            transition: all 0.3s ease;
         }
-
-        input[type="text"]:focus, input[type="email"]:focus, input[type="tel"]:focus, select:focus, textarea:focus {
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
             outline: none;
             border-color: #667eea;
             background: white;
-            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
         }
-
-        input[type="text"]:disabled {
+        .form-group input[disabled] {
             background: #f0f4f8;
             color: #64748b;
             cursor: not-allowed;
-            opacity: 0.8;
         }
-
-        select {
-            cursor: pointer;
-            appearance: none;
-            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
-            background-repeat: no-repeat;
-            background-position: right 10px center;
-            background-size: 20px;
-            padding-right: 40px;
-        }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-
-        .price-box {
+        .inline-row { display: grid; grid-template-columns: 1.5fr 1fr; gap: 15px; align-items: end; margin-bottom: 18px; }
+        .price-display {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 20px;
+            padding: 25px;
             border-radius: 12px;
             text-align: center;
             box-shadow: 0 5px 20px rgba(102, 126, 234, 0.3);
+            margin-top: 20px;
         }
-
-        .price-label {
-            font-size: 0.9rem;
-            opacity: 0.9;
-            margin-bottom: 8px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: 600;
-        }
-
-        .price-value {
-            font-size: 2.5rem;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 5px;
-        }
-
-        .price-currency {
-            font-size: 1.3rem;
-        }
-
-        /* Pricing options display */
-        .pricing-options-grid {
+        .price-label { font-size: 0.9rem; text-transform: uppercase; opacity: 0.9; margin-bottom: 10px; letter-spacing: 1px; }
+        .price-amount { font-size: 3rem; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 8px; }
+        .price-amount span { font-size: 1.5rem; }
+        .option-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 12px;
-            margin: 20px 0;
-            margin-bottom: 25px;
+            margin: 20px 0 25px 0;
         }
-
-        .pricing-option-item {
+        .option-card {
             background: linear-gradient(135deg, #f0f4ff 0%, #ede9fe 100%);
             border: 2px solid #e2e8f0;
             border-radius: 10px;
-            padding: 12px;
+            padding: 15px;
             text-align: center;
             cursor: pointer;
             transition: all 0.3s ease;
-            font-size: 0.9rem;
         }
-
-        .pricing-option-item:hover {
+        .option-card:hover {
             border-color: #667eea;
             box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
             transform: translateY(-2px);
         }
-
-        .pricing-option-item.selected {
+        .option-card.selected {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             border-color: #667eea;
-            box-shadow: 0 6px 15px rgba(102, 126, 234, 0.3);
         }
-
-        .pricing-option-name {
-            font-weight: 700;
-            margin-bottom: 6px;
-            display: block;
-        }
-
-        .pricing-option-price {
-            font-size: 1.1rem;
-            font-weight: 700;
-        }
-
-        .fee-description {
-            background: #f0f4f8;
-            border-left: 4px solid #667eea;
-            padding: 12px 15px;
-            border-radius: 4px;
-            margin-top: 10px;
-            font-size: 0.9rem;
-            color: #64748b;
-            line-height: 1.5;
-        }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-top: 25px;
-        }
-
-        textarea {
-            min-height: 100px;
-            resize: vertical;
-        }
-
-        .button-group {
-            display: flex;
-            gap: 15px;
-            margin-top: 25px;
-        }
-
+        .option-name { font-weight: 700; display: block; margin-bottom: 8px; }
+        .option-price { font-size: 1.2rem; font-weight: 700; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 25px; }
+        .button-group { display: flex; gap: 15px; margin-top: 25px; }
         button {
             flex: 1;
-            padding: 16px;
-            font-size: 1.1rem;
+            padding: 14px;
+            font-size: 1rem;
             font-weight: 700;
             border: none;
             border-radius: 8px;
             cursor: pointer;
-            transition: all 0.3s ease;
             text-transform: uppercase;
             letter-spacing: 1px;
+            transition: all 0.3s ease;
         }
-
         .btn-primary {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             box-shadow: 0 5px 20px rgba(102, 126, 234, 0.3);
         }
-
         .btn-primary:hover:not(:disabled) {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(102, 126, 234, 0.4);
         }
-
         .btn-primary:disabled {
             opacity: 0.6;
             cursor: not-allowed;
-            transform: none;
         }
-
-        .btn-secondary {
-            background: #e2e8f0;
-            color: #2c3e50;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
-
-        .btn-secondary:hover {
-            background: #cbd5e1;
-            transform: translateY(-2px);
-        }
-
-        .status-message {
-            padding: 16px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            display: none;
-            animation: slideIn 0.3s ease;
-            font-weight: 600;
-        }
-
-        .status-message.show {
-            display: block;
-        }
-
-        .status-message.error {
-            background: #fee2e2;
-            color: #b91c1c;
-            border: 2px solid #fca5a5;
-        }
-
-        .status-message.success {
-            background: #dcfce7;
-            color: #166534;
-            border: 2px solid #86efac;
-        }
-
-        @keyframes slideIn {
-            from {
-                transform: translateY(-10px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        .required {
-            color: #ef4444;
-            font-weight: 700;
-        }
-
+        .required { color: #ef4444; }
+        .debug-info { background: #f0f4f8; padding: 12px; border-radius: 8px; margin: 15px 0; font-size: 0.85rem; color: #64748b; font-family: monospace; }
         @media (max-width: 768px) {
-            .enrollment-card {
-                padding: 30px 20px;
-            }
-
-            .inline-wrapper, .form-row {
-                grid-template-columns: 1fr;
-            }
-
-            .pricing-options-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .button-group {
-                flex-direction: column;
-            }
-
-            .enrollment-card h2 {
-                font-size: 1.5rem;
-            }
-
-            input[type="text"], select {
-                font-size: 16px;
-            }
-
-            .price-value {
-                font-size: 2rem;
-            }
-        }
-
-        .hidden {
-            display: none !important;
-        }
-
-        .loading-spinner {
-            display: inline-block;
-            width: 16px;
-            height: 16px;
-            border: 3px solid rgba(255,255,255,0.3);
-            border-radius: 50%;
-            border-top-color: white;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
+            .inline-row, .form-row, .option-grid { grid-template-columns: 1fr; }
+            .enrollment-card { padding: 25px; }
+            .price-amount { font-size: 2rem; }
         }
     </style>
 </head>
@@ -387,81 +165,76 @@
     <div class="container">
         <div class="enrollment-card">
             <h2>Enroll in Course</h2>
-            <p>Select your course, choose a pricing option, and proceed to payment</p>
+            <p>Select your pricing option and complete enrollment</p>
 
-            <div id="statusMessage" class="status-message"></div>
+            <div id="errorBox" class="error-box"></div>
+            <div id="successBox" class="success-box"></div>
 
-            <form id="enrollmentForm" onsubmit="submitEnrollment(event)">
-                <!-- Course Name and Pricing Option Side by Side -->
-                <div class="inline-wrapper">
-                    <!-- Course Name -->
+            <form id="enrollmentForm" onsubmit="handleSubmit(event)">
+                <!-- STEP 1: Course and Pricing Selection -->
+                <div class="inline-row">
                     <div class="form-group">
                         <label for="courseName">Selected Course</label>
-                        <input type="text" id="courseName" name="courseName" readonly disabled>
+                        <input type="text" id="courseName" readonly disabled>
                     </div>
-
-                    <!-- Pricing Option Dropdown -->
                     <div class="form-group">
-                        <label for="pricingOption">Pricing Option <span class="required">*</span></label>
-                        <select id="pricingOption" name="pricingOption" required onchange="updatePrice()">
-                            <option value="">-- Choose option --</option>
+                        <label for="pricingDropdown">Pricing Option <span class="required">*</span></label>
+                        <select id="pricingDropdown" required onchange="handlePricingChange()">
+                            <option value="">-- Loading options --</option>
                         </select>
                     </div>
                 </div>
 
-                <!-- Pricing Options Display Grid -->
-                <div class="pricing-options-grid" id="pricingGrid"></div>
+                <!-- PRICING OPTIONS GRID -->
+                <div id="optionGrid" class="option-grid"></div>
 
-                <!-- Fee Description -->
-                <div class="fee-description" id="feeDesc"></div>
-
-                <!-- Price Display Box -->
-                <div class="price-box" style="margin-top: 20px;">
+                <!-- PRICE DISPLAY -->
+                <div class="price-display">
                     <div class="price-label">Total Investment</div>
-                    <div class="price-value">
-                        <span class="price-currency">$</span><span id="displayPrice">0.00</span>
+                    <div class="price-amount">
+                        <span>$</span><span id="priceDisplay">0.00</span>
                     </div>
                 </div>
 
-                <!-- Hidden fields for storing values -->
-                <input type="hidden" id="selectedPrice" name="selectedPrice" value="0">
-                <input type="hidden" id="selectedOption" name="selectedOption" value="">
-                <input type="hidden" id="courseDuration" name="courseDuration" value="1">
+                <!-- Hidden fields -->
+                <input type="hidden" id="selectedPrice" value="0">
+                <input type="hidden" id="selectedOption" value="">
 
-                <!-- Enrollment Details -->
-                <div class="form-row" style="margin-top: 40px;">
+                <!-- DEBUG INFO -->
+                <div id="debugInfo" class="debug-info" style="display: none;"></div>
+
+                <!-- STEP 2: Personal Information -->
+                <div class="form-row" style="margin-top: 30px;">
                     <div class="form-group">
                         <label for="fullName">Full Name <span class="required">*</span></label>
-                        <input type="text" id="fullName" name="fullName" required placeholder="John Doe">
+                        <input type="text" id="fullName" required placeholder="John Doe">
                     </div>
                     <div class="form-group">
                         <label for="email">Email Address <span class="required">*</span></label>
-                        <input type="email" id="email" name="email" required placeholder="john@example.com">
+                        <input type="email" id="email" required placeholder="john@example.com">
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group">
                         <label for="phone">Phone Number <span class="required">*</span></label>
-                        <input type="tel" id="phone" name="phone" required placeholder="+1 (555) 000-0000">
+                        <input type="tel" id="phone" required placeholder="+1 (555) 000-0000">
                     </div>
                     <div class="form-group">
                         <label for="company">Company (Optional)</label>
-                        <input type="text" id="company" name="company" placeholder="Your Company">
+                        <input type="text" id="company" placeholder="Your Company">
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="comments">Additional Comments (Optional)</label>
-                    <textarea id="comments" name="comments" placeholder="Any special requests or questions?"></textarea>
+                    <textarea id="comments" style="min-height: 80px;" placeholder="Any questions or special requests?"></textarea>
                 </div>
 
-                <!-- Buttons -->
+                <!-- BUTTONS -->
                 <div class="button-group">
-                    <button type="button" class="btn-secondary" onclick="resetForm()">Clear</button>
-                    <button type="submit" class="btn-primary" id="submitBtn" disabled>
-                        <i class="fas fa-lock"></i> Proceed to Payment
-                    </button>
+                    <button type="button" onclick="resetForm()" style="background: #e2e8f0; color: #2c3e50;">Clear Form</button>
+                    <button type="submit" class="btn-primary" id="submitBtn" disabled>Proceed to Payment</button>
                 </div>
             </form>
         </div>
@@ -469,77 +242,91 @@
 
     <script>
         let courseData = null;
-        let selectedOptionData = null;
+        let selectedPricing = null;
+        const DEBUG = false; // Set to true to see debug info
 
-        // Get course name from URL
-        function getCourseName() {
-            const urlParams = new URLSearchParams(window.location.search);
-            return urlParams.get('course') || '';
+        function showDebug(msg) {
+            if (DEBUG) {
+                console.log('[DEBUG]', msg);
+                const debugBox = document.getElementById('debugInfo');
+                debugBox.style.display = 'block';
+                debugBox.textContent += msg + '\n';
+            }
         }
 
-        // Load course pricing data
+        function showError(msg) {
+            const box = document.getElementById('errorBox');
+            box.textContent = msg;
+            box.classList.add('show');
+            console.error('[ERROR]', msg);
+        }
+
+        function hideError() {
+            document.getElementById('errorBox').classList.remove('show');
+        }
+
+        function showSuccess(msg) {
+            const box = document.getElementById('successBox');
+            box.textContent = msg;
+            box.classList.add('show');
+        }
+
         async function loadCourseData() {
             try {
-                const courseName = getCourseName();
-                console.log('Loading course data for:', courseName);
+                const params = new URLSearchParams(window.location.search);
+                const courseName = params.get('course') || '';
                 
+                showDebug(`URL parameter received: "${courseName}"`);
+
                 if (!courseName) {
-                    showStatus('No course selected. Please go back and select a course.', 'error');
+                    showError('No course selected. Please go back to courses page and select a course.');
                     return;
                 }
 
                 document.getElementById('courseName').value = courseName;
 
-                // Fetch course data from API
+                // Call API
                 const apiUrl = `course_fees_api.php?action=get_course&course=${encodeURIComponent(courseName)}`;
-                console.log('API URL:', apiUrl);
-                
-                const response = await fetch(apiUrl);
-                console.log('API Response Status:', response.status);
-                
-                const data = await response.json();
-                console.log('API Response Data:', data);
+                showDebug(`API URL: ${apiUrl}`);
 
-                if (data.success && data.data) {
-                    courseData = data.data;
-                    document.getElementById('courseDuration').value = courseData.duration;
-                    populatePricingOptions();
-                    console.log('Successfully loaded pricing options');
-                } else {
-                    console.error('API error:', data.error);
-                    showStatus(data.error || 'Course not found. Please check the course name.', 'error');
+                const response = await fetch(apiUrl);
+                showDebug(`API Response Status: ${response.status}`);
+
+                const data = await response.json();
+                showDebug(`API Response: ${JSON.stringify(data).substring(0, 100)}...`);
+
+                if (!data.success) {
+                    showError(`API Error: ${data.error || 'Unknown error'}`);
+                    return;
                 }
+
+                if (!data.data) {
+                    showError('No course data received from API');
+                    return;
+                }
+
+                courseData = data.data;
+                showDebug(`Course loaded: ${courseData.name}`);
+                hideError();
+                populateOptions();
+
             } catch (error) {
-                console.error('Error loading course:', error);
-                showStatus(`Error: ${error.message}. Please check browser console for details.`, 'error');
+                showError(`Fatal Error: ${error.message}`);
+                console.error('Full error:', error);
             }
         }
 
-        // Populate pricing dropdown and grid options
-        function populatePricingOptions() {
-            console.log('populatePricingOptions called');
-            console.log('courseData:', courseData);
-            
-            if (!courseData) {
-                console.error('courseData is null or undefined');
-                showStatus('Error: Course data not loaded', 'error');
-                return;
-            }
-            
-            if (!courseData.pricing) {
-                console.error('courseData.pricing is missing', courseData);
-                showStatus('Error: Pricing data not available for this course', 'error');
+        function populateOptions() {
+            showDebug('Populating pricing options...');
+
+            if (!courseData || !courseData.pricing) {
+                showError('Course pricing data is missing');
                 return;
             }
 
-            const dropdown = document.getElementById('pricingOption');
-            const grid = document.getElementById('pricingGrid');
-            
-            if (!dropdown || !grid) {
-                console.error('DOM elements not found - dropdown:', dropdown, 'grid:', grid);
-                return;
-            }
-            
+            const dropdown = document.getElementById('pricingDropdown');
+            const grid = document.getElementById('optionGrid');
+
             dropdown.innerHTML = '<option value="">-- Choose pricing option --</option>';
             grid.innerHTML = '';
 
@@ -550,184 +337,131 @@
                 { key: 'virtual_early_bird', label: 'Live Virtual Early Bird' }
             ];
 
-            let optionsAdded = 0;
+            let addedCount = 0;
+
             options.forEach(opt => {
                 const pricing = courseData.pricing[opt.key];
-                console.log(`Checking ${opt.key}:`, pricing);
-                
-                if (pricing) {
-                    // Add to dropdown
-                    const option = document.createElement('option');
-                    option.value = JSON.stringify({ key: opt.key, ...pricing });
-                    option.textContent = `${opt.label} - $${pricing.price.toFixed(2)}`;
-                    dropdown.appendChild(option);
-
-                    // Add to grid
-                    const gridItem = document.createElement('div');
-                    gridItem.className = 'pricing-option-item';
-                    gridItem.innerHTML = `
-                        <span class="pricing-option-name">${opt.label}</span>
-                        <span class="pricing-option-price">$${pricing.price.toFixed(2)}</span>
-                    `;
-                    gridItem.onclick = () => selectPricingFromGrid(opt.key, pricing, opt.label);
-                    grid.appendChild(gridItem);
-                    
-                    optionsAdded++;
+                if (!pricing) {
+                    showDebug(`Missing pricing for ${opt.key}`);
+                    return;
                 }
+
+                // Add to dropdown
+                const option = document.createElement('option');
+                option.value = JSON.stringify({ key: opt.key, ...pricing });
+                option.textContent = `${opt.label} - $${pricing.price.toFixed(2)}`;
+                dropdown.appendChild(option);
+
+                // Add to grid
+                const card = document.createElement('div');
+                card.className = 'option-card';
+                card.innerHTML = `
+                    <span class="option-name">${opt.label}</span>
+                    <span class="option-price">$${pricing.price.toFixed(2)}</span>
+                `;
+                card.onclick = () => selectOption(opt.key, pricing);
+                grid.appendChild(card);
+
+                addedCount++;
             });
-            
-            console.log(`Added ${optionsAdded} pricing options`);
-            if (optionsAdded === 0) {
-                showStatus('Error: No pricing options available', 'error');
+
+            showDebug(`Added ${addedCount} pricing options to form`);
+
+            if (addedCount === 0) {
+                showError('No pricing options available for this course');
             }
         }
 
-        // Select pricing from grid
-        function selectPricingFromGrid(key, pricing, label) {
-            selectedOptionData = { key: key, ...pricing };
-            
+        function selectOption(key, pricing) {
+            showDebug(`Selected: ${key} at $${pricing.price}`);
+            selectedPricing = { key, ...pricing };
+
             // Update dropdown
-            const dropdown = document.getElementById('pricingOption');
-            dropdown.value = JSON.stringify(selectedOptionData);
+            document.getElementById('pricingDropdown').value = JSON.stringify(selectedPricing);
 
             // Update grid selection
-            document.querySelectorAll('.pricing-option-item').forEach(item => {
-                item.classList.remove('selected');
+            document.querySelectorAll('.option-card').forEach(card => {
+                card.classList.remove('selected');
             });
             event.currentTarget.classList.add('selected');
 
-            // Update display
-            updatePriceDisplay();
+            updateDisplay();
         }
 
-        // Update price when dropdown changes
-        function updatePrice() {
-            const dropdown = document.getElementById('pricingOption');
-            if (!dropdown.value) {
-                document.getElementById('displayPrice').textContent = '0.00';
-                document.getElementById('selectedPrice').value = '0';
-                document.getElementById('selectedOption').value = '';
-                document.getElementById('feeDesc').innerHTML = '';
-                document.getElementById('submitBtn').disabled = true;
-                document.querySelectorAll('.pricing-option-item').forEach(item => {
-                    item.classList.remove('selected');
-                });
-                return;
-            }
-
-            try {
-                selectedOptionData = JSON.parse(dropdown.value);
+        function handlePricingChange() {
+            const val = document.getElementById('pricingDropdown').value;
+            if (val) {
+                selectedPricing = JSON.parse(val);
                 
-                // Update grid selection
-                document.querySelectorAll('.pricing-option-item').forEach(item => {
-                    item.classList.remove('selected');
+                // Update grid
+                document.querySelectorAll('.option-card').forEach(card => {
+                    card.classList.remove('selected');
                 });
-                // Find and select the matching grid item
-                const gridItems = document.querySelectorAll('.pricing-option-item');
-                const selectedText = `$${selectedOptionData.price.toFixed(2)}`;
-                gridItems.forEach(item => {
-                    if (item.textContent.includes(selectedText)) {
-                        item.classList.add('selected');
+                const cards = document.querySelectorAll('.option-card');
+                const priceText = `$${selectedPricing.price.toFixed(2)}`;
+                for (let card of cards) {
+                    if (card.textContent.includes(priceText)) {
+                        card.classList.add('selected');
+                        break;
                     }
-                });
+                }
 
-                updatePriceDisplay();
-            } catch (error) {
-                console.error('Error updating price:', error);
-                showStatus('Error selecting pricing option.', 'error');
+                updateDisplay();
             }
         }
 
-        // Update price display
-        function updatePriceDisplay() {
-            if (!selectedOptionData) return;
+        function updateDisplay() {
+            if (!selectedPricing) return;
 
-            document.getElementById('displayPrice').textContent = selectedOptionData.price.toFixed(2);
-            document.getElementById('selectedPrice').value = selectedOptionData.price.toFixed(2);
-            document.getElementById('selectedOption').value = selectedOptionData.name;
-
-            // Show fee description
-            document.getElementById('feeDesc').innerHTML = `
-                <strong>${selectedOptionData.name}</strong><br>${selectedOptionData.description || ''}
-            `;
-
-            // Enable submit button
+            document.getElementById('priceDisplay').textContent = selectedPricing.price.toFixed(2);
+            document.getElementById('selectedPrice').value = selectedPricing.price.toFixed(2);
+            document.getElementById('selectedOption').value = selectedPricing.name;
             document.getElementById('submitBtn').disabled = false;
         }
 
-        // Submit enrollment and redirect to payment
-        function submitEnrollment(event) {
+        function resetForm() {
+            document.getElementById('enrollmentForm').reset();
+            document.getElementById('pricingDropdown').dispatchEvent(new Event('change'));
+            document.getElementById('submitBtn').disabled = true;
+        }
+
+        function handleSubmit(event) {
             event.preventDefault();
+
+            if (!selectedPricing) {
+                showError('Please select a pricing option');
+                return;
+            }
 
             const fullName = document.getElementById('fullName').value.trim();
             const email = document.getElementById('email').value.trim();
             const phone = document.getElementById('phone').value.trim();
-            const price = document.getElementById('selectedPrice').value;
 
             if (!fullName || !email || !phone) {
-                showStatus('Please fill in all required fields.', 'error');
+                showError('Please fill in all required fields');
                 return;
             }
 
-            if (!selectedOptionData || price === '0') {
-                showStatus('Please select a pricing option.', 'error');
-                return;
-            }
-
-            // Validate email
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email)) {
-                showStatus('Please enter a valid email address.', 'error');
-                return;
-            }
-
-            // Prepare enrollment data
             const enrollmentData = {
-                courseName: document.getElementById('courseName').value,
-                fullName: fullName,
-                email: email,
-                phone: phone,
+                course: document.getElementById('courseName').value,
+                fullName,
+                email,
+                phone,
                 company: document.getElementById('company').value,
                 comments: document.getElementById('comments').value,
-                pricingOption: selectedOptionData.name,
-                amount: parseFloat(price),
-                duration: courseData.duration,
-                timestamp: new Date().toISOString()
+                pricing_option: selectedPricing.name,
+                amount: parseFloat(selectedPricing.price)
             };
 
-            // Store in session storage
             sessionStorage.setItem('enrollmentData', JSON.stringify(enrollmentData));
 
-            // Show success and redirect to payment
-            showStatus('Processing your enrollment... Redirecting to payment.', 'success');
+            showSuccess('Enrollment successful! Redirecting to payment...');
             setTimeout(() => {
-                // Redirect with amount in URL
-                window.location.href = `success.html?course=${encodeURIComponent(enrollmentData.courseName)}&amount=${price}&option=${encodeURIComponent(enrollmentData.pricingOption)}`;
+                window.location.href = `success.html?course=${encodeURIComponent(enrollmentData.course)}&amount=${enrollmentData.amount}&option=${encodeURIComponent(enrollmentData.pricing_option)}`;
             }, 1500);
         }
 
-        // Show status message
-        function showStatus(message, type) {
-            const statusDiv = document.getElementById('statusMessage');
-            statusDiv.textContent = message;
-            statusDiv.className = `status-message show ${type}`;
-            
-            if (type === 'success') {
-                setTimeout(() => statusDiv.classList.remove('show'), 3000);
-            }
-        }
-
-        // Reset form
-        function resetForm() {
-            document.getElementById('enrollmentForm').reset();
-            document.getElementById('displayPrice').textContent = '0.00';
-            document.getElementById('selectedPrice').value = '0';
-            document.getElementById('feeDesc').innerHTML = '';
-            document.getElementById('submitBtn').disabled = true;
-            selectedOptionData = null;
-        }
-
-        // Initialize on page load
+        // Initialize
         window.addEventListener('DOMContentLoaded', loadCourseData);
     </script>
 </body>
