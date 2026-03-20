@@ -276,37 +276,42 @@
         let enrollmentConfig = {};
         let coursePrices = {};
 
-        // Fetch course pricing from new pricing system
+        // Fetch course pricing from new pricing system (course_fees_api.php)
         async function loadCoursePricing() {
             try {
                 const urlParams = new URLSearchParams(window.location.search);
                 const courseName = urlParams.get('course') || 'Professional Development Course';
                 
-                // Try new pricing system first
-                const response = await fetch(`course_pricing_manager.php?action=get_course_price&course=${encodeURIComponent(courseName)}`);
+                // Call new pricing API (NOT course_pricing_manager.php which doesn't exist)
+                const response = await fetch(`course_fees_api.php?action=get_course&course=${encodeURIComponent(courseName)}`);
                 const data = await response.json();
                 
                 if (data.success && data.data) {
+                    const course = data.data;
                     return {
-                        price: data.data.base_price,
-                        duration: data.data.duration_days,
-                        category: data.data.category
+                        price: course.pricing.standard.price, // Use STANDARD fee as default price
+                        duration: course.duration,
+                        category: course.name
                     };
                 } else {
-                    // Fallback to old system if course not found
-                    const response = await fetch('./get_enrollment_config.php');
-                    const config = await response.json();
-                    enrollmentConfig = config;
-                    coursePrices = config.courses_pricing || { 'default': 149.00 };
-                    return {
-                        price: coursePrices[courseName] || coursePrices['default'] || 149.00,
-                        duration: 1,
-                        category: 'General'
+                    console.error('Course not found in pricing database:', courseName);
+                    // If course not found, return an error (don't use hardcoded fallback)
+                    return { 
+                        price: 0, 
+                        duration: 1, 
+                        category: 'General',
+                        error: true
                     };
                 }
             } catch (error) {
                 console.error('Error loading course pricing:', error);
-                return { price: 149.00, duration: 1, category: 'General' };
+                // Return error state
+                return { 
+                    price: 0, 
+                    duration: 1, 
+                    category: 'General',
+                    error: true
+                };
             }
         }
 
