@@ -63,27 +63,27 @@
         .enrollment-card {
             background: white;
             border-radius: 15px;
-            padding: 50px;
+            padding: 35px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.15);
             margin-bottom: 40px;
         }
 
         .enrollment-card h2 {
-            font-size: 2rem;
+            font-size: 1.6rem;
             color: #667eea;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             text-align: center;
         }
 
         .enrollment-card p {
             text-align: center;
             color: #64748b;
-            margin-bottom: 40px;
-            font-size: 1.05rem;
+            margin-bottom: 25px;
+            font-size: 0.95rem;
         }
 
         .form-group {
-            margin-bottom: 25px;
+            margin-bottom: 18px;
         }
 
         .form-group label {
@@ -174,6 +174,50 @@
             font-size: 1.3rem;
         }
 
+        /* Pricing options display */
+        .pricing-options-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin: 20px 0;
+            margin-bottom: 25px;
+        }
+
+        .pricing-option-item {
+            background: linear-gradient(135deg, #f0f4ff 0%, #ede9fe 100%);
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .pricing-option-item:hover {
+            border-color: #667eea;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .pricing-option-item.selected {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #667eea;
+            box-shadow: 0 6px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .pricing-option-name {
+            font-weight: 700;
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        .pricing-option-price {
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
         .fee-description {
             background: #f0f4f8;
             border-left: 4px solid #667eea;
@@ -189,7 +233,7 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 20px;
-            margin-top: 30px;
+            margin-top: 25px;
         }
 
         textarea {
@@ -200,7 +244,7 @@
         .button-group {
             display: flex;
             gap: 15px;
-            margin-top: 40px;
+            margin-top: 25px;
         }
 
         button {
@@ -294,6 +338,10 @@
                 grid-template-columns: 1fr;
             }
 
+            .pricing-options-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
             .button-group {
                 flex-direction: column;
             }
@@ -360,6 +408,9 @@
                         </select>
                     </div>
                 </div>
+
+                <!-- Pricing Options Display Grid -->
+                <div class="pricing-options-grid" id="pricingGrid"></div>
 
                 <!-- Fee Description -->
                 <div class="fee-description" id="feeDesc"></div>
@@ -454,12 +505,14 @@
             }
         }
 
-        // Populate pricing dropdown options
+        // Populate pricing dropdown and grid options
         function populatePricingOptions() {
             if (!courseData || !courseData.pricing) return;
 
             const dropdown = document.getElementById('pricingOption');
+            const grid = document.getElementById('pricingGrid');
             dropdown.innerHTML = '<option value="">-- Choose pricing option --</option>';
+            grid.innerHTML = '';
 
             const options = [
                 { key: 'standard', label: 'Standard Fee' },
@@ -471,12 +524,41 @@
             options.forEach(opt => {
                 const pricing = courseData.pricing[opt.key];
                 if (pricing) {
+                    // Add to dropdown
                     const option = document.createElement('option');
                     option.value = JSON.stringify({ key: opt.key, ...pricing });
                     option.textContent = `${opt.label} - $${pricing.price.toFixed(2)}`;
                     dropdown.appendChild(option);
+
+                    // Add to grid
+                    const gridItem = document.createElement('div');
+                    gridItem.className = 'pricing-option-item';
+                    gridItem.innerHTML = `
+                        <span class="pricing-option-name">${opt.label}</span>
+                        <span class="pricing-option-price">$${pricing.price.toFixed(2)}</span>
+                    `;
+                    gridItem.onclick = () => selectPricingFromGrid(opt.key, pricing, opt.label);
+                    grid.appendChild(gridItem);
                 }
             });
+        }
+
+        // Select pricing from grid
+        function selectPricingFromGrid(key, pricing, label) {
+            selectedOptionData = { key: key, ...pricing };
+            
+            // Update dropdown
+            const dropdown = document.getElementById('pricingOption');
+            dropdown.value = JSON.stringify(selectedOptionData);
+
+            // Update grid selection
+            document.querySelectorAll('.pricing-option-item').forEach(item => {
+                item.classList.remove('selected');
+            });
+            event.currentTarget.classList.add('selected');
+
+            // Update display
+            updatePriceDisplay();
         }
 
         // Update price when dropdown changes
@@ -488,27 +570,50 @@
                 document.getElementById('selectedOption').value = '';
                 document.getElementById('feeDesc').innerHTML = '';
                 document.getElementById('submitBtn').disabled = true;
+                document.querySelectorAll('.pricing-option-item').forEach(item => {
+                    item.classList.remove('selected');
+                });
                 return;
             }
 
             try {
                 selectedOptionData = JSON.parse(dropdown.value);
+                
+                // Update grid selection
+                document.querySelectorAll('.pricing-option-item').forEach(item => {
+                    item.classList.remove('selected');
+                });
+                // Find and select the matching grid item
+                const gridItems = document.querySelectorAll('.pricing-option-item');
+                const selectedText = `$${selectedOptionData.price.toFixed(2)}`;
+                gridItems.forEach(item => {
+                    if (item.textContent.includes(selectedText)) {
+                        item.classList.add('selected');
+                    }
+                });
 
-                document.getElementById('displayPrice').textContent = selectedOptionData.price.toFixed(2);
-                document.getElementById('selectedPrice').value = selectedOptionData.price.toFixed(2);
-                document.getElementById('selectedOption').value = selectedOptionData.name;
-
-                // Show fee description
-                document.getElementById('feeDesc').innerHTML = `
-                    <strong>${selectedOptionData.name}</strong><br>${selectedOptionData.description || ''}
-                `;
-
-                // Enable submit button
-                document.getElementById('submitBtn').disabled = false;
+                updatePriceDisplay();
             } catch (error) {
                 console.error('Error updating price:', error);
                 showStatus('Error selecting pricing option.', 'error');
             }
+        }
+
+        // Update price display
+        function updatePriceDisplay() {
+            if (!selectedOptionData) return;
+
+            document.getElementById('displayPrice').textContent = selectedOptionData.price.toFixed(2);
+            document.getElementById('selectedPrice').value = selectedOptionData.price.toFixed(2);
+            document.getElementById('selectedOption').value = selectedOptionData.name;
+
+            // Show fee description
+            document.getElementById('feeDesc').innerHTML = `
+                <strong>${selectedOptionData.name}</strong><br>${selectedOptionData.description || ''}
+            `;
+
+            // Enable submit button
+            document.getElementById('submitBtn').disabled = false;
         }
 
         // Submit enrollment and redirect to payment
