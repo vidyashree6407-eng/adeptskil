@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enrollment Processor (Mock) - Adeptskil</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+        .data-box {
+            background: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-family: monospace;
+            font-size: 0.9rem;
+            color: #333;
+            max-height: 400px;
+            overflow: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        .success {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .info {
+            background: #cce5ff;
+            border: 1px solid #b3d9ff;
+            color: #004085;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+        .btn-secondary {
+            background: #e0e0e0;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>📝 Enrollment Data Processor (MOCK)</h2>
+        <p><strong>⚠️ This is a mock endpoint for testing.</strong> In production, this would be a PHP backend.</p>
+        
+        <div class="info">
+            <strong>ℹ️ How to use:</strong><br>
+            This page simulates the <code>process_enrollment.php</code> endpoint. 
+            When the success page POSTs enrollment data, check the browser console and the box below to see the data received.
+        </div>
+        
+        <h3>Received Data:</h3>
+        <div class="data-box" id="dataDisplay">Waiting for enrollment data...</div>
+        
+        <div id="successMessage" style="display: none;" class="success">
+            ✓ Enrollment data received and logged successfully!
+        </div>
+        
+        <div class="button-group">
+            <button class="btn-secondary" onclick="goBack()">← Back to Enrollment</button>
+            <button class="btn-primary" onclick="clearData()">Clear Data</button>
+        </div>
+    </div>
+
+    <script>
+        function displayReceivedData() {
+            // Get data from URL hash (for JSONP-like communication)
+            const hashData = window.location.hash.substring(1);
+            
+            if (hashData) {
+                try {
+                    const data = JSON.parse(decodeURIComponent(hashData));
+                    document.getElementById('dataDisplay').textContent = JSON.stringify(data, null, 2);
+                    document.getElementById('successMessage').style.display = 'block';
+                    console.log('✓ Enrollment data received:', data);
+                } catch (error) {
+                    console.error('Error parsing data:', error);
+                }
+            } else {
+                // Check if data was passed via POST simulation
+                const urlParams = new URLSearchParams(window.location.search);
+                if (urlParams.has('data')) {
+                    try {
+                        const data = JSON.parse(decodeURIComponent(urlParams.get('data')));
+                        document.getElementById('dataDisplay').textContent = JSON.stringify(data, null, 2);
+                        document.getElementById('successMessage').style.display = 'block';
+                        console.log('✓ Enrollment data received:', data);
+                    } catch (error) {
+                        console.error('Error parsing data:', error);
+                    }
+                }
+            }
+        }
+        
+        function goBack() {
+            window.history.back();
+        }
+        
+        function clearData() {
+            document.getElementById('dataDisplay').textContent = 'Waiting for enrollment data...';
+            document.getElementById('successMessage').style.display = 'none';
+        }
+        
+        window.addEventListener('DOMContentLoaded', displayReceivedData);
+    </script>
+</body>
+</html>

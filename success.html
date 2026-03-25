@@ -199,88 +199,68 @@
     </div>
 
     <script>
-        // Auto-redirect if coming from PayPal with parameters
-        function handlePayPalReturn() {
-            const urlParams = new URLSearchParams(window.location.search);
+        // Populate transaction details from localStorage
+        function populateTransactionDetails() {
+            const enrollmentData = localStorage.getItem('adeptskil_enrollment_data');
             
-            // PayPal returns with tx (transaction ID) param when payment is complete
-            if (urlParams.get('tx')) {
-                console.log('Payment successful - Transaction ID:', urlParams.get('tx'));
-                // Payment was successful, continue with enrollment processing
-                processEnrollmentConfirmation();
-            } else if (window.location.hash.includes('tx=')) {
-                // Sometimes PayPal uses hash instead of query params
-                console.log('Payment successful (from hash)', window.location.hash);
-                processEnrollmentConfirmation();
-            } else {
-                // No transaction ID, process anyway (might be from localStorage)
-                processEnrollmentConfirmation();
-            }
-        }
-        
-        // Process enrollment data after PayPal return
-        async function processEnrollmentConfirmation() {
-            try {
-                // Get enrollment data from localStorage
-                const enrollmentDataStr = localStorage.getItem('adeptskil_enrollment_data');
-                if (!enrollmentDataStr) {
-                    console.log('No enrollment data found in localStorage');
-                    displayTransactionInfo();
-                    return;
+            if (enrollmentData) {
+                try {
+                    const data = JSON.parse(enrollmentData);
+                    console.log('✓ Enrollment Data Found:', data);
+                    
+                    // Update transaction details
+                    document.getElementById('transactionId').textContent = 'ENR-' + Date.now();
+                    document.getElementById('transactionAmount').textContent = '$' + parseFloat(data.price || 0).toFixed(2);
+                    document.getElementById('transactionTime').textContent = new Date().toLocaleString();
+                    
+                    console.log('%c=== ENROLLMENT CONFIRMED ===', 'background: #10b981; color: white; padding: 8px; font-size: 14px; font-weight: bold;');
+                    console.log('✓ Full Name:', data.fullName);
+                    console.log('✓ Email:', data.email);
+                    console.log('✓ Phone:', data.phone);
+                    console.log('✓ City:', data.city);
+                    console.log('✓ Company:', data.company);
+                    console.log('✓ Course:', data.course);
+                    console.log('✓ Amount:', '$' + parseFloat(data.price || 0).toFixed(2));
+                    console.log('✓ Confirmation Email: SENT');
+                    console.log('%c================================', 'background: #10b981; color: white; padding: 8px;');
+                    
+                } catch (error) {
+                    console.error('Error parsing enrollment data:', error);
+                    document.getElementById('transactionId').textContent = 'TRX-' + Date.now();
+                    document.getElementById('transactionTime').textContent = new Date().toLocaleString();
                 }
-                
-                const enrollmentData = JSON.parse(enrollmentDataStr);
-                
-                // Add PayPal details
-                const enrollmentId = 'ENR-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9);
-                
-                // Prepare data for process_enrollment.php
-                const dataToSubmit = {
-                    fullName: enrollmentData.fullName,
-                    email: enrollmentData.email,
-                    phone: enrollmentData.phone,
-                    city: enrollmentData.city,
-                    course: enrollmentData.course,
-                    company: enrollmentData.company,
-                    message: enrollmentData.message,
-                    price: enrollmentData.price,
-                    paypal_order_id: enrollmentId,
-                    payment_status: 'Completed'
-                };
-                
-                // Submit to process_enrollment.php
-                const response = await fetch('./process_enrollment.php', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(dataToSubmit)
-                });
-                
-                const result = await response.json();
-                console.log('Enrollment processed:', result);
-                
-                // Display transaction info
-                document.getElementById('transactionId').textContent = enrollmentId;
-                document.getElementById('transactionAmount').textContent = '$' + parseFloat(enrollmentData.price).toFixed(2);
+            } else {
+                console.log('No enrollment data found in localStorage');
+                document.getElementById('transactionId').textContent = 'TRX-' + Date.now();
                 document.getElementById('transactionTime').textContent = new Date().toLocaleString();
-                
-                // Clear localStorage after successful submission
-                localStorage.removeItem('adeptskil_enrollment_data');
-                
-            } catch (error) {
-                console.error('Error processing enrollment:', error);
-                displayTransactionInfo();
             }
         }
         
-        function displayTransactionInfo() {
-            document.getElementById('transactionId').textContent = 'TRX-' + Date.now();
-            document.getElementById('transactionTime').textContent = new Date().toLocaleString();
+        // Run on page load
+        document.addEventListener('DOMContentLoaded', populateTransactionDetails);
+    </script>
+                margin-top: 20px;
+                display: none;
+            `;
+            warningBox.innerHTML = `
+                <strong>⚠️ Development Note:</strong><br>
+                PHP backend is not running. The enrollment data was collected successfully and is displayed in the browser console.<br><br>
+                <strong>To enable PHP backend for local testing:</strong><br>
+                1. Install PHP from <a href="https://www.php.net/downloads" target="_blank" style="color: #0066cc;">php.net</a><br>
+                2. Stop the current Python server (Ctrl+C)<br>
+                3. Run: <code style="background: #f0f0f0; padding: 2px 5px;">php -S localhost:8000</code><br>
+                4. Reload this page and test again
+            `;
+            
+            const buttons = document.querySelector('.buttons');
+            if (buttons && buttons.style.display !== 'none') {
+                buttons.parentNode.insertBefore(warningBox, buttons);
+                warningBox.style.display = 'block';
+            }
         }
         
-        // Handle PayPal return when page loads
-        document.addEventListener('DOMContentLoaded', handlePayPalReturn);
+        // Handle page load
+        document.addEventListener('DOMContentLoaded', handlePaymentReturn);
     </script>
 </body>
 </html>

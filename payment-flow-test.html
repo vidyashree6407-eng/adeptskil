@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Flow Test - Adeptskil</title>
+    <link rel="icon" type="image/jpeg" href="images/FAVICON.jpg">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            padding: 40px;
+        }
+        h1 {
+            color: #2d3748;
+            margin-bottom: 30px;
+            font-size: 2rem;
+        }
+        .test-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f8fafc;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+        .test-title {
+            font-size: 1.2rem;
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        .test-content {
+            color: #64748b;
+            line-height: 1.6;
+        }
+        .test-list {
+            list-style: none;
+            padding: 15px 0;
+        }
+        .test-list li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+        }
+        .test-list li:before {
+            content: "▶";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+        .button-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        button, a {
+            display: inline-block;
+            padding: 12px 25px;
+            border-radius: 8px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+        .btn-secondary {
+            background: #e2e8f0;
+            color: #2d3748;
+        }
+        .btn-secondary:hover {
+            background: #cbd5e1;
+        }
+        .result-box {
+            background: #d1fae5;
+            border: 1px solid #6ee7b7;
+            color: #065f46;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            display: none;
+        }
+        .result-box.error {
+            background: #fee2e2;
+            border-color: #fca5a5;
+            color: #991b1b;
+        }
+        .code-block {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            margin: 15px 0;
+        }
+        .step-number {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            background: #667eea;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        .success {
+            color: #10b981;
+        }
+        .warning {
+            color: #f59e0b;
+        }
+        .error {
+            color: #ef4444;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1><i class="fas fa-flask"></i> Payment Flow - Test Guide</h1>
+        
+        <!-- Test 1: Enrollment Form -->
+        <div class="test-section">
+            <div class="test-title">
+                <span class="step-number">1</span> Enrollment Form & Data Storage
+            </div>
+            <div class="test-content">
+                <p>✅ <strong>What happens:</strong> Customer fills form, data stored in localStorage</p>
+                <div class="button-group">
+                    <a href="courses.html" class="btn-primary">Go to Courses</a>
+                    <button onclick="testEnrollmentData()" class="btn-secondary">Check localStorage</button>
+                </div>
+                <div id="enrollmentResult" class="result-box"></div>
+            </div>
+        </div>
+
+        <!-- Test 2: PayPal Payment -->
+        <div class="test-section">
+            <div class="test-title">
+                <span class="step-number">2</span> PayPal Payment
+            </div>
+            <div class="test-content">
+                <p>✅ <strong>What happens:</strong> Customer redirected to PayPal, completes payment, returns to paypal-return.html</p>
+                <ul class="test-list">
+                    <li>Click "Continue to Payment" on enrollment form</li>
+                    <li>You'll see "Pay with PayPal" button</li>
+                    <li>Click to go to PayPal sandbox</li>
+                    <li>Use test account (see instructions)</li>
+                    <li>Complete payment and "Return to Merchant"</li>
+                </ul>
+                <div class="code-block">
+Test PayPal Account:<br>
+Email: sb-cfl5f26532@personal.example.com<br>
+Password: 1234@test
+                </div>
+            </div>
+        </div>
+
+        <!-- Test 3: Database Saving -->
+        <div class="test-section">
+            <div class="test-title">
+                <span class="step-number">3</span> Database Saving
+            </div>
+            <div class="test-content">
+                <p>✅ <strong>After payment:</strong> paypal-return.html calls process_enrollment.php to save to database</p>
+                <p style="margin-top: 10px;"><strong>Check that:</strong></p>
+                <ul class="test-list">
+                    <li>File <code>enrollments.db</code> is created</li>
+                    <li>Customer data is saved in database</li>
+                    <li>Payment status is "completed"</li>
+                </ul>
+                <button onclick="testDatabase()" class="btn-secondary">Check Database...</button>
+                <div id="dbResult" class="result-box"></div>
+            </div>
+        </div>
+
+        <!-- Test 4: Email Sending -->
+        <div class="test-section">
+            <div class="test-title">
+                <span class="step-number">4</span> Confirmation Email
+            </div>
+            <div class="test-content">
+                <p>✅ <strong>After payment:</strong> Confirmation email is sent to customer</p>
+                <p style="margin-top: 10px;"><strong>Check that:</strong></p>
+                <ul class="test-list">
+                    <li>Email file created in <code>/emails/</code> folder</li>
+                    <li>Email contains customer name</li>
+                    <li>Email contains course name and amount</li>
+                    <li>Email contains invoice number</li>
+                </ul>
+                <button onclick="testEmails()" class="btn-secondary">Check Emails...</button>
+                <div id="emailResult" class="result-box"></div>
+            </div>
+        </div>
+
+        <!-- Test 5: Success Page -->
+        <div class="test-section">
+            <div class="test-title">
+                <span class="step-number">5</span> Success Page Display
+            </div>
+            <div class="test-content">
+                <p>✅ <strong>What happens:</strong> success.html displays enrollment details from localStorage</p>
+                <p style="margin-top: 10px;"><strong>Check that:</strong></p>
+                <ul class="test-list">
+                    <li>Transaction ID/Invoice number is shown</li>
+                    <li>Amount is displayed correctly</li>
+                    <li>Date & time are shown</li>
+                    <li>Message says "Confirmation email has been sent"</li>
+                    <li>Console shows enrollment details</li>
+                </ul>
+                <div class="code-block">
+How to check console:
+1. Open success.html after payment
+2. Press F12 (or Cmd+Option+I on Mac)
+3. Click "Console" tab
+4. Look for "✓ ENROLLMENT CONFIRMED" in green
+                </div>
+            </div>
+        </div>
+
+        <!-- Complete Test Flow -->
+        <div class="test-section" style="border-left-color: #10b981;">
+            <div class="test-title" style="color: #10b981;">
+                <i class="fas fa-check-circle"></i> Complete Test Flow
+            </div>
+            <div class="test-content">
+                <ol style="padding-left: 20px;">
+                    <li style="margin-bottom: 10px;">Start server: <code>php -S localhost:8000</code></li>
+                    <li style="margin-bottom: 10px;">Go to: <code>http://localhost:8000</code></li>
+                    <li style="margin-bottom: 10px;">Click course → click "Enroll Now"</li>
+                    <li style="margin-bottom: 10px;">Fill form with test data, click "Continue to Payment"</li>
+                    <li style="margin-bottom: 10px;">See "Pay with PayPal" button, click it</li>
+                    <li style="margin-bottom: 10px;">Complete payment on PayPal sandbox</li>
+                    <li style="margin-bottom: 10px;">Click "Return to Merchant" on PayPal</li>
+                    <li style="margin-bottom: 10px;">Wait for success page to show (3 seconds)</li>
+                    <li style="margin-bottom: 10px;">Check database and emails (links above)</li>
+                </ol>
+                <div class="button-group">
+                    <a href="courses.html" class="btn-primary">Start Test →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Troubleshooting -->
+        <div class="test-section">
+            <div class="test-title">🔧 Troubleshooting</div>
+            <div class="test-content">
+                <ul class="test-list">
+                    <li><strong>Problem:</strong> Page stuck on "Processing Your Payment"
+                        <ul style="margin-top: 5px; margin-left: 30px;">
+                            <li>✓ Open browser console (F12)</li>
+                            <li>✓ Look for "Saving enrollment data to database..."</li>
+                            <li>✓ Check for fetch errors</li>
+                        </ul>
+                    </li>
+                    <li><strong>Problem:</strong> Success page shows but database is empty
+                        <ul style="margin-top: 5px; margin-left: 30px;">
+                            <li>✓ Check console for JavaScript errors</li>
+                            <li>✓ Verify process_enrollment.php is accessible</li>
+                            <li>✓ Check PHP error logs</li>
+                        </ul>
+                    </li>
+                    <li><strong>Problem:</strong> Emails not in /emails/ folder
+                        <ul style="margin-top: 5px; margin-left: 30px;">
+                            <li>✓ Check that folder exists and is writable</li>
+                            <li>✓ Check config.php MAIL_METHOD setting</li>
+                            <li>✓ Check PHP permissions</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Summary -->
+        <div class="test-section" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-left: none;">
+            <div style="color: white;">
+                <h2 style="margin-bottom: 15px;"><i class="fas fa-rocket"></i> You're All Set!</h2>
+                <p style="margin-bottom: 15px;">The payment flow has been fixed. Customer details will:</p>
+                <ul style="margin-left: 30px; margin-bottom: 15px;">
+                    <li>✅ Save to SQLite database (enrollments.db)</li>
+                    <li>✅ Send confirmation email to customer</li>
+                    <li>✅ Display on success page</li>
+                </ul>
+                <p>Follow the test flow above to verify everything works correctly.</p>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 40px; color: #64748b;">
+            <p>📧 For complete details, see: <strong>PAYMENT_FLOW_FIX.md</strong></p>
+        </div>
+    </div>
+
+    <script>
+        function testEnrollmentData() {
+            const data = localStorage.getItem('adeptskil_enrollment_data');
+            const resultBox = document.getElementById('enrollmentResult');
+            
+            if (data) {
+                const parsed = JSON.parse(data);
+                resultBox.className = 'result-box success';
+                resultBox.innerHTML = `
+                    <i class="fas fa-check-circle"></i> <strong>✓ Data Found in localStorage:</strong><br><br>
+                    <strong>Name:</strong> ${parsed.fullName}<br>
+                    <strong>Email:</strong> ${parsed.email}<br>
+                    <strong>Phone:</strong> ${parsed.phone}<br>
+                    <strong>City:</strong> ${parsed.city}<br>
+                    <strong>Course:</strong> ${parsed.course}<br>
+                    <strong>Amount:</strong> $${parsed.price}
+                `;
+            } else {
+                resultBox.className = 'result-box error';
+                resultBox.innerHTML = `
+                    <i class="fas fa-exclamation-circle"></i> <strong>✗ No data found</strong><br>
+                    Fill the enrollment form first and click "Continue to Payment" to store data in localStorage.
+                `;
+            }
+            resultBox.style.display = 'block';
+        }
+
+        function testDatabase() {
+            const resultBox = document.getElementById('dbResult');
+            resultBox.className = 'result-box';
+            resultBox.innerHTML = `
+                <i class="fas fa-database"></i> <strong>How to Check Database:</strong><br><br>
+                <strong>Option 1: Using command line</strong><br>
+                <code style="background: #1e293b; color: #e2e8f0; padding: 5px 10px; border-radius: 4px;">
+                    sqlite3 enrollments.db "SELECT * FROM enrollments;"
+                </code><br><br>
+                <strong>Option 2: Using browser</strong><br>
+                Open DevTools → Application → Storage → (check if you can browse SQLite)<br><br>
+                <strong>File location:</strong> <code>./enrollments.db</code>
+            `;
+            resultBox.style.display = 'block';
+        }
+
+        function testEmails() {
+            const resultBox = document.getElementById('emailResult');
+            resultBox.className = 'result-box';
+            resultBox.innerHTML = `
+                <i class="fas fa-envelope"></i> <strong>How to Check Emails:</strong><br><br>
+                <strong>Location:</strong> <code>/emails/</code> folder<br><br>
+                <strong>File naming:</strong> <code>EMAIL-DATE-TIME-RANDOM.json</code><br>
+                Example: <code>EMAIL-20260325120530-12345.json</code><br><br>
+                <strong>Open any email file to verify it contains:</strong><br>
+                • Customer name<br>
+                • Customer email<br>
+                • Course name<br>
+                • Amount<br>
+                • Invoice number<br>
+                • Status: "Payment Completed"
+            `;
+            resultBox.style.display = 'block';
+        }
+    </script>
+</body>
+</html>

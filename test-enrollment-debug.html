@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ENROLLMENT DEBUG TEST</title>
+    <style>
+        body { font-family: monospace; background: #000; color: #0f0; padding: 20px; }
+        .log-box { background: #111; border: 2px solid #0f0; padding: 15px; margin: 10px 0; border-radius: 5px; }
+        .error { color: #ff6b6b; }
+        .success { color: #51cf66; }
+        .info { color: #74c0fc; }
+        button { background: #0f0; color: #000; padding: 10px 20px; margin: 10px 0; font-weight: bold; cursor: pointer; border: none; border-radius: 5px; }
+        button:hover { background: #00ff00; }
+        h1 { color: #0f0; }
+        pre { overflow-x: auto; }
+    </style>
+</head>
+<body>
+    <h1>🔧 ENROLLMENT SYSTEM DEBUG</h1>
+    
+    <div class="log-box">
+        <strong>Step 1: Check if course_fees.json exists</strong><br>
+        <button onclick="testJsonFile()">TEST JSON FILE</button>
+        <div id="test1"></div>
+    </div>
+
+    <div class="log-box">
+        <strong>Step 2: Check directory listing</strong><br>
+        <button onclick="testDirListing()">TEST DIRECTORY</button>
+        <div id="test2"></div>
+    </div>
+
+    <div class="log-box">
+        <strong>Step 3: Load and parse JSON</strong><br>
+        <button onclick="testJsonParse()">TEST JSON PARSE</button>
+        <div id="test3"></div>
+    </div>
+
+    <div class="log-box">
+        <strong>Step 4: Create sample dropdown</strong><br>
+        <button onclick="testForm()">TEST FORM</button>
+        <div id="test4"></div>
+    </div>
+
+    <hr style="border-color: #0f0; margin: 30px 0;">
+    <div class="log-box" id="allLogs" style="min-height: 600px;"></div>
+
+    <script>
+        let logs = [];
+
+        function log(msg, type = 'info') {
+            const timestamp = new Date().toLocaleTimeString();
+            const entry = `[${timestamp}] ${msg}`;
+            logs.push({ msg: entry, type });
+            console.log(entry);
+            updateLogs();
+        }
+
+        function updateLogs() {
+            document.getElementById('allLogs').innerHTML = logs
+                .map(l => `<span class="${l.type}">${l.msg}</span><br>`)
+                .join('');
+            document.getElementById('allLogs').scrollTop = document.getElementById('allLogs').scrollHeight;
+        }
+
+        async function testJsonFile() {
+            log('▶ Testing JSON file fetch...', 'info');
+            try {
+                const response = await fetch('course_fees.json');
+                log(`Status: ${response.status} ${response.statusText}`, 'info');
+                log(`Content-Type: ${response.headers.get('content-type')}`, 'info');
+
+                const text = await response.text();
+                log(`File size: ${text.length} bytes`, 'info');
+
+                if (text.startsWith('<?php')) {
+                    log('❌ ERROR: Server returned PHP code instead of JSON!', 'error');
+                    log('First 200 chars: ' + text.substring(0, 200), 'error');
+                    return;
+                }
+
+                if (text.startsWith('{')) {
+                    log('✅ File appears to be valid JSON', 'success');
+                    const data = JSON.parse(text);
+                    log(`✅ JSON parsed successfully: ${data.metadata.total_courses} courses found`, 'success');
+                } else {
+                    log('❌ File does not start with JSON character', 'error');
+                    log('First 100 chars: ' + text.substring(0, 100), 'error');
+                }
+            } catch (e) {
+                log(`❌ FETCH ERROR: ${e.message}`, 'error');
+            }
+        }
+
+        async function testDirListing() {
+            log('▶ Testing directory listing...', 'info');
+            try {
+                // Try to fetch index
+                const response = await fetch('./');
+                const html = await response.text();
+                log('✅ Directory is accessible', 'success');
+                
+                // Check if files are listed
+                if (html.includes('course_fees.json')) {
+                    log('✅ course_fees.json found in directory listing', 'success');
+                } else {
+                    log('⚠ course_fees.json not in directory listing (might still exist)', 'info');
+                }
+                
+                if (html.includes('enrollment')) {
+                    log('✅ Multiple enrollment files detected', 'success');
+                }
+            } catch (e) {
+                log(`❌ ERROR: ${e.message}`, 'error');
+            }
+        }
+
+        async function testJsonParse() {
+            log('▶ Testing JSON parsing...', 'info');
+            try {
+                const response = await fetch('course_fees.json');
+                const data = await response.json();
+
+                log(`✅ JSON parsed: ${data.courses.length} courses`, 'success');
+                log(`✅ First course: "${data.courses[0].name}"`, 'success');
+                log(`✅ Pricing options: ${Object.keys(data.courses[0].pricing).join(', ')}`, 'success');
+
+                // Sample pricing
+                const first = data.courses[0];
+                log(`   - Standard: $${first.pricing.standard.price}`, 'success');
+                log(`   - Early Bird: $${first.pricing.early_bird.price}`, 'success');
+                log(`   - Virtual Standard: $${first.pricing.virtual_standard.price}`, 'success');
+                log(`   - Virtual Early Bird: $${first.pricing.virtual_early_bird.price}`, 'success');
+            } catch (e) {
+                log(`❌ PARSE ERROR: ${e.message}`, 'error');
+            }
+        }
+
+        async function testForm() {
+            log('▶ Creating test form...', 'info');
+            try {
+                const response = await fetch('course_fees.json');
+                const data = await response.json();
+
+                let html = '<select id="courseDropdown" onchange="showPrice()"><option>-- Select course --</option>';
+                data.courses.slice(0, 10).forEach((course, idx) => {
+                    html += `<option value="${idx}">${course.name}</option>`;
+                });
+                html += '</select>';
+                html += '<div id="priceInfo" style="margin-top: 10px;"></div>';
+
+                document.getElementById('test4').innerHTML = html;
+                log('✅ Form created with first 10 courses', 'success');
+                log('📌 Try selecting a course to see pricing', 'info');
+
+                window.formData = data; // Make available globally
+            } catch (e) {
+                log(`❌ ERROR: ${e.message}`, 'error');
+            }
+        }
+
+        window.showPrice = function() {
+            const idx = document.getElementById('courseDropdown').value;
+            if (idx === '') return;
+            
+            const course = window.formData.courses[idx];
+            let html = `<strong>${course.name}</strong><br>`;
+            html += Object.entries(course.pricing).map(([key, p]) => 
+                `${p.name}: <strong>$${p.price}</strong><br>`
+            ).join('');
+            
+            document.getElementById('priceInfo').innerHTML = html;
+            log(`Selected: ${course.name}`, 'success');
+        };
+
+        // Auto-run on load
+        window.addEventListener('load', () => {
+            log('=== DEBUG TEST STARTED ===', 'success');
+            log('URL: ' + window.location.href, 'info');
+            log('Ready - Click buttons above to run tests', 'info');
+        });
+    </script>
+</body>
+</html>

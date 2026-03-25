@@ -207,17 +207,31 @@
     </div>
 
     <script>
-        // Clear enrollment data when user cancels
-        function clearEnrollmentData() {
-            localStorage.removeItem('adeptskil_enrollment_data');
-            console.log('Enrollment data cleared');
+        // Handle payment cancellation
+        function handlePaymentCancellation() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const method = urlParams.get('method') || 'unknown';
+            const invoice = urlParams.get('invoice');
+            
+            console.log('Payment Cancelled:');
+            console.log('  Method:', method);
+            console.log('  Invoice:', invoice);
+            
+            // Clear enrollment data
+            sessionStorage.removeItem('enrollmentSuccessData');
+            sessionStorage.removeItem('paymentData');
+            
+            console.log('✓ Enrollment data cleared from session');
         }
         
-        // Clear data when page loads
-        document.addEventListener('DOMContentLoaded', clearEnrollmentData);
+        // Handle page load
+        document.addEventListener('DOMContentLoaded', handlePaymentCancellation);
         
         // Also clear on page unload
-        window.addEventListener('beforeunload', clearEnrollmentData);
+        window.addEventListener('beforeunload', () => {
+            sessionStorage.removeItem('enrollmentSuccessData');
+            sessionStorage.removeItem('paymentData');
+        });
     </script>
 </body>
 </html>

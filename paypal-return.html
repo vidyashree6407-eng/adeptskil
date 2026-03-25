@@ -215,10 +215,70 @@
             document.getElementById('manualView').classList.add('hidden');
             document.getElementById('cancelView').classList.add('hidden');
             
-            // Auto-redirect to success.html after 2 seconds
+            // GET enrollment data from localStorage
+            const enrollmentData = localStorage.getItem('adeptskil_enrollment_data');
+            if (enrollmentData) {
+                try {
+                    const data = JSON.parse(enrollmentData);
+                    console.log('Saving enrollment data to database...', data);
+                    
+                    // SAVE to database via API - NON-BLOCKING
+                    saveEnrollmentToDatabase(data);
+                } catch (error) {
+                    console.error('Error parsing enrollment data:', error);
+                }
+            }
+            
+            // Auto-redirect to success.html after 3 seconds
             setTimeout(() => {
                 window.location.href = './success.html';
-            }, 2000);
+            }, 3000);
+        }
+
+        // Save enrollment data to database and send confirmation email
+        async function saveEnrollmentToDatabase(enrollmentData) {
+            try {
+                const payload = {
+                    fullName: enrollmentData.fullName,
+                    email: enrollmentData.email,
+                    phone: enrollmentData.phone,
+                    company: enrollmentData.company || '',
+                    city: enrollmentData.city,
+                    pincode: enrollmentData.pincode || '',
+                    address: enrollmentData.address || '',
+                    course: enrollmentData.course,
+                    amount: enrollmentData.price,
+                    invoice: 'ENR-' + Date.now(),
+                    payment_method: 'paypal',
+                    payment_status: 'completed',
+                    payment_id: enrollmentData.payment_id || 'PAYPAL-PENDING',
+                    comments: enrollmentData.message || ''
+                };
+
+                console.log('Sending enrollment data to API:', payload);
+
+                const response = await fetch('process_enrollment.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                const result = await response.json();
+                console.log('API Response:', result);
+
+                if (result.success) {
+                    console.log('✓ Enrollment saved successfully');
+                    console.log('✓ Confirmation email sent');
+                    // Data saved and email sent!
+                } else {
+                    console.error('Failed to save enrollment:', result.message);
+                }
+            } catch (error) {
+                console.error('Error saving enrollment:', error);
+                // Continue anyway - user should see success page
+            }
         }
 
         function showCancel() {

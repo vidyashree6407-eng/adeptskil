@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Test</title>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        pre { background: #f0f0f0; padding: 10px; overflow-x: auto; }
+        .error { color: red; font-weight: bold; }
+        .success { color: green; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>Test 1: Direct Fetch</h1>
+    <button onclick="testFetch()">Fetch course_fees.json</button>
+    <pre id="result"></pre>
+
+    <script>
+        async function testFetch() {
+            try {
+                console.log('Starting fetch...');
+                const response = await fetch('course_fees.json');
+                console.log('Response received:', response.status, response.headers.get('content-type'));
+                
+                const text = await response.text();
+                console.log('Text length:', text.length);
+                console.log('First 500 chars:', text.substring(0, 500));
+                
+                document.getElementById('result').innerHTML = 
+                    `<span class="success">✓ Status: ${response.status}</span><br>` +
+                    `<span class="success">✓ Content-Type: ${response.headers.get('content-type')}</span><br>` +
+                    `<span class="success">✓ First 500 chars:<br></span>` +
+                    `<pre>${text.substring(0, 500)}</pre>`;
+                    
+            } catch(e) {
+                document.getElementById('result').innerHTML = 
+                    `<span class="error">✗ Error: ${e.message}</span>`;
+            }
+        }
+    </script>
+</body>
+</html>

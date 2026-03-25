@@ -28,16 +28,16 @@
         }
         .navbar h1 { font-size: 1.8rem; display: flex; align-items: center; gap: 10px; }
         .navbar a { color: white; text-decoration: none; display: flex; align-items: center; gap: 8px; }
-        .container { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
+        .container { max-width: 900px; margin: 0 auto; padding: 30px 15px; }
         .enrollment-card {
             background: white;
             border-radius: 15px;
-            padding: 35px;
+            padding: 30px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-            margin-bottom: 40px;
+            margin-bottom: 30px;
         }
-        .enrollment-card h2 { font-size: 1.6rem; color: #667eea; margin-bottom: 8px; text-align: center; }
-        .enrollment-card p { text-align: center; color: #64748b; margin-bottom: 25px; font-size: 0.95rem; }
+        .enrollment-card h2 { font-size: 1.5rem; color: #667eea; margin-bottom: 8px; text-align: center; }
+        .enrollment-card p { text-align: center; color: #64748b; margin-bottom: 20px; font-size: 0.9rem; }
         .error-box {
             background: #fee2e2;
             border: 2px solid #fca5a5;
@@ -58,8 +58,8 @@
             display: none;
         }
         .success-box.show { display: block; }
-        .form-group { margin-bottom: 18px; }
-        .form-group label { display: block; margin-bottom: 8px; font-weight: 700; color: #2c3e50; }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 6px; font-weight: 700; color: #2c3e50; font-size: 0.9rem; }
         .form-group input, .form-group select, .form-group textarea {
             width: 100%;
             padding: 12px 14px;
@@ -80,24 +80,24 @@
             color: #64748b;
             cursor: not-allowed;
         }
-        .inline-row { display: grid; grid-template-columns: 1.5fr 1fr; gap: 15px; align-items: end; margin-bottom: 18px; }
+        .inline-row { display: grid; grid-template-columns: 1.5fr 1fr; gap: 15px; align-items: end; margin-bottom: 15px; }
         .price-display {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 25px;
+            padding: 20px;
             border-radius: 12px;
             text-align: center;
             box-shadow: 0 5px 20px rgba(102, 126, 234, 0.3);
-            margin-top: 20px;
+            margin-top: 15px;
         }
-        .price-label { font-size: 0.9rem; text-transform: uppercase; opacity: 0.9; margin-bottom: 10px; letter-spacing: 1px; }
-        .price-amount { font-size: 3rem; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 8px; }
-        .price-amount span { font-size: 1.5rem; }
+        .price-label { font-size: 0.85rem; text-transform: uppercase; opacity: 0.9; margin-bottom: 8px; letter-spacing: 0.5px; }
+        .price-amount { font-size: 2rem; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 6px; }
+        .price-amount span { font-size: 1.2rem; }
         .option-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 12px;
-            margin: 20px 0 25px 0;
+            gap: 10px;
+            margin: 15px 0 15px 0;
         }
         .option-card {
             background: linear-gradient(135deg, #f0f4ff 0%, #ede9fe 100%);
@@ -120,18 +120,18 @@
         }
         .option-name { font-weight: 700; display: block; margin-bottom: 8px; }
         .option-price { font-size: 1.2rem; font-weight: 700; }
-        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 25px; }
-        .button-group { display: flex; gap: 15px; margin-top: 25px; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px; }
+        .button-group { display: flex; gap: 12px; margin-top: 18px; }
         button {
             flex: 1;
-            padding: 14px;
-            font-size: 1rem;
+            padding: 12px;
+            font-size: 0.95rem;
             font-weight: 700;
             border: none;
             border-radius: 8px;
             cursor: pointer;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
             transition: all 0.3s ease;
         }
         .btn-primary {
@@ -149,6 +149,106 @@
         }
         .required { color: #ef4444; }
         .debug-info { background: #f0f4f8; padding: 12px; border-radius: 8px; margin: 15px 0; font-size: 0.85rem; color: #64748b; font-family: monospace; }
+        
+        /* Payment Method Cards */
+        #paymentMethodSection {
+            margin-top: 30px !important;
+            padding-top: 20px !important;
+            border-top: 1px solid #e2e8f0 !important;
+        }
+        
+        #paymentMethodSection h3 {
+            margin-bottom: 15px !important;
+        }
+        
+        #paymentMethodSection > div:first-of-type {
+            background: #f0f4ff;
+            padding: 15px !important;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        #paymentMethodSection > div:first-of-type p {
+            margin: 5px 0 !important;
+            font-size: 0.9rem;
+        }
+        
+        #paymentMethodSection > div:first-of-type p:first-child {
+            font-weight: 600;
+            color: #667eea;
+        }
+        
+        .payment-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100px;
+            cursor: pointer;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+            background: white;
+        }
+        
+        .payment-card:hover {
+            border-color: #667eea;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+            transform: translateY(-2px);
+        }
+        
+        .payment-card.selected {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #667eea;
+        }
+        
+        .payment-card i {
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+        
+        .payment-card p {
+            margin: 4px 0;
+            font-size: 0.9rem;
+        }
+        
+        .payment-card p:first-of-type {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        
+        .payment-card p:last-child {
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+        
+        .payment-card.selected p {
+            color: white;
+        }
+        
+        .compact-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        
+        @media (max-width: 900px) {
+            .compact-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .compact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
         @media (max-width: 768px) {
             .inline-row, .form-row, .option-grid { grid-template-columns: 1fr; }
             .enrollment-card { padding: 25px; }
@@ -221,9 +321,25 @@
                         <input type="tel" id="phone" required placeholder="+1 (555) 000-0000">
                     </div>
                     <div class="form-group">
-                        <label for="company">Company (Optional)</label>
-                        <input type="text" id="company" placeholder="Your Company">
+                        <label for="company">Company/Organization <span class="required">*</span></label>
+                        <input type="text" id="company" required placeholder="Your Company">
                     </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="city">City <span class="required">*</span></label>
+                        <input type="text" id="city" required placeholder="New York">
+                    </div>
+                    <div class="form-group">
+                        <label for="pincode">Pincode/ZIP Code <span class="required">*</span></label>
+                        <input type="text" id="pincode" required placeholder="10001">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="address">Address <span class="required">*</span></label>
+                    <textarea id="address" style="min-height: 80px;" required placeholder="Street address, apartment, suite, etc."></textarea>
                 </div>
 
                 <div class="form-group">
@@ -237,22 +353,62 @@
                     <button type="submit" class="btn-primary" id="submitBtn" disabled>Proceed to Payment</button>
                 </div>
             </form>
+
+            <!-- PAYMENT METHOD SELECTION (Hidden until form is valid) -->
+            <div id="paymentMethodSection" style="display: none;">
+                <h3 style="color: #2d3748; margin-bottom: 15px; text-align: center; font-size: 1.2rem;">
+                    <i class="fas fa-credit-card"></i> Select Payment Method
+                </h3>
+
+                <div style="background: #f0f4ff; padding: 12px; border-radius: 10px; margin-bottom: 15px; text-align: center;">
+                    <p style="color: #667eea; font-weight: 600; margin-bottom: 4px;">Total Amount: $<span id="paymentAmount">0.00</span></p>
+                    <p style="color: #94a3b8; font-size: 0.85rem; margin: 0;"><span id="paymentCourseName"></span></p>
+                </div>
+
+                <!-- Payment Method Cards Grid (3 columns) -->
+                <div class="compact-grid" id="paymentGrid">
+                    <!-- PayPal -->
+                    <div class="payment-card" onclick="selectPaymentMethod('paypal')">
+                        <i class="fab fa-paypal" style="color: #003087;"></i>
+                        <p>PayPal</p>
+                        <p>Fast & Secure</p>
+                    </div>
+
+                    <!-- Razorpay -->
+                    <div class="payment-card" onclick="selectPaymentMethod('razorpay')">
+                        <i class="fas fa-wallet" style="color: #1E40AF;"></i>
+                        <p>Razorpay</p>
+                        <p>India Preferred</p>
+                    </div>
+
+                    <!-- Credit Card -->
+                    <div class="payment-card" onclick="selectPaymentMethod('creditcard')">
+                        <i class="fas fa-credit-card" style="color: #7C3AED;"></i>
+                        <p>Credit Card</p>
+                        <p>Visa, Mastercard</p>
+                    </div>
+                </div>
+
+                <!-- Payment Action Buttons -->
+                <div class="button-group">
+                    <button type="button" onclick="goBackToForm()" style="background: #e2e8f0; color: #2c3e50;">Back</button>
+                    <button type="button" class="btn-primary" id="paymentBtn" disabled onclick="processPayment()" style="opacity: 0.6; cursor: not-allowed;">
+                        <i class="fas fa-lock"></i> Pay Now
+                    </button>
+                </div>
+
+                <div style="background: #fef3c7; border: 1px solid #fcd34d; color: #92400e; padding: 10px; border-radius: 8px; margin-top: 12px; font-size: 0.85rem; text-align: center;">
+                    <i class="fas fa-info-circle"></i> Secure Payment - Your data is encrypted
+                </div>
         </div>
     </div>
 
+    <!-- Razorpay Checkout Script -->
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <script>
         let courseData = null;
+        let coursesDatabase = null;
         let selectedPricing = null;
-        const DEBUG = false; // Set to true to see debug info
-
-        function showDebug(msg) {
-            if (DEBUG) {
-                console.log('[DEBUG]', msg);
-                const debugBox = document.getElementById('debugInfo');
-                debugBox.style.display = 'block';
-                debugBox.textContent += msg + '\n';
-            }
-        }
 
         function showError(msg) {
             const box = document.getElementById('errorBox');
@@ -271,12 +427,27 @@
             box.classList.add('show');
         }
 
+        async function loadCoursesDatabase() {
+            try {
+                const response = await fetch('course_fees.json');
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                coursesDatabase = await response.json();
+                console.log(`✓ Loaded ${coursesDatabase.courses.length} courses from database`);
+            } catch (error) {
+                showError(`Failed to load course database: ${error.message}`);
+                throw error;
+            }
+        }
+
         async function loadCourseData() {
             try {
+                // Load database if not already loaded
+                if (!coursesDatabase) {
+                    await loadCoursesDatabase();
+                }
+
                 const params = new URLSearchParams(window.location.search);
                 const courseName = params.get('course') || '';
-                
-                showDebug(`URL parameter received: "${courseName}"`);
 
                 if (!courseName) {
                     showError('No course selected. Please go back to courses page and select a course.');
@@ -285,40 +456,28 @@
 
                 document.getElementById('courseName').value = courseName;
 
-                // Call API
-                const apiUrl = `course_fees_api.php?action=get_course&course=${encodeURIComponent(courseName)}`;
-                showDebug(`API URL: ${apiUrl}`);
+                // Find course in database (case-insensitive)
+                const found = coursesDatabase.courses.find(c => 
+                    c.name.toLowerCase() === courseName.toLowerCase()
+                );
 
-                const response = await fetch(apiUrl);
-                showDebug(`API Response Status: ${response.status}`);
-
-                const data = await response.json();
-                showDebug(`API Response: ${JSON.stringify(data).substring(0, 100)}...`);
-
-                if (!data.success) {
-                    showError(`API Error: ${data.error || 'Unknown error'}`);
+                if (!found) {
+                    showError(`Course "${courseName}" not found in database. Please select from courses page.`);
                     return;
                 }
 
-                if (!data.data) {
-                    showError('No course data received from API');
-                    return;
-                }
-
-                courseData = data.data;
-                showDebug(`Course loaded: ${courseData.name}`);
+                courseData = found;
+                console.log(`✓ Course loaded: ${courseData.name}`);
                 hideError();
                 populateOptions();
 
             } catch (error) {
-                showError(`Fatal Error: ${error.message}`);
+                showError(`Error loading course: ${error.message}`);
                 console.error('Full error:', error);
             }
         }
 
         function populateOptions() {
-            showDebug('Populating pricing options...');
-
             if (!courseData || !courseData.pricing) {
                 showError('Course pricing data is missing');
                 return;
@@ -333,22 +492,17 @@
             const options = [
                 { key: 'standard', label: 'Standard Fee' },
                 { key: 'early_bird', label: 'Early Bird Fee' },
-                { key: 'virtual_standard', label: 'Live Virtual Standard' },
-                { key: 'virtual_early_bird', label: 'Live Virtual Early Bird' }
+                { key: 'virtual_standard', label: 'Virtual Standard' },
+                { key: 'virtual_early_bird', label: 'Virtual Early Bird' }
             ];
-
-            let addedCount = 0;
 
             options.forEach(opt => {
                 const pricing = courseData.pricing[opt.key];
-                if (!pricing) {
-                    showDebug(`Missing pricing for ${opt.key}`);
-                    return;
-                }
+                if (!pricing) return;
 
                 // Add to dropdown
                 const option = document.createElement('option');
-                option.value = JSON.stringify({ key: opt.key, ...pricing });
+                option.value = opt.key;
                 option.textContent = `${opt.label} - $${pricing.price.toFixed(2)}`;
                 dropdown.appendChild(option);
 
@@ -361,68 +515,51 @@
                 `;
                 card.onclick = () => selectOption(opt.key, pricing);
                 grid.appendChild(card);
-
-                addedCount++;
             });
 
-            showDebug(`Added ${addedCount} pricing options to form`);
-
-            if (addedCount === 0) {
-                showError('No pricing options available for this course');
-            }
+            console.log('✓ Pricing options populated');
         }
 
         function selectOption(key, pricing) {
-            showDebug(`Selected: ${key} at $${pricing.price}`);
             selectedPricing = { key, ...pricing };
 
-            // Update dropdown
-            document.getElementById('pricingDropdown').value = JSON.stringify(selectedPricing);
-
-            // Update grid selection
-            document.querySelectorAll('.option-card').forEach(card => {
-                card.classList.remove('selected');
-            });
+            // Update grid
+            document.querySelectorAll('.option-card').forEach(card => card.classList.remove('selected'));
             event.currentTarget.classList.add('selected');
 
-            updateDisplay();
+            // Update dropdown
+            document.getElementById('pricingDropdown').value = key;
+
+            // Update display
+            document.getElementById('priceDisplay').textContent = pricing.price.toFixed(2);
+            document.getElementById('selectedPrice').value = pricing.price.toFixed(2);
+            document.getElementById('selectedOption').value = pricing.name;
+            document.getElementById('submitBtn').disabled = false;
+
+            console.log(`✓ Selected: ${pricing.name} - $${pricing.price}`);
         }
 
         function handlePricingChange() {
-            const val = document.getElementById('pricingDropdown').value;
-            if (val) {
-                selectedPricing = JSON.parse(val);
-                
-                // Update grid
-                document.querySelectorAll('.option-card').forEach(card => {
-                    card.classList.remove('selected');
-                });
-                const cards = document.querySelectorAll('.option-card');
-                const priceText = `$${selectedPricing.price.toFixed(2)}`;
-                for (let card of cards) {
-                    if (card.textContent.includes(priceText)) {
-                        card.classList.add('selected');
-                        break;
-                    }
-                }
+            const dropdown = document.getElementById('pricingDropdown');
+            const key = dropdown.value;
 
-                updateDisplay();
+            if (!key) return;
+
+            const pricing = courseData.pricing[key];
+            if (pricing) {
+                selectOption(key, pricing);
             }
-        }
-
-        function updateDisplay() {
-            if (!selectedPricing) return;
-
-            document.getElementById('priceDisplay').textContent = selectedPricing.price.toFixed(2);
-            document.getElementById('selectedPrice').value = selectedPricing.price.toFixed(2);
-            document.getElementById('selectedOption').value = selectedPricing.name;
-            document.getElementById('submitBtn').disabled = false;
         }
 
         function resetForm() {
             document.getElementById('enrollmentForm').reset();
-            document.getElementById('pricingDropdown').dispatchEvent(new Event('change'));
+            document.querySelectorAll('.option-card').forEach(card => card.classList.remove('selected'));
+            document.getElementById('pricingDropdown').value = '';
+            document.getElementById('priceDisplay').textContent = '0.00';
             document.getElementById('submitBtn').disabled = true;
+            selectedPricing = null;
+            selectedPaymentMethod = null;
+            hideError();
         }
 
         function handleSubmit(event) {
@@ -436,32 +573,302 @@
             const fullName = document.getElementById('fullName').value.trim();
             const email = document.getElementById('email').value.trim();
             const phone = document.getElementById('phone').value.trim();
+            const company = document.getElementById('company').value.trim();
+            const city = document.getElementById('city').value.trim();
+            const pincode = document.getElementById('pincode').value.trim();
+            const address = document.getElementById('address').value.trim();
 
-            if (!fullName || !email || !phone) {
-                showError('Please fill in all required fields');
+            // Validate all required fields
+            if (!fullName || !email || !phone || !company || !city || !pincode || !address) {
+                showError('Please fill in all required fields (marked with *)');
                 return;
             }
 
-            const enrollmentData = {
-                course: document.getElementById('courseName').value,
+            // Validate email format
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                showError('Please enter a valid email address');
+                return;
+            }
+
+            // Store in sessionStorage
+            sessionStorage.setItem('enrollmentData', JSON.stringify({
+                course: courseData.name,
+                pricing: selectedPricing,
                 fullName,
                 email,
                 phone,
-                company: document.getElementById('company').value,
+                company,
+                city,
+                pincode,
+                address,
                 comments: document.getElementById('comments').value,
-                pricing_option: selectedPricing.name,
-                amount: parseFloat(selectedPricing.price)
-            };
+                timestamp: new Date().toISOString()
+            }));
 
-            sessionStorage.setItem('enrollmentData', JSON.stringify(enrollmentData));
+            console.log('✓ Enrollment data validated, showing payment methods...');
+            hideError();
 
-            showSuccess('Enrollment successful! Redirecting to payment...');
-            setTimeout(() => {
-                window.location.href = `success.html?course=${encodeURIComponent(enrollmentData.course)}&amount=${enrollmentData.amount}&option=${encodeURIComponent(enrollmentData.pricing_option)}`;
-            }, 1500);
+            // Hide form, show payment methods
+            document.getElementById('enrollmentForm').style.display = 'none';
+            document.getElementById('paymentMethodSection').style.display = 'block';
+            document.getElementById('paymentAmount').textContent = selectedPricing.price.toFixed(2);
+            document.getElementById('paymentCourseName').textContent = courseData.name;
         }
 
-        // Initialize
+        let selectedPaymentMethod = null;
+
+        function selectPaymentMethod(method) {
+            selectedPaymentMethod = method;
+            
+            // Update UI - highlight selected card
+            document.querySelectorAll('.payment-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            
+            event.currentTarget.classList.add('selected');
+
+            // Enable payment button
+            document.getElementById('paymentBtn').disabled = false;
+            document.getElementById('paymentBtn').style.opacity = '1';
+            document.getElementById('paymentBtn').style.cursor = 'pointer';
+
+            console.log(`✓ Payment method selected: ${method}`);
+        }
+
+        function goBackToForm() {
+            document.getElementById('enrollmentForm').style.display = 'block';
+            document.getElementById('paymentMethodSection').style.display = 'none';
+            selectedPaymentMethod = null;
+        }
+
+        function processPayment() {
+            if (!selectedPaymentMethod) {
+                showError('Please select a payment method');
+                return;
+            }
+
+            const enrollmentData = JSON.parse(sessionStorage.getItem('enrollmentData'));
+            const paymentData = {
+                method: selectedPaymentMethod,
+                amount: selectedPricing.price,
+                currency: 'USD',
+                enrollment: enrollmentData
+            };
+
+            console.log('Processing payment with method:', selectedPaymentMethod);
+            console.log('Payment data:', paymentData);
+
+            // Route to appropriate payment processor
+            switch (selectedPaymentMethod) {
+                case 'paypal':
+                    processPayPalPayment(paymentData);
+                    break;
+                case 'razorpay':
+                    processRazorpayPayment(paymentData);
+                    break;
+                case 'creditcard':
+                    processCreditCardPayment(paymentData);
+                    break;
+            }
+        }
+
+        // PayPal Payment Processing
+        function processPayPalPayment(paymentData) {
+            console.log('Redirecting to PayPal...');
+            
+            // Store enrollment data for return
+            sessionStorage.setItem('paymentData', JSON.stringify(paymentData));
+            
+            // Generate invoice
+            const invoiceId = 'ENR-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9);
+            const amount = parseFloat(paymentData.amount).toFixed(2);
+            
+            // Store enrollment data for success page
+            const enrollmentDataForSuccess = {
+                fullName: paymentData.enrollment.fullName,
+                email: paymentData.enrollment.email,
+                phone: paymentData.enrollment.phone,
+                company: paymentData.enrollment.company,
+                city: paymentData.enrollment.city,
+                pincode: paymentData.enrollment.pincode,
+                address: paymentData.enrollment.address,
+                course: paymentData.enrollment.course,
+                amount: amount,
+                invoice: invoiceId,
+                method: 'paypal'
+            };
+            sessionStorage.setItem('enrollmentSuccessData', JSON.stringify(enrollmentDataForSuccess));
+            
+            // Create a hidden form and submit to PayPal
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = 'https://www.sandbox.paypal.com/cgi-bin/webscr'; // Sandbox
+            // For production, change to: 'https://www.paypal.com/cgi-bin/webscr'
+            
+            // Build proper return URLs with absolute paths
+            const successURL = window.location.origin + '/success.html?invoice=' + invoiceId + '&method=paypal';
+            const cancelURL = window.location.origin + '/cancel.html?invoice=' + invoiceId + '&method=paypal';
+            const notifyURL = window.location.origin + '/ipn_handler.php';
+            
+            // PayPal form parameters
+            const paypalParams = {
+                'cmd': '_xclick',
+                'business': 'sb-besoe49191096@business.example.com', // Replace with your PayPal email
+                'item_name': 'Adeptskil Course Enrollment - ' + paymentData.enrollment.course,
+                'item_number': invoiceId,
+                'amount': amount,
+                'currency_code': 'USD',
+                'invoice': invoiceId,
+                'custom': JSON.stringify({
+                    fullName: paymentData.enrollment.fullName,
+                    email: paymentData.enrollment.email,
+                    phone: paymentData.enrollment.phone,
+                    company: paymentData.enrollment.company,
+                    city: paymentData.enrollment.city,
+                    pincode: paymentData.enrollment.pincode,
+                    address: paymentData.enrollment.address
+                }),
+                'return': successURL,
+                'cancel_return': cancelURL,
+                'notify_url': notifyURL,
+                'rm': '2',
+                'no_shipping': '1',
+                'no_note': '1',
+                'email': paymentData.enrollment.email,
+                'charset': 'utf-8'
+            };
+            
+            console.log('PayPal Return URL:', successURL);
+            console.log('PayPal Cancel URL:', cancelURL);
+            
+            // Add hidden inputs to form
+            for (const key in paypalParams) {
+                const input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = key;
+                input.value = paypalParams[key];
+                form.appendChild(input);
+            }
+            
+            // Append form to body and submit
+            document.body.appendChild(form);
+            form.submit();
+        }
+
+        // Razorpay Payment Processing
+        function processRazorpayPayment(paymentData) {
+            console.log('Loading Razorpay checkout...');
+            
+            // Store enrollment data
+            sessionStorage.setItem('paymentData', JSON.stringify(paymentData));
+            
+            // Generate order ID
+            const orderId = 'ORD-' + Date.now();
+            const amountInPaise = Math.round(paymentData.amount * 100);
+            
+            // Store enrollment data for success page
+            const enrollmentDataForSuccess = {
+                fullName: paymentData.enrollment.fullName,
+                email: paymentData.enrollment.email,
+                phone: paymentData.enrollment.phone,
+                company: paymentData.enrollment.company,
+                city: paymentData.enrollment.city,
+                pincode: paymentData.enrollment.pincode,
+                address: paymentData.enrollment.address,
+                course: paymentData.enrollment.course,
+                amount: paymentData.amount,
+                invoice: orderId,
+                method: 'razorpay'
+            };
+            sessionStorage.setItem('enrollmentSuccessData', JSON.stringify(enrollmentDataForSuccess));
+            
+            // Razorpay configuration
+            const razorpayOptions = {
+                key: 'rzp_test_1sCuWrHPqbUaea', // Test key
+                amount: amountInPaise,
+                currency: 'INR',
+                name: 'Adeptskil',
+                description: 'Course: ' + paymentData.enrollment.course,
+                image: 'https://adeptskil.com/images/FAVICON.jpg',
+                order_id: orderId,
+                prefill: {
+                    name: paymentData.enrollment.fullName,
+                    email: paymentData.enrollment.email,
+                    contact: paymentData.enrollment.phone
+                },
+                handler: function(response) {
+                    console.log('✓ Razorpay payment successful!');
+                    console.log('Payment ID:', response.razorpay_payment_id);
+                    sessionStorage.setItem('razorpay_payment_id', response.razorpay_payment_id);
+                    // Use absolute URL path with protocol
+                    window.location.href = window.location.origin + '/success.html?invoice=' + orderId + '&payment_id=' + response.razorpay_payment_id + '&method=razorpay';
+                },
+                theme: {
+                    color: '#667eea'
+                },
+                modal: {
+                    ondismiss: function() {
+                        console.log('Razorpay payment cancelled by user');
+                        window.location.href = window.location.origin + '/cancel.html?invoice=' + orderId + '&method=razorpay';
+                    }
+                }
+            };
+            
+            console.log('Razorpay Options:', razorpayOptions);
+            
+            // Check if Razorpay script is loaded
+            if (typeof Razorpay !== 'undefined') {
+                console.log('Razorpay library already loaded');
+                const rzp = new Razorpay(razorpayOptions);
+                rzp.open();
+            } else {
+                console.log('Loading Razorpay library dynamically...');
+                // Load Razorpay script dynamically
+                const script = document.createElement('script');
+                script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+                script.onload = function() {
+                    console.log('Razorpay library loaded successfully');
+                    const rzp = new Razorpay(razorpayOptions);
+                    rzp.open();
+                };
+                script.onerror = function() {
+                    console.error('Failed to load Razorpay library');
+                    showError('Failed to load payment gateway. Please try again.');
+                };
+                document.head.appendChild(script);
+            }
+        }
+
+        // Credit Card Payment Processing
+        function processCreditCardPayment(paymentData) {
+            console.log('Loading Credit Card payment form...');
+            sessionStorage.setItem('paymentData', JSON.stringify(paymentData));
+            
+            // Generate invoice
+            const invoiceId = 'ENR-' + Date.now();
+            
+            // Store enrollment data for success page
+            const enrollmentDataForSuccess = {
+                fullName: paymentData.enrollment.fullName,
+                email: paymentData.enrollment.email,
+                phone: paymentData.enrollment.phone,
+                company: paymentData.enrollment.company,
+                city: paymentData.enrollment.city,
+                pincode: paymentData.enrollment.pincode,
+                address: paymentData.enrollment.address,
+                course: paymentData.enrollment.course,
+                amount: paymentData.amount,
+                invoice: invoiceId,
+                method: 'creditcard'
+            };
+            sessionStorage.setItem('enrollmentSuccessData', JSON.stringify(enrollmentDataForSuccess));
+            
+            // For now, redirect to a local payment form
+            window.location.href = 'payment_form_creditcard.html?invoice=' + invoiceId + '&method=creditcard';
+        }
+
+        // Load on page load
         window.addEventListener('DOMContentLoaded', loadCourseData);
     </script>
 </body>

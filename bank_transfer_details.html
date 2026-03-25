@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank Transfer Payment - Adeptskil</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            max-width: 600px;
+            width: 100%;
+            padding: 40px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .header h2 {
+            color: #667eea;
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+        .header p {
+            color: #64748b;
+            font-size: 0.95rem;
+        }
+        .amount-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .amount-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-bottom: 10px;
+        }
+        .amount-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+        .invoice-ref {
+            background: #f0f4ff;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .invoice-ref strong {
+            color: #667eea;
+        }
+        .copy-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+        }
+        .copy-btn:hover {
+            background: #5568d3;
+        }
+        .bank-details {
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+        .bank-details h3 {
+            color: #2d3748;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .detail-row {
+            display: grid;
+            grid-template-columns: 150px 1fr auto;
+            gap: 15px;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e2e8f0;
+            align-items: center;
+        }
+        .detail-row:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        .detail-label {
+            font-weight: 600;
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+        .detail-value {
+            color: #2d3748;
+            font-family: 'Courier New', monospace;
+            word-break: break-all;
+            background: white;
+            padding: 8px;
+            border-radius: 6px;
+            border: 1px solid #e2e8f0;
+        }
+        .copy-icon {
+            cursor: pointer;
+            color: #667eea;
+            font-size: 0.9rem;
+        }
+        .instructions {
+            background: #fef3c7;
+            border: 2px solid #fcd34d;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+        .instructions h4 {
+            color: #92400e;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .instructions ol {
+            color: #92400e;
+            margin-left: 20px;
+            line-height: 1.8;
+        }
+        .instructions li {
+            margin-bottom: 8px;
+        }
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+        button {
+            flex: 1;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+        }
+        .btn-secondary {
+            background: #e2e8f0;
+            color: #2d3748;
+        }
+        .btn-secondary:hover {
+            background: #cbd5e1;
+        }
+        .confirmation-box {
+            background: #dcfce7;
+            border: 2px solid #86efac;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+        }
+        .confirmation-box h4 {
+            color: #166534;
+            margin-bottom: 10px;
+        }
+        .confirmation-box p {
+            color: #166534;
+            font-size: 0.9rem;
+        }
+        .note {
+            background: #ecfdf5;
+            border-left: 4px solid #10b981;
+            padding: 15px;
+            border-radius: 8px;
+            color: #047857;
+            font-size: 0.9rem;
+        }
+        @media (max-width: 768px) {
+            .detail-row {
+                grid-template-columns: 1fr;
+            }
+            .button-group {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h2><i class="fas fa-university"></i> Bank Transfer</h2>
+            <p>Complete your payment via direct bank transfer</p>
+        </div>
+
+        <div class="amount-box">
+            <div class="amount-label">Amount to Transfer</div>
+            <div class="amount-value" id="paymentAmount">$0.00</div>
+            <p style="margin-top: 10px; font-size: 0.9rem;" id="courseName">Loading...</p>
+        </div>
+
+        <div class="invoice-ref">
+            <div>
+                <strong>Reference Number:</strong> 
+                <span id="invoiceNumber">ENR-XXXXX</span>
+            </div>
+            <button class="copy-btn" onclick="copyToClipboard(document.getElementById('invoiceNumber').textContent)">
+                <i class="fas fa-copy"></i>
+            </button>
+        </div>
+
+        <div class="bank-details">
+            <h3><i class="fas fa-building"></i> Bank Details</h3>
+            
+            <div class="detail-row">
+                <div class="detail-label">Bank Name</div>
+                <div class="detail-value">Adeptskil Business Bank</div>
+                <i class="fas fa-copy copy-icon" onclick="copyToClipboard('Adeptskil Business Bank')"></i>
+            </div>
+
+            <div class="detail-row">
+                <div class="detail-label">Account Name</div>
+                <div class="detail-value">Adeptskil Training Institute</div>
+                <i class="fas fa-copy copy-icon" onclick="copyToClipboard('Adeptskil Training Institute')"></i>
+            </div>
+
+            <div class="detail-row">
+                <div class="detail-label">Account Number</div>
+                <div class="detail-value">1234567890</div>
+                <i class="fas fa-copy copy-icon" onclick="copyToClipboard('1234567890')"></i>
+            </div>
+
+            <div class="detail-row">
+                <div class="detail-label">Routing Number</div>
+                <div class="detail-value">021000021</div>
+                <i class="fas fa-copy copy-icon" onclick="copyToClipboard('021000021')"></i>
+            </div>
+
+            <div class="detail-row">
+                <div class="detail-label">SWIFT Code</div>
+                <div class="detail-value">ADSBUSXXXXX</div>
+                <i class="fas fa-copy copy-icon" onclick="copyToClipboard('ADSBUSXXXXX')"></i>
+            </div>
+
+            <div class="detail-row">
+                <div class="detail-label">IBAN</div>
+                <div class="detail-value">US12ADSB0012345678</div>
+                <i class="fas fa-copy copy-icon" onclick="copyToClipboard('US12ADSB0012345678')"></i>
+            </div>
+        </div>
+
+        <div class="instructions">
+            <h4><i class="fas fa-list-ol"></i> Transfer Instructions</h4>
+            <ol>
+                <li>Log in to your bank's online banking system</li>
+                <li>Start a new "Send Money" or "Transfer" transaction</li>
+                <li>Enter the account details above</li>
+                <li><strong>Important:</strong> In the payment reference/memo field, enter: <strong id="referenceText">ENR-XXXXX</strong></li>
+                <li>Enter the amount: <strong id="transferAmount">$0.00</strong></li>
+                <li>Review and confirm the transfer</li>
+                <li>Allow 2-3 business days for processing</li>
+            </ol>
+        </div>
+
+        <div class="button-group">
+            <button class="btn-secondary" onclick="goBack()">
+                <i class="fas fa-arrow-left"></i> Back
+            </button>
+            <button class="btn-primary" onclick="confirmPaymentInitiated()">
+                <i class="fas fa-check"></i> Confirmed
+            </button>
+        </div>
+
+        <div class="confirmation-box">
+            <h4><i class="fas fa-check-circle"></i> Payment Initiated</h4>
+            <p>Once we receive your transfer, your enrollment will be confirmed via email.</p>
+        </div>
+
+        <div class="note">
+            <i class="fas fa-info-circle"></i> <strong>Note:</strong> A confirmation email will be sent once the payment is verified.
+        </div>
+    </div>
+
+    <script>
+        // Load payment data from session
+        function loadPaymentData() {
+            const paymentData = JSON.parse(sessionStorage.getItem('paymentData'));
+            const urlParams = new URLSearchParams(window.location.search);
+            const invoice = urlParams.get('invoice') || 'ENR-' + Date.now();
+
+            if (paymentData) {
+                document.getElementById('paymentAmount').textContent = '$' + paymentData.amount.toFixed(2);
+                document.getElementById('courseName').textContent = 'Course: ' + paymentData.enrollment.course;
+                document.getElementById('transferAmount').textContent = '$' + paymentData.amount.toFixed(2);
+            }
+
+            document.getElementById('invoiceNumber').textContent = invoice;
+            document.getElementById('referenceText').textContent = invoice;
+        }
+
+        // Copy to clipboard
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                // Show temporary success message
+                const originalText = event.target.innerHTML;
+                event.target.innerHTML = '<i class="fas fa-check"></i>';
+                setTimeout(() => {
+                    event.target.innerHTML = originalText;
+                }, 2000);
+            }).catch(() => {
+                alert('Failed to copy. Please try again.');
+            });
+        }
+
+        // Confirm payment initiated
+        function confirmPaymentInitiated() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const invoice = urlParams.get('invoice');
+            window.location.href = 'success.html?invoice=' + invoice + '&method=banktransfer&status=pending';
+        }
+
+        // Go back
+        function goBack() {
+            window.history.back();
+        }
+
+        // Load data on page load
+        window.addEventListener('DOMContentLoaded', loadPaymentData);
+    </script>
+</body>
+</html>

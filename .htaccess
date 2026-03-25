@@ -1,18 +1,77 @@
+# ADEPTSKIL HTTPS CONFIGURATION FOR GODADDY
+# Forces secure HTTPS connection and fixes mixed content
+
 <IfModule mod_rewrite.c>
     RewriteEngine On
     RewriteBase /
+    
+    # ===== FORCE HTTPS (Most Important!) =====
+    # Redirect all HTTP traffic to HTTPS
+    RewriteCond %{HTTPS} off
+    RewriteCond %{HTTP:X-Forwarded-Proto} !https
+    RewriteRule ^(.*)$ https://adeptskil.com%{REQUEST_URI} [L,R=301]
+    
+    # ===== FORCE WWW (Optional) =====
+    # Uncomment below to force www.adeptskil.com
+    # RewriteCond %{HTTP_HOST} !^www\. [NC]
+    # RewriteCond %{HTTP_HOST} !^$
+    # RewriteRule ^(.*)$ https://www.adeptskil.com%{REQUEST_URI} [L,R=301]
     
     # Allow POST requests
     <Limit POST>
         Allow from all
     </Limit>
     
-    # Allow OPTIONS
+    # Allow OPTIONS (for CORS)
     <Limit OPTIONS>
+        Allow from all
+    </Limit>
+    
+    # Allow GET
+    <Limit GET>
         Allow from all
     </Limit>
 </IfModule>
 
+# PHP Configuration
 <IfModule mod_php7.c>
     AddType application/x-httpd-php .php
+    php_flag display_errors off
+    php_flag log_errors on
+</IfModule>
+
+# Enable GZIP compression
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json
+</IfModule>
+
+# Set correct MIME types
+<IfModule mod_mime.c>
+    AddType application/json .json
+    AddType text/javascript .js
+    AddType text/css .css
+    AddType application/php .php
+    AddCharset UTF-8 .css .js .html .json .php
+</IfModule>
+
+# Browser caching (improves performance)
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType image/jpeg "access plus 30 days"
+    ExpiresByType image/gif "access plus 30 days"
+    ExpiresByType image/png "access plus 30 days"
+    ExpiresByType text/css "access plus 1 week"
+    ExpiresByType text/javascript "access plus 1 week"
+    ExpiresByType application/javascript "access plus 1 week"
+    ExpiresByType text/html "access plus 1 day"
+</IfModule>
+
+# Prevent directory listing
+Options -Indexes
+
+# Add security headers
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set X-XSS-Protection "1; mode=block"
 </IfModule>
