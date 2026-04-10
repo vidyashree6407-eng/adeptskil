@@ -170,14 +170,29 @@
             try {
                 // Check if we're returning from PayPal
                 const urlParams = new URLSearchParams(window.location.search);
+                
+                // IMPORTANT: Check for enrollment data in URL parameter first (backup for localStorage)
+                const enrollmentParam = urlParams.get('enrollment');
+                if (enrollmentParam) {
+                    try {
+                        const enrollmentData = JSON.parse(decodeURIComponent(enrollmentParam));
+                        console.log('✓ Restoring enrollment data from URL parameter');
+                        console.log('Data:', enrollmentData);
+                        // Restore to localStorage for success page
+                        localStorage.setItem('adeptskil_enrollment_data', JSON.stringify(enrollmentData));
+                    } catch (e) {
+                        console.error('Error parsing URL enrollment data:', e);
+                    }
+                }
+                
                 const hasTransaction = urlParams.get('tx') || urlParams.get('st') || window.location.hash.includes('tx=');
                 
-                // Check localStorage for enrollment data
+                // Check localStorage for enrollment data (either from original page or restored from URL)
                 const enrollmentData = localStorage.getItem('adeptskil_enrollment_data');
                 
-                if (hasTransaction && enrollmentData) {
+                if ((hasTransaction || enrollmentParam) && enrollmentData) {
                     // Payment was successful
-                    console.log('Payment successful detected');
+                    console.log('✓ Payment successful detected');
                     showSuccess();
                 } else if (urlParams.get('cancelled') === 'true') {
                     // Payment was cancelled
@@ -231,7 +246,9 @@
             
             // Auto-redirect to success.html after 3 seconds
             setTimeout(() => {
-                window.location.href = './success.html';
+                // Use absolute URL to avoid relative path issues
+                const baseUrl = window.location.origin || window.location.protocol + '//' + window.location.host;
+                window.location.href = baseUrl + '/success.html';
             }, 3000);
         }
 
@@ -255,15 +272,30 @@
                     comments: enrollmentData.message || ''
                 };
 
-                console.log('Sending enrollment data to API:', payload);
+                console.log('Sending enrollment data to process_enrollment.php:', payload);
 
-                const response = await fetch('process_enrollment.php', {
+                // Use absolute URL to avoid relative path issues
+                const baseUrl = window.location.origin || (window.location.protocol + '//' + window.location.host);
+                const apiUrl = baseUrl + '/process_enrollment.php';
+                
+                console.log('API URL:', apiUrl);
+
+                const response = await fetch(apiUrl, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify(payload)
                 });
+
+                console.log('Response Status:', response.status, response.statusText);
+                
+                if (!response.ok) {
+                    console.error(`HTTP ${response.status}: ${response.statusText}`);
+                    const errorText = await response.text();
+                    console.error('Response body:', errorText);
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
 
                 const result = await response.json();
                 console.log('API Response:', result);
@@ -277,6 +309,7 @@
                 }
             } catch (error) {
                 console.error('Error saving enrollment:', error);
+                console.error('Error details:', error.message);
                 // Continue anyway - user should see success page
             }
         }

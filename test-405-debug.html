@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test POST Request - 405 Debugging</title>
+    <style>
+        body { font-family: Arial; margin: 40px; background: #f5f5f5; }
+        .container { max-width: 600px; background: white; padding: 20px; border-radius: 8px; }
+        button { padding: 10px 20px; background: #667eea; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        button:hover { background: #764ba2; }
+        pre { background: #f9f9f9; padding: 15px; border-radius: 4px; overflow-x: auto; }
+        .success { color: #10b981; }
+        .error { color: #dc2626; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 Test POST to process_enrollment.php</h1>
+        
+        <button onclick="testPost()">Test POST Request</button>
+        
+        <div id="output" style="margin-top: 20px;"></div>
+    </div>
+    
+    <script>
+        async function testPost() {
+            const output = document.getElementById('output');
+            output.innerHTML = '<p>Testing...</p>';
+            
+            const testData = {
+                fullName: 'Test User',
+                email: 'test@example.com',
+                phone: '9876543210',
+                company: 'Test Co',
+                city: 'Bangalore',
+                course: 'Test Course',
+                amount: 100,
+                invoice: 'TEST-' + Date.now(),
+                payment_method: 'test',
+                payment_status: 'completed',
+                payment_id: 'TEST-ID'
+            };
+            
+            try {
+                console.log('Sending POST request to process_enrollment.php');
+                console.log('Data:', testData);
+                
+                const response = await fetch('process_enrollment.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(testData)
+                });
+                
+                console.log('Response status:', response.status);
+                console.log('Response headers:', response.headers);
+                
+                if (response.status === 405) {
+                    output.innerHTML = `<p class="error">✗ HTTP 405 - Method Not Allowed</p>
+                    <p>The POST method is being blocked. This could be:</p>
+                    <ul>
+                        <li>.htaccess configuration issue</li>
+                        <li>Server firewall/WAF blocking POST</li>
+                        <li>GoDaddy server restrictions</li>
+                    </ul>
+                    <p><strong>Check:</strong> Ask GoDaddy support if POST requests are allowed on your account</p>`;
+                    return;
+                }
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    output.innerHTML = `<p class="success">✓ POST Request Successful!</p>
+                    <pre>${JSON.stringify(result, null, 2)}</pre>`;
+                } else {
+                    output.innerHTML = `<p class="error">✗ Request Failed</p>
+                    <pre>${JSON.stringify(result, null, 2)}</pre>`;
+                }
+            } catch (error) {
+                output.innerHTML = `<p class="error">✗ Error: ${error.message}</p>
+                <pre>${error.stack}</pre>`;
+            }
+        }
+    </script>
+</body>
+</html>

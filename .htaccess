@@ -17,21 +17,17 @@
     # RewriteCond %{HTTP_HOST} !^$
     # RewriteRule ^(.*)$ https://www.adeptskil.com%{REQUEST_URI} [L,R=301]
     
-    # Allow POST requests
-    <Limit POST>
-        Allow from all
-    </Limit>
-    
-    # Allow OPTIONS (for CORS)
-    <Limit OPTIONS>
-        Allow from all
-    </Limit>
-    
-    # Allow GET
-    <Limit GET>
-        Allow from all
-    </Limit>
+    # Allow all HTTP methods (GET, POST, PUT, DELETE, OPTIONS)
+    RewriteCond %{REQUEST_METHOD} ^(GET|POST|PUT|DELETE|OPTIONS|HEAD|PATCH)$
+    RewriteRule ^ - [L]
 </IfModule>
+
+# Allow all HTTP methods for PHP files
+<FilesMatch "\.php$">
+    <IfModule mod_authorization.c>
+        Require all granted
+    </IfModule>
+</FilesMatch>
 
 # PHP Configuration
 <IfModule mod_php7.c>
