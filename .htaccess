@@ -22,6 +22,20 @@
     RewriteRule ^ - [L]
 </IfModule>
 
+# ========================================
+# GODADDY SECURITY FIXES (ModSecurity)
+# ========================================
+
+# Bypass ModSecurity for API endpoints
+<IfModule mod_security.c>
+    <Files "process_enrollment.php">
+        SecRuleEngine Off
+    </Files>
+    <Files "ipn_handler.php">
+        SecRuleEngine Off
+    </Files>
+</IfModule>
+
 # Allow all HTTP methods for PHP files
 <FilesMatch "\.php$">
     <IfModule mod_authorization.c>
