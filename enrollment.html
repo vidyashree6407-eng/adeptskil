@@ -254,8 +254,9 @@
                 <input type="hidden" name="currency_code" id="paypalCurrency" value="USD">
                 <input type="hidden" name="invoice" id="paypalInvoice" value="">
                 <input type="hidden" name="custom" id="paypalCustom" value="">
-                <input type="hidden" name="return" id="paypalReturn" value="https://adeptskil.com/paypal-return.html">
-                <input type="hidden" name="cancel_return" id="paypalCancel" value="https://adeptskil.com/paypal-return.html?cancelled=true">
+                <input type="hidden" name="return" id="paypalReturn" value="https://adeptskil.com/thank-you.html">
+                <input type="hidden" name="cancel_return" id="paypalCancel" value="https://adeptskil.com/enrollment.html">
+                <input type="hidden" name="notify_url" id="paypalNotifyUrl" value="">
                 <input type="hidden" name="rm" value="2">
                 <button type="submit" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; padding: 14px 30px; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; width: 100%;">
                     <i class="fab fa-paypal"></i> Pay with PayPal
@@ -266,7 +267,7 @@
             </p>
             
             <div style="background: #fef3c7; border: 1px solid #fcd34d; color: #92400e; padding: 12px; border-radius: 8px; margin-top: 15px; font-size: 0.9rem;">
-                <i class="fas fa-info-circle"></i> <strong>After Payment:</strong> Click the "Return to Merchant" button on PayPal to complete your enrollment.
+                <i class="fas fa-info-circle"></i> <strong>After Payment:</strong> You'll be redirected to the thank you page.
             </div>
         </div>
     </div>
@@ -275,6 +276,9 @@
         // ========== ENROLLMENT CONFIGURATION ==========
         let enrollmentConfig = {};
         let coursePrices = {};
+        
+        // Initialize default price (will be overridden by loadCoursePricing)
+        window.coursePrice = 149.00;
 
         // Fetch course pricing from new pricing system (course_fees_api.php)
         async function loadCoursePricing() {
@@ -336,8 +340,10 @@
         let enrollmentData = {};
 
         // Form submission handler - validate and prepare for payment
-        document.getElementById('enrollmentForm').addEventListener('submit', async (e) => {
+        document.getElementById('enrollmentForm').addEventListener('submit', function(e) {
             e.preventDefault();
+            
+            console.log('✓ Form submission started');
             
             const formData = new FormData(e.target);
             const successMsg = document.getElementById('successMessage');
@@ -348,15 +354,21 @@
             successMsg.style.display = 'none';
             errorMsg.style.display = 'none';
             
-            // Validate required fields
-            const fullName = formData.get('fullName')?.trim();
-            const email = formData.get('email')?.trim();
-            const phone = formData.get('phone')?.trim();
-            const city = formData.get('city')?.trim();
+            // Get form values
+            const fullName = (formData.get('fullName') || '').trim();
+            const email = (formData.get('email') || '').trim();
+            const phone = (formData.get('phone') || '').trim();
+            const city = (formData.get('city') || '').trim();
+            const company = (formData.get('company') || '').trim();
+            const message = (formData.get('message') || '').trim();
             
+            console.log('Form values:', { fullName, email, phone, city, company });
+            
+            // Validate required fields
             if (!fullName || !email || !phone || !city) {
                 errorMsg.style.display = 'block';
                 errorMsg.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Please fill in all required fields (Name, Email, Phone, City).';
+                console.error('✗ Validation failed: missing required fields');
                 return;
             }
             
@@ -365,60 +377,134 @@
             if (!emailRegex.test(email)) {
                 errorMsg.style.display = 'block';
                 errorMsg.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Please enter a valid email address.';
+                console.error('✗ Validation failed: invalid email');
                 return;
             }
             
-            // Get the current course price from the new pricing system
+            // Get course name and price
+            const courseName = document.getElementById('courseHidden').value || document.getElementById('courseTitle').textContent || 'Professional Development Course';
             const currentCoursePrice = window.coursePrice || 149.00;
             
-            // Store enrollment data for payment processing
+            console.log('Course info:', { courseName, price: currentCoursePrice });
+            
+            // Create enrollment data object
             enrollmentData = {
                 course: courseName,
                 fullName: fullName,
                 email: email,
                 phone: phone,
                 city: city,
-                company: formData.get('company')?.trim() || '',
-                message: formData.get('message')?.trim() || '',
+                company: company,
+                message: message,
                 price: currentCoursePrice
             };
             
-            // Save enrollment data to localStorage for after PayPal return
-            localStorage.setItem('adeptskil_enrollment_data', JSON.stringify(enrollmentData));
+            console.log('✓ Enrollment data created:', enrollmentData);
             
-            // Hide form and show payment section immediately
+            // CRITICAL: Save to localStorage IMMEDIATELY
+            try {
+                const jsonData = JSON.stringify(enrollmentData);
+                localStorage.setItem('adeptskil_enrollment_data', jsonData);
+                console.log('✓ Data saved to localStorage successfully');
+                console.log('✓ Verification - read back from localStorage:', localStorage.getItem('adeptskil_enrollment_data'));
+            } catch (error) {
+                console.error('✗ Failed to save to localStorage:', error);
+                errorMsg.style.display = 'block';
+                errorMsg.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Error saving data. Please try again.';
+                return;
+            }
+            
+            // Hide form and show payment section
             e.target.style.display = 'none';
-            document.querySelector('.enrollment-header p').style.display = 'none';
+            const headerP = document.querySelector('.enrollment-header p');
+            if (headerP) headerP.style.display = 'none';
             paymentSection.style.display = 'block';
             
-            // Generate enrollment ID and populate PayPal form
+            console.log('✓ Payment section shown');
+            
+            // Generate enrollment ID and setup PayPal form
             const enrollmentId = 'ENR-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9);
-            setupPayPalForm(enrollmentId);
+            
+            // Store enrollment in database BEFORE payment
+            storeEnrollmentInDatabase(enrollmentId);
+        }
+        
+        // Store enrollment in database via AJAX
+        async function storeEnrollmentInDatabase(enrollmentId) {
+            try {
+                console.log('✓ Storing enrollment in database:', enrollmentId);
+                
+                const response = await fetch('process_enrollment.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        fullName: enrollmentData.fullName,
+                        email: enrollmentData.email,
+                        phone: enrollmentData.phone,
+                        city: enrollmentData.city,
+                        company: enrollmentData.company,
+                        course: enrollmentData.course,
+                        amount: enrollmentData.price,
+                        invoice: enrollmentId,
+                        payment_method: 'paypal',
+                        payment_status: 'pending'
+                    })
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    console.log('✓ Enrollment stored in database successfully');
+                    setupPayPalForm(enrollmentId);
+                } else {
+                    console.error('✗ Failed to store enrollment:', result);
+                    const errorMsg = document.getElementById('errorMessage');
+                    errorMsg.style.display = 'block';
+                    errorMsg.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Error processing enrollment. Please try again.';
+                }
+            } catch (error) {
+                console.error('✗ Error storing enrollment:', error);
+                const errorMsg = document.getElementById('errorMessage');
+                errorMsg.style.display = 'block';
+                errorMsg.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Error processing enrollment. Please try again.';
+            }
+        }
         });
 
         // Setup PayPal form with enrollment data
         function setupPayPalForm(enrollmentId) {
+            console.log('✓ Setting up PayPal form with enrollment ID:', enrollmentId);
+            
             const form = document.getElementById('paypalForm');
             
-            // Get the current domain dynamically (localhost, staging, or production)
+            // Get domain info
             const baseUrl = window.location.origin;
             const isProduction = baseUrl.includes('adeptskil.com');
-            const isSandbox = baseUrl.includes('localhost') || baseUrl.includes('127.0.0.1');
             
-            const returnUrl = baseUrl + '/paypal-return.html';
-            const cancelUrl = baseUrl + '/paypal-return.html?cancelled=true';
+            // Simple return to thank-you.html
+            const returnUrl = baseUrl + '/thank-you.html';
+            const cancelUrl = baseUrl + '/enrollment.html';
             
-            // Set merchant IDs based on environment
+            // Merchant IDs
             const sandboxMerchant = 'sb-besoe49191096@business.example.com';
             const productionMerchant = 'info@adeptskil.com';
             const merchantId = isProduction ? productionMerchant : sandboxMerchant;
+            
+            console.log('PayPal configuration:', {
+                baseUrl,
+                merchantId,
+                course: enrollmentData.course,
+                amount: enrollmentData.price,
+                returnUrl
+            });
             
             // Set PayPal form fields
             document.getElementById('paypalBusiness').value = merchantId;
             document.getElementById('paypalItemName').value = 'Course Enrollment: ' + enrollmentData.course;
             document.getElementById('paypalAmount').value = enrollmentData.price.toFixed(2);
             document.getElementById('paypalCurrency').value = 'USD';
-            
             document.getElementById('paypalInvoice').value = enrollmentId;
             document.getElementById('paypalCustom').value = JSON.stringify({
                 enrollment_id: enrollmentId,
@@ -427,31 +513,15 @@
                 price: enrollmentData.price
             });
             
-            // Set return URLs dynamically
-            console.log('Setting return URLs...');
-            console.log('Return URL:', returnUrl);
-            console.log('Cancel URL:', cancelUrl);
-            
+            // Set return URLs - simplified, no IPN needed for basic flow
             document.getElementById('paypalReturn').value = returnUrl;
             document.getElementById('paypalCancel').value = cancelUrl;
+            document.getElementById('paypalNotifyUrl').value = baseUrl + '/ipn_handler.php';
             
-            // Verify URLs were set
-            console.log('PayPal Return Field Value:', document.getElementById('paypalReturn').value);
-            console.log('PayPal Cancel Field Value:', document.getElementById('paypalCancel').value);
+            console.log('✓ PayPal form configured');
+            console.log('✓ Ready to submit to PayPal');
             
-            // Debug: Log form data before submission
-            console.log('Form Data Before Submit:');
-            const formData = new FormData(form);
-            for (let [key, value] of formData.entries()) {
-                console.log(key + ': ' + value);
-            }
-            
-            // Log URLs for debugging
-            console.log('PayPal Return URL:', returnUrl);
-            console.log('PayPal Cancel URL:', cancelUrl);
-            console.log('PayPal Merchant:', merchantId);
-            
-            // Use sandbox or production PayPal endpoint based on environment
+            // Set PayPal endpoint
             if (isProduction) {
                 form.action = 'https://www.paypal.com/cgi-bin/webscr';
             } else {

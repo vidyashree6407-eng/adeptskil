@@ -7,260 +7,431 @@
     <link rel="icon" type="image/jpeg" href="images/FAVICON.jpg">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             justify-content: center;
-            padding: 20px;
+            padding: 10px;
+            padding-top: 30px;
         }
+
+        .wrapper { width: 100%; max-width: 550px; margin: 0 auto; }
+        
+        .header-logo {
+            display: none;
+            text-align: center;
+            margin-bottom: 12px;
+        }
+
+        .header-logo img {
+            max-width: 130px;
+            height: auto;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+        }
+        
         .container {
             background: white;
-            border-radius: 16px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-            max-width: 600px;
-            width: 100%;
-            padding: 60px 40px;
+            border-radius: 12px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+            padding: 20px 18px;
             text-align: center;
         }
-        .checkmark {
-            font-size: 5rem;
-            color: #10b981;
-            margin-bottom: 20px;
-            animation: scaleIn 0.5s ease-out;
-        }
-        @keyframes scaleIn {
-            from {
-                transform: scale(0);
-                opacity: 0;
-            }
-            to {
-                transform: scale(1);
-                opacity: 1;
-            }
-        }
-        h1 {
+
+        .success-icon {
             font-size: 2.5rem;
-            color: #2d3748;
-            margin-bottom: 20px;
-            font-weight: 700;
-        }
-        p {
-            font-size: 1.1rem;
-            color: #64748b;
-            margin-bottom: 15px;
-            line-height: 1.6;
-        }
-        .transaction-box {
-            background: linear-gradient(135deg, #f0f4ff 0%, #f5f3ff 100%);
-            padding: 25px;
-            border-radius: 12px;
-            margin: 30px 0;
-            border-left: 4px solid #10b981;
-        }
-        .transaction-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 12px 0;
-            border-bottom: 1px solid #e2e8f0;
-        }
-        .transaction-row:last-child {
-            border-bottom: none;
-        }
-        .transaction-label {
-            color: #64748b;
-            font-weight: 500;
-        }
-        .transaction-value {
-            color: #2d3748;
-            font-weight: 600;
-        }
-        .transaction-amount {
             color: #10b981;
-            font-size: 1.3rem;
-            font-weight: 700;
+            margin-bottom: 8px;
+            animation: scaleIn 0.5s ease-out;
+            display: block;
         }
+
+        @keyframes scaleIn { 0% { transform: scale(0); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+
+        h1 { 
+            font-size: 1.6rem; 
+            color: #2d3748; 
+            margin: 8px 0; 
+            font-weight: 700;
+            display: block;
+            visibility: visible !important;
+            opacity: 1 !important;
+        }
+
         .status-badge {
             display: inline-block;
             background: #10b981;
             color: white;
-            padding: 8px 16px;
+            padding: 6px 14px;
             border-radius: 20px;
-            font-size: 0.9rem;
+            font-size: 0.80rem;
             font-weight: 600;
-            margin: 15px 0;
+            margin: 8px 0;
         }
-        .buttons {
-            margin-top: 30px;
+
+        .success-message { color: #64748b; font-size: 0.85rem; margin: 8px 0 12px; }
+
+        .details-section {
+            background: linear-gradient(135deg, #f0f4ff 0%, #f5f3ff 100%);
+            border-left: 4px solid #10b981;
+            border-radius: 8px;
+            padding: 12px;
+            margin: 12px 0;
+            text-align: left;
+            font-size: 0.80rem;
+        }
+
+        .detail-row {
             display: flex;
-            gap: 15px;
+            justify-content: space-between;
+            padding: 6px 0;
+            border-bottom: 1px solid rgba(0,0,0,0.08);
+        }
+
+        .detail-row:last-child { border-bottom: none; }
+        .detail-label { color: #64748b; font-weight: 500; min-width: 100px; }
+        .detail-value { color: #2d3748; font-weight: 600; text-align: right; flex: 1; }
+        .detail-amount { color: #10b981; font-size: 0.95rem; font-weight: 700; }
+
+        .notification-box {
+            background: #d1fae5;
+            border: 1px solid #a7f3d0;
+            border-radius: 8px;
+            padding: 10px;
+            margin: 10px 0;
+            color: #065f46;
+            font-size: 0.75rem;
+            line-height: 1.4;
+        }
+
+        .notification-box i { margin-right: 6px; }
+
+        .info-box {
+            background: #fef3c7;
+            border: 1px solid #fde68a;
+            border-radius: 8px;
+            padding: 10px;
+            margin: 10px 0;
+            color: #92400e;
+            font-size: 0.75rem;
+            line-height: 1.4;
+        }
+
+        .info-box i { margin-right: 6px; }
+
+        .action-buttons {
+            display: flex;
+            gap: 8px;
             justify-content: center;
+            margin: 12px 0;
             flex-wrap: wrap;
         }
-        a {
-            display: inline-block;
-            padding: 12px 30px;
-            border-radius: 8px;
+
+        .btn {
+            padding: 8px 16px;
+            border-radius: 6px;
             text-decoration: none;
             font-weight: 600;
-            transition: all 0.3s ease;
+            border: none;
             cursor: pointer;
+            font-size: 0.80rem;
+            transition: all 0.3s ease;
+            display: inline-block;
         }
+
         .btn-primary {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
         }
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(102, 126, 234, 0.35); }
+
+        .btn-secondary { background: #e2e8f0; color: #2d3748; }
+        .btn-secondary:hover { background: #cbd5e1; transform: translateY(-2px); }
+
+        .support-text {
+            color: #64748b;
+            font-size: 0.70rem;
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px solid #e2e8f0;
+            line-height: 1.4;
         }
-        .btn-secondary {
-            background: #e2e8f0;
-            color: #2d3748;
-        }
-        .btn-secondary:hover {
-            background: #cbd5e1;
-        }
-        .info-text {
-            background: #fef3c7;
-            border: 1px solid #fcd34d;
-            color: #92400e;
-            padding: 15px;
-            border-radius: 8px;
-            font-size: 0.95rem;
-            margin: 20px 0;
+
+        .support-text strong { color: #2d3748; }
+
+        @media (max-width: 768px) {
+            body { padding: 8px; }
+            .container { padding: 15px 12px; }
+            .header-logo img { max-width: 110px; }
+            h1 { font-size: 1.3rem; }
+            .success-icon { font-size: 2rem; }
+            .action-buttons { flex-direction: row; gap: 6px; }
+            .btn { width: auto; font-size: 0.70rem; padding: 6px 12px; }
+            .detail-row { flex-direction: row; }
+            .detail-label { margin-bottom: 0; }
+            .detail-value { text-align: right; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="checkmark">
-            <i class="fas fa-check-circle"></i>
+    <div class="wrapper">
+        <!-- Logo Header -->
+        <div class="header-logo">
+            <img src="images/Logo with full name.png" alt="Adeptskil Logo">
         </div>
-        
-        <h1>Payment Successful!</h1>
-        
-        <div class="status-badge">
-            <i class="fas fa-check"></i> Transaction Completed
-        </div>
-        
-        <p>Your payment has been processed successfully!</p>
-        
-        <div class="transaction-box">
-            <div class="transaction-row">
-                <span class="transaction-label">Status:</span>
-                <span class="transaction-value"><i class="fas fa-check-circle" style="color: #10b981;"></i> Completed</span>
+
+        <div class="container">
+            <i class="fas fa-check-circle success-icon"></i>
+            <h1>Payment Successful!</h1>
+
+            <div class="status-badge">
+                <i class="fas fa-check"></i> Transaction Completed
             </div>
-            <div class="transaction-row">
-                <span class="transaction-label">Transaction ID:</span>
-                <span class="transaction-value" id="transactionId">Processing...</span>
+
+            <p class="success-message">Your payment has been processed successfully and your enrollment is confirmed.</p>
+
+            <!-- Transaction Details -->
+            <div class="details-section">
+                <div class="detail-row">
+                    <span class="detail-label">Status:</span>
+                    <span class="detail-value"><i class="fas fa-check-circle" style="color: #10b981; margin-right: 5px;"></i>Completed</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Enrollment ID:</span>
+                    <span class="detail-value" id="enrollmentId">Processing...</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Course Name:</span>
+                    <span class="detail-value" id="courseName">Loading...</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Amount Paid:</span>
+                    <span class="detail-amount" id="amountPaid">$0.00</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Payment Method:</span>
+                    <span class="detail-value">PayPal</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Date & Time:</span>
+                    <span class="detail-value" id="dateTime">Loading...</span>
+                </div>
             </div>
-            <div class="transaction-row">
-                <span class="transaction-label">Amount:</span>
-                <span class="transaction-amount" id="transactionAmount">$0.00</span>
+
+            <!-- Email Notification -->
+            <div class="notification-box">
+                <i class="fas fa-envelope"></i> <strong>Confirmation Email Sent</strong><br>
+                A confirmation email has been sent to <strong><span id="emailAddr">your registered email</span></strong>
             </div>
-            <div class="transaction-row">
-                <span class="transaction-label">Payment Method:</span>
-                <span class="transaction-value">PayPal</span>
+
+            <!-- Info Box -->
+            <div class="info-box">
+                <i class="fas fa-info-circle"></i> <strong>Check your inbox</strong> (including spam/promotions folder) for enrollment details and course access information.
             </div>
-            <div class="transaction-row">
-                <span class="transaction-label">Date & Time:</span>
-                <span class="transaction-value" id="transactionTime">--:--</span>
+
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <a href="courses.html" class="btn btn-primary">
+                    <i class="fas fa-book"></i> View More Courses
+                </a>
+                <a href="index.html" class="btn btn-secondary">
+                    <i class="fas fa-home"></i> Back to Home
+                </a>
             </div>
-        </div>
-        
-        <div class="info-text">
-            <i class="fas fa-info-circle"></i> A confirmation email has been sent to your registered email address with enrollment details and course access information.
-        </div>
-        
-        <div style="background: #dbeafe; border: 1px solid #93c5fd; color: #1e40af; padding: 15px; border-radius: 8px; font-size: 0.95rem; margin: 15px 0;">
-            <i class="fas fa-flask"></i> <strong>Sandbox Test:</strong> This is a test payment. In production, PayPal will automatically redirect you here.
-        </div>
-        
-        <p style="font-size: 0.95rem; color: #64748b; margin-top: 20px;">
-            Our team will review your enrollment and contact you shortly with the next steps.
-        </p>
-        
-        <div class="buttons">
-            <a href="courses.html" class="btn-primary">
-                <i class="fas fa-book"></i> Explore More Courses
-            </a>
-            <a href="index.html" class="btn-secondary">
-                <i class="fas fa-home"></i> Back to Home
-            </a>
+
+            <!-- Support Text -->
+            <div class="support-text">
+                <p><i class="fas fa-question-circle"></i> If you have any questions, contact us at <strong>info@adeptskil.com</strong></p>
+                <p style="margin-top: 10px;">Thank you for enrolling with Adeptskil! 🎓</p>
+            </div>
         </div>
     </div>
 
     <script>
-        // Populate transaction details from localStorage
-        function populateTransactionDetails() {
-            const enrollmentData = localStorage.getItem('adeptskil_enrollment_data');
+        document.addEventListener('DOMContentLoaded', function() {
+            console.clear();
+            console.log('=== SUCCESS PAGE DEBUG ===');
+            console.log('✓ Page URL:', window.location.href);
+            console.log('✓ Page hostname:', window.location.hostname);
+            console.log('✓ URL search params:', window.location.search);
+            console.log('=== CHECKING DATA SOURCES ===');
             
-            if (enrollmentData) {
+            // Check localStorage
+            console.log('✓ localStorage size:', Object.keys(localStorage).length);
+            console.log('✓ localStorage keys:', Object.keys(localStorage));
+            const localStorageData = localStorage.getItem('adeptskil_enrollment_data');
+            console.log('✓ adeptskil_enrollment_data in localStorage:', localStorageData ? 'YES' : 'NO');
+            
+            // Check sessionStorage  
+            console.log('✓ sessionStorage size:', Object.keys(sessionStorage).length);
+            const sessionData = sessionStorage.getItem('enrollmentSuccessData');
+            console.log('✓ enrollmentSuccessData in sessionStorage:', sessionData ? 'YES' : 'NO');
+            
+            // Parse URL params
+            const urlParams = new URLSearchParams(window.location.search);
+            console.log('✓ URL Parameters present:');
+            for (let [key, value] of urlParams) {
+                console.log(`  - ${key}: ${value}`);
+            }
+            
+            // Try to load and parse data
+            let enrollmentData = null;
+            
+            // 1. Try localStorage
+            if (localStorageData) {
                 try {
-                    const data = JSON.parse(enrollmentData);
-                    console.log('✓ Enrollment Data Found:', data);
-                    
-                    // Update transaction details
-                    document.getElementById('transactionId').textContent = 'ENR-' + Date.now();
-                    document.getElementById('transactionAmount').textContent = '$' + parseFloat(data.price || 0).toFixed(2);
-                    document.getElementById('transactionTime').textContent = new Date().toLocaleString();
-                    
-                    console.log('%c=== ENROLLMENT CONFIRMED ===', 'background: #10b981; color: white; padding: 8px; font-size: 14px; font-weight: bold;');
-                    console.log('✓ Full Name:', data.fullName);
-                    console.log('✓ Email:', data.email);
-                    console.log('✓ Phone:', data.phone);
-                    console.log('✓ City:', data.city);
-                    console.log('✓ Company:', data.company);
-                    console.log('✓ Course:', data.course);
-                    console.log('✓ Amount:', '$' + parseFloat(data.price || 0).toFixed(2));
-                    console.log('✓ Confirmation Email: SENT');
-                    console.log('%c================================', 'background: #10b981; color: white; padding: 8px;');
-                    
-                } catch (error) {
-                    console.error('Error parsing enrollment data:', error);
-                    document.getElementById('transactionId').textContent = 'TRX-' + Date.now();
-                    document.getElementById('transactionTime').textContent = new Date().toLocaleString();
+                    enrollmentData = JSON.parse(localStorageData);
+                    console.log('✓ LOADED FROM LOCALSTORAGE:', enrollmentData);
+                } catch (e) {
+                    console.error('✗ Error parsing localStorage:', e);
                 }
-            } else {
-                console.log('No enrollment data found in localStorage');
-                document.getElementById('transactionId').textContent = 'TRX-' + Date.now();
-                document.getElementById('transactionTime').textContent = new Date().toLocaleString();
             }
-        }
-        
-        // Run on page load
-        document.addEventListener('DOMContentLoaded', populateTransactionDetails);
-    </script>
-                margin-top: 20px;
-                display: none;
-            `;
-            warningBox.innerHTML = `
-                <strong>⚠️ Development Note:</strong><br>
-                PHP backend is not running. The enrollment data was collected successfully and is displayed in the browser console.<br><br>
-                <strong>To enable PHP backend for local testing:</strong><br>
-                1. Install PHP from <a href="https://www.php.net/downloads" target="_blank" style="color: #0066cc;">php.net</a><br>
-                2. Stop the current Python server (Ctrl+C)<br>
-                3. Run: <code style="background: #f0f0f0; padding: 2px 5px;">php -S localhost:8000</code><br>
-                4. Reload this page and test again
-            `;
             
-            const buttons = document.querySelector('.buttons');
-            if (buttons && buttons.style.display !== 'none') {
-                buttons.parentNode.insertBefore(warningBox, buttons);
-                warningBox.style.display = 'block';
+            // 2. Try sessionStorage
+            if (!enrollmentData && sessionData) {
+                try {
+                    enrollmentData = JSON.parse(sessionData);
+                    console.log('✓ LOADED FROM SESSIONSTORAGE:', enrollmentData);
+                } catch (e) {
+                    console.error('✗ Error parsing sessionStorage:', e);
+                }
             }
-        }
+            
+            // 3. Try URL parameters
+            if (!enrollmentData) {
+                console.log('⚠ No storage data found, building from URL params...');
+                const invoice = urlParams.get('invoice');
+                const email = urlParams.get('email');
+                const fullName = urlParams.get('fullName');
+                const course = urlParams.get('course');
+                const price = urlParams.get('price');
+                const method = urlParams.get('method');
+                
+                console.log('URL Param Values:', { invoice, email, fullName, course, price, method });
+                
+                if (invoice) {
+                    enrollmentData = {
+                        invoice: invoice,
+                        email: email,
+                        fullName: fullName,
+                        course: course,
+                        price: price,
+                        method: method,
+                        status: 'completed'
+                    };
+                    console.log('✓ LOADED FROM URL PARAMS:', enrollmentData);
+                }
+            }
+            
+            // Generate ID if missing
+            if (enrollmentData && !enrollmentData.id) {
+                enrollmentData.id = enrollmentData.invoice || 'ENR-' + Date.now();
+            }
+            
+            console.log('=== FINAL DATA ===');
+            console.log('Enrollment Data:', enrollmentData);
+            
+            // Display the data
+            if (enrollmentData) {
+                console.log('✓ Displaying enrollment data...');
+                
+                // Enrollment ID
+                const enrollmentIdEl = document.getElementById('enrollmentId');
+                if (enrollmentIdEl) {
+                    const displayId = enrollmentData.id || enrollmentData.invoice || 'ENR-UNKNOWN';
+                    enrollmentIdEl.textContent = displayId;
+                    enrollmentIdEl.style.color = '#2d3748';
+                    console.log('✓ Set enrollmentId to:', displayId);
+                }
+                
+                // Course Name
+                const courseNameEl = document.getElementById('courseName');
+                if (courseNameEl) {
+                    const displayCourse = enrollmentData.course || 'Professional Training Course';
+                    courseNameEl.textContent = displayCourse;
+                    courseNameEl.style.color = '#2d3748';
+                    console.log('✓ Set courseName to:', displayCourse);
+                }
+                
+                // Amount Paid
+                const amountEl = document.getElementById('amountPaid');
+                if (amountEl) {
+                    const displayPrice = '$' + parseFloat(enrollmentData.price || 0).toFixed(2);
+                    amountEl.textContent = displayPrice;
+                    amountEl.style.color = '#10b981';
+                    console.log('✓ Set amountPaid to:', displayPrice);
+                }
+                
+                // Date & Time
+                const dateTimeEl = document.getElementById('dateTime');
+                if (dateTimeEl) {
+                    const displayDate = new Date().toLocaleString();
+                    dateTimeEl.textContent = displayDate;
+                    dateTimeEl.style.color = '#2d3748';
+                    console.log('✓ Set dateTime to:', displayDate);
+                }
+                
+                // Email Address
+                const emailEl = document.getElementById('emailAddr');
+                if (emailEl) {
+                    const displayEmail = enrollmentData.email || 'your registered email';
+                    emailEl.textContent = displayEmail;
+                    emailEl.style.color = '#2d3748';
+                    console.log('✓ Set emailAddr to:', displayEmail);
+                }
+                
+                console.log('=== EMAIL NOTIFICATION ===');
+                
+                // RETRY to store enrollment if it wasn't stored in payment method
+                if (enrollmentData.fullName && enrollmentData.email && enrollmentData.course) {
+                    console.log('🔄 Attempting to store enrollment (retry on success page)...');
+                    
+                    storeEnrollmentRetry(enrollmentData);
+                }
+                
+                console.log('✓ Enrollment confirmation displayed successfully');
+            } else {
+                console.error('✗ NO ENROLLMENT DATA FOUND IN ANY SOURCE!');
+                console.error('This usually means:');
+                console.error('  1. The enrollment form was not submitted');
+                console.error('  2. Storage was cleared between page loads');
+                console.error('  3. URL parameters were not passed correctly');
+                console.error('URL:', window.location.href);
+            }
+        });
         
-        // Handle page load
-        document.addEventListener('DOMContentLoaded', handlePaymentReturn);
+        // RETRY: Store enrollment if not already stored
+        function storeEnrollmentRetry(enrollmentData) {
+            fetch('store_enrollment.php', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    action: 'store_enrollment',
+                    fullName: enrollmentData.fullName,
+                    email: enrollmentData.email,
+                    phone: enrollmentData.phone || '',
+                    course: enrollmentData.course,
+                    price: enrollmentData.price || 0,
+                    invoice: enrollmentData.id || enrollmentData.invoice,
+                    company: enrollmentData.company || '',
+                    city: enrollmentData.city || ''
+                })
+            })
+            .then(r => r.json())
+            .then(d => {
+                if (d.success) {
+                    console.log('✓ Enrollment stored on success page:', d);
+                } else {
+                    console.warn('⚠ Store failed:', d.error);
+                }
+            })
+            .catch(e => console.warn('Store retry failed (non-critical):', e));
+        }
     </script>
 </body>
 </html>

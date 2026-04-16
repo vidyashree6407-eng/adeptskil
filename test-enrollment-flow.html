@@ -1,0 +1,213 @@
+<?php
+/**
+ * Quick Enrollment Test
+ * Tests the complete enrollment flow without PayPal
+ */
+?>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quick Enrollment Test - Adeptskil</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body { font-family: Arial; margin: 0; padding: 20px; background: #f5f5f5; }
+        .container { max-width: 900px; margin: 0 auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        h1 { color: #667eea; margin-top: 0; }
+        .section { margin: 25px 0; padding: 20px; background: #f9f9f9; border-left: 4px solid #667eea; border-radius: 4px; }
+        .test-box { background: #f0f4ff; padding: 15px; margin: 10px 0; border-radius: 4px; }
+        code { background: #eee; padding: 2px 6px; border-radius: 3px; font-family: monospace; }
+        button { background: #667eea; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; font-size: 14px; }
+        button:hover { background: #764ba2; }
+        .success { color: #10b981; font-weight: bold; }
+        .error { color: #ef4444; font-weight: bold; }
+        .warning { color: #f59e0b; font-weight: bold; }
+        pre { background: #eee; padding: 10px; border-radius: 4px; overflow-x: auto; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 Enrollment Flow Test</h1>
+        
+        <div class="section">
+            <h2>Test 1: Simulate Full Enrollment Flow</h2>
+            <p>This test will:</p>
+            <ol>
+                <li>Save fake enrollment data to localStorage</li>
+                <li>Check if success page can read it</li>
+                <li>Send test confirmation email</li>
+            </ol>
+            <button onclick="testEnrollmentFlow()">▶ Run Test 1</button>
+            <div id="test1-result"></div>
+        </div>
+
+        <div class="section">
+            <h2>Test 2: Check localStorage</h2>
+            <button onclick="checkLocalStorage()">▶ Run Test 2</button>
+            <div id="test2-result"></div>
+        </div>
+
+        <div class="section">
+            <h2>Test 3: Send Test Confirmation Email</h2>
+            <p>This will send a test email using the PHP mail system:</p>
+            <input type="email" id="testEmail" placeholder="Enter your email" style="padding: 8px; width: 300px; border: 1px solid #ddd; border-radius: 4px;">
+            <button onclick="sendTestEmail()">▶ Send Test Email</button>
+            <div id="test3-result"></div>
+        </div>
+
+        <div class="section">
+            <h2>Test 4: Check If Data Flows Through Success Page</h2>
+            <button onclick="testSuccessPage()">▶ Run Test 4</button>
+            <div id="test4-result"></div>
+        </div>
+
+        <div class="section">
+            <h2>🔍 Current State</h2>
+            <div class="test-box">
+                <strong>Current Page:</strong> <code id="currentPage"></code>
+                <br><strong>localStorage Keys:</strong> <code id="storageKeys"></code>
+                <br><strong>Enrollment Data in localStorage:</strong> <code id="enrollmentData" style="display: block; word-break: break-all;"></code>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Update current state
+        document.getElementById('currentPage').textContent = window.location.href;
+        document.getElementById('storageKeys').textContent = Object.keys(localStorage).join(', ');
+        const data = localStorage.getItem('adeptskil_enrollment_data');
+        document.getElementById('enrollmentData').textContent = data ? JSON.stringify(JSON.parse(data), null, 2) : 'Not found';
+
+        function testEnrollmentFlow() {
+            const result = document.getElementById('test1-result');
+            result.innerHTML = '<p class="warning">Running Test 1...</p>';
+            
+            try {
+                // Create fake enrollment data
+                const testData = {
+                    course: 'Test Python Development',
+                    fullName: 'Test User',
+                    email: 'test@example.com',
+                    phone: '9999999999',
+                    city: 'Test City',
+                    company: 'Test Company',
+                    message: 'Test message',
+                    price: 199.99
+                };
+
+                // Save to localStorage
+                localStorage.setItem('adeptskil_enrollment_data', JSON.stringify(testData));
+                
+                result.innerHTML = `
+                    <p class="success">✓ Step 1: Data saved to localStorage</p>
+                    <div class="test-box">
+                        <pre>${JSON.stringify(testData, null, 2)}</pre>
+                    </div>
+                    
+                    <p class="success">✓ Step 2: Now visit <code>http://localhost:8000/success.html</code></p>
+                    <p style="color: #64748b;">The success page should display all this data.</p>
+                    
+                    <p class="warning">✓ Step 3: Check your email inbox for confirmation</p>
+                    <p style="color: #64748b;">Check both inbox and spam folder.</p>
+                    
+                    <button onclick="goToSuccessPage()">Go to Success Page →</button>
+                `;
+            } catch (error) {
+                result.innerHTML = '<p class="error">✗ Error: ' + error.message + '</p>';
+            }
+        }
+
+        function goToSuccessPage() {
+            window.location.href = 'http://localhost:8000/success.html';
+        }
+
+        function checkLocalStorage() {
+            const result = document.getElementById('test2-result');
+            const data = localStorage.getItem('adeptskil_enrollment_data');
+            
+            if (data) {
+                result.innerHTML = `
+                    <p class="success">✓ Enrollment data found in localStorage</p>
+                    <div class="test-box">
+                        <pre>${JSON.stringify(JSON.parse(data), null, 2)}</pre>
+                    </div>
+                `;
+            } else {
+                result.innerHTML = `
+                    <p class="error">✗ No enrollment data found in localStorage</p>
+                    <p>Run <strong>Test 1</strong> first to create test data</p>
+                `;
+            }
+        }
+
+        function sendTestEmail() {
+            const email = document.getElementById('testEmail').value;
+            const result = document.getElementById('test3-result');
+            
+            if (!email || !email.includes('@')) {
+                result.innerHTML = '<p class="error">✗ Please enter a valid email address</p>';
+                return;
+            }
+
+            result.innerHTML = '<p class="warning">Sending test email to ' + email + '...</p>';
+
+            fetch('send_confirmation_email.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    fullName: 'Test User',
+                    email: email,
+                    phone: '9999999999',
+                    course: 'Test Course',
+                    company: 'Test Company',
+                    city: 'Test City',
+                    price: 199.99
+                })
+            })
+            .then(r => r.json())
+            .then(data => {
+                result.innerHTML = `
+                    <p class="success">✓ Email sent!</p>
+                    <div class="test-box">
+                        <strong>Response:</strong>
+                        <pre>${JSON.stringify(data, null, 2)}</pre>
+                    </div>
+                    <p style="color: #64748b;">Check your email (${email}) in 5-10 seconds</p>
+                    <p style="color: #f59e0b;"><strong>Note:</strong> Check spam/promotions folder too</p>
+                `;
+            })
+            .catch(error => {
+                result.innerHTML = '<p class="error">✗ Error: ' + error.message + '</p>';
+            });
+        }
+
+        function testSuccessPage() {
+            const result = document.getElementById('test4-result');
+            const data = localStorage.getItem('adeptskil_enrollment_data');
+            
+            if (!data) {
+                result.innerHTML = `
+                    <p class="error">✗ No data in localStorage</p>
+                    <p>Run <strong>Test 1</strong> first to create test data</p>
+                `;
+                return;
+            }
+
+            try {
+                const parsed = JSON.parse(data);
+                result.innerHTML = `
+                    <p class="success">✓ localStorage can be read by success page</p>
+                    <div class="test-box">
+                        <strong>Course:</strong> ${parsed.course}<br>
+                        <strong>Amount:</strong> $${parseFloat(parsed.price).toFixed(2)}<br>
+                        <strong>Email:</strong> ${parsed.email}<br>
+                        <strong>Date:</strong> ${new Date().toLocaleString()}
+                    </div>
+                    <p style="color: #64748b;">This is what success page should display</p>
+                `;
+            } catch (error) {
+                result.innerHTML = '<p class="error">✗ Error parsing data: ' + error.message + '</p>';
+            }
+        }
+    </script>
+</body>
+</html>

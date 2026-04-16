@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enrollment Form Test - Console Monitoring</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f8fafc;
+            padding: 20px;
+        }
+        .test-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .test-section {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .test-section h2 {
+            margin-top: 0;
+            color: #667eea;
+        }
+        .test-form {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .test-form input, .test-form select {
+            padding: 10px;
+            border: 1px solid #e2e8f0;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        .test-form button {
+            padding: 12px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-top: 12px;
+        }
+        .test-form button:hover {
+            background: #764ba2;
+        }
+        .console-output {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 15px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            max-height: 400px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        .console-log { color: #e2e8f0; }
+        .console-success { color: #10b981; }
+        .console-error { color: #ef4444; }
+        .console-warning { color: #f59e0b; }
+        .status-box {
+            background: #f0fdf4;
+            border: 1px solid #86efac;
+            padding: 12px;
+            border-radius: 4px;
+            margin: 12px 0;
+            font-size: 0.9rem;
+        }
+        .status-error {
+            background: #fef2f2;
+            border-color: #fecaca;
+        }
+        .status-title {
+            font-weight: 600;
+            color: #166534;
+            margin-bottom: 6px;
+        }
+        .status-error .status-title {
+            color: #7f1d1d;
+        }
+        @media (max-width: 768px) {
+            .test-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <!-- Left: Form Testing -->
+        <div class="test-section">
+            <h2><i class="fas fa-form"></i> Test Enrollment Form</h2>
+            <p style="color: #64748b; font-size: 0.9rem;">Fill out and submit the form to test localStorage saving:</p>
+            
+            <form id="testForm" class="test-form">
+                <input type="text" name="courseName" placeholder="Course Name (e.g., Leadership Fundamentals)" value="Leadership Fundamentals" required>
+                <input type="text" name="fullName" placeholder="Full Name" value="John Doe" required>
+                <input type="email" name="email" placeholder="Email" value="john@example.com" required>
+                <input type="tel" name="phone" placeholder="Phone" value="+1 234-567-8900" required>
+                <input type="text" name="city" placeholder="City" value="New York" required>
+                <input type="text" name="company" placeholder="Company (optional)" value="Acme Corp">
+                <input type="number" name="price" placeholder="Price" value="149.00" step="0.01" required>
+                <button type="submit">
+                    <i class="fas fa-check"></i> Submit & Save to localStorage
+                </button>
+            </form>
+
+            <div class="status-box">
+                <div class="status-title"><i class="fas fa-database"></i> localStorage Status:</div>
+                <div id="storageStatus">Not tested yet...</div>
+            </div>
+
+            <button type="button" onclick="testLocalStorage()" style="background: #764ba2; width: 100%; margin-top: 10px;">
+                <i class="fas fa-search"></i> Check localStorage Now
+            </button>
+        </div>
+
+        <!-- Right: Console Output -->
+        <div class="test-section">
+            <h2><i class="fas fa-terminal"></i> Browser Console Output</h2>
+            <p style="color: #64748b; font-size: 0.9rem;">Console logs appear here in real-time:</p>
+            <div class="console-output" id="consoleOutput">Waiting for activity...</div>
+            <button type="button" onclick="clearConsole()" style="background: #ef4444; width: 100%; margin-top: 10px;">
+                <i class="fas fa-trash"></i> Clear Console
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // ========== CONSOLE CAPTURE ==========
+        const consoleOutput = document.getElementById('consoleOutput');
+        const originalLog = console.log;
+        const originalError = console.error;
+        const originalWarn = console.warn;
+
+        function addConsoleLine(message, type = 'log') {
+            const timestamp = new Date().toLocaleTimeString();
+            const line = document.createElement('div');
+            line.className = `console-${type}`;
+            line.textContent = `[${timestamp}] ${message}`;
+            consoleOutput.appendChild(line);
+            consoleOutput.scrollTop = consoleOutput.scrollHeight;
+        }
+
+        console.log = function(message) {
+            originalLog.apply(console, arguments);
+            if (typeof message === 'object') {
+                addConsoleLine(JSON.stringify(message, null, 2), 'log');
+            } else {
+                addConsoleLine(String(message), 'log');
+            }
+        };
+
+        console.error = function(message) {
+            originalError.apply(console, arguments);
+            if (typeof message === 'object') {
+                addConsoleLine('ERROR: ' + JSON.stringify(message, null, 2), 'error');
+            } else {
+                addConsoleLine('ERROR: ' + String(message), 'error');
+            }
+        };
+
+        console.warn = function(message) {
+            originalWarn.apply(console, arguments);
+            addConsoleLine('WARN: ' + String(message), 'warning');
+        };
+
+        function clearConsole() {
+            consoleOutput.innerHTML = 'Console cleared. Submit the form to see new logs...';
+        }
+
+        // ========== FORM TEST ==========
+        document.getElementById('testForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            console.log('✓ Form submit handler triggered');
+            
+            const formData = new FormData(e.target);
+            const enrollmentData = {
+                course: formData.get('courseName'),
+                fullName: formData.get('fullName'),
+                email: formData.get('email'),
+                phone: formData.get('phone'),
+                city: formData.get('city'),
+                company: formData.get('company'),
+                price: parseFloat(formData.get('price')),
+                timestamp: new Date().toISOString()
+            };
+
+            console.log('✓ Enrollment data object created:', enrollmentData);
+
+            try {
+                const jsonData = JSON.stringify(enrollmentData);
+                console.log('✓ JSON stringified successfully');
+                
+                localStorage.setItem('adeptskil_enrollment_data', jsonData);
+                console.log('✓ Data saved to localStorage!');
+                
+                // Verify it was saved
+                const saved = localStorage.getItem('adeptskil_enrollment_data');
+                console.log('✓ Verification read from localStorage:', JSON.parse(saved));
+                
+                updateStorageStatus(true, enrollmentData);
+            } catch (error) {
+                console.error('✗ FAILED to save to localStorage:', error);
+                updateStorageStatus(false, error);
+            }
+        });
+
+        function testLocalStorage() {
+            console.log('━━━ MANUAL localStorage CHECK ━━━');
+            
+            try {
+                // Test localStorage is available
+                console.log('✓ localStorage API available');
+                
+                // Try to get the enrollment data
+                const stored = localStorage.getItem('adeptskil_enrollment_data');
+                
+                if (stored) {
+                    console.log('✓ Data found in localStorage!');
+                    const parsed = JSON.parse(stored);
+                    console.log('✓ Successfully parsed JSON');
+                    console.log('Data contents:', parsed);
+                    updateStorageStatus(true, parsed);
+                } else {
+                    console.warn('⚠ No data found in localStorage (key: adeptskil_enrollment_data)');
+                    updateStorageStatus(false, 'No data stored yet');
+                }
+                
+                // Show all localStorage keys for debugging
+                console.log('All localStorage keys:');
+                for (let i = 0; i < localStorage.length; i++) {
+                    const key = localStorage.key(i);
+                    console.log(`  - ${key} (${localStorage.getItem(key).substring(0, 50)}...)`);
+                }
+            } catch (error) {
+                console.error('✗ localStorage check failed:', error);
+                updateStorageStatus(false, error);
+            }
+        }
+
+        function updateStorageStatus(success, data) {
+            const statusDiv = document.getElementById('storageStatus');
+            
+            if (success && typeof data === 'object') {
+                statusDiv.className = '';
+                statusDiv.innerHTML = `
+                    <div style="color: #166534; font-weight: 600; margin-bottom: 8px;">✓ Data successfully saved!</div>
+                    <div style="font-size: 0.85rem; color: #4b5563;">
+                        <strong>Course:</strong> ${data.course}<br>
+                        <strong>Name:</strong> ${data.fullName}<br>
+                        <strong>Email:</strong> ${data.email}<br>
+                        <strong>Phone:</strong> ${data.phone}<br>
+                        <strong>City:</strong> ${data.city}<br>
+                        <strong>Price:</strong> $${data.price}
+                    </div>
+                `;
+            } else if (success) {
+                statusDiv.className = 'status-error';
+                statusDiv.innerHTML = `
+                    <div class="status-title">✓ localStorage Check Passed</div>
+                    <div style="font-size: 0.85rem;">${String(data)}</div>
+                `;
+            } else {
+                statusDiv.className = 'status-error';
+                statusDiv.innerHTML = `
+                    <div class="status-title">✗ Error Saving Data</div>
+                    <div style="font-size: 0.85rem;">${data instanceof Error ? data.message : String(data)}</div>
+                `;
+            }
+        }
+
+        // Initial log
+        console.log('✓ Test page loaded. Fill out form and click Submit to test enrollment data saving.');
+        console.log(`Browser: ${navigator.userAgent.substring(0, 50)}...`);
+        console.log(`localStorage available: ${typeof(Storage) !== 'undefined'}`);
+    </script>
+</body>
+</html>

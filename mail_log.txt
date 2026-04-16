@@ -1,0 +1,100 @@
+[2026-04-06 07:07:07] TO: info@adeptskil.com | SUBJECT: GoDaddy SMTP Configuration Test - 2026-04-06 07:07:07 | FROM: info@adeptskil.com
+Body length: 539 bytes
+---
+
+<html>
+<head><title>SMTP Configuration Test</title></head>
+<body>
+<h2>GoDaddy SMTP Configuration Test</h2>
+<p><strong>Status:</strong> Configuration appears to be working!</p>
+<p><strong>Timestamp:</strong> 2026-04-06 07:07:07</p>
+<p><strong>Mail Method:</strong> smtp</p>
+<p><strong>From:</strong> Adeptskil &lt;info@adeptskil.com&gt;</p>
+<p><strong>To:</strong> info@adeptskil.com</p>
+<hr>
+<p>This is an automated test email. If you received this, your GoDaddy SMTP configuration is working correctly.</p>
+</body>
+</html>
+
+---
+
+[2026-04-10 08:23:03] TO: vidyashree6407@gmail.com | SUBJECT: ✓ Enrollment Confirmation - Leadership Training | FROM: info@adeptskil.com
+Body length: 2625 bytes
+---
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; }
+        .container { max-width: 600px; margin: 20px auto; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; }
+        .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px 20px; text-align: center; }
+        .header h1 { margin: 0; font-size: 24px; }
+        .content { padding: 25px 20px; background: white; }
+        .info-box { background: #f5f5f5; padding: 15px; border-radius: 5px; margin: 15px 0; }
+        .row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #eee; }
+        .row:last-child { border-bottom: none; }
+        .label { font-weight: bold; color: #555; }
+        .value { color: #333; }
+        .footer { background: #f9f9f9; padding: 15px; text-align: center; font-size: 12px; color: #777; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>✓ Enrollment Confirmed</h1>
+        </div>
+        
+        <div class="content">
+            <p>Dear <strong>Test Student</strong>,</p>
+            
+            <p>Thank you for enrolling with <strong>Adeptskil</strong>! Your payment has been received and your enrollment is now active.</p>
+            
+            <div class="info-box">
+                <div class="row">
+                    <span class="label">Enrollment ID:</span>
+                    <span class="value"><strong>TEST-20260410082303</strong></span>
+                </div>
+                <div class="row">
+                    <span class="label">Course:</span>
+                    <span class="value">Leadership Training</span>
+                </div>
+                <div class="row">
+                    <span class="label">Amount Paid:</span>
+                    <span class="value" style="color: #10b981; font-weight: bold;">₹5000</span>
+                </div>
+            </div>
+            
+            <p>Your course materials will be available soon. You will receive further instructions via email.</p>
+            
+            <p>If you have any questions, feel free to contact us.</p>
+            
+            <p>Best regards,<br>
+            <strong>Adeptskil Team</strong><br>
+            info@adeptskil.com
+            </p>
+        </div>
+        
+        <div class="footer">
+            <p>This is an automated email. Please do not reply.</p>
+        </div>
+    </div>
+</body>
+</html>
+---
+
+[2026-04-10 08:45:36] CLI TEST: ENROLLMENT EMAIL START: vidyashree6407@gmail.com | Invoice: PAYPAL-TEST-1775810736
+[2026-04-10 08:45:36] TO: vidyashree6407@gmail.com | SUBJECT: ✓ Enrollment Confirmation - Advanced Leadership | FROM: info@adeptskil.com
+Body length: 29 bytes
+---
+<p>Test email to customer</p>
+---
+
+[2026-04-10 08:45:45] CLI TEST: ENROLLMENT EMAIL TO CUSTOMER: SENT
+[2026-04-10 08:45:45] TO: info@adeptskil.com | SUBJECT: NEW ENROLLMENT: Advanced Leadership - PayPal Test User | FROM: info@adeptskil.com
+Body length: 26 bytes
+---
+<p>Test email to admin</p>
+---
+
+[2026-04-10 08:45:53] CLI TEST: ENROLLMENT EMAIL TO ADMIN: SENT

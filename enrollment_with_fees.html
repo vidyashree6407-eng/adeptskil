@@ -674,8 +674,38 @@
         }
 
         // PayPal Payment Processing
-        function processPayPalPayment(paymentData) {
+        async function processPayPalPayment(paymentData) {
             console.log('Redirecting to PayPal...');
+            
+            // WAIT for enrollment to be stored FIRST
+            try {
+                console.log('🔄 Storing enrollment to database...');
+                const response = await fetch('store_enrollment.php', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        action: 'store_enrollment',
+                        fullName: paymentData.enrollment.fullName,
+                        email: paymentData.enrollment.email,
+                        phone: paymentData.enrollment.phone,
+                        course: paymentData.enrollment.course,
+                        price: paymentData.enrollment.price,
+                        invoice: paymentData.enrollment.invoice,
+                        company: paymentData.enrollment.company,
+                        city: paymentData.enrollment.city
+                    })
+                });
+                
+                const data = await response.json();
+                console.log('✓ Enrollment stored successfully:', data);
+                
+                if (!data.success) {
+                    console.warn('⚠ Store returned error:', data.error);
+                }
+            } catch (error) {
+                console.error('❌ Store failed:', error.message);
+                // Continue anyway - PayPal redirect is still needed
+            }
             
             // Store enrollment data for return
             sessionStorage.setItem('paymentData', JSON.stringify(paymentData));
@@ -694,10 +724,12 @@
                 pincode: paymentData.enrollment.pincode,
                 address: paymentData.enrollment.address,
                 course: paymentData.enrollment.course,
-                amount: amount,
+                price: amount,
                 invoice: invoiceId,
                 method: 'paypal'
             };
+            // Save to localStorage with the key success.html expects
+            localStorage.setItem('adeptskil_enrollment_data', JSON.stringify(enrollmentDataForSuccess));
             sessionStorage.setItem('enrollmentSuccessData', JSON.stringify(enrollmentDataForSuccess));
             
             // Create a hidden form and submit to PayPal
@@ -706,8 +738,8 @@
             form.action = 'https://www.sandbox.paypal.com/cgi-bin/webscr'; // Sandbox
             // For production, change to: 'https://www.paypal.com/cgi-bin/webscr'
             
-            // Build proper return URLs with absolute paths
-            const successURL = window.location.origin + '/success.html?invoice=' + invoiceId + '&method=paypal';
+            // Build proper return URLs with absolute paths (include email as backup)
+            const successURL = window.location.origin + '/success.html?invoice=' + invoiceId + '&method=paypal&email=' + encodeURIComponent(paymentData.enrollment.email) + '&fullName=' + encodeURIComponent(paymentData.enrollment.fullName) + '&course=' + encodeURIComponent(paymentData.enrollment.course) + '&price=' + amount;
             const cancelURL = window.location.origin + '/cancel.html?invoice=' + invoiceId + '&method=paypal';
             const notifyURL = window.location.origin + '/ipn_handler.php';
             
@@ -757,14 +789,40 @@
         }
 
         // Razorpay Payment Processing
-        function processRazorpayPayment(paymentData) {
+        async function processRazorpayPayment(paymentData) {
             console.log('Loading Razorpay checkout...');
+            
+            // Generate order ID first
+            const orderId = 'ORD-' + Date.now();
+            
+            // WAIT for enrollment to be stored FIRST
+            try {
+                console.log('🔄 Storing Razorpay enrollment...');
+                const response = await fetch('store_enrollment.php', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        action: 'store_enrollment',
+                        fullName: paymentData.enrollment.fullName,
+                        email: paymentData.enrollment.email,
+                        phone: paymentData.enrollment.phone,
+                        course: paymentData.enrollment.course,
+                        price: paymentData.enrollment.price,
+                        invoice: orderId,
+                        company: paymentData.enrollment.company,
+                        city: paymentData.enrollment.city
+                    })
+                });
+                
+                const data = await response.json();
+                console.log('✓ Razorpay enrollment stored:', data);
+            } catch (error) {
+                console.error('⚠ Store failed:', error.message);
+            }
             
             // Store enrollment data
             sessionStorage.setItem('paymentData', JSON.stringify(paymentData));
             
-            // Generate order ID
-            const orderId = 'ORD-' + Date.now();
             const amountInPaise = Math.round(paymentData.amount * 100);
             
             // Store enrollment data for success page
@@ -777,10 +835,12 @@
                 pincode: paymentData.enrollment.pincode,
                 address: paymentData.enrollment.address,
                 course: paymentData.enrollment.course,
-                amount: paymentData.amount,
+                price: paymentData.amount,
                 invoice: orderId,
                 method: 'razorpay'
             };
+            // Save to localStorage with the key success.html expects
+            localStorage.setItem('adeptskil_enrollment_data', JSON.stringify(enrollmentDataForSuccess));
             sessionStorage.setItem('enrollmentSuccessData', JSON.stringify(enrollmentDataForSuccess));
             
             // Razorpay configuration
@@ -801,8 +861,9 @@
                     console.log('✓ Razorpay payment successful!');
                     console.log('Payment ID:', response.razorpay_payment_id);
                     sessionStorage.setItem('razorpay_payment_id', response.razorpay_payment_id);
-                    // Use absolute URL path with protocol
-                    window.location.href = window.location.origin + '/success.html?invoice=' + orderId + '&payment_id=' + response.razorpay_payment_id + '&method=razorpay';
+                    // Use absolute URL path with protocol (include email and other data as backup)
+                    const successUrl = window.location.origin + '/success.html?invoice=' + orderId + '&payment_id=' + response.razorpay_payment_id + '&method=razorpay&email=' + encodeURIComponent(paymentData.enrollment.email) + '&fullName=' + encodeURIComponent(paymentData.enrollment.fullName) + '&course=' + encodeURIComponent(paymentData.enrollment.course) + '&price=' + selectedPricing.price;
+                    window.location.href = successUrl;
                 },
                 theme: {
                     color: '#667eea'
@@ -841,12 +902,41 @@
         }
 
         // Credit Card Payment Processing
-        function processCreditCardPayment(paymentData) {
+        async function processCreditCardPayment(paymentData) {
             console.log('Loading Credit Card payment form...');
-            sessionStorage.setItem('paymentData', JSON.stringify(paymentData));
             
-            // Generate invoice
+            // Generate invoice ID first
             const invoiceId = 'ENR-' + Date.now();
+            
+            // WAIT for enrollment to be stored FIRST
+            try {
+                console.log('🔄 Storing Credit Card enrollment...');
+                const response = await fetch('store_enrollment.php', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        action: 'store_enrollment',
+                        fullName: paymentData.enrollment.fullName,
+                        email: paymentData.enrollment.email,
+                        phone: paymentData.enrollment.phone,
+                        course: paymentData.enrollment.course,
+                        price: paymentData.enrollment.price,
+                        invoice: invoiceId,
+                        company: paymentData.enrollment.company,
+                        city: paymentData.enrollment.city
+                    })
+                });
+                
+                const data = await response.json();
+                console.log('✓ Credit Card enrollment stored:', data);
+                if (!data.success) {
+                    console.warn('⚠ Store returned error:', data.error);
+                }
+            } catch (error) {
+                console.error('⚠ Store failed:', error.message);
+            }
+            
+            sessionStorage.setItem('paymentData', JSON.stringify(paymentData));
             
             // Store enrollment data for success page
             const enrollmentDataForSuccess = {
@@ -858,10 +948,12 @@
                 pincode: paymentData.enrollment.pincode,
                 address: paymentData.enrollment.address,
                 course: paymentData.enrollment.course,
-                amount: paymentData.amount,
+                price: paymentData.amount,
                 invoice: invoiceId,
                 method: 'creditcard'
             };
+            // Save to localStorage with the key success.html expects
+            localStorage.setItem('adeptskil_enrollment_data', JSON.stringify(enrollmentDataForSuccess));
             sessionStorage.setItem('enrollmentSuccessData', JSON.stringify(enrollmentDataForSuccess));
             
             // For now, redirect to a local payment form

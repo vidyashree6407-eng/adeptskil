@@ -1,5 +1,7 @@
 <?php
-// Simple enrollment viewer
+// Enrollment and Sandbox Test Viewer
+require_once(__DIR__ . '/db_config.php');
+
 $enrollmentsFile = 'enrollments.json';
 $enrollments = [];
 
@@ -14,13 +16,45 @@ if (file_exists($enrollmentsFile)) {
 usort($enrollments, function($a, $b) {
     return strtotime($b['timestamp'] ?? '0') - strtotime($a['timestamp'] ?? '0');
 });
+
+// Get sandbox tests from database
+$sandbox_tests = [];
+try {
+    $db = getDB();
+    
+    // Add sandbox_tests table if it doesn't exist
+    $db->exec("CREATE TABLE IF NOT EXISTS sandbox_tests (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        invoice_id TEXT NOT NULL,
+        test_type TEXT NOT NULL,
+        full_name TEXT NOT NULL,
+        email TEXT NOT NULL,
+        phone TEXT NOT NULL,
+        course TEXT,
+        score REAL DEFAULT 0,
+        status TEXT DEFAULT 'pending',
+        duration INTEGER DEFAULT 0,
+        test_data TEXT,
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        completed_at DATETIME,
+        FOREIGN KEY(invoice_id) REFERENCES enrollments(invoice_id)
+    )");
+    
+    $stmt = $db->query("SELECT * FROM sandbox_tests ORDER BY completed_at DESC LIMIT 100");
+    $sandbox_tests = $stmt->fetchAll(PDO::FETCH_ASSOC) ?: [];
+} catch (Exception $e) {
+    $sandbox_tests = [];
+}
+
+// Get current tab
+$tab = $_GET['tab'] ?? 'enrollments';
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enrollment Records - Adeptskil</title>
+    <title>Enrollment & Test Records - Adeptskil</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         * {
@@ -241,6 +275,12 @@ usort($enrollments, function($a, $b) {
             box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
         }
         
+        .btn-primary:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
         .btn-secondary {
             background: #e2e8f0;
             color: #1e293b;
@@ -248,6 +288,71 @@ usort($enrollments, function($a, $b) {
         
         .btn-secondary:hover {
             background: #cbd5e1;
+        }
+        
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #e2e8f0;
+            background: white;
+            padding: 15px;
+            border-radius: 12px 12px 0 0;
+        }
+        
+        .tab-btn {
+            padding: 10px 20px;
+            border: none;
+            background: none;
+            color: #64748b;
+            cursor: pointer;
+            font-weight: 600;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .tab-btn.active {
+            color: #667eea;
+            border-bottom-color: #667eea;
+        }
+        
+        .tab-btn:hover {
+            color: #667eea;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .table-wrapper {
+            padding: 20px;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        
+        .badge-success {
+            background: #d1fae5;
+            color: #065f46;
+        }
+        
+        .badge-pending {
+            background: #fef3c7;
+            color: #92400e;
+        }
+        
+        .badge-completed {
+            background: #dbeafe;
+            color: #0c2d6b;
         }
         
         @media (max-width: 768px) {
@@ -262,19 +367,27 @@ usort($enrollments, function($a, $b) {
             .stats {
                 grid-template-columns: 1fr;
             }
+            
+            .tabs {
+                flex-wrap: wrap;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1><i class="fas fa-graduation-cap"></i> Course Enrollments</h1>
-            <p>View all student enrollment records</p>
+            <h1><i class="fas fa-graduation-cap"></i> Enrollments & Sandbox Tests</h1>
+            <p>View enrollment records and sandbox test completions</p>
             
             <div class="stats">
                 <div class="stat-card">
                     <div class="number"><?php echo count($enrollments); ?></div>
                     <div class="label">Total Enrollments</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number"><?php echo count($sandbox_tests); ?></div>
+                    <div class="label">Tests Completed</div>
                 </div>
                 <?php
                     $courses = [];
@@ -286,7 +399,7 @@ usort($enrollments, function($a, $b) {
                         $topCourse = array_key_first($courses);
                         echo '<div class="stat-card">
                             <div class="number">' . $courses[$topCourse] . '</div>
-                            <div class="label">Most Popular Course</div>
+                            <div class="label">Most Popular</div>
                             <div style="font-size: 0.8rem; margin-top: 5px;">' . substr($topCourse, 0, 20) . '...</div>
                         </div>';
                     }
@@ -295,38 +408,96 @@ usort($enrollments, function($a, $b) {
         </div>
         
         <div class="enrollments-table">
-            <?php if (empty($enrollments)): ?>
-                <div class="empty-state">
-                    <i class="fas fa-inbox"></i>
-                    <h3>No Enrollments Yet</h3>
-                    <p>Enrollments will appear here when students submit the enrollment form.</p>
+            <div class="tabs">
+                <button class="tab-btn <?php echo ($tab === 'enrollments') ? 'active' : ''; ?>" onclick="switchTab('enrollments')">
+                    <i class="fas fa-list"></i> Enrollments (<?php echo count($enrollments); ?>)
+                </button>
+                <button class="tab-btn <?php echo ($tab === 'tests') ? 'active' : ''; ?>" onclick="switchTab('tests')">
+                    <i class="fas fa-check-circle"></i> Tests (<?php echo count($sandbox_tests); ?>)
+                </button>
+            </div>
+            
+            <!-- Enrollments Tab -->
+            <div id="enrollments-tab" class="tab-content <?php echo ($tab === 'enrollments') ? 'active' : ''; ?>">
+                <div class="table-wrapper">
+                    <?php if (empty($enrollments)): ?>
+                        <div class="empty-state">
+                            <i class="fas fa-inbox"></i>
+                            <h3>No Enrollments</h3>
+                            <p>Enrollments will appear here when students submit the enrollment form.</p>
+                        </div>
+                    <?php else: ?>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Course</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($enrollments as $index => $enrollment): ?>
+                                    <tr class="enrollment-row" onclick="showDetails(<?php echo $index; ?>, 'enrollment')">
+                                        <td class="timestamp"><?php echo date('M d, Y', strtotime($enrollment['timestamp'])); ?></td>
+                                        <td><?php echo htmlspecialchars($enrollment['fullName']); ?></td>
+                                        <td><?php echo htmlspecialchars($enrollment['email']); ?></td>
+                                        <td><?php echo htmlspecialchars($enrollment['phone']); ?></td>
+                                        <td><?php echo htmlspecialchars(substr($enrollment['course'], 0, 30)); ?></td>
+                                        <td><button class="btn btn-primary" style="padding: 6px 12px; font-size: 0.85rem;" onclick="event.stopPropagation(); showDetails(<?php echo $index; ?>, 'enrollment')">View</button></td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    <?php endif; ?>
                 </div>
-            <?php else: ?>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Date</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Phone</th>
-                            <th>Course</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($enrollments as $index => $enrollment): ?>
-                            <tr class="enrollment-row" onclick="showDetails(<?php echo $index; ?>)">
-                                <td class="timestamp"><?php echo date('M d, Y', strtotime($enrollment['timestamp'])); ?></td>
-                                <td><?php echo htmlspecialchars($enrollment['fullName']); ?></td>
-                                <td><?php echo htmlspecialchars($enrollment['email']); ?></td>
-                                <td><?php echo htmlspecialchars($enrollment['phone']); ?></td>
-                                <td><?php echo htmlspecialchars(substr($enrollment['course'], 0, 30)); ?></td>
-                                <td><button class="btn btn-primary" style="padding: 6px 12px; font-size: 0.85rem;" onclick="event.stopPropagation(); showDetails(<?php echo $index; ?>)">View</button></td>
-                            </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
-            <?php endif; ?>
+            </div>
+            
+            <!-- Tests Tab -->
+            <div id="tests-tab" class="tab-content <?php echo ($tab === 'tests') ? 'active' : ''; ?>">
+                <div class="table-wrapper">
+                    <?php if (empty($sandbox_tests)): ?>
+                        <div class="empty-state">
+                            <i class="fas fa-inbox"></i>
+                            <h3>No Tests Completed</h3>
+<p>Sandbox test completions will appear here.</p>
+                        </div>
+                    <?php else: ?>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Course</th>
+                                    <th>Test Type</th>
+                                    <th>Score</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($sandbox_tests as $index => $test): ?>
+                                    <tr class="enrollment-row" onclick="showDetails(<?php echo $index; ?>, 'test')">
+                                        <td class="timestamp"><?php echo date('M d, Y', strtotime($test['completed_at'])); ?></td>
+                                        <td><?php echo htmlspecialchars($test['full_name']); ?></td>
+                                        <td><?php echo htmlspecialchars($test['email']); ?></td>
+                                        <td><?php echo htmlspecialchars(substr($test['course'], 0, 25)); ?></td>
+                                        <td><?php echo htmlspecialchars($test['test_type']); ?></td>
+                                        <td>
+                                            <span class="badge badge-<?php echo ($test['score'] >= 70) ? 'success' : 'pending'; ?>">
+                                                <?php echo $test['score']; ?>%
+                                            </span>
+                                        </td>
+                                        <td><button class="btn btn-primary" style="padding: 6px 12px; font-size: 0.85rem;" onclick="event.stopPropagation(); showDetails(<?php echo $index; ?>, 'test')">View</button></td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    <?php endif; ?>
+                </div>
+            </div>
         </div>
     </div>
     
@@ -334,59 +505,223 @@ usort($enrollments, function($a, $b) {
     <div class="modal" id="detailModal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>Enrollment Details</h2>
+                <h2 id="detailTitle">Details</h2>
                 <button class="close-btn" onclick="closeModal()">&times;</button>
             </div>
             <div id="detailContent"></div>
             <div class="action-buttons">
                 <button class="btn btn-secondary" onclick="closeModal()">Close</button>
-                <button class="btn btn-primary" onclick="downloadEnrollments()">Download All</button>
+                <button class="btn btn-primary" id="sendEmailBtn" onclick="sendEmailToUser()">Send Email</button>
+                <button class="btn btn-primary" onclick="downloadAll()">Download All</button>
             </div>
+            <div id="emailStatus" style="margin-top: 15px; padding: 12px; border-radius: 8px; display: none; text-align: center; font-weight: 600;"></div>
         </div>
     </div>
     
     <script>
         const enrollments = <?php echo json_encode($enrollments); ?>;
+        const sandboxTests = <?php echo json_encode($sandbox_tests); ?>;
         
-        function showDetails(index) {
-            const enrollment = enrollments[index];
-            let html = `
-                <div class="detail-row">
-                    <div class="detail-label">Date & Time</div>
-                    <div class="detail-value">${enrollment.timestamp}</div>
-                </div>
-                <div class="detail-row">
-                    <div class="detail-label">Full Name</div>
-                    <div class="detail-value">${enrollment.fullName}</div>
-                </div>
-                <div class="detail-row">
-                    <div class="detail-label">Email</div>
-                    <div class="detail-value"><a href="mailto:${enrollment.email}" style="color: #667eea; text-decoration: none;">${enrollment.email}</a></div>
-                </div>
-                <div class="detail-row">
-                    <div class="detail-label">Phone</div>
-                    <div class="detail-value"><a href="tel:${enrollment.phone}" style="color: #667eea; text-decoration: none;">${enrollment.phone}</a></div>
-                </div>
-                <div class="detail-row">
-                    <div class="detail-label">Company</div>
-                    <div class="detail-value">${enrollment.company || 'Not provided'}</div>
-                </div>
-                <div class="detail-row">
-                    <div class="detail-label">Course</div>
-                    <div class="detail-value">${enrollment.course}</div>
-                </div>
-                <div class="detail-row">
-                    <div class="detail-label">Message</div>
-                    <div class="detail-value">${enrollment.message || 'No message'}</div>
-                </div>
-            `;
+        let currentDetailData = null;
+        let currentDetailType = null;
+        
+        function switchTab(tab) {
+            // Hide all tabs
+            document.getElementById('enrollments-tab').classList.remove('active');
+            document.getElementById('tests-tab').classList.remove('active');
+            
+            // Deactivate all buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            
+            // Show selected tab
+            document.getElementById(tab + '-tab').classList.add('active');
+            
+            // Activate button
+            event.target.closest('.tab-btn').classList.add('active');
+            
+            // Update URL
+            window.history.replaceState({}, '', '?tab=' + tab);
+        }
+        
+        function showDetails(index, type) {
+            const data = type === 'enrollment' ? enrollments[index] : sandboxTests[index];
+            let html = '';
+            
+            // Store current data and type for email sending
+            currentDetailData = data;
+            currentDetailType = type;
+            
+            // Reset email status
+            document.getElementById('emailStatus').style.display = 'none';
+            document.getElementById('sendEmailBtn').disabled = false;
+            document.getElementById('sendEmailBtn').textContent = 'Send Email';
+            
+            if (type === 'enrollment') {
+                document.getElementById('detailTitle').textContent = 'Enrollment Details';
+                html = `
+                    <div class="detail-row">
+                        <div class="detail-label">Date & Time</div>
+                        <div class="detail-value">${data.timestamp}</div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">Full Name</div>
+                        <div class="detail-value">${data.fullName}</div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">Email</div>
+                        <div class="detail-value"><a href="mailto:${data.email}" style="color: #667eea; text-decoration: none;">${data.email}</a></div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">Phone</div>
+                        <div class="detail-value"><a href="tel:${data.phone}" style="color: #667eea; text-decoration: none;">${data.phone}</a></div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">Company</div>
+                        <div class="detail-value">${data.company || 'Not provided'}</div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">Course</div>
+                        <div class="detail-value">${data.course}</div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">Message</div>
+                        <div class="detail-value">${data.message || 'No message'}</div>
+                    </div>
+                `;
+            } else if (type === 'test') {
+                document.getElementById('detailTitle').textContent = 'Test Completion Details';
+                const statusBadge = data.score >= 70 ? '<span class="badge badge-success">PASSED</span>' : '<span class="badge badge-pending">PENDING</span>';
+                html = `
+                    <div class="detail-row">
+                        <div class="detail-label">Date & Time</div>
+                        <div class="detail-value">${data.completed_at}</div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">Full Name</div>
+                        <div class="detail-value">${data.full_name}</div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">Email</div>
+                        <div class="detail-value"><a href="mailto:${data.email}" style="color: #667eea; text-decoration: none;">${data.email}</a></div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">Phone</div>
+                        <div class="detail-value"><a href="tel:${data.phone}" style="color: #667eea; text-decoration: none;">${data.phone}</a></div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">Invoice ID</div>
+                        <div class="detail-value">${data.invoice_id}</div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">Course</div>
+                        <div class="detail-value">${data.course || 'Not specified'}</div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">Test Type</div>
+                        <div class="detail-value">${data.test_type}</div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">Score</div>
+                        <div class="detail-value"><strong>${data.score}%</strong> ${statusBadge}</div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">Duration</div>
+                        <div class="detail-value">${Math.floor(data.duration / 60)} h ${data.duration % 60} m</div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">Status</div>
+                        <div class="detail-value"><span class="badge badge-completed">${data.status.toUpperCase()}</span></div>
+                    </div>
+                `;
+            }
             
             document.getElementById('detailContent').innerHTML = html;
             document.getElementById('detailModal').classList.add('active');
         }
         
+        function sendEmailToUser() {
+            if (!currentDetailData || !currentDetailType) {
+                alert('No data selected. Please open a record first.');
+                return;
+            }
+            
+            const emailAddress = currentDetailType === 'enrollment' ? currentDetailData.email : currentDetailData.email;
+            
+            if (!emailAddress) {
+                alert('No email address found for this record.');
+                return;
+            }
+            
+            // Disable button while sending
+            const btn = document.getElementById('sendEmailBtn');
+            btn.disabled = true;
+            btn.textContent = 'Sending...';
+            
+            // Prepare data for sending
+            const payload = {
+                type: currentDetailType,
+                email: emailAddress,
+                data: currentDetailData
+            };
+            
+            // Send email
+            fetch('send_user_details_email.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.success) {
+                    // Show success message
+                    const statusDiv = document.getElementById('emailStatus');
+                    statusDiv.style.display = 'block';
+                    statusDiv.style.background = '#d1fae5';
+                    statusDiv.style.color = '#065f46';
+                    statusDiv.textContent = '✓ ' + data.message;
+                    statusDiv.style.borderLeft = '4px solid #10b981';
+                    
+                    btn.textContent = 'Email Sent ✓';
+                    btn.style.opacity = '0.7';
+                    btn.disabled = true;
+                } else {
+                    throw new Error(data.error || 'Unknown error');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                const statusDiv = document.getElementById('emailStatus');
+                statusDiv.style.display = 'block';
+                statusDiv.style.background = '#fee2e2';
+                statusDiv.style.color = '#991b1b';
+                statusDiv.textContent = '✗ Error: ' + error.message;
+                statusDiv.style.borderLeft = '4px solid #ef4444';
+                
+                btn.disabled = false;
+                btn.textContent = 'Send Email';
+            });
+        }
+        
         function closeModal() {
             document.getElementById('detailModal').classList.remove('active');
+            currentDetailData = null;
+            currentDetailType = null;
+        }
+        
+        function downloadAll() {
+            const currentTab = document.querySelector('.tab-btn.active');
+            if (currentTab.textContent.includes('Enrollment')) {
+                downloadEnrollments();
+            } else {
+                downloadTests();
+            }
         }
         
         function downloadEnrollments() {
@@ -403,11 +738,35 @@ usort($enrollments, function($a, $b) {
                 ].join(','))
             ].join('\n');
             
+            downloadCSV(csv, 'enrollments-' + new Date().toISOString().split('T')[0] + '.csv');
+        }
+        
+        function downloadTests() {
+            const csv = [
+                ['Date', 'Name', 'Email', 'Phone', 'Invoice ID', 'Course', 'Test Type', 'Score', 'Duration (min)', 'Status'].join(','),
+                ...sandboxTests.map(t => [
+                    t.completed_at,
+                    `"${t.full_name}"`,
+                    t.email,
+                    t.phone,
+                    t.invoice_id,
+                    `"${t.course || ''}"`,
+                    t.test_type,
+                    t.score,
+                    t.duration,
+                    t.status
+                ].join(','))
+            ].join('\n');
+            
+            downloadCSV(csv, 'sandbox-tests-' + new Date().toISOString().split('T')[0] + '.csv');
+        }
+        
+        function downloadCSV(csv, filename) {
             const blob = new Blob([csv], { type: 'text/csv' });
             const url = window.URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = `enrollments-${new Date().toISOString().split('T')[0]}.csv`;
+            a.download = filename;
             a.click();
             window.URL.revokeObjectURL(url);
         }

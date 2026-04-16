@@ -34,6 +34,9 @@
     <Files "ipn_handler.php">
         SecRuleEngine Off
     </Files>
+    <Files "diagnostic-email.php">
+        SecRuleEngine Off
+    </Files>
 </IfModule>
 
 # Allow all HTTP methods for PHP files

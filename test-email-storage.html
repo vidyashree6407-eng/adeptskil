@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Test Email Storage</title>
+    <style>
+        body { font-family: Arial; max-width: 600px; margin: 50px auto; background: #f5f5f5; }
+        .card { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        h1 { color: #667eea; }
+        button { background: #667eea; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; }
+        button:hover { background: #5a67d8; }
+        .status { margin-top: 20px; padding: 15px; border-radius: 4px; display: none; }
+        .status.success { background: #c6f6d5; color: #22543d; border: 1px solid #9ae6b4; }
+        .status.error { background: #fed7d7; color: #742a2a; border: 1px solid #fc8181; }
+        input { width: 100%; padding: 8px; margin: 5px 0 15px 0; border: 1px solid #ddd; border-radius: 4px; }
+        label { display: block; margin-top: 10px; font-weight: bold; color: #2d3748; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>📧 Test Email Storage</h1>
+        <p>Simulate an enrollment to test if emails are stored correctly:</p>
+        
+        <label>Full Name:</label>
+        <input type="text" id="fullName" value="Test User">
+        
+        <label>Email:</label>
+        <input type="email" id="email" value="test@example.com">
+        
+        <label>Course:</label>
+        <input type="text" id="course" value="Leadership Training">
+        
+        <label>Price:</label>
+        <input type="number" id="price" value="500" step="0.01">
+        
+        <button onclick="testEnrollment()">Test Enrollment Email Storage</button>
+        
+        <div id="status" class="status"></div>
+    </div>
+
+    <script>
+        function testEnrollment() {
+            const fullName = document.getElementById('fullName').value;
+            const email = document.getElementById('email').value;
+            const course = document.getElementById('course').value;
+            const price = document.getElementById('price').value;
+            const invoice = 'TEST-' + Date.now();
+            
+            const statusEl = document.getElementById('status');
+            statusEl.style.display = 'block';
+            statusEl.classList.remove('success', 'error');
+            statusEl.innerHTML = '⏳ Storing enrollment...';
+            
+            fetch('store_enrollment.php', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    action: 'store_enrollment',
+                    fullName: fullName,
+                    email: email,
+                    phone: '9999999999',
+                    course: course,
+                    price: price,
+                    invoice: invoice,
+                    company: 'Test Company',
+                    city: 'Test City'
+                })
+            })
+            .then(r => {
+                console.log('Response status:', r.status);
+                return r.json();
+            })
+            .then(data => {
+                console.log('Response data:', data);
+                if (data.success) {
+                    statusEl.classList.add('success');
+                    statusEl.innerHTML = `
+                        ✅ <strong>Success!</strong><br>
+                        Invoice: ${invoice}<br>
+                        Emails stored: ${data.emails_stored}<br>
+                        <br>
+                        <a href="emails-dashboard.php" style="color: #00a86b; font-weight: bold;">View all emails →</a>
+                    `;
+                } else {
+                    statusEl.classList.add('error');
+                    statusEl.innerHTML = '❌ Error: ' + (data.error || 'Unknown error');
+                }
+            })
+            .catch(error => {
+                console.error('Fetch error:', error);
+                statusEl.classList.add('error');
+                statusEl.innerHTML = '❌ Error: ' + error.message;
+            });
+        }
+    </script>
+</body>
+</html>

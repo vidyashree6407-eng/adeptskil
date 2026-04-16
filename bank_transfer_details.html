@@ -343,7 +343,35 @@
         function confirmPaymentInitiated() {
             const urlParams = new URLSearchParams(window.location.search);
             const invoice = urlParams.get('invoice');
-            window.location.href = 'success.html?invoice=' + invoice + '&method=banktransfer&status=pending';
+            
+            // Get enrollment data from sessionStorage
+            const paymentData = JSON.parse(sessionStorage.getItem('paymentData'));
+            if (paymentData) {
+                // Save to localStorage with the key success.html expects
+                const enrollmentDataForSuccess = {
+                    fullName: paymentData.enrollment.fullName,
+                    email: paymentData.enrollment.email,
+                    phone: paymentData.enrollment.phone,
+                    company: paymentData.enrollment.company,
+                    city: paymentData.enrollment.city,
+                    pincode: paymentData.enrollment.pincode,
+                    address: paymentData.enrollment.address,
+                    course: paymentData.enrollment.course,
+                    price: paymentData.amount,
+                    invoice: invoice,
+                    method: 'banktransfer'
+                };
+                localStorage.setItem('adeptskil_enrollment_data', JSON.stringify(enrollmentDataForSuccess));
+                
+                // Redirect with email and data in URL as backup
+                const successUrl = 'success.html?invoice=' + invoice + '&method=banktransfer&status=pending&email=' + encodeURIComponent(paymentData.enrollment.email) + '&fullName=' + encodeURIComponent(paymentData.enrollment.fullName) + '&course=' + encodeURIComponent(paymentData.enrollment.course) + '&price=' + paymentData.amount;
+                window.location.href = successUrl;
+            } else {
+                // Fallback if no payment data
+                const urlParams = new URLSearchParams(window.location.search);
+                const invoice = urlParams.get('invoice');
+                window.location.href = 'success.html?invoice=' + invoice + '&method=banktransfer&status=pending';
+            }
         }
 
         // Go back

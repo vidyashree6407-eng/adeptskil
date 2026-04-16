@@ -1,0 +1,10 @@
+{
+    "id": "EMAIL-20260406070707-79508",
+    "timestamp": "2026-04-06 07:07:07",
+    "to": "info@adeptskil.com",
+    "from": "info@adeptskil.com",
+    "subject": "GoDaddy SMTP Configuration Test - 2026-04-06 07:07:07",
+    "body": "\r\n<html>\r\n<head><title>SMTP Configuration Test</title></head>\r\n<body>\r\n<h2>GoDaddy SMTP Configuration Test</h2>\r\n<p><strong>Status:</strong> Configuration appears to be working!</p>\r\n<p><strong>Timestamp:</strong> 2026-04-06 07:07:07</p>\r\n<p><strong>Mail Method:</strong> smtp</p>\r\n<p><strong>From:</strong> Adeptskil &lt;info@adeptskil.com&gt;</p>\r\n<p><strong>To:</strong> info@adeptskil.com</p>\r\n<hr>\r\n<p>This is an automated test email. If you received this, your GoDaddy SMTP configuration is working correctly.</p>\r\n</body>\r\n</html>\r\n",
+    "replyTo": null,
+    "status": "sent"
+}
