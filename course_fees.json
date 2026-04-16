@@ -45,22 +45,22 @@
       "pricing": {
         "standard": {
           "name": "Standard Fee",
-          "price": 695.0,
+          "price": 1.0,
           "description": "IN-PERSON or LIVE-ONLINE training at standard rates"
         },
         "early_bird": {
           "name": "Early Bird Fee",
-          "price": 545.0,
+          "price": 1.0,
           "description": "Early enrollment discount - Act now!"
         },
         "virtual_standard": {
           "name": "Live Virtual Standard Fee",
-          "price": 545.0,
+          "price": 1.0,
           "description": "Virtual instructor-led training"
         },
         "virtual_early_bird": {
           "name": "Live Virtual Early Bird Fee",
-          "price": 445.0,
+          "price": 1.0,
           "description": "Virtual early enrollment discount"
         }
       }

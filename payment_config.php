@@ -31,7 +31,7 @@ $coursesPricing = array(
     
     // Adeptskil Leadership Courses:
     'Account Management' => 149.00,
-    'Absence Management' => 149.00,
+    'Absence Management' => 1.00,
     'Conflict Management Training' => 149.00,
     'Crisis Management Training' => 149.00,
     'Effective Vendor Management' => 149.00,
