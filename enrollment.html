@@ -483,7 +483,7 @@
             const baseUrl = window.location.origin;
             const isProduction = baseUrl.includes('adeptskil.com');
             
-            // Simple return to thank-you.html
+            // Simple return to thank-you.html - NO parameters exposed
             const returnUrl = baseUrl + '/thank-you.html';
             const cancelUrl = baseUrl + '/enrollment.html';
             
@@ -513,7 +513,8 @@
                 price: enrollmentData.price
             });
             
-            // Set return URLs - simplified, no IPN needed for basic flow
+            // Set return URLs - NO query parameters
+            // PayPal will add its own parameters (like PayerID), but we don't pass customer data
             document.getElementById('paypalReturn').value = returnUrl;
             document.getElementById('paypalCancel').value = cancelUrl;
             document.getElementById('paypalNotifyUrl').value = baseUrl + '/ipn_handler.php';
