@@ -49,6 +49,13 @@
     </IfModule>
 </FilesMatch>
 
+# Allow all HTTP methods for thank-you.html (PayPal redirects)
+<FilesMatch "thank-you\.html$">
+    <IfModule mod_authorization.c>
+        Require all granted
+    </IfModule>
+</FilesMatch>
+
 # PHP Configuration
 <IfModule mod_php7.c>
     AddType application/x-httpd-php .php
